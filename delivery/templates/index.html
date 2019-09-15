@@ -1,0 +1,195 @@
+{% load static %}
+{% include 'includes/header.html' %}
+
+    <div class="banner-home" style="background-image: url('/static/assets/bg.jpg')">
+        <div class="over"></div>
+
+        <div class="center-form">
+            <h2 class=big-title>
+                Pesquise o melhor <br> na sua cidade
+            </h2>
+
+            <form action="">
+                {% csrf_token %}
+                <input type="text" placeholder="Restaurantes/produtos">
+
+                <button>Pesquisar</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="wrapper-servicos padding-sections">
+        <div class="container">
+            <div class="row fs-0">
+                <div class="col-xs-12 col-md-6 col-in-block">
+                    <p class="small-title">
+                        Empresa
+                    </p>
+
+                    <h2 class="big-title">
+                        Porque <br> escolher nosso <br> serviço?
+                    </h2>
+                </div>
+
+                <div class="col-xs-12 col-md-6 col-in-block v-bottom">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor similique veritatis praesentium voluptate facilis, aut deserunt dolores dolore aperiam pariatur incidunt iure dolorem quidem exercitationem ab, beatae unde iste, deleniti cum molestias. Perspiciatis, error distinctio.</p>   
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="categorias-wrapper">
+        
+        <div class="container">
+            <p class="small-title">
+                Categorias
+            </p>
+        
+            <h2 class="big-title"> As categorias mais acessadas </h2>
+
+            <div class="container-categoria">
+
+                <div class="first-col">
+                    <a href="#">
+                        <div class="item" style="background-image: url('/static/assets/bg.jpg')">
+                            <div class="over"></div>
+    
+                            <h3>Lanches</h3>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="second-col">
+                    <div class="second-first-row">
+                        <a href="#">
+                            <div class="item" style="background-image: url('/static/assets/bg.jpg')">
+                                <div class="over"></div>
+
+                                <h3> Pizzas </h3>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="second-second-row">
+                        <div class="item-1" style="background-image: url('/static/assets/bg.jpg')">
+                            <a href="#">
+                                <div class="over"></div>
+                                <h3>Pastéis</h3>
+                            </a>
+                        </div>
+                        <div class="item-2" style="background-image: url('/static/assets/bg.jpg')">
+                            <a href="#">
+                                <div class="over"></div>
+
+                                <h3> Massas </h3>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="third-col">
+                    <div class="third-first-row">
+                        <div class="item-1" style="background-image: url('/static/assets/bg.jpg')">
+                            <a href="#">
+                                <div class="over"></div>
+
+                                <h3>Bebidas</h3>
+                            </a>
+                        </div>
+                        <div class="item-2" style="background-image: url('/static/assets/bg.jpg')">
+                            <a href="#">
+                                <div class="over"></div>
+
+                                <h3>Pratos</h3>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="third-second-row">
+                        <div class="item" style="background-image: url('/static/assets/bg.jpg')">
+                            <a href="#">
+                                <div class="over"></div>
+
+                                <h3>Sobremesas</h3>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="wrapper-escolhas padding-sections">
+        <div class="container">
+            <div class="row">
+                
+                <div class="col-xs-12 col-md-3">
+                    <p class="small-title">Escolhas</p>
+
+                    <h2 class="big-title">Escolhas <br> do dia </h2>
+
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad, omnis. Repellat sint quas tempora optio perferendis! Fugiat doloremque ipsam, autem quibusdam neque, incidunt provident explicabo aperiam eaque adipisci magnam ducimus!</p>
+                </div>
+
+                <div class="col-xs-12 col-md-8 col-md-offset-1">
+                    <div class="wrapper-slider">
+
+                        <div class="owl-carousel">
+                            
+                            {% for i in range %}
+                            <div class="item" style="width:422px">
+                                <div class="slider slide-1">
+
+                                    <div class="inside-top">
+                                        <span> 01 </span>
+        
+                                        <p>
+                                            R$14.50
+                                        </p>
+                                    </div>
+        
+                                    <div class="inside-bottom">
+                                        <p>Restaurante SóDelicia</p>
+        
+                                        <h3>Hamburguer <br> Especial </h3>
+                                    </div>
+        
+                                </div>
+                            </div>
+
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="wrapper-restaurantes">
+        <div class="container">
+            <p class="small-title text-center">Restaurantes</p>
+            <h2 class="big-title text-center">Melhores <br> Restaurantes </h2>
+
+            <div class="row">
+                {% for i in range %}
+
+                <div class="col-xs-12 col-md-4">
+                    
+                    <div class="melhores-restaurantes">
+                        
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+    </div>
+
+{% include 'includes/footer.html' %}

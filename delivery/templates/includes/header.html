@@ -1,0 +1,64 @@
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Foodz - Delivery</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'lib/OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css' %}">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" href="{% static 'reset.css' %}">
+        <link rel="stylesheet" href="{% static 'styles.css' %}">
+    </head>
+    <body>
+        <div class="main-container">
+            <header>
+                <div class="header">
+                    <div class="container">
+                        <div class="row">
+
+                            <div class="col-xs-6 col-sm-2 col-lg-1 col-in-block">
+                                <h1><a href="/">Foodz</a></h1>
+                            </div>
+
+                            <div class="hidden-xs col-md-8 col-lg-10 col-in-block text-right">
+                                <div class="menu">
+                                    <ul>
+                                        
+                                        {% if request.path == '/' %}
+                                            <li class="active"><a href="/">Home</a></li>
+                                        {% else %}
+                                            <li><a href="/">Home</a></li>
+                                        {% endif %}
+
+                                        {% if '/produtos' in request.path  %}
+                                            <li class="active"><a href="/produtos">Produtos</a></li>
+                                        {% else %}
+                                            <li><a href="/produtos">Produtos</a></li>
+                                        {% endif %}
+
+                                        {% if '/restaurantes' in request.path %}
+                                            <li class="active"><a href="/restaurantes">Restaurantes</a></li>
+                                        {% else %}
+                                            <li><a href="/restaurantes">Restaurantes</a></li>
+                                        {% endif %}
+
+                                        <li><a href="#">Login</a></li>
+                                        <li class="not-hover"><a href="#"><i class="fas fa-cart-plus"></i></a></li>
+
+                                        <li class="cadastra-restaurante"><a href="/cadastro/restaurante">Cadastre <br> seu restaurante</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+
+{% endblock %}
