@@ -58,6 +58,22 @@ body, html {
   }
 }
 
+.bt {
+  padding: 16px;
+  width: 50%;
+  background-color: #282828;
+  color: #fff;
+  text-align: center;
+  border-radius: 25px;
+  font-size: 20px;
+  text-decoration: none;
+  display: block;
+}
+
+.bt:hover {
+  background-color: #424242;
+}
+
 .over {
   top: 0;
   left: 0;
@@ -690,5 +706,105 @@ header .header .menu ul li.not-hover:hover::before {
 
 .wrapper-restaurantes h2 {
   color: #fff;
+}
+
+.wrapper-indeciso {
+  background-color: #E45F5F;
+}
+
+.wrapper-indeciso .explore {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+}
+
+.wrapper-indeciso .explore a {
+  padding: 16px;
+  width: 50%;
+  background-color: #282828;
+  color: #fff;
+  text-align: center;
+  border-radius: 25px;
+  font-size: 20px;
+  text-decoration: none;
+}
+
+.wrapper-indeciso .explore a:hover {
+  background-color: #424242;
+}
+
+.wrapper-motoboy .motoboy-img {
+  padding-bottom: 70%;
+  background-image: url("./assets/motoboy.jpg");
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  -webkit-box-shadow: 28px 4px 0px 18px #282828;
+  box-shadow: 28px 4px 0px 18px #282828;
+}
+
+.wrapper-motoboy p {
+  line-height: 30px;
+}
+
+.wrapper-motoboy p:not(.small-title) {
+  margin-top: 20px;
+}
+
+.wrapper-motoboy .bt {
+  margin-top: 30px;
+  text-decoration: none;
+}
+
+.wrapper-motoboy .bt:hover {
+  color: #fff;
+}
+
+footer .footer {
+  width: 100%;
+}
+
+footer .footer .fot-top {
+  background-color: #282828;
+  padding: 50px 0;
+}
+
+footer .footer .fot-top h3 {
+  font-size: 24px;
+  color: #fff;
+  font-weight: 600;
+}
+
+footer .footer .fot-top p {
+  color: #fff;
+  font-size: 14px;
+  margin-top: 24px;
+  line-height: 26px;
+}
+
+footer .footer .fot-top .bt {
+  background-color: #494949;
+  margin-top: 14px;
+  text-decoration: none;
+}
+
+footer .footer .fot-top .bt:hover {
+  color: #fff;
+  background-color: #636363;
+}
+
+footer .footer .fot-bottom {
+  background-color: #494949;
+  padding: 30px 0;
+}
+
+footer .footer .fot-bottom p {
+  color: #fff;
+  text-align: center;
 }
 /*# sourceMappingURL=styles.css.map */
