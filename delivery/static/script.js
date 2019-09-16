@@ -1,4 +1,5 @@
 $(document).ready(function(){
+
     $('.owl-carousel').owlCarousel({
         // loop:true,
         margin:10,
@@ -17,4 +18,12 @@ $(document).ready(function(){
             }
         }
     })
+
+    // $(window).scroll(function () { 
+    //     if($(this).scrollTop() > 220){
+    //         $('header').addClass("fixed-nav")
+    //     }else{
+    //         $('header').removeClass("fixed-nav")
+    //     }
+    // });
 })

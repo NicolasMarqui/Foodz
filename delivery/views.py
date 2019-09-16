@@ -10,3 +10,12 @@ def home(request):
             'range': range(9),
         }
     )
+
+def produtos(request):
+    return render(
+        request,
+        'produtos.html',
+        {
+            'range': range(9)
+        }
+    )

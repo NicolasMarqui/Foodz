@@ -11,7 +11,7 @@
 
             <form action="">
                 {% csrf_token %}
-                <input type="text" placeholder="Restaurantes/produtos">
+                <input type="text" placeholder="Restaurantes/produtos" id="banner-input">
 
                 <button>Pesquisar</button>
             </form>
@@ -179,9 +179,23 @@
 
                 <div class="col-xs-12 col-md-4">
                     
-                    <div class="melhores-restaurantes">
+                    <a href="#">
+                        <div class="melhores-restaurantes rest-1">
+                    
+                            <div class="over"></div>
 
-                    </div>
+                            <div class="top-nota">
+                                <p>8 / <span>10</span></p>
+                            </div>
+    
+                            <div class="rest-down">
+                                <h3>Restaurante <br> SóDelicia </h3>
+
+                                <a href="#" class="bt">Saiba Mais</a>
+                            </div>
+    
+                        </div>
+                    </a>
 
                 </div>
 

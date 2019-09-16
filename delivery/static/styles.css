@@ -217,6 +217,29 @@ header .header .menu ul li.not-hover:hover::before {
   content: none;
 }
 
+.fixed-nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  -webkit-transition: 0.5s ease-in-out;
+  transition: 0.5s ease-in-out;
+  background-color: #fff;
+}
+
+.fixed-nav .header h1 a {
+  color: #000;
+}
+
+.fixed-nav .header .menu ul li a {
+  padding: 10px 16px;
+  color: #000;
+}
+
+.fixed-nav .header .cadastra-restaurante {
+  padding: 5px 16px !important;
+}
+
 .banner-home {
   height: 550px;
   background-color: #000;
@@ -251,6 +274,13 @@ header .header .menu ul li.not-hover:hover::before {
   padding: 14px;
   margin: 20px auto;
   outline: none;
+}
+
+.banner-home .center-form form input:focus {
+  outline: none !important;
+  border: 2px solid #E04040;
+  -webkit-box-shadow: 0 0 10px #719ECE;
+          box-shadow: 0 0 10px #719ECE;
 }
 
 .banner-home .center-form form button {
@@ -706,6 +736,63 @@ header .header .menu ul li.not-hover:hover::before {
 
 .wrapper-restaurantes h2 {
   color: #fff;
+  margin-bottom: 30px;
+}
+
+.wrapper-restaurantes a {
+  text-decoration: none;
+}
+
+.wrapper-restaurantes .melhores-restaurantes {
+  height: 484px;
+  width: 100%;
+  background-image: url("./assets/example.jpg");
+  margin: 10px 25px 10px 0;
+  position: relative;
+}
+
+.wrapper-restaurantes .melhores-restaurantes .rest-down {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 24px;
+}
+
+.wrapper-restaurantes .melhores-restaurantes .rest-down h3 {
+  color: #fff;
+  font-size: calc(1.3375rem + 1.05vw);
+  font-weight: 600;
+}
+
+@media (min-width: 1200px) {
+  .wrapper-restaurantes .melhores-restaurantes .rest-down h3 {
+    font-size: 2.125rem;
+  }
+}
+
+.wrapper-restaurantes .melhores-restaurantes .rest-down .bt {
+  margin-top: 15px;
+  font-size: 16px;
+  padding: 10px;
+  background-color: #E04040;
+}
+
+.wrapper-restaurantes .melhores-restaurantes .rest-down .bt:hover {
+  color: #fff;
+  background-color: #e76c6c;
+}
+
+.wrapper-restaurantes .melhores-restaurantes .top-nota {
+  position: absolute;
+  top: 20px;
+  right: 0;
+  background-color: #fff;
+  padding: 14px 16px;
+}
+
+.wrapper-restaurantes .melhores-restaurantes .top-nota p {
+  color: #000;
 }
 
 .wrapper-indeciso {
@@ -798,6 +885,22 @@ footer .footer .fot-top .bt:hover {
   background-color: #636363;
 }
 
+footer .footer .fot-top ul li {
+  padding: 8px 0;
+}
+
+footer .footer .fot-top ul li a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 16px;
+  display: block;
+}
+
+footer .footer .fot-top ul li:hover a {
+  -webkit-transform: scale(1.15);
+          transform: scale(1.15);
+}
+
 footer .footer .fot-bottom {
   background-color: #494949;
   padding: 30px 0;
@@ -805,6 +908,32 @@ footer .footer .fot-bottom {
 
 footer .footer .fot-bottom p {
   color: #fff;
-  text-align: center;
+  font-size: 14px;
+}
+
+.banner-interno {
+  width: 100%;
+  height: 335px;
+  background-position: center;
+  background-size: cover;
+  position: relative;
+}
+
+.banner-interno .over {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.breadcumb {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.breadcumb h1 {
+  color: #fff;
+}
+
+.show-produtos-wrapper .bt {
+  margin-left: 0 !important;
 }
 /*# sourceMappingURL=styles.css.map */
