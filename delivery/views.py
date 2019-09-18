@@ -19,3 +19,12 @@ def produtos(request):
             'range': range(9)
         }
     )
+
+def dashboard(request):
+    return render(
+        request,
+        'dashboard.html',
+        {
+            'range': range(9),
+        }
+    )

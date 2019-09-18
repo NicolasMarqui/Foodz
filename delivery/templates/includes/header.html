@@ -16,7 +16,11 @@
     </head>
     <body>
         <div class="main-container">
+            {% if '/dashboard' in request.path %}
+            <header class="hidden-dash">
+            {% else %}
             <header>
+            {% endif %}
                 <div class="header">
                     <div class="container">
                         <div class="row fs-0">

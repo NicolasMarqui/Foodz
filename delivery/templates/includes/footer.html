@@ -1,6 +1,10 @@
 {% load static %}
 
+        {% if '/dashboard' in request.path %}
+        <footer class="hidden-dash">
+        {% else %}
         <footer>
+        {% endif %}
             <div class="footer">
                 <div class="fot-top">
                     <div class="container">

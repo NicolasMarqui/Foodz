@@ -26,4 +26,12 @@ $(document).ready(function(){
     //         $('header').removeClass("fixed-nav")
     //     }
     // });
+
+    $('.ver-todos-order').click(function(){
+        $('.modal-more-orders').css('display', 'block');
+    })
+
+    $('#close-all-orders').click(function(){
+        $('.modal-more-orders').css('display', 'none');
+    })
 })
