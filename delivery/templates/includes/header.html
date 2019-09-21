@@ -23,6 +23,8 @@
         <div class="main-container">
             {% if '/dashboard' in request.path %}
             <header class="hidden-dash">
+            {% elif '/info' in request.path %}
+            <header class="white-bg">
             {% else %}
             <header>
             {% endif %}

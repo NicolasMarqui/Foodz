@@ -40,3 +40,12 @@ def login(request):
         request,
         'login.html',
     )
+
+def produto_info(request,id = None):
+    return render(
+        request,
+        'produto_info.html',
+        {
+            'range': range(5),
+        }
+    )

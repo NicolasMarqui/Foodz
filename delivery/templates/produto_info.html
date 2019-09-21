@@ -1,0 +1,167 @@
+{% load static %}
+{% include 'includes/header.html' %}
+
+    <div class="offset-header-info-produto"></div>
+    
+    <div class="product-display">
+
+        <div class="container">
+            <div class="row">
+
+                <div class="col-xs-12 col-md-6">
+                    <div class="main-image"></div>
+                </div>
+
+                <div class="col-xs-12 col-md-6" id="ifp">
+
+                    <div class="starts-area">
+                        <ul>
+                            {% for i in range %}
+                                <li><i class="far fa-star fa-2x"></i></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <p class="small-title">
+                        Lanches
+                    </p>
+
+                    <h1 class="big-title">
+                        Combo <br> Hamburguer
+                    </h1>
+
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur ipsa officia illum, iste numquam non a ad quo excepturi repellendus minus sint illo obcaecati eius, iure recusandae ratione quasi alias beatae, accusamus iusto quia! Nulla suscipit totam quas, exercitationem laboriosam ab culpa, unde quasi sed dolorem possimus repudiandae ducimus ea.</p>
+
+                    <div class="buy-and-quantity">
+                        <a href="#" class="btn">Comprar</a>
+
+                        <input type="number" value="1">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="get-rest-name-info padding-sections">
+
+        <div class="container">
+            <div class="row">
+
+                <div class="col-xs-12 col-md-4">
+
+                    <p class="small-title">Vendido por</p>
+
+                    <h2 class="big-title"> Restaurante <br> <span>SóDelicia</span> </h2>
+
+                    <div class="rating-restaurante">
+                        <ul>
+                            {% for i in range %}
+                                <li><i class="far fa-star fa-2x"></i></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                </div>
+
+                <div class="col-xs-12 col-md-7 col-md-offset-1">
+                    <div class="featured-products">
+                        <div class="product product-1">
+                            <div class="inside-top">
+                                <span> 01 </span>
+
+                                <p>
+                                    R$14.50
+                                </p>
+                            </div>
+
+                            <div class="inside-bottom">
+                                <p>Restaurante SóDelicia</p>
+
+                                <h3>Hamburguer <br> Especial </h3>
+                            </div>
+                        </div>
+
+                        <div class="product product-2">
+                            <div class="inside-top">
+                                <span> 02 </span>
+
+                                <p>
+                                    R$14.50
+                                </p>
+                            </div>
+
+                            <div class="inside-bottom">
+                                <p>Restaurante SóDelicia</p>
+
+                                <h3>Hamburguer <br> Especial </h3>
+                            </div>
+                        </div>
+
+                        <div class="saiba-mais-card">
+                            <a href="#">
+                                <p>Saiba Mais <span><i class="fas fa-arrow-right"></i></span> </p>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="comment-section padding-sections">
+        
+        <div class="container">
+
+            <div class="row">
+                <div class="col-xs-12 col-md-7">
+
+                    <h2 class="big-title">Comentários</h2>
+    
+                    <p class="small-title">
+                        Mostrando <span>8</span> de <span>120</span>
+                    </p>
+
+                    <div class="display-comments">
+
+                        {% for i in range %}
+
+                            <div class="comment comment1">
+
+                                <div class="rating-comment">
+                                    <ul>
+                                        <li><i class="far fa-star "></i> </li>
+                                        <li><i class="far fa-star "></i> </li>
+                                        <li><i class="far fa-star "></i> </li>
+                                        <li><i class="far fa-star "></i> </li>
+                                        <li><i class="far fa-star "></i> </li>
+
+                                        <li><p>4/5</p></li>
+                                    </ul>
+                                </div>
+
+                                <h3> Nicolas Marqui </h3>
+                                <p class="small-title"> 16/08/2019 ás <span>19:30</span> </p>
+
+                                <div class="review">
+                                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore officiis blanditiis voluptas possimus maxime aspernatur asperiores similique sint architecto nihil. Culpa magnam ab beatae debitis.</p>
+                                </div>
+
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+{% include 'includes/footer.html' %}
