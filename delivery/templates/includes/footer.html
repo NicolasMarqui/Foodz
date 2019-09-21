@@ -1,6 +1,6 @@
 {% load static %}
 
-        {% if '/dashboard' in request.path %}
+        {% if '/dashboard' in request.path or '/login' in request.path %}
         <footer class="hidden-dash">
         {% else %}
         <footer>

@@ -5,7 +5,12 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Foodz - Delivery</title>
+        {% if request.path == '/' %}
+            <title>Home - Foodz Delivery</title>
+        {% elif '/dashboard' in request.path %}
+            <title> Dashboard - Foodz Delivery </title>
+        {% endif %}
+            
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,900&display=swap" rel="stylesheet">
@@ -51,7 +56,7 @@
                                             <li><a href="/restaurantes">Restaurantes</a></li>
                                         {% endif %}
 
-                                        <li><a href="#">Login</a></li>
+                                        <li><a href="/login">Login</a></li>
                                         <li class="not-hover"><a href="#"><i class="fas fa-cart-plus"></i></a></li>
 
                                         <li class="cadastra-restaurante"><a href="/cadastro/restaurante">Cadastre <br> seu restaurante</a></li>

@@ -1,0 +1,64 @@
+{% include 'includes/header.html' %}
+
+    <div class="offset-header" style="height: 100px;background-color: #282828;"></div>
+
+    <div class="login-wrapper">
+        <div class="main-container-login">
+            <div class="form-container login-form">
+                <form action="">
+                   
+                    <h1>Login</h1>
+
+                    <span>Email</span>
+                    <input type="text" placeholder="Email" name="email">
+
+                    <span>Senha</span>
+                    <input type="password" placeholder="Senha" name="senha">
+
+                    <span class="esqueci-senha"><a href="#">Esqueci minha senha</a></span>
+
+                    <button type="submit">Login</button>
+                </form>
+            </div>
+
+            <div class="form-container signup-form">
+                
+                <form action="">
+                   
+                    <h1>Criar Conta</h1>
+
+                    <span>Email</span>
+                    <input type="text" placeholder="Email" name="email">
+
+                    <span>Senha</span>
+                    <input type="password" placeholder="Senha" name="senha">
+
+                    <span class="esqueci-senha"><a href="#">Esqueci minha senha</a></span>
+
+                    <button type="submit">Login</button>
+                </form>
+            </div>
+
+            <div class="overlay-container">
+                <div class="overlay">
+                    <div class="overlay-panel overlay-left">
+                        <h2>Possui conta?</h2>
+
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam laudantium itaque laborum ipsa voluptate dignissimos.</p>
+                        
+                        <button id="login">Login</button>
+                    </div>
+
+                    <div class="overlay-panel overlay-right">
+                        <h2>Não possui conta?</h2>
+
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam laudantium itaque laborum ipsa voluptate dignissimos.</p>
+
+                        <button id="signup">Criar Conta</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% include 'includes/footer.html' %}

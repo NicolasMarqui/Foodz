@@ -28,3 +28,15 @@ def dashboard(request):
             'range': range(9),
         }
     )
+
+def financeiro(request):
+    return render(
+        request,
+        'financeiro.html',
+    )
+
+def login(request):
+    return render(
+        request,
+        'login.html',
+    )

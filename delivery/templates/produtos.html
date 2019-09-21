@@ -2,6 +2,17 @@
 
     <div class="banner-interno" style="background-image: url('/static/assets/burguer.jpg')">
         <div class="over"></div>
+
+        <div class="container">
+            <div class="bread-banner">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li> <span> > </span> </li>
+                    <li><h1>Produtos</h1></li>
+                </ul>
+            </div>
+        </div>
+
     </div>
 
     <div class="show-produtos-wrapper padding-sections">
@@ -18,17 +29,18 @@
                     </a>
                 </div>
 
-                <div class="content">
+                <div class="content-show-produtos">
                     <div class="row">
 
                         {% for i in range %}
 
                         <div class="col-xs-12 col-md-4">
-                            <div class="result-produtos">
+                            <a href="#">
+                                <div class="result-produtos" style="background-image: url('/static/assets/example.jpg')">
 
-                                
-
-                            </div>
+                                    
+                                </div>
+                            </a>
                         </div>
 
                         {% endfor %}

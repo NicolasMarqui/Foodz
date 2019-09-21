@@ -34,4 +34,13 @@ $(document).ready(function(){
     $('#close-all-orders').click(function(){
         $('.modal-more-orders').css('display', 'none');
     })
+
+    $("#signup").click(function(){
+        $('.main-container-login').addClass('right-panel-active');
+    })
+
+    $("#login").click(function(){
+        $('.main-container-login').removeClass('right-panel-active');
+        console.log('eae')
+    })
 })
