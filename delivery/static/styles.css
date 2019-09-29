@@ -2002,4 +2002,76 @@ footer .footer .fot-bottom p {
     height: 200px;
   }
 }
+
+.form-cadastre-wrapper {
+  padding: 50px 0;
+}
+
+.form-cadastre-wrapper h1 {
+  font-size: calc(1.425rem + 2.1vw);
+  padding-bottom: 8px;
+  border-bottom: 2px solid #E04040;
+  margin-bottom: 25px;
+}
+
+@media (min-width: 1200px) {
+  .form-cadastre-wrapper h1 {
+    font-size: 3rem;
+  }
+}
+
+.form-cadastre-wrapper .input-group {
+  margin: 15px 0;
+  width: 100%;
+}
+
+.form-cadastre-wrapper .input-group span {
+  display: block;
+}
+
+.form-cadastre-wrapper .input-group input {
+  border: 1px solid #c4c4c4;
+  margin: 5px 0;
+  border-radius: 15px;
+  padding: 8px;
+  width: 100%;
+}
+
+.form-cadastre-wrapper .input-group input.endereco-cad {
+  width: 75%;
+}
+
+.form-cadastre-wrapper .input-group input.number-cad {
+  width: 20%;
+  margin-left: 5%;
+}
+
+.form-cadastre-wrapper .input-group input:focus {
+  outline: none;
+  border: 2px solid red;
+}
+
+.form-cadastre-wrapper .input-group button {
+  margin: 0 auto;
+  border: none;
+  margin-top: 15px;
+  background-color: #E04040;
+}
+
+.form-cadastre-wrapper .input-group button:hover {
+  background-color: #e76c6c;
+}
+
+.form-cadastre-wrapper .disclaimer-options {
+  padding: 20px;
+}
+
+.form-cadastre-wrapper .disclaimer-options h2 {
+  margin-top: 20px;
+}
+
+.form-cadastre-wrapper .concordo-termos p {
+  font-size: 12px;
+  text-align: justify;
+}
 /*# sourceMappingURL=styles.css.map */

@@ -20,6 +20,15 @@ def produtos(request):
         }
     )
 
+def restaurantes(request):
+    return render(
+        request,
+        'restaurantes.html',
+        {
+            'range': range(9)
+        }
+    )
+
 def dashboard(request):
     return render(
         request,
@@ -45,6 +54,15 @@ def produto_info(request,id = None):
     return render(
         request,
         'produto_info.html',
+        {
+            'range': range(5),
+        }
+    )
+
+def cadastro_restaurantes(request):
+    return render(
+        request,
+        'cadastro_restaurantes.html',
         {
             'range': range(5),
         }
