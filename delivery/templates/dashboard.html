@@ -104,11 +104,62 @@
                 </div>
             </div>
 
-            {% if request.path == '/dashboard/' %}
-                {% include 'includes/home_dash.html' %}
-            {% elif '/financeiro' in request.path %}
-                {% include 'includes/financeiro_dash.html' %}
-            {% endif %}
+            <div class="content-owner" id="home">
+                <h2>Seja bem vindo, <span>Nicolas</span></h2>
+            
+                <div class="info-sales">
+                    <div class="info sales">
+                        <h3>Total de Venda Feitas</h3>
+                        <p> 450 </p>
+                    </div>
+            
+                    <div class="info lucro">
+                        <h3>Lucro total</h3>
+                        <p> R$ <span>450,00</span> </p>
+                    </div>
+            
+                    <div class="info graph">
+                        Grafico
+                    </div>
+                </div>
+            
+                <div class="last-orders">
+                    <h4>Suas últimas vendas</h4>
+            
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <td>Nome</td>
+                                    <td>Descrição</td>
+                                    <td>Preço</td>
+                                    <td>Qnt</td>
+                                    <td>Comprador</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for i in range %}
+                                <tr>
+                                    <td>Hambuguer</td>
+                                    <td>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Architecto, sint.</td>
+                                    <td>19.90</td>
+                                    <td>5</td>
+                                    <td>Nicolas Marqui</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+            
+                    <a href="#" class="ver-todos-order">Ver Todos</a>
+                </div>
+            </div>
+
+            <div class="financeiro-dashboard" id="financeiro">
+                <h2>Suas Finanças</h2>
+
+                <canvas id="myChart" width="400" height="400"></canvas>
+            </div>
         </div>
     </div>
 

@@ -21,6 +21,54 @@
     </head>
     <body>
         <div class="main-container">
+
+            <div class="display-shopping-cart">
+
+                <div class="inside-header">
+                    <h2>Seu Carrinho</h2>
+
+                    <div class="closing-menu">
+                        <i class="fas fa-times"></i>
+                    </div>
+                </div>
+
+                <div class="display-shopping-item">
+                    <ul>
+                        {% for i in range %}
+                        <li>
+                            <div class="display">
+
+                                <div class="amount">
+                                    <p> x <span>1</span> </p>
+                                </div>
+
+                                <div class="info">
+                                    <h5>Pizza Calabresa</h5>
+                                    <p> <strong>Vendido por: </strong> SóDelicia </p>
+                                </div>
+
+                                <div class="preco">
+                                    <p>R$ <span>0.00</span> </p>
+                                </div>
+
+                            </div>
+                        </li>
+
+                        {% endfor %}
+                    </ul>
+
+                    <div class="total">
+                        <h2>Valor Total: </h2>
+
+                        <p>R$ <span>0.00</span> </p>
+                    </div>
+                </div>
+
+                <div class="go-checkout-info">
+                    <a href="#" class="bt">Continuar</a>
+                </div>
+            </div>
+
             {% if '/dashboard' in request.path %}
             <header class="hidden-dash">
             {% elif '/info' in request.path %}
@@ -32,14 +80,24 @@
                     <div class="container">
                         <div class="row fs-0">
 
-                            <div class="col-xs-6 col-sm-2 col-in-block">
-                                <h1><a href="/">Foodz</a></h1>
+                            <div class="col-xs-6 col-sm-2 col-in-block text-left">
+                                <div class="logo">
+                                    <h1><a href="/">Foodz</a></h1>
+                                </div>
                             </div>
 
-                            <div class="hidden-xs col-md-8 col-lg-10 col-in-block text-right">
+                            <div class="col-md-3 hidden-xs col-in-block v-bottom">
+                                <div class="search-nav">
+                                    <input type="text" placeholder="Pesquisar">
+                                    <span>
+                                        <i class="fas fa-search fa-2x"></i>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="hidden-xs col-md-4 col-in-block text-right">
                                 <div class="menu">
                                     <ul>
-                                        
                                         {% if request.path == '/' %}
                                             <li class="active"><a href="/">Home</a></li>
                                         {% else %}
@@ -47,27 +105,69 @@
                                         {% endif %}
 
                                         {% if '/produtos' in request.path  %}
-                                            <li class="active"><a href="/produtos">Produtos</a></li>
+                                            <!-- <li class="active"><a href="/produtos">Produtos</a></li> -->
                                         {% else %}
-                                            <li><a href="/produtos">Produtos</a></li>
+                                            <!-- <li><a href="/produtos">Produtos</a></li> -->
                                         {% endif %}
 
                                         {% if '/restaurantes' in request.path %}
-                                            <li class="active"><a href="/restaurantes">Restaurantes</a></li>
+                                            <!-- <li class="active"><a href="/restaurantes">Restaurantes</a></li> -->
                                         {% else %}
-                                            <li><a href="/restaurantes">Restaurantes</a></li>
+                                            <!-- <li><a href="/restaurantes">Restaurantes</a></li> -->
                                         {% endif %}
 
-                                        <li><a href="/login">Login</a></li>
-                                        <li class="not-hover"><a href="#"><i class="fas fa-cart-plus"></i></a></li>
+                                        <li><a href="#">Sobre Nós</a></li>
 
-                                        <li class="cadastra-restaurante"><a href="/restaurantes/cadastro">Cadastre <br> seu restaurante</a></li>
+                                        <li>
+                                            <a href="produtos">Produtos</a>
+                                        </li>
+
+                                        <!-- <li class="cadastra-restaurante"><a href="/restaurantes/cadastro">Cadastre <br> seu restaurante</a></li> -->
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3 col-in-block">
+                                <div class="side-info-header">
+                                    <ul>
+                                        <li class="login-header">
+                                            <a href="login">Login</a>
+                                        </li>
+                                        <li class="shopping-cart">
+                                            <a href="#">
+                                                <!-- <i class="fas fa-shopping-cart"></i> -->
+                                                <div class="amount-cart">
+                                                    <span>0</span>
+                                                </div>
+
+                                                <a href="#">R$ <span>0.00</span></a>
+                                            </a>
+                                        </li>
+                                        <!-- <li>
+                                            <a href="#">R$ <span>0.00</span></a>
+                                        </li> -->
                                     </ul>
                                 </div>
                             </div>
 
                         </div>
                     </div>
+                </div>
+                <div class="bottom-header">
+                    <ul>
+                        {% for i in range %}
+                        <li>
+                            <a href="#">Lanches</a>
+
+                            <ul class="show-products-hover">
+                                <div class="inside-img">
+                                    <div class="thumb" style="background-image: url('https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940')"></div>
+                                    <h3>Hámburguer</h3>
+                                </div>
+                            </ul>
+                        </li>
+                        {% endfor %}
+                    </ul>
                 </div>
             </header>
 

@@ -2,7 +2,6 @@
 ./delivery/static/*.map
 ./delivery/static/reset.css
 ./delivery/static/responsive
-
 static/responsive
 *.scss
 *.map

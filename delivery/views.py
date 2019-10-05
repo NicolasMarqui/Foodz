@@ -8,6 +8,7 @@ def home(request):
         'index.html',
         {
             'range': range(9),
+            'range2': range(5),
         }
     )
 
@@ -16,7 +17,7 @@ def produtos(request):
         request,
         'produtos.html',
         {
-            'range': range(9)
+            'range': range(9),
         }
     )
 
@@ -36,12 +37,6 @@ def dashboard(request):
         {
             'range': range(9),
         }
-    )
-
-def financeiro(request):
-    return render(
-        request,
-        'financeiro.html',
     )
 
 def login(request):

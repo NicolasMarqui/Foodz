@@ -1,40 +1,154 @@
 {% load static %}
 {% include 'includes/header.html' %}
 
-    <div class="banner-home" style="background-image: url('/static/assets/bg.jpg')">
+    <div class="banner-home" style="background-image: url('https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940')">
         <div class="over"></div>
 
-        <div class="center-form">
-            <h2 class=big-title>
-                Pesquise o melhor <br> na sua cidade
-            </h2>
+        <div class="container relative h-100">
+            <div class="center-form">
+                <h2 class=big-title>
+                    Descubra <br> restaurantes 
+                    <br> perto de você
+                </h2>
+    
+                <a href="#" class="bt">Saiba Mais</a>
+    
+                
+            </div>
+        </div>
 
-            <form action="">
-                {% csrf_token %}
-                <input type="text" placeholder="Restaurantes/produtos" id="banner-input">
+    </div>
 
-                <button>Pesquisar</button>
-            </form>
+    <div class="wrapper-banner-call">
+        <div class="container">
+            <div class="col-xs-12 col-md-4 p-l-0">
+                <a href="#">
+                    <div class="item-banner-call" style="background-image: url('https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940')">
+
+                        <div class="over"></div>
+    
+                        <div class="banner-call-text">
+                            <h3>Pizza <br> Grande </h3>
+                            <p>Saiba Mais</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-xs-12 col-md-4">
+                <a href="#">
+                    <div class="item-banner-call" style="background-image: url('https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940')">
+
+                        <div class="over"></div>
+    
+                        <div class="banner-call-text">
+                            <h3>Pizza <br> Grande </h3>
+                            <p>Saiba Mais</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-xs-12 col-md-4 p-r-0">
+                <a href="#">
+                    <div class="item-banner-call" style="background-image: url('https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940')">
+
+                        <div class="over"></div>
+    
+                        <div class="banner-call-text">
+                            <h3>Pizza <br> Grande </h3>
+                            <p>Saiba Mais</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
         </div>
     </div>
 
-    <div class="wrapper-servicos padding-sections">
+    <!-- <div class="wrapper-escolhas padding-sections">
         <div class="container">
-            <div class="row fs-0">
-                <div class="col-xs-12 col-md-6 col-in-block">
-                    <p class="small-title">
-                        Empresa
-                    </p>
+            <div class="row">
+                
+                <div class="col-xs-12 col-md-3">
+                    <p class="small-title">Escolhas</p>
 
-                    <h2 class="big-title">
-                        Porque <br> escolher nosso <br> serviço?
-                    </h2>
+                    <h2 class="big-title">Escolhas <br> do dia </h2>
+
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad, omnis. Repellat sint quas tempora optio perferendis! Fugiat doloremque ipsam, autem quibusdam neque, incidunt provident explicabo aperiam eaque adipisci magnam ducimus!</p>
                 </div>
 
-                <div class="col-xs-12 col-md-6 col-in-block v-bottom">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor similique veritatis praesentium voluptate facilis, aut deserunt dolores dolore aperiam pariatur incidunt iure dolorem quidem exercitationem ab, beatae unde iste, deleniti cum molestias. Perspiciatis, error distinctio.</p>   
+                <div class="col-xs-12 col-md-8 col-md-offset-1">
+                    <div class="wrapper-slider">
+
+                        <div class="owl-carousel">
+                            
+                            {% for i in range %}
+                            <div class="item" style="width:422px">
+                                <div class="slider slide-1">
+
+                                    <div class="inside-top">
+                                        <span> 0{{i}} </span>
+        
+                                        <p>
+                                            R$14.50
+                                        </p>
+                                    </div>
+        
+                                    <div class="inside-bottom">
+                                        <p>Restaurante SóDelicia</p>
+        
+                                        <h3>Hamburguer <br> Especial </h3>
+                                    </div>
+        
+                                </div>
+                            </div>
+
+                            {% endfor %}
+
+                        </div>
+                    </div>
                 </div>
+
             </div>
+        </div>
+    </div> -->
+
+    <div class="wrapper-random-products">
+        <div class="container">
+
+            <p class="small-title">
+                Produtos
+            </p>
+
+            <h2>Escolhas do dia</h2>
+
+            <div class="display-choices-products">
+                {% for i in range2 %}
+                    <div class="displayed-ones">
+                        <a href="#" class="h-100">
+                            <div class="thumb" style="background-image: url('https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940')"></div>
+    
+                            <div class="more-info">
+                                <div class="title">
+                                    <h4>Combo Hamburguer</h4>
+                                </div>
+
+                                <div class="price">
+                                    <p>R$ <span>0.00</span> </p>
+                                </div>
+
+                                <div class="infos">
+                                    <p> Carrinho</p>
+
+                                    <p> Info </p>
+                                </div>
+
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+
         </div>
     </div>
 
@@ -121,50 +235,22 @@
 
     </div>
 
-    <div class="wrapper-escolhas padding-sections">
+    <div class="wrapper-servicos padding-sections">
         <div class="container">
-            <div class="row">
-                
-                <div class="col-xs-12 col-md-3">
-                    <p class="small-title">Escolhas</p>
+            <div class="row fs-0">
+                <div class="col-xs-12 col-md-6 col-in-block">
+                    <p class="small-title">
+                        Empresa
+                    </p>
 
-                    <h2 class="big-title">Escolhas <br> do dia </h2>
-
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ad, omnis. Repellat sint quas tempora optio perferendis! Fugiat doloremque ipsam, autem quibusdam neque, incidunt provident explicabo aperiam eaque adipisci magnam ducimus!</p>
+                    <h2 class="big-title">
+                        Porque <br> escolher nosso <br> serviço?
+                    </h2>
                 </div>
 
-                <div class="col-xs-12 col-md-8 col-md-offset-1">
-                    <div class="wrapper-slider">
-
-                        <div class="owl-carousel">
-                            
-                            {% for i in range %}
-                            <div class="item" style="width:422px">
-                                <div class="slider slide-1">
-
-                                    <div class="inside-top">
-                                        <span> 0{{i}} </span>
-        
-                                        <p>
-                                            R$14.50
-                                        </p>
-                                    </div>
-        
-                                    <div class="inside-bottom">
-                                        <p>Restaurante SóDelicia</p>
-        
-                                        <h3>Hamburguer <br> Especial </h3>
-                                    </div>
-        
-                                </div>
-                            </div>
-
-                            {% endfor %}
-
-                        </div>
-                    </div>
+                <div class="col-xs-12 col-md-6 col-in-block v-bottom">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor similique veritatis praesentium voluptate facilis, aut deserunt dolores dolore aperiam pariatur incidunt iure dolorem quidem exercitationem ab, beatae unde iste, deleniti cum molestias. Perspiciatis, error distinctio.</p>   
                 </div>
-
             </div>
         </div>
     </div>
