@@ -8,7 +8,16 @@ def home(request):
         'index.html',
         {
             'range': range(9),
-            'range2': range(5),
+            'range2': range(9),
+        }
+    )
+
+def sobre_nos(request):
+    return render(
+        request,
+        'sobre-nos.html',
+        {
+            'range': range(9),
         }
     )
 

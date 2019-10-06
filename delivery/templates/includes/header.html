@@ -14,7 +14,7 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,900&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="{% static 'lib/OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css' %}">
+        <link rel="stylesheet" href="{% static 'lib/slick-1.8.1/slick/slick.css' %}">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <link rel="stylesheet" href="{% static 'reset.css' %}">
         <link rel="stylesheet" href="{% static 'styles.css' %}">
@@ -69,13 +69,32 @@
                 </div>
             </div>
 
-            {% if '/dashboard' in request.path %}
-            <header class="hidden-dash">
-            {% elif '/info' in request.path %}
-            <header class="white-bg">
-            {% else %}
+            <div class="menu-mobile-wrapper">
+
+                <i class="fas fa-times" id="close-full-menu"></i>
+                
+                <div class="center-menu">
+                    <ul>
+                        <li>
+                            <a href="#">Home</a>
+                        </li>
+
+                        <li>
+                            <a href="sobre-nos">Sobre Nós</a>
+                        </li>
+
+                        <li>
+                            <a href="#">Produtos</a>
+                        </li>
+
+                        <li>
+                            <a href="#">Login</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
             <header>
-            {% endif %}
                 <div class="header">
                     <div class="container">
                         <div class="row fs-0">
@@ -103,31 +122,25 @@
                                         {% else %}
                                             <li><a href="/">Home</a></li>
                                         {% endif %}
-
-                                        {% if '/produtos' in request.path  %}
-                                            <!-- <li class="active"><a href="/produtos">Produtos</a></li> -->
-                                        {% else %}
-                                            <!-- <li><a href="/produtos">Produtos</a></li> -->
-                                        {% endif %}
-
+                                        
                                         {% if '/restaurantes' in request.path %}
                                             <!-- <li class="active"><a href="/restaurantes">Restaurantes</a></li> -->
                                         {% else %}
                                             <!-- <li><a href="/restaurantes">Restaurantes</a></li> -->
                                         {% endif %}
-
-                                        <li><a href="#">Sobre Nós</a></li>
-
-                                        <li>
-                                            <a href="produtos">Produtos</a>
-                                        </li>
-
-                                        <!-- <li class="cadastra-restaurante"><a href="/restaurantes/cadastro">Cadastre <br> seu restaurante</a></li> -->
+                                
+                                        <li><a href="/sobre-nos">Sobre Nós</a></li>
+                                
+                                        {% if '/produtos' in request.path  %}
+                                            <li class="active"><a href="/produtos">Produtos</a></li>
+                                        {% else %}
+                                            <li><a href="/produtos">Produtos</a></li>
+                                        {% endif %}
                                     </ul>
                                 </div>
                             </div>
 
-                            <div class="col-md-3 col-in-block">
+                            <div class="hidden-xs hidden-sm col-xs-3 col-md-3 col-in-block">
                                 <div class="side-info-header">
                                     <ul>
                                         <li class="login-header">
@@ -135,7 +148,6 @@
                                         </li>
                                         <li class="shopping-cart">
                                             <a href="#">
-                                                <!-- <i class="fas fa-shopping-cart"></i> -->
                                                 <div class="amount-cart">
                                                     <span>0</span>
                                                 </div>
@@ -143,17 +155,20 @@
                                                 <a href="#">R$ <span>0.00</span></a>
                                             </a>
                                         </li>
-                                        <!-- <li>
-                                            <a href="#">R$ <span>0.00</span></a>
-                                        </li> -->
                                     </ul>
+                                </div>
+                            </div>
+
+                            <div class="hidden-md hidden-lg col-xs-6 col-in-block text-right">
+                                <div class="menu-m">
+                                    <i class="fas fa-bars fa-2x"></i>
                                 </div>
                             </div>
 
                         </div>
                     </div>
                 </div>
-                <div class="bottom-header">
+                <div class="bottom-header hidden-xs hidden-sm">
                     <ul>
                         {% for i in range %}
                         <li>

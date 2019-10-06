@@ -123,30 +123,32 @@
             <h2>Escolhas do dia</h2>
 
             <div class="display-choices-products">
-                {% for i in range2 %}
-                    <div class="displayed-ones">
-                        <a href="#" class="h-100">
-                            <div class="thumb" style="background-image: url('https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940')"></div>
-    
-                            <div class="more-info">
-                                <div class="title">
-                                    <h4>Combo Hamburguer</h4>
-                                </div>
-
-                                <div class="price">
-                                    <p>R$ <span>0.00</span> </p>
-                                </div>
-
-                                <div class="infos">
-                                    <p> Carrinho</p>
-
-                                    <p> Info </p>
-                                </div>
-
+                    {% for i in range2 %}
+                        <div class="item">
+                            <div class="displayed-ones">
+                                <a href="#" class="h-100">
+                                    <div class="thumb" style="background-image: url('https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940')"></div>
+            
+                                    <div class="more-info">
+                                        <div class="title">
+                                            <h4>Combo Hamburguer</h4>
+                                        </div>
+        
+                                        <div class="price">
+                                            <p>R$ <span>0.00</span> </p>
+                                        </div>
+        
+                                        <div class="infos">
+                                            <p> Carrinho</p>
+        
+                                            <p> Info </p>
+                                        </div>
+        
+                                    </div>
+                                </a>
                             </div>
-                        </a>
-                    </div>
-                {% endfor %}
+                        </div>
+                    {% endfor %}
             </div>
 
         </div>
@@ -249,7 +251,9 @@
                 </div>
 
                 <div class="col-xs-12 col-md-6 col-in-block v-bottom">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor similique veritatis praesentium voluptate facilis, aut deserunt dolores dolore aperiam pariatur incidunt iure dolorem quidem exercitationem ab, beatae unde iste, deleniti cum molestias. Perspiciatis, error distinctio.</p>   
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor similique veritatis praesentium voluptate facilis, aut deserunt dolores dolore aperiam pariatur incidunt iure dolorem quidem exercitationem ab, beatae unde iste, deleniti cum molestias. Perspiciatis, error distinctio.</p>
+                    
+                    <a href="#" class="bt">Saiba Mais</a>
                 </div>
             </div>
         </div>
@@ -260,7 +264,7 @@
             <p class="small-title text-center">Restaurantes</p>
             <h2 class="big-title text-center">Melhores <br> Restaurantes </h2>
 
-            <div class="row">
+            <div class="melhores-rest">
                 {% for i in range %}
 
                 <div class="col-xs-12 col-md-4">
@@ -286,7 +290,6 @@
                 </div>
 
                 {% endfor %}
-
             </div>
 
         </div>

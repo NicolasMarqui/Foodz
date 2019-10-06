@@ -59,20 +59,34 @@ body ::-webkit-scrollbar-thumb, html ::-webkit-scrollbar-thumb {
   background-color: #E04040;
 }
 
-.owl-carousel {
-  width: 100%;
+.display-choices-products button.slick-prev, .display-choices-products button.slick-next {
+  display: none !important;
 }
 
-.owl-carousel .item {
-  height: 484px;
-  margin-left: 25px;
+.display-choices-products ul.slick-dots {
+  margin: 15px auto 0;
 }
 
-@media (max-width: 768px) {
-  .owl-carousel .item {
-    margin-left: 0;
-    width: 315px !important;
-  }
+.display-choices-products ul.slick-dots li {
+  display: inline-block;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.display-choices-products ul.slick-dots li button {
+  padding: 10px;
+  border: none;
+  outline: none;
+}
+
+.display-choices-products ul.slick-dots li button:hover {
+  background-color: #ee9898;
+}
+
+.display-choices-products ul.slick-dots li.slick-active button {
+  background-color: #E04040;
+  color: #fff;
 }
 
 .hidden-dash {
@@ -119,11 +133,23 @@ body ::-webkit-scrollbar-thumb, html ::-webkit-scrollbar-thumb {
 }
 
 .p-l-0 {
-  padding-left: 0;
+  padding-left: auto;
+}
+
+@media (min-width: 992px) {
+  .p-l-0 {
+    padding-left: 0;
+  }
 }
 
 .p-r-0 {
-  padding-right: 0;
+  padding-right: auto;
+}
+
+@media (min-width: 992px) {
+  .p-r-0 {
+    padding-left: 0;
+  }
 }
 
 .h-100 {
@@ -341,6 +367,15 @@ header .header .side-info-header ul li.shopping-cart .amount-cart span {
           transform: translate(-50%, -50%);
 }
 
+header .header .menu-m {
+  cursor: pointer;
+  padding: 24px;
+}
+
+header .header .menu-m i {
+  font-size: 22px;
+}
+
 header .header .menu ul {
   list-style: none;
   padding: 0;
@@ -410,6 +445,8 @@ header .bottom-header ul {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 
 header .bottom-header ul li {
@@ -530,18 +567,31 @@ header.white-bg .header .menu ul li.cadastra-restaurante a {
 .banner-home .center-form h2 {
   color: #fff;
   text-align: center;
-  line-height: 50px;
-  font-size: calc(1.4375rem + 2.25vw);
+  line-height: 39px;
+  font-size: calc(1.5625rem + 3.75vw);
 }
 
 @media (min-width: 1200px) {
+  .banner-home .center-form h2 {
+    font-size: 4.375rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .banner-home .center-form h2 {
+    font-size: calc(1.4375rem + 2.25vw);
+    line-height: 50px;
+  }
+}
+
+@media (min-width: 992px) and (min-width: 1200px) {
   .banner-home .center-form h2 {
     font-size: 3.125rem;
   }
 }
 
 .banner-home .center-form a {
-  margin-top: 25px;
+  margin: 25px auto;
   background-color: #E04040;
   text-decoration: none;
   padding: 10px;
@@ -551,6 +601,12 @@ header.white-bg .header .menu ul li.cadastra-restaurante a {
 .banner-home .center-form a:hover {
   color: #fff;
   background-color: #e76c6c;
+}
+
+@media (min-width: 992px) {
+  .banner-home .center-form a {
+    margin: 25px 0;
+  }
 }
 
 .banner-home .center-form form input {
@@ -597,9 +653,22 @@ header.white-bg .header .menu ul li.cadastra-restaurante a {
   }
 }
 
-.wrapper-servicos p {
+.wrapper-servicos p:not(.small-title) {
+  margin-top: 25px;
   font-size: 18px;
   line-height: 30px;
+}
+
+.wrapper-servicos a.bt {
+  margin: 15px auto;
+  padding: 10px;
+  font-size: 14px;
+}
+
+@media (min-width: 992px) {
+  .wrapper-servicos a.bt {
+    float: right;
+  }
 }
 
 .categorias-wrapper {
@@ -1028,6 +1097,37 @@ header.white-bg .header .menu ul li.cadastra-restaurante a {
   }
 }
 
+.melhores-rest button.slick-prev, .melhores-rest button.slick-next {
+  display: none !important;
+}
+
+.melhores-rest ul.slick-dots {
+  margin: 15px auto 0;
+  text-align: center;
+}
+
+.melhores-rest ul.slick-dots li {
+  display: inline-block;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.melhores-rest ul.slick-dots li button {
+  padding: 10px;
+  border: none;
+  outline: none;
+}
+
+.melhores-rest ul.slick-dots li button:hover {
+  background-color: #ee9898;
+}
+
+.melhores-rest ul.slick-dots li.slick-active button {
+  background-color: #E04040;
+  color: #fff;
+}
+
 .wrapper-restaurantes {
   padding: 50px 0;
   background-color: #282828;
@@ -1244,7 +1344,7 @@ footer .footer .fot-bottom p {
 
 .banner-interno {
   width: 100%;
-  height: 335px;
+  height: 235px;
   background-position: center;
   background-size: cover;
   position: relative;
@@ -1286,6 +1386,10 @@ footer .footer .fot-bottom p {
 
 .breadcumb h1 {
   color: #fff;
+}
+
+.show-produtos-wrapper {
+  padding: 40px 0;
 }
 
 .show-produtos-wrapper .bt {
@@ -1640,12 +1744,33 @@ footer .footer .fot-bottom p {
   margin-top: 50px;
 }
 
-.content-show-produtos .result-produtos {
-  min-height: 350px;
+.content-show-produtos .wrap-results {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.content-show-produtos .wrap-results .result-produtos {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  height: 250px;
   background-color: #282828;
   width: 100%;
   margin: 10px 5px;
   position: relative;
+  background-position: center;
+  background-size: cover;
+}
+
+.content-show-produtos .wrap-results .info-prods {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
 }
 
 .login-wrapper {
@@ -2355,6 +2480,13 @@ footer .footer .fot-bottom p {
   border-radius: 15px;
   background-position: center;
   background-size: cover;
+  margin: 10px 0;
+}
+
+@media (min-width: 992px) {
+  .wrapper-banner-call .item-banner-call {
+    margin: 0;
+  }
 }
 
 .wrapper-banner-call .item-banner-call:hover {
@@ -2397,12 +2529,22 @@ footer .footer .fot-bottom p {
   font-size: 30px;
   font-weight: 700;
   margin: 5px 0 10px;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+@media (min-width: 992px) {
+  .wrapper-random-products h2 {
+    text-align: left;
+  }
 }
 
 .wrapper-random-products .display-choices-products {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 
 .wrapper-random-products .display-choices-products .displayed-ones {
@@ -2418,8 +2560,6 @@ footer .footer .fot-bottom p {
   -webkit-box-flex: 1;
       -ms-flex-positive: 1;
           flex-grow: 1;
-  -ms-flex-wrap: 1;
-      flex-wrap: 1;
   margin: 0 5px;
   overflow: hidden;
   -webkit-transition: all .5s linear;
@@ -2459,6 +2599,14 @@ footer .footer .fot-bottom p {
 
 .wrapper-random-products .display-choices-products .displayed-ones .more-info .title h4 {
   color: #000;
+  text-align: center;
+  font-size: 18px;
+}
+
+@media (min-width: 992px) {
+  .wrapper-random-products .display-choices-products .displayed-ones .more-info .title h4 {
+    text-align: left;
+  }
 }
 
 .wrapper-random-products .display-choices-products .displayed-ones .more-info .price {
@@ -2468,6 +2616,13 @@ footer .footer .fot-bottom p {
 .wrapper-random-products .display-choices-products .displayed-ones .more-info .price p {
   font-weight: 700;
   color: #282828;
+  text-align: center;
+}
+
+@media (min-width: 992px) {
+  .wrapper-random-products .display-choices-products .displayed-ones .more-info .price p {
+    text-align: left;
+  }
 }
 
 .wrapper-random-products .display-choices-products .displayed-ones .more-info .infos {
@@ -2647,5 +2802,52 @@ footer .footer .fot-bottom p {
 .display-shopping-cart .go-checkout-info a:hover {
   text-decoration: none;
   background-color: #e76c6c;
+}
+
+.menu-mobile-wrapper {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 6;
+  display: none;
+  opacity: 0;
+  -webkit-transition: all .5s linear;
+  transition: all .5s linear;
+}
+
+.menu-mobile-wrapper #close-full-menu {
+  position: absolute;
+  top: 35px;
+  right: 35px;
+  color: #fff;
+  font-size: 34px;
+  cursor: pointer;
+}
+
+.menu-mobile-wrapper .center-menu {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+.menu-mobile-wrapper .center-menu ul li {
+  padding: 24px 0;
+}
+
+.menu-mobile-wrapper .center-menu ul li a {
+  display: block;
+  font-size: 36px;
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+}
+
+.menu-mobile-wrapper .center-menu ul li:hover {
+  border-bottom: 2px solid #fff;
 }
 /*# sourceMappingURL=styles.css.map */

@@ -1,29 +1,87 @@
 $(document).ready(function(){
 
-    $('.owl-carousel').owlCarousel({
-        // loop:true,
-        margin:10,
-        // nav:true,
-        autoWidth:true,
-        items:4,
-        responsive:{
-            0:{
-                items:2
-            },
-            600:{
-                items:3
-            },
-            1000:{
-                items:1
+    $('.display-choices-products').slick({
+        lazyLoad: 'ondemand',
+        dots: true,
+        infinite: false,
+        autoplaySpeed: 3000,
+        slidesToShow: 6,
+        slidesToScroll: 5,
+        responsive: [
+          {
+            breakpoint: 1024,
+            settings: {
+              slidesToShow: 3,
+              slidesToScroll: 3,
+              infinite: true,
+              dots: true
             }
-        }
-    })
+          },
+          {
+            breakpoint: 600,
+            settings: {
+              slidesToShow: 2,
+              slidesToScroll: 2
+            }
+          },
+          {
+            breakpoint: 480,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1
+            }
+          }
+        ]
+      });
 
-    $(window).scroll(function () { 
-        if($(this).scrollTop() > 110){
-            $('.bottom-header').addClass("fixed-nav")
+      $('.melhores-rest').slick({
+        lazyLoad: 'ondemand',
+        dots: true,
+        infinite: false,
+        autoplaySpeed: 3000,
+        slidesToShow: 3,
+        slidesToScroll: 3,
+        responsive: [
+          {
+            breakpoint: 1024,
+            settings: {
+              slidesToShow: 3,
+              slidesToScroll: 3,
+              infinite: true,
+              dots: true
+            }
+          },
+          {
+            breakpoint: 600,
+            settings: {
+              slidesToShow: 2,
+              slidesToScroll: 2
+            }
+          },
+          {
+            breakpoint: 480,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1
+            }
+          }
+        ]
+      });
+
+    $(window).scroll(function () {
+        
+        let nav;
+
+        if($('.bottom-header').css('display') === 'none'){
+            nav = '.header';
         }else{
-            $('.bottom-header').removeClass("fixed-nav")
+            nav = '.bottom-header';
+        }
+        
+        if($(this).scrollTop() > 110){
+            $(nav).addClass("fixed-nav")
+        }else{
+            $(nav).removeClass("fixed-nav")
         }
     });
 
@@ -59,12 +117,29 @@ $(document).ready(function(){
         });
     })
 
+    //Fechar Carrinho de Compras
     $('.closing-menu').click(function(){
         $('.display-shopping-cart').css({
             display: 'none',
             width: '0',
             transition: 'all .5s linear',
         });
+    })
+
+    //Abrir Menu Mobile
+    $('.menu-m i').click(function(){
+        $('.menu-mobile-wrapper').css({
+            display: 'block',
+            opacity: '1',
+        })
+    })
+
+    //Fecha Menu Mobile
+    $('#close-full-menu').click(function(){
+        $('.menu-mobile-wrapper').css({
+            display: 'none',
+            opacity: '0',
+        })
     })
 
 })
