@@ -142,4 +142,12 @@ $(document).ready(function(){
         })
     })
 
+    //Abre carrinho no icone de carrinho para mobilão
+    $('.mobile-cart').click(function(){
+        $('.display-shopping-cart').css({
+            display: 'block',
+            width: '350px',
+        });
+    })
+
 })

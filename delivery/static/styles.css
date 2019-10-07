@@ -128,6 +128,16 @@ body ::-webkit-scrollbar-thumb, html ::-webkit-scrollbar-thumb {
   position: absolute;
 }
 
+.dark-bg-hover {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  position: absolute;
+  z-index: 10;
+}
+
 .p-0 {
   padding: 0;
 }
@@ -449,7 +459,7 @@ header .bottom-header ul {
       flex-wrap: wrap;
 }
 
-header .bottom-header ul li {
+header .bottom-header ul > li {
   display: inline-block;
   padding: 14px 0px;
   position: relative;
@@ -458,21 +468,31 @@ header .bottom-header ul li {
           flex: 1;
 }
 
-header .bottom-header ul li a {
+header .bottom-header ul > li a {
   display: block;
   text-decoration: none;
   text-align: center;
 }
 
-header .bottom-header ul li ul.show-products-hover {
+header .bottom-header ul > li a span img {
+  height: 16px;
+  vertical-align: middle;
+  margin-top: -3px;
+}
+
+header .bottom-header ul > li > ul.show-products-hover {
   position: absolute;
   top: 100%;
   left: 0;
   visibility: hidden;
 }
 
-header .bottom-header ul li ul.show-products-hover .inside-img {
-  padding: 50px;
+header .bottom-header ul > li > ul.show-products-hover li {
+  padding: 0;
+}
+
+header .bottom-header ul > li > ul.show-products-hover .inside-img {
+  padding: 20px;
   background-color: #fff;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -483,23 +503,16 @@ header .bottom-header ul li ul.show-products-hover .inside-img {
           flex-direction: column;
 }
 
-header .bottom-header ul li ul.show-products-hover .inside-img .thumb {
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
-}
-
-header .bottom-header ul li ul.show-products-hover:first-child {
+header .bottom-header ul > li > ul.show-products-hover:first-child {
   left: 0;
   right: auto;
 }
 
-header .bottom-header ul li ul.show-products-hover:last-child {
-  right: 0;
+header .bottom-header ul > li > ul.show-products-hover:last-child {
   left: auto;
 }
 
-header .bottom-header ul li:hover .show-products-hover {
+header .bottom-header ul > li:hover .show-products-hover {
   visibility: visible;
 }
 
@@ -2849,5 +2862,41 @@ footer .footer .fot-bottom p {
 
 .menu-mobile-wrapper .center-menu ul li:hover {
   border-bottom: 2px solid #fff;
+}
+
+.mobile-cart {
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  background-color: #E04040;
+  border-radius: 50%;
+  height: 60px;
+  width: 60px;
+  z-index: 5;
+  -webkit-box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.75);
+  cursor: pointer;
+}
+
+.mobile-cart i {
+  height: 100%;
+  display: block;
+  width: 100%;
+  font-size: 30px;
+}
+
+.mobile-cart i::before {
+  position: absolute;
+  top: 50%;
+  left: 49%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+.mobile-cart:hover i {
+  -webkit-transition: all .5s linear;
+  transition: all .5s linear;
+  -webkit-transform: scale(1.112) rotate(360deg);
+          transform: scale(1.112) rotate(360deg);
 }
 /*# sourceMappingURL=styles.css.map */

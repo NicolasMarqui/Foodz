@@ -94,6 +94,10 @@
                 </div>
             </div>
 
+            <div class="mobile-cart visible-xs visible-sm">
+                <i class="fas fa-shopping-cart"></i>
+            </div>
+
             <header>
                 <div class="header">
                     <div class="container">
@@ -105,7 +109,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-3 hidden-xs col-in-block v-bottom">
+                            <div class="col-sm-5 col-md-3 hidden-xs col-in-block v-bottom">
                                 <div class="search-nav">
                                     <input type="text" placeholder="Pesquisar">
                                     <span>
@@ -114,19 +118,13 @@
                                 </div>
                             </div>
 
-                            <div class="hidden-xs col-md-4 col-in-block text-right">
+                            <div class="hidden-xs col-sm-5 col-md-4 col-in-block text-right">
                                 <div class="menu">
                                     <ul>
                                         {% if request.path == '/' %}
                                             <li class="active"><a href="/">Home</a></li>
                                         {% else %}
                                             <li><a href="/">Home</a></li>
-                                        {% endif %}
-                                        
-                                        {% if '/restaurantes' in request.path %}
-                                            <!-- <li class="active"><a href="/restaurantes">Restaurantes</a></li> -->
-                                        {% else %}
-                                            <!-- <li><a href="/restaurantes">Restaurantes</a></li> -->
                                         {% endif %}
                                 
                                         <li><a href="/sobre-nos">Sobre Nós</a></li>
@@ -159,7 +157,7 @@
                                 </div>
                             </div>
 
-                            <div class="hidden-md hidden-lg col-xs-6 col-in-block text-right">
+                            <div class="hidden-md hidden-lg hidden-sm col-xs-6 col-in-block text-right">
                                 <div class="menu-m">
                                     <i class="fas fa-bars fa-2x"></i>
                                 </div>
@@ -168,21 +166,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="bottom-header hidden-xs hidden-sm">
-                    <ul>
-                        {% for i in range %}
-                        <li>
-                            <a href="#">Lanches</a>
-
-                            <ul class="show-products-hover">
-                                <div class="inside-img">
-                                    <div class="thumb" style="background-image: url('https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940')"></div>
-                                    <h3>Hámburguer</h3>
-                                </div>
-                            </ul>
-                        </li>
-                        {% endfor %}
-                    </ul>
+                <div class="bottom-header">
+                    <div class="container">
+                        {% include 'includes/products-bottom.html' %}
+                    </div>
                 </div>
             </header>
 
