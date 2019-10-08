@@ -71,3 +71,20 @@ def cadastro_restaurantes(request):
             'range': range(5),
         }
     )
+
+def pesquisa(request):
+
+    query = request.POST['query']
+    
+    # q_produtos = Produto.objects.filter(nome__icontains=query)
+    # q_restaurantes = Restaurante.objects.filter(Q(nome__icontains=query) | Q(endereco__icontains=query))
+
+    return render(
+        request,
+        'pesquisa.html',
+        {
+            'query': query,
+            # 'produtos': q_produtos,
+            # 'restaurantes': q_restaurantes,
+        }
+    )

@@ -5,8 +5,8 @@ $(document).ready(function(){
         dots: true,
         infinite: false,
         autoplaySpeed: 3000,
-        slidesToShow: 6,
-        slidesToScroll: 5,
+        slidesToShow: 5,
+        slidesToScroll: 2,
         responsive: [
           {
             breakpoint: 1024,
@@ -149,5 +149,21 @@ $(document).ready(function(){
             width: '350px',
         });
     })
+
+    //Abrir Search Mobile
+    $('.search-m i').click(function(){
+      $('.search-mobile-wrapper').css({
+          display: 'flex',
+          opacity: '1',
+      })
+  })
+
+  //Fecha Search Mobile
+  $('#close-full-search').click(function(){
+      $('.search-mobile-wrapper').css({
+          display: 'none',
+          opacity: '0',
+      })
+  })
 
 })
