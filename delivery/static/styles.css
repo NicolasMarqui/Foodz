@@ -1832,7 +1832,7 @@ footer .footer .fot-bottom p {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  background-color: #f8f8f8;
+  background-color: #282828;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -2999,5 +2999,49 @@ footer .footer .fot-bottom p {
   transition: all .5s linear;
   -webkit-transform: scale(1.112) rotate(360deg);
           transform: scale(1.112) rotate(360deg);
+}
+
+.cadastre-restaurante {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 6;
+}
+
+.cadastre-restaurante a {
+  display: block;
+  padding: 10px 35px;
+  background-color: red;
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+  -webkit-animation: fade_border 2s infinite linear;
+          animation: fade_border 2s infinite linear;
+}
+
+.cadastre-restaurante a:hover {
+  background-color: #e76c6c;
+}
+
+@-webkit-keyframes fade_border {
+  0% {
+    -webkit-box-shadow: 1px 1px 2px 4px rgba(0, 0, 0, 0.75);
+    box-shadow: 1px 1px 2px 4px rgba(0, 0, 0, 0.75);
+  }
+  100% {
+    -webkit-box-shadow: 1px 1px 5px 4px rgba(0, 0, 0, 0.75);
+    box-shadow: 1px 1px 5px 4px rgba(0, 0, 0, 0.75);
+  }
+}
+
+@keyframes fade_border {
+  0% {
+    -webkit-box-shadow: 1px 1px 2px 4px rgba(0, 0, 0, 0.75);
+    box-shadow: 1px 1px 2px 4px rgba(0, 0, 0, 0.75);
+  }
+  100% {
+    -webkit-box-shadow: 1px 1px 5px 4px rgba(0, 0, 0, 0.75);
+    box-shadow: 1px 1px 5px 4px rgba(0, 0, 0, 0.75);
+  }
 }
 /*# sourceMappingURL=styles.css.map */

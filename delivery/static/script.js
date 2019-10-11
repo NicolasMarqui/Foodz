@@ -166,4 +166,11 @@ $(document).ready(function(){
       })
   })
 
+  //Add borda vermelha
+  $('.search-nav form input[name=query]').blur(function(){
+    $(this).css({
+      borderBottom: '1px solid red',
+    })
+  })
+
 })
