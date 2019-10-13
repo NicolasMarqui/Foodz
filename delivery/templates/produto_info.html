@@ -1,8 +1,11 @@
+{% extends 'base.html' %}
 {% load static %}
-{% include 'includes/header.html' %}
 
-    <div class="offset-header-info-produto"></div>
-    
+{% block title %}
+    Produto > {{id}}
+{% endblock %}
+
+{% block content %}
     <div class="product-display">
 
         <div class="container">
@@ -164,4 +167,4 @@
 
     </div>
 
-{% include 'includes/footer.html' %}
+{% endblock %}

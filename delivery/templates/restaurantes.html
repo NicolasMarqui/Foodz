@@ -1,5 +1,10 @@
-{% include 'includes/header.html' %}
+{% extends 'base.html' %}
 
+{% block title %}
+    Restaurantes
+{% endblock %}
+
+{% block content %}
     <div class="banner-interno" style="background-image: url('/static/assets/burguer.jpg')">
         <div class="over"></div>
 
@@ -19,4 +24,4 @@
         
     </div>
 
-{% include 'includes/footer.html' %}
+{% endblock %}

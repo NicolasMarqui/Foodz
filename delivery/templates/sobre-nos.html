@@ -1,6 +1,11 @@
+{% extends 'base.html' %}
 {% load static %}
-{% include 'includes/header.html' %}
 
+{% block title %}
+    Sobre Nós
+{% endblock %}
+
+{% block content %}
     <div class="banner-interno" style="background-image: url('/static/assets/burguer.jpg')">
         <div class="over"></div>
 
@@ -14,5 +19,4 @@
             </div>
         </div>
     </div>
-
-{% include 'includes/footer.html' %}
+{% endblock %}

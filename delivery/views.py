@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .forms import CreateNewUser, LoginUser
 
 # Create your views here.
 def home(request):
@@ -49,9 +50,27 @@ def dashboard(request):
     )
 
 def login(request):
+
+    form = LoginUser()
+
     return render(
         request,
         'login.html',
+        {
+            "form": form,
+        }
+    )
+
+def signup(request):
+
+    form = CreateNewUser()
+
+    return render(
+        request,
+        'signup.html',
+        {
+            "form": form,
+        }
     )
 
 def produto_info(request,id = None):
@@ -60,6 +79,7 @@ def produto_info(request,id = None):
         'produto_info.html',
         {
             'range': range(5),
+            'id': id,
         }
     )
 

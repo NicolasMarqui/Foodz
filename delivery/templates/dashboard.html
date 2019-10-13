@@ -1,7 +1,11 @@
+{% extends 'base.html' %}
 {% load static %}
 
-{% include 'includes/header.html' %}
+{% block title %}
+    Dashboard
+{% endblock %}
 
+{% block content %}
     <div class="wrapper-dashboard">
 
         <div class="modal-more-orders">
@@ -163,4 +167,4 @@
         </div>
     </div>
 
-{% include 'includes/footer.html' %}
+{% endblock %}

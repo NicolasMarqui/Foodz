@@ -1,62 +1,92 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
+from .choices import *
 
 # Create your models here.
 class Cidade(models.Model):
-    nomeCidade = models.CharField(max_length=255)
+    nomeCidade = models.CharField(max_length=255, choices=CIDADES_CHOICE)
+
+class Endereco(models.Model):
+    id_cliente                  = models.ForeignKey('Cliente', on_delete=models.CASCADE)
+    endereco                    = models.CharField(max_length=255)
+    numero                      = models.CharField(max_length=255)
+    tipo                        = models.CharField(max_length=255, choices=TIPO_CHOICE)
+    cidade                      = models.ForeignKey(Cidade, on_delete = models.CASCADE)
 
 class Cliente(models.Model):
-    nome = models.CharField(max_length=50)
-    cidade = models.ForeignKey(Cidade, on_delete = models.CASCADE)
-    endereco = models.CharField(max_length=255)
-    numero = models.CharField(max_length=255)
-    cep = models.CharField(max_length=10)
-    cpf = models.CharField(max_length=14)
-    telefone = models.CharField(max_length=30)
-    email = models.CharField(max_length=100)
-    senha = models.CharField(max_length=50)
-    cadastro_criado = models.DateTimeField()
-    is_dono = models.BooleanField(default=False)
-    avatar = models.ImageField(upload_to="pics/clientes/", default='pics/None/no-img.png')
-    ultimo_compra = models.DateTimeField(auto_now=True)
-    quantidade_comentarios = models.IntegerField(blank=True)
+    nome                        = models.CharField(max_length=50)
+    endereco_id                 = models.ForeignKey(Endereco, on_delete = models.CASCADE,blank=True,null=True)
+    cep                         = models.CharField(max_length=10)
+    cpf                         = models.CharField(max_length=14)
+    telefone                    = models.CharField(max_length=30)
+    email                       = models.CharField(max_length=100)
+    senha                       = models.CharField(max_length=50)
+    cadastro_criado             = models.DateTimeField()
+    avatar                      = models.ImageField(upload_to="pics/clientes/", default='pics/None/no-img.png')
+    ultimo_compra               = models.DateTimeField(auto_now=True)
+    quantidade_comentarios      = models.IntegerField(blank=True)
 
 class Restaurante(models.Model):
-    nome = models.CharField(max_length=100)
-    logo = models.ImageField(upload_to="pics/restaurante/", default='pics/None/no-img.png')
-    endereco = models.CharField(max_length=255)
-    cidade = models.ForeignKey(Cidade, on_delete=models.CASCADE)
-    vendas = models.IntegerField(blank=True)
+    nome                        = models.CharField(max_length=100)
+    cep                         = models.CharField(max_length=10)
+    estado                      = models.CharField(max_length=255)
+    cidade                      = models.ForeignKey(Cidade, on_delete=models.CASCADE)
+    endereco                    = models.CharField(max_length=255)
+    numero                      = models.CharField(max_length=255)
+    complemento                 = models.CharField(max_length=255)
+    especialidade               = models.CharField(max_length=255)
+    razao_social                = models.CharField(max_length=255)
+    total_vendas                = models.IntegerField(blank=True)
+    descricao                   = models.CharField(max_length=255)
+    logo                        = models.ImageField(upload_to="pics/restaurante/", default='pics/None/no-img.png')
+    cnpj                        = models.CharField(max_length=18)
+
 
 class Categoria(models.Model):
-    categoria = models.CharField(max_length=50)
+    categoria                   = models.CharField(max_length=50)
 
 class Produto(models.Model):
-    nome = models.CharField(max_length=100)
-    foto = models.ImageField(upload_to="pics/produtos/", default='pics/None/no-img.png')
-    categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
-    restaurante = models.ForeignKey(Restaurante, on_delete=models.CASCADE)
-    descricao = models.TextField()
-    ingredientes = models.TextField(blank=True)
-    preco = models.DecimalField(max_digits=5,decimal_places=2)
-    ativo = models.BooleanField(default=True)
+    nome                        = models.CharField(max_length=100)
+    foto                        = models.ImageField(upload_to="pics/produtos/", default='pics/None/no-img.png')
+    categoria                   = models.ForeignKey(Categoria, on_delete=models.CASCADE)
+    restaurante                 = models.ForeignKey(Restaurante, on_delete=models.CASCADE)
+    descricao                   = models.TextField()
+    ingredientes                = models.TextField(blank=True)
+    preco                       = models.DecimalField(max_digits=5,decimal_places=2)
+    ativo                       = models.BooleanField(default=True)
 
 class Oferta(models.Model):
-    inicio_data_oferta = models.DateField(null=True)
-    inicio_horario_oferta = models.TimeField(null=True)
-    fim_data_oferta = models.DateField(null=True)
-    fim_horario_oferta = models.TimeField(null=True)
-    preco_oferta = models.DecimalField(max_digits=5,decimal_places=2)
+    inicio_data_oferta          = models.DateField(null=True)
+    inicio_horario_oferta       = models.TimeField(null=True)
+    fim_data_oferta             = models.DateField(null=True)
+    fim_horario_oferta          = models.TimeField(null=True)
+    preco_oferta                = models.DecimalField(max_digits=5,decimal_places=2)
 
 class Em_Oferta(models.Model):
-    oferta = models.ForeignKey(Oferta, on_delete=models.CASCADE)
-    produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
+    oferta                      = models.ForeignKey(Oferta, on_delete=models.CASCADE)
+    produto                     = models.ForeignKey(Produto, on_delete=models.CASCADE)
 
 class Comentario(models.Model):
-    cliente_id = models.ForeignKey(Cliente, on_delete=models.CASCADE)
-    produto_id = models.ForeignKey(Produto, on_delete=models.CASCADE)
-    restaurante_id = models.ForeignKey(Restaurante, on_delete=models.CASCADE)
-    nota = models.PositiveIntegerField(null=True,default=0 ,validators=[MinValueValidator(0),MaxValueValidator(5)])
-    descricao = models.TextField(blank=True)
-    recomenda = models.BooleanField(default=True)
-    data_comentario = models.DateTimeField()
+    cliente_id                  = models.ForeignKey(Cliente, on_delete=models.CASCADE)
+    produto_id                  = models.ForeignKey(Produto, on_delete=models.CASCADE)
+    restaurante_id              = models.ForeignKey(Restaurante, on_delete=models.CASCADE)
+    nota                        = models.PositiveIntegerField(null=True,default=0 ,validators=[MinValueValidator(0),MaxValueValidator(5)])
+    descricao                   = models.TextField(blank=True)
+    recomenda                   = models.BooleanField(default=True)
+    data_comentario             = models.DateTimeField()
+
+class Compras(models.Model):
+    id_cliente                  = models.ForeignKey(Cliente, on_delete=models.CASCADE)
+    id_produto                  = models.ForeignKey(Produto, on_delete=models.CASCADE)
+    id_restaurante              = models.ForeignKey(Restaurante, on_delete=models.CASCADE)
+
+class Placed_order(models.Model):
+    id_restaurante              = models.ForeignKey(Restaurante, on_delete=models.CASCADE)
+    order_time                  = models.DateTimeField()
+    tempo_estimado              = models.IntegerField(blank=True)
+    comida_pronta               = models.DateTimeField(auto_now=True, blank=True)
+    endereco_entrega            = models.CharField(max_length=255)
+    endereco_saida              = models.CharField(max_length=255)
+    id_cliente                  = models.ForeignKey(Cliente, on_delete=models.CASCADE)
+    preco                       = models.DecimalField(max_digits=5,decimal_places=2)
+    comentario                  = models.TextField(blank=True, null=True)
