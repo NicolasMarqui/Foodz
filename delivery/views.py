@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .forms import CreateNewUser, LoginUser
+from .models import Cliente
 
 # Create your views here.
 def home(request):
@@ -106,5 +107,19 @@ def pesquisa(request):
             'query': query,
             # 'produtos': q_produtos,
             # 'restaurantes': q_restaurantes,
+        }
+    )
+
+def minha_conta(request, id):
+
+    cliente = Cliente.objects.all().filter(id=id)
+
+    return render(
+        request,
+        'minha_conta.html',
+        {
+            "id": id,
+            "cliente": cliente,
+            "range": range(10)
         }
     )

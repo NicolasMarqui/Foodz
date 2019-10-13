@@ -6,25 +6,35 @@ from .choices import *
 class Cidade(models.Model):
     nomeCidade = models.CharField(max_length=255, choices=CIDADES_CHOICE)
 
+    def __str__(self):
+        return 'cidade: {}' .format(self.nomeCidade)
+
 class Endereco(models.Model):
     id_cliente                  = models.ForeignKey('Cliente', on_delete=models.CASCADE)
+    cep                         = models.CharField(max_length=10)
     endereco                    = models.CharField(max_length=255)
-    numero                      = models.CharField(max_length=255)
+    numero                      = models.CharField(max_length=255, blank=True, null=True)
+    complemento                 = models.CharField(max_length=100, blank=True, null=True)
     tipo                        = models.CharField(max_length=255, choices=TIPO_CHOICE)
     cidade                      = models.ForeignKey(Cidade, on_delete = models.CASCADE)
+
+    def __str__(self):
+        return '{} e {}' .format(self.id_cliente, self.endereco)
 
 class Cliente(models.Model):
     nome                        = models.CharField(max_length=50)
     endereco_id                 = models.ForeignKey(Endereco, on_delete = models.CASCADE,blank=True,null=True)
-    cep                         = models.CharField(max_length=10)
     cpf                         = models.CharField(max_length=14)
     telefone                    = models.CharField(max_length=30)
     email                       = models.CharField(max_length=100)
     senha                       = models.CharField(max_length=50)
     cadastro_criado             = models.DateTimeField()
-    avatar                      = models.ImageField(upload_to="pics/clientes/", default='pics/None/no-img.png')
+    avatar                      = models.ImageField(upload_to="pics/clientes/", default='pics/None/no-img.png',blank=True, null=True)
     ultimo_compra               = models.DateTimeField(auto_now=True)
-    quantidade_comentarios      = models.IntegerField(blank=True)
+    quantidade_comentarios      = models.IntegerField(blank=True, null=True)
+
+    def __str__(self):
+        return 'ID: {} e nome: {}'.format(self.id, self.nome)
 
 class Restaurante(models.Model):
     nome                        = models.CharField(max_length=100)
@@ -75,11 +85,6 @@ class Comentario(models.Model):
     recomenda                   = models.BooleanField(default=True)
     data_comentario             = models.DateTimeField()
 
-class Compras(models.Model):
-    id_cliente                  = models.ForeignKey(Cliente, on_delete=models.CASCADE)
-    id_produto                  = models.ForeignKey(Produto, on_delete=models.CASCADE)
-    id_restaurante              = models.ForeignKey(Restaurante, on_delete=models.CASCADE)
-
 class Placed_order(models.Model):
     id_restaurante              = models.ForeignKey(Restaurante, on_delete=models.CASCADE)
     order_time                  = models.DateTimeField()
@@ -90,3 +95,9 @@ class Placed_order(models.Model):
     id_cliente                  = models.ForeignKey(Cliente, on_delete=models.CASCADE)
     preco                       = models.DecimalField(max_digits=5,decimal_places=2)
     comentario                  = models.TextField(blank=True, null=True)
+
+class Compras(models.Model):
+    id_cliente                  = models.ForeignKey(Cliente, on_delete=models.CASCADE)
+    id_produto                  = models.ForeignKey(Produto, on_delete=models.CASCADE)
+    id_restaurante              = models.ForeignKey(Restaurante, on_delete=models.CASCADE)
+    placed_order_id             = models.ForeignKey(Placed_order, on_delete=models.CASCADE)

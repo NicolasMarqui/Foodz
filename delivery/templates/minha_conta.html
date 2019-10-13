@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Minha Conta - {{id}}
+{% endblock %}
+
+{% block content %}
+    
+    {% for cl in cliente %}
+        <div class="minha-conta-wrapper">
+            <div class="side-nav-conta">
+                
+                <div class="info-nome">
+                    
+                    <div class="foto">
+                        <div class="bg" style="background-image: url('/media/{{cl.avatar}}');"></div>
+                    </div>
+
+                    <h2>{{cl.nome}}</h2>
+
+                </div>
+
+            </div>
+
+            <div class="my-info-conta">
+                <h3>Minha Conta</h3>
+
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#pedidos">Pedidos</a></li>
+                    <li><a data-toggle="tab" href="#enderecos">Cadastro</a></li>
+                    <li><a data-toggle="tab" href="#enderecos">Endereços</a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <div id="pedidos" class="tab-pane fade in active">
+                        
+                        <div class="show-pedidos">
+
+                            <div class="container p-0">
+                                {% for i in range %}
+                                    <div class="pedido pedido-1">
+                                        <div class="row fs-0">
+                                            <div class="col-xs-12 col-md-3 h100 col-in-block">
+                                                <div class="product-image">
+                                                    <div class="bg" style="background-image: url('/media/{{cl.avatar}}');"></div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xs-12 col-md-5 col-in-block v-middle">
+                                                <h4>{{cl.nome}}</h4>
+                                                <p>R$ <span>0.00</span></p>
+
+                                                <p class="vendido-por">Vendido por:  <span>{{cl.nome}}</span></p>
+                                                
+                                                <a href="#" class="mais-detalhes">Mais Detalhes</a>
+                                            </div>
+                                        </div>
+
+                                        <div class="info-fixed-side">
+                                            <ul>
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="fas fa-thumbs-up"></i>
+                                                    </a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="fas fa-thumbs-up"></i>
+                                                    </a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="#">
+                                                        <i class="fas fa-thumbs-up"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div id="home" class="tab-pane fade">
+                      
+                        <div class="info-tab">
+
+                        </div>
+
+
+                    </div>
+
+                    <div id="enderecos" class="tab-pane fade">
+                      <h3>Menu 1</h3>
+                      <p>Some content in menu 1.</p>
+                    </div>
+
+                  </div>
+            </div>
+        </div>
+    {% endfor %}
+    
+{% endblock %}
