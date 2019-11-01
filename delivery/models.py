@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from .choices import *
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Cidade(models.Model):
@@ -22,19 +23,17 @@ class Endereco(models.Model):
         return '{} e {}' .format(self.id_cliente, self.endereco)
 
 class Cliente(models.Model):
-    nome                        = models.CharField(max_length=50)
+    user                        = models.OneToOneField(User, on_delete=models.CASCADE)
     endereco_id                 = models.ForeignKey(Endereco, on_delete = models.CASCADE,blank=True,null=True)
-    cpf                         = models.CharField(max_length=14)
-    telefone                    = models.CharField(max_length=30)
-    email                       = models.CharField(max_length=100)
-    senha                       = models.CharField(max_length=50)
-    cadastro_criado             = models.DateTimeField()
+    cpf                         = models.CharField(max_length=14,blank=True)
+    telefone                    = models.CharField(max_length=30,blank=True)
+    cadastro_criado             = models.DateTimeField(auto_now=True)
     avatar                      = models.ImageField(upload_to="pics/clientes/", default='pics/None/no-img.png',blank=True, null=True)
-    ultimo_compra               = models.DateTimeField(auto_now=True)
+    ultimo_compra               = models.DateTimeField(auto_now=True,blank=True)
     quantidade_comentarios      = models.IntegerField(blank=True, null=True)
 
     def __str__(self):
-        return 'ID: {} e nome: {}'.format(self.id, self.nome)
+        return 'ID: {} e username: {} '.format(self.id, self.user.username)
 
 class Restaurante(models.Model):
     nome                        = models.CharField(max_length=100)

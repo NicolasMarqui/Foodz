@@ -3236,4 +3236,29 @@ footer .footer .fot-bottom p {
 .minha-conta-wrapper .my-info-conta .pedido .info-fixed-side ul li a:hover {
   background-color: #fff;
 }
+
+.thicker {
+  border-width: 4px !important;
+}
+
+.login-header:hover .logout-header {
+  visibility: visible;
+}
+
+.logout-header {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: #494949;
+  z-index: 2;
+  visibility: hidden;
+}
+
+.logout-header a {
+  padding: 14px;
+  color: #fff !important;
+  display: block;
+  text-align: center;
+}
 /*# sourceMappingURL=styles.css.map */

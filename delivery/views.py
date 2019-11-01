@@ -1,7 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .forms import CreateNewUser, LoginUser
 from .models import Cliente
+from django.contrib.auth import logout as django_logout
+from django.contrib.auth.models import User, auth
+from django.contrib import messages
 
 # Create your views here.
 def home(request):
@@ -52,26 +54,46 @@ def dashboard(request):
 
 def login(request):
 
-    form = LoginUser()
+    if request.method == 'POST':
+        email = request.POST['email']
+        senha = request.POST['senha']
+
+        usuario = User.objects.filter(email=email)
+
+        for i in usuario:
+            user = auth.authenticate(username=i, password=senha)
+
+        if user is not None:
+            auth.login(request, user)
+            return redirect('/')
+        else:
+            messages.info(request, 'Os dados não conferem')
+
+    else:
+        return render(request, 'login.html')
 
     return render(
         request,
         'login.html',
-        {
-            "form": form,
-        }
     )
 
-def signup(request):
+def register(request):
 
-    form = CreateNewUser()
+    if request.method == 'POST':
+        nome = request.POST['nome']
+        email = request.POST['email']
+        senha = request.POST['senha']
+
+        if User.objects.filter(email=email).exists():
+            messages.info(request, 'Esse email ja existe')
+        else:
+            user = User.objects.create_user(username=nome, email=email, password=senha)
+            user.save()
+            return redirect('/login')
 
     return render(
         request,
-        'signup.html',
-        {
-            "form": form,
-        }
+        'register.html',
     )
 
 def produto_info(request,id = None):
@@ -112,8 +134,8 @@ def pesquisa(request):
 
 def minha_conta(request, id):
 
-    cliente = Cliente.objects.all().filter(id=id)
-
+    cliente = Cliente.objects.all().filter(user_id=id)
+    
     return render(
         request,
         'minha_conta.html',
@@ -123,3 +145,7 @@ def minha_conta(request, id):
             "range": range(10)
         }
     )
+
+def logout(request):
+    django_logout(request)
+    return redirect('/')

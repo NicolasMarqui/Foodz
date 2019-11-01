@@ -33,16 +33,29 @@
 
         <div class="center-form-login">
 
-            <h2>Seja bem vindo!</h2>
+            <h2>Seja bem vindo de volta!</h2>
 
-            <form action="">
+            <form action="{% url 'login' %}" method="POST">
             {% csrf_token %}
-                {% for fields in form %}
-                    {{ fields.errors }}
-                    {{ fields.label_tag }} {{ fields }}
-                {% endfor %}
                 
-                <button type="submit" class="login-btn">Criar Conta</button>
+                {% if messages %}
+                <input type="email" placeholder="Email" name="email" required class="thicker">
+                {% else %}
+                <input type="email" placeholder="Email" name="email" required>
+                {% endif %}
+                <input type="password" placeholder="Senha" name="senha" required>
+
+                {% if messages %}
+                    <div class="alert alert-danger">
+                        {% for message in messages %}
+                            <h3>{{message}}</h3>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <a href="/register">Não tem cadastro?</a>
+                
+                <button type="submit" class="login-btn">Login</button>
             </form>
         </div>
     </div>

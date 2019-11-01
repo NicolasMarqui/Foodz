@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'foodz.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'foodz_2.0',
+        'NAME': 'foodz_3.0',
         'USER': 'root',
         'PASSWORD': '',
         'HOST': 'localhost',
@@ -127,3 +127,5 @@ MEDIA_URL = '/media/'
 
 STATICFILES_DIRS = ( os.path.join('static'), )
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+LOGIN_REDIRECT_URL = '/'

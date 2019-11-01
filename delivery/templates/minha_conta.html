@@ -6,7 +6,8 @@
 
 {% block content %}
     
-    {% for cl in cliente %}
+    {% if user.is_authenticated %}
+        {% for cl in cliente %}
         <div class="minha-conta-wrapper">
             <div class="side-nav-conta">
                 
@@ -16,7 +17,7 @@
                         <div class="bg" style="background-image: url('/media/{{cl.avatar}}');"></div>
                     </div>
 
-                    <h2>{{cl.nome}}</h2>
+                    <h2>{{user.username}}</h2>
 
                 </div>
 
@@ -102,6 +103,7 @@
                   </div>
             </div>
         </div>
-    {% endfor %}
+        {% endfor %}
+    {% endif %}
     
 {% endblock %}

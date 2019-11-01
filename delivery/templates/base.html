@@ -161,7 +161,16 @@
                                 <div class="side-info-header">
                                     <ul>
                                         <li class="login-header">
+                                            {% if user.is_authenticated %}
+                                            <a href="/conta/{{user.id}}">Conta</a>
+
+                                            <div class="logout-header">
+                                                <a href="{% url 'logout' %}">logout</a>
+                                            </div>
+
+                                            {% else %}
                                             <a href="/login">Login</a>
+                                            {% endif %}
                                         </li>
                                         <li class="shopping-cart">
                                             <a href="#">
@@ -202,7 +211,7 @@
 
             {% endblock %}
 
-        {% if '/dashboard' in request.path or '/login' in request.path or '/conta' in request.path %}
+        {% if '/dashboard' in request.path or '/login' in request.path or '/conta' in request.path or '/register' in request.path%}
         <footer class="hidden-dash">
         {% else %}
         <footer>
