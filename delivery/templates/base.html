@@ -110,7 +110,7 @@
             </div>
             {% endif %}
 
-                {% if '/signup' in request.path or '/login' in request.path %}
+                {% if '/signup' in request.path or '/login' in request.path or '/register' in request.path or '/dashboard' in request.path %}
                 <header class="hidden-dash">
                 {% else %}
                 <header>
@@ -127,7 +127,7 @@
 
                             <div class="col-sm-5 col-md-3 hidden-xs col-in-block v-bottom">
                                 <div class="search-nav">
-                                    <form action="pesquisa/" method="POST">
+                                    <form action="/pesquisa/" method="POST">
                                         {% csrf_token %}
                                         <input type="text" name="query" placeholder="Pesquisar" required>
                                         <button type="submit">

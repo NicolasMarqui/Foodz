@@ -36,6 +36,7 @@ class Cliente(models.Model):
         return 'ID: {} e username: {} '.format(self.id, self.user.username)
 
 class Restaurante(models.Model):
+    user                        = models.OneToOneField(User, on_delete=models.CASCADE)
     nome                        = models.CharField(max_length=100)
     cep                         = models.CharField(max_length=10)
     estado                      = models.CharField(max_length=255)

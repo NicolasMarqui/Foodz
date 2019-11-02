@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Cliente
+from .models import Cliente, Produto, Restaurante
 from django.contrib.auth import logout as django_logout
-from django.contrib.auth.models import User, auth
+from django.contrib.auth.models import User, auth, Group
+from django.db.models import Q
 from django.contrib import messages
 
 # Create your views here.
@@ -44,9 +45,30 @@ def restaurantes(request):
     )
 
 def dashboard(request):
+
+    print(User.objects.all())
+    
     return render(
         request,
         'dashboard.html',
+        {
+            'range': range(9),
+        }
+    )
+
+def dashboard_financeiro(request):
+    return render(
+        request,
+        'dashboard_financeiro.html',
+        {
+            'range': range(9),
+        }
+    )
+
+def dashboard_produtos(request):
+    return render(
+        request,
+        'dashboard_produtos.html',
         {
             'range': range(9),
         }
@@ -80,15 +102,21 @@ def login(request):
 def register(request):
 
     if request.method == 'POST':
-        nome = request.POST['nome']
-        email = request.POST['email']
-        senha = request.POST['senha']
+        nome    = request.POST['nome']
+        email   = request.POST['email']
+        senha   = request.POST['senha']
+        tipo    = request.POST['tipo']
 
         if User.objects.filter(email=email).exists():
             messages.info(request, 'Esse email ja existe')
         else:
             user = User.objects.create_user(username=nome, email=email, password=senha)
             user.save()
+
+            if(tipo == 'Dono'):
+                grupo_dono = Group.objects.get(name="Donos")
+                grupo_dono.user_set.add(user)
+
             return redirect('/login')
 
     return render(
@@ -135,6 +163,9 @@ def pesquisa(request):
 def minha_conta(request, id):
 
     cliente = Cliente.objects.all().filter(user_id=id)
+
+    if request.user.groups.filter(name="Donos").exists():
+        return redirect('/dashboard')
     
     return render(
         request,

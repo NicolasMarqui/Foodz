@@ -46,6 +46,14 @@
                 {% endif %}
                 <input type="password" placeholder="Senha" name="senha" required>
 
+                <div class="input-tipo">
+                    <select name="tipo" id="tipo_cliente" required>
+                        <option value="" disabled selected>Tipo de Perfil</option>
+                        <option value="Cliente">Cliente</option>
+                        <option value="Dono">Dono</option>
+                    </select>
+                </div>
+
                 {% if messages %}
                     <div class="alert alert-danger">
                         {% for message in messages %}

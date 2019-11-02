@@ -1,14 +1,51 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    Pesquisa
+    Pesquisa > {{query}}
 {% endblock %}
 
     {% block content %}
 
-    
+        <div class="pesquisa-wrapper">
+            <div class="pesquisa-interna">
+                <div class="over"></div>
+
+                <form action="/pesquisa/" method="POST">
+                    {% csrf_token %}
+                    <input type="text" name="query" placeholder="Pesquisar" required>
+                    <button type="submit">
+                        Pesquisar
+                    </button>
+                </form>
+            </div>
+
+            <div class="container-pesquisa">
+                <div class="container">
+                    <a href="#">< Voltar</a>
+                    <h1>Exibindo resultados para <span>{{query}}</span></h1>
+
+                    <div class="search-content">
+
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" href="#produtos">Produtos</a></li>
+                            <li><a data-toggle="tab" href="#restaurantes">Restaurantes</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                            <div id="produtos" class="tab-pane fade in active">
+                                <div class="display-produtos-pesquisa">
+                                    
+                                </div>
+                            </div>
+        
+                            <div id="restaurantes" class="tab-pane fade">
+                                
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
 
     {% endblock %}
-
-
-{% endblock %}

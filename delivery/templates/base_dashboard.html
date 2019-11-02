@@ -1,0 +1,114 @@
+{% load static %}
+
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Foodz - {% block title %}{% endblock %}</title>
+            
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'lib/slick-1.8.1/slick/slick.css' %}">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" href="{% static 'reset.css' %}">
+        <link rel="stylesheet" href="{% static 'styles.css' %}">
+    </head>
+    <body>
+        <div class="main-container">
+            <div class="wrapper-dashboard">
+                <div class="sidenav">
+                    
+                    <h1> <a href="/">Foodz</a> </h1>
+                
+                    <div class="menu-dashboard">
+                        <ul>
+                            <li>
+                                {% if request.path == '/dashboard/' %}
+                                <a href="/dashboard/" class="active-dash"> <i class="fas fa-home"></i> <span>Home</span> </a>
+                                {% else %}
+                                <a href="/dashboard/"> <i class="fas fa-home"></i> <span>Home</span> </a>
+                                {% endif %}
+                            </li>
+                
+                            <li>
+                                {% if request.path == '/dashboard/financeiro' %}
+                                <a href="/dashboard/financeiro" class="active-dash"> <i class="fas fa-dollar-sign"></i> <span>Financeiro</span> </a>
+                                {% else %}
+                                <a href="/dashboard/financeiro"> <i class="fas fa-dollar-sign"></i> <span>Financeiro</span> </a>
+                                {% endif %}                                
+                            </li>
+                
+                            <li>
+                                {% if request.path == '/dashboard/produtos' %}
+                                <a href="/dashboard/produtos" class="active-dash"> <i class="fab fa-product-hunt"></i> <span>Produtos</span> </a>
+                                {% else %}
+                                <a href="/dashboard/produtos"> <i class="fab fa-product-hunt"></i> <span>Produtos</span> </a>
+                                {% endif %}
+                            </li>
+                
+                            <li>
+                                <a href="#"> <i class="fas fa-chart-line"></i> <span>Vendas</span> </a>
+                            </li>
+                
+                            <li>
+                                <a href="#"> <i class="fas fa-clipboard-list"></i> <span>Relatório</span> </a>
+                            </li>
+                        </ul>
+                    </div>
+                
+                </div>
+        
+                <div class="main-content-dashboard">
+                    <div class="navigation-menu">
+                        <div class="container-fluid">
+                            <div class="row fs-0">
+        
+                                <div class="col-xs-12 col-md-2 col-in-block">
+                                    <a href="#" class="menu-toggle">
+                                        <i class="fas fa-bars"></i>
+                                    </a>
+                                </div>
+        
+                                <div class="col-xs-12 col-md-7 col-in-block">
+                                    
+                                </div>
+        
+                                <div class="col-xs-12 col-md-3 col-in-block text-right">
+                                    <ul class="topbar-dashboard">
+                                        <li>
+                                            <a href="#">
+                                                <i class="fas fa-bell"></i>
+                                            </a>
+                                        </li>
+        
+                                        <li>
+                                            <div class="avatar"></div>
+                                        </li>
+
+                                        <li>
+                                            <a href="/logout">
+                                                <i class="fas fa-sign-out-alt"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+        
+                            </div>
+                        </div>
+                    </div>
+        
+                    {% block content %}
+                    
+                    {% endblock %}
+                </div>
+            </div>
+            
+        </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="{% static 'lib/slick-1.8.1/slick/slick.min.js' %}"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/13e048d385.js"></script>
+    <script src="{% static 'script.js' %}" async defer></script>
+    </body>
+</html>
