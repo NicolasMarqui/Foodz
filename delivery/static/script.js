@@ -126,6 +126,29 @@ $(document).ready(function(){
         });
     })
 
+    //Open notificação
+    $('.open-not').click(function(){
+
+      $('.display-notificacoes').css({
+          display: 'block',
+          width: '350px',
+          zIndex: '6'
+      });
+  })
+
+  //Fechar Notificação
+  $('#close-not').click(function(){
+      $('.display-notificacoes').css({
+          display: 'none',
+          width: '0',
+          zIndex: '0',
+          transition: 'all .5s linear',
+      });
+  })
+
+    //Tooltip
+    $('[data-toggle="tooltip"]').tooltip();
+
     //Abrir Menu Mobile
     $('.menu-m i').click(function(){
         $('.menu-mobile-wrapper').css({

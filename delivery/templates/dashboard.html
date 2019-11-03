@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-    Dashboard > Home
+    Dashboard > Home - {{user.username}}
 {% endblock %}
 
 <div class="wrapper-dashboard">
@@ -99,10 +99,23 @@
             {% endfor %}
         {% else %}
         <div class="first-login">
-            <h2>Acesse a página Configurações ao lado para terminar seu cadastro! </h2>
-            <a href="#">Ou clique aqui</a>
 
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempora quod alias temporibus! Consectetur, architecto corporis?</p>
+            <h2>Obrigado por escolher o <span>Foodz</span></h2>
+
+            <h2 class="acesse">Acesse a página Configurações ao lado para <span>terminar seu cadastro</span>! </h2>
+            
+            <p>Obrigado por selecionar nossa plataforma !</p>
+            <p>Termine seu cadastro na página Configurações ao lado, após isso entre <strong>2 á 4 dias utéis</strong> 
+                <i class="far fa-question-circle" data-toggle="tooltip" title="É necessário a verificação de seus dados e de sua empresa!"></i> 
+                vc poderá vender em nossa plataforma.
+            </p>
+            
+            <div class="links">
+                <a href="/dashboard/config">Clique aqui para acessar a página</a>
+                ou
+                <a href="#">Clique aqui para o tutorial</a>
+            </div>
+
         </div>
         {% endif %}
     {% endblock %}

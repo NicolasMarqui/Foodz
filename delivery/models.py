@@ -8,7 +8,7 @@ class Cidade(models.Model):
     nomeCidade = models.CharField(max_length=255, choices=CIDADES_CHOICE)
 
     def __str__(self):
-        return 'cidade: {}' .format(self.nomeCidade)
+        return '{}' .format(self.nomeCidade)
 
 class Endereco(models.Model):
     id_cliente                  = models.ForeignKey('Cliente', on_delete=models.CASCADE)
@@ -110,3 +110,12 @@ class Compras(models.Model):
     id_produto                  = models.ForeignKey(Produto, on_delete=models.CASCADE)
     id_restaurante              = models.ForeignKey(Restaurante, on_delete=models.CASCADE)
     placed_order_id             = models.ForeignKey(Placed_order, on_delete=models.CASCADE)
+
+class Notificacao(models.Model):
+    id_user                     = models.OneToOneField(User, on_delete=models.CASCADE)
+    mensagem                    = models.TextField(blank=True, null=True)
+    # foi_lida                    = models.BooleanField(default=False)
+    # data_comentario             = models.DateTimeField()
+
+    def __str__(self):
+        return 'user_id: {} e mensagem: {}'.format(self.id_user, self.mensagem)

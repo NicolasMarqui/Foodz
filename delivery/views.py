@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Cliente, Produto, Restaurante
+from .models import Cliente, Produto, Restaurante, Notificacao
 from django.contrib.auth import logout as django_logout
 from django.contrib.auth.models import User, auth, Group
 from django.db.models import Q
@@ -55,14 +55,12 @@ def dashboard(request):
 
     info_restaurante = Restaurante.objects.filter(user_id = id)
     
-    print(info_restaurante)
-    
     return render(
         request,
         'dashboard.html',
         {
             'range': range(9),
-            'info': info_restaurante
+            'info': info_restaurante,
         }
     )
 
@@ -90,7 +88,7 @@ def dashboard_config(request):
 
     info_restaurante = Restaurante.objects.filter(user_id = id)
 
-    if info_restaurante != []:
+    if info_restaurante:
         for i in info_restaurante:
             data = {
                 'user': request.user.username,
@@ -181,6 +179,8 @@ def register(request):
                 grupo_dono = Group.objects.get(name="Donos")
                 grupo_dono.user_set.add(user)
 
+            notificacao = Notificacao(id_user=request.user, mensagem="Bem vindo ao nosso sistema")
+            notificacao.save()
             return redirect('/login')
 
     return render(
