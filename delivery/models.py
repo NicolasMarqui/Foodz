@@ -43,17 +43,23 @@ class Restaurante(models.Model):
     cidade                      = models.ForeignKey(Cidade, on_delete=models.CASCADE)
     endereco                    = models.CharField(max_length=255)
     numero                      = models.CharField(max_length=255)
-    complemento                 = models.CharField(max_length=255)
-    especialidade               = models.CharField(max_length=255)
+    complemento                 = models.CharField(max_length=255,blank=True, null=True)
+    especialidade               = models.CharField(max_length=255, choices=ESPECIALIDADE_CHOICE)
     razao_social                = models.CharField(max_length=255)
     total_vendas                = models.IntegerField(blank=True)
     descricao                   = models.CharField(max_length=255)
-    logo                        = models.ImageField(upload_to="pics/restaurante/", default='pics/None/no-img.png')
+    logo                        = models.ImageField(upload_to="pics/restaurantes", default='pics/None/no-img.png')
     cnpj                        = models.CharField(max_length=18)
+
+    def __str__(self):
+        return 'ID: {} e nome: {} '.format(self.id, self.nome)
 
 
 class Categoria(models.Model):
     categoria                   = models.CharField(max_length=50)
+
+    def __str__(self):
+        return 'categoria: {} '.format(self.categoria)
 
 class Produto(models.Model):
     nome                        = models.CharField(max_length=100)
@@ -64,6 +70,9 @@ class Produto(models.Model):
     ingredientes                = models.TextField(blank=True)
     preco                       = models.DecimalField(max_digits=5,decimal_places=2)
     ativo                       = models.BooleanField(default=True)
+
+    def __str__(self):
+        return 'ID: {} e nome: {} '.format(self.id, self.nome)
 
 class Oferta(models.Model):
     inicio_data_oferta          = models.DateField(null=True)

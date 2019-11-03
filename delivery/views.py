@@ -5,6 +5,8 @@ from django.contrib.auth import logout as django_logout
 from django.contrib.auth.models import User, auth, Group
 from django.db.models import Q
 from django.contrib import messages
+from .forms import MoreInfoRestaurant
+from django.shortcuts import get_object_or_404
 
 # Create your views here.
 def home(request):
@@ -46,13 +48,21 @@ def restaurantes(request):
 
 def dashboard(request):
 
-    print(User.objects.all())
+    if(not request.user.is_authenticated):
+        return redirect('/login')
+
+    id = request.user.id
+
+    info_restaurante = Restaurante.objects.filter(user_id = id)
+    
+    print(info_restaurante)
     
     return render(
         request,
         'dashboard.html',
         {
             'range': range(9),
+            'info': info_restaurante
         }
     )
 
@@ -71,6 +81,60 @@ def dashboard_produtos(request):
         'dashboard_produtos.html',
         {
             'range': range(9),
+        }
+    )
+
+def dashboard_config(request):
+
+    id = request.user.id
+
+    info_restaurante = Restaurante.objects.filter(user_id = id)
+
+    if info_restaurante != []:
+        for i in info_restaurante:
+            data = {
+                'user': request.user.username,
+                'nome': i.nome,
+                'cep': i.cep,
+                'estado': i.estado,
+                'cidade': i.cidade,
+                'endereco': i.endereco,
+                'numero': i.numero,
+                'complemento': i.complemento,
+                'razao_social': i.razao_social,
+                'descricao': i.descricao,
+                'cnpj': i.cnpj,
+            }
+
+            instance = Restaurante.objects.get(user_id = request.user.id)
+            form = MoreInfoRestaurant( request.POST or None, initial=data ,instance=instance)
+
+    else:
+        form = MoreInfoRestaurant(request.POST)
+
+
+    if request.method == 'POST':
+        if form.is_valid():
+            if info_restaurante:
+                novo_restaurante = form.save()
+                print('eae')
+            else:
+                novo_restaurante = form.save(commit=False)
+                novo_restaurante.user_id = request.user.id
+                novo_restaurante.total_vendas = 0
+
+            print(novo_restaurante)
+            novo_restaurante.save()
+            return redirect('/dashboard/')
+            
+
+    return render(
+        request,
+        'dashboard_config.html',
+        {
+            'range': range(9),
+            'info': info_restaurante,
+            'form': form
         }
     )
 

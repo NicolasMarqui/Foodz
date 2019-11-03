@@ -3348,4 +3348,14 @@ footer .footer .fot-bottom p {
   color: #E04040;
   font-size: 30px;
 }
+
+.content-config {
+  width: 95%;
+  margin: 15px auto 0;
+  min-height: 100%;
+}
+
+.display-info {
+  padding: 50px 50px 0;
+}
 /*# sourceMappingURL=styles.css.map */

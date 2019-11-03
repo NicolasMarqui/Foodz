@@ -54,6 +54,14 @@
                             <li>
                                 <a href="#"> <i class="fas fa-clipboard-list"></i> <span>Relatório</span> </a>
                             </li>
+
+                            <li>
+                                {% if request.path == '/dashboard/config' %}
+                                <a href="/dashboard/config" class="active-dash"> <i class="fas fa-cog"></i> <span>Configurações</span> </a>
+                                {% else %}
+                                <a href="/dashboard/config"> <i class="fas fa-cog"></i> <span>Configurações</span> </a>
+                                {% endif %}
+                            </li>
                         </ul>
                     </div>
                 
