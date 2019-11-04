@@ -2,6 +2,7 @@ from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from .choices import *
 from django.contrib.auth.models import User
+from django.utils.timezone import now
 
 # Create your models here.
 class Cidade(models.Model):
@@ -56,7 +57,7 @@ class Restaurante(models.Model):
 
 
 class Categoria(models.Model):
-    categoria                   = models.CharField(max_length=50)
+    categoria                   = models.CharField(max_length=255, choices=CATEGORIAS_CHOICES)
 
     def __str__(self):
         return 'categoria: {} '.format(self.categoria)
@@ -64,7 +65,7 @@ class Categoria(models.Model):
 class Produto(models.Model):
     nome                        = models.CharField(max_length=100)
     foto                        = models.ImageField(upload_to="pics/produtos/", default='pics/None/no-img.png')
-    categoria                   = models.ForeignKey(Categoria, on_delete=models.CASCADE)
+    categoria                   = models.CharField(max_length=255, choices=CATEGORIAS_CHOICES)
     restaurante                 = models.ForeignKey(Restaurante, on_delete=models.CASCADE)
     descricao                   = models.TextField()
     ingredientes                = models.TextField(blank=True)
@@ -112,10 +113,10 @@ class Compras(models.Model):
     placed_order_id             = models.ForeignKey(Placed_order, on_delete=models.CASCADE)
 
 class Notificacao(models.Model):
-    id_user                     = models.OneToOneField(User, on_delete=models.CASCADE)
+    id_user                     = models.ForeignKey(User, on_delete=models.CASCADE)
     mensagem                    = models.TextField(blank=True, null=True)
-    # foi_lida                    = models.BooleanField(default=False)
-    # data_comentario             = models.DateTimeField()
+    foi_lida                    = models.BooleanField(default=False)
+    data_comentario             = models.DateTimeField(default=now, blank=True)
 
     def __str__(self):
         return 'user_id: {} e mensagem: {}'.format(self.id_user, self.mensagem)

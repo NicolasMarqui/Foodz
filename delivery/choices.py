@@ -24,5 +24,21 @@ ESPECIALIDADE_CHOICE = (
     ('massas', 'Massas'),
     ('pratos', 'Pratos'),
     ('outros', 'Outros'),
+)
 
+CATEGORIAS_CHOICES = (
+    ('saldados', 'Salgados'),
+    ('saladas', 'Saladas'),
+    ('italiana', 'Italiana'),
+    ('doces', 'Doces'),
+    ('lanches', 'Lanches'),
+    ('sorvetes', 'Sorvetes'),
+    ('bebidas', 'Bebidas'),
+    ('chinesa', 'Chinesa'),
+    ('japonesa', 'Japonesa'),
+    ('petiscos', 'Petiscos'),
+    ('pizzas', 'Pizzas'),
+    ('massas', 'Massas'),
+    ('pratos', 'Pratos'),
+    ('outros', 'Outros'),
 )

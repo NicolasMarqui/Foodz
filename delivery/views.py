@@ -5,8 +5,9 @@ from django.contrib.auth import logout as django_logout
 from django.contrib.auth.models import User, auth, Group
 from django.db.models import Q
 from django.contrib import messages
-from .forms import MoreInfoRestaurant
+from .forms import MoreInfoRestaurant, AddProducts
 from django.shortcuts import get_object_or_404
+import datetime
 
 # Create your views here.
 def home(request):
@@ -74,11 +75,38 @@ def dashboard_financeiro(request):
     )
 
 def dashboard_produtos(request):
+
+    id = request.user.id
+
+    info_restaurante = Restaurante.objects.filter(user_id = id)
+
+    if info_restaurante:
+
+        rest = Restaurante.objects.get(user_id = id)
+
+        data = {
+            'restaurante': rest.id
+        }
+
+        form = AddProducts(request.POST or None, request.FILES or None ,initial=data)
+    
+    else:
+        form = None
+
+    if request.method == 'POST':
+        if form.is_valid():
+            novo_produto = form.save()
+            print('eae')
+
+            print(novo_produto)
+            return redirect('/dashboard/')
+
     return render(
         request,
         'dashboard_produtos.html',
         {
             'range': range(9),
+            'form': form
         }
     )
 
@@ -105,10 +133,10 @@ def dashboard_config(request):
             }
 
             instance = Restaurante.objects.get(user_id = request.user.id)
-            form = MoreInfoRestaurant( request.POST or None, initial=data ,instance=instance)
+            form = MoreInfoRestaurant( request.POST or None, request.FILES or None ,initial=data ,instance=instance)
 
     else:
-        form = MoreInfoRestaurant(request.POST)
+        form = MoreInfoRestaurant(request.POST, request.FILES or None)
 
 
     if request.method == 'POST':
@@ -144,7 +172,7 @@ def login(request):
 
         usuario = User.objects.filter(email=email)
 
-        print(usuario.exists())
+        has_login = User.objects.get(email=email)
 
         if usuario.exists():
             for i in usuario:
@@ -153,6 +181,15 @@ def login(request):
             user = None
 
         if user is not None:
+
+            if has_login.last_login == 'NULL':
+                notificacao = Notificacao(id_user=has_login, mensagem="Bem vindo ao nosso sistema")
+                notificacao.save()
+            else:
+                msg = "Bem Vindo novamente, Sentimos sua falta!"
+                # notificacao = Notificacao(id_user=has_login, mensagem=msg)
+                # notificacao.save()
+
             auth.login(request, user)
             return redirect('/')
         else:
@@ -183,10 +220,6 @@ def register(request):
                 grupo_dono = Group.objects.get(name="Donos")
                 grupo_dono.user_set.add(user)
 
-            print(user)
-
-            notificacao = Notificacao(id_user=request.user, mensagem="Bem vindo ao nosso sistema")
-            notificacao.save()
             return redirect('/login')
 
     return render(

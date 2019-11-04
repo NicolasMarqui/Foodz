@@ -8,29 +8,29 @@
 <div class="wrapper-dashboard">
     
     {% block content %}
-            <div class="content-config">
-                
-                <h2>Sua Conta</h2>
+        <div class="content-config">
+            
+            <h2>Sua Conta</h2>
 
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis, quia! Expedita, quod maxime. Dignissimos iusto distinctio iste odit ratione pariatur ipsam voluptatum esse mollitia fugit quasi, vero aliquid sapiente voluptates quas optio voluptate maiores praesentium voluptatem similique, adipisci quae neque eos autem. Sequi ipsum adipisci tenetur doloremque officiis minima unde.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis, quia! Expedita, quod maxime. Dignissimos iusto distinctio iste odit ratione pariatur ipsam voluptatum esse mollitia fugit quasi, vero aliquid sapiente voluptates quas optio voluptate maiores praesentium voluptatem similique, adipisci quae neque eos autem. Sequi ipsum adipisci tenetur doloremque officiis minima unde.</p>
 
-                <div class="display-info">
-                    <form action="{% url 'Dashboard_config' %}" method="post" enctype='multipart/form-data'>
-                        {% csrf_token %}
-                        {% for f in form %}
-                            <div class="form-group row">
-                                <label for="{{f.label}}" class="col-sm-2 col-form-label">{{f.label}}</label>
-                                <div class="col-sm-10">
-                                    {{f}}
-                                </div>
+            <div class="display-info">
+                <form action="{% url 'Dashboard_config' %}" method="post" enctype='multipart/form-data'>
+                    {% csrf_token %}
+                    {% for f in form %}
+                        <div class="form-group row">
+                            <label for="{{f.label}}" class="col-sm-2 col-form-label">{{f.label}}</label>
+                            <div class="col-sm-10">
+                                {{f}}
                             </div>
-                        {% endfor %}
+                        </div>
+                    {% endfor %}
 
-                        <button type="submit">Salvar</button>
-                    </form>
-                </div>
-
+                    <button type="submit">Salvar</button>
+                </form>
             </div>
+
+        </div>
 
     {% endblock %}
 </div>

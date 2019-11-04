@@ -27,11 +27,14 @@
                     {% if notificacoes %}
                         {% for n in notificacoes %}
                         <li>
-                            <p>{{n.mensagem}}</p>
-                            <p class="date">22/10/2019 ás 21:00</p>
-                        </li>
-                        <li class="check">
-                            <a href="#"><i class="fas fa-check" data-toggle="tooltip" title="Lida" data-placement="bottom"></i></a>
+                            <div class="info">
+                                <p>{{n.mensagem}}</p>
+                                <p class="date">22/10/2019 ás 21:00</p>
+                            </div>
+
+                            <div class="check">
+                                <a href="#"><i class="fas fa-check" data-toggle="tooltip" title="Lida" data-placement="bottom"></i></a>
+                            </div>
                         </li>
                         {% endfor %}
                     {% else %}
@@ -46,7 +49,7 @@
             <div class="wrapper-dashboard">
                 <div class="sidenav">
                     
-                    <h1> <a href="/">Foodz</a> </h1>
+                    <h1> <a href="/"> <span class="hidden-xs hidden-sm">Foodz</span> <span class="visible-xs visible-sm">Fz</span> </a> </h1>
                 
                     <div class="menu-dashboard">
                         <ul>
@@ -99,17 +102,13 @@
                         <div class="container-fluid">
                             <div class="row fs-0">
         
-                                <div class="col-xs-12 col-md-2 col-in-block">
+                                <div class="col-xs-2 col-md-9 col-in-block">
                                     <a href="#" class="menu-toggle">
                                         <i class="fas fa-bars"></i>
                                     </a>
                                 </div>
         
-                                <div class="col-xs-12 col-md-7 col-in-block">
-                                    
-                                </div>
-        
-                                <div class="col-xs-12 col-md-3 col-in-block text-right">
+                                <div class="col-xs-10 col-md-3 col-in-block text-right">
                                     <ul class="topbar-dashboard">
                                         <li data-toggle="tooltip" title="Notificações" data-placement="bottom" class="open-not">
                                             <a href="#">
