@@ -123,7 +123,13 @@
                                         </li>
         
                                         <li>
-                                            <div class="avatar" data-toggle="tooltip" title="Conta" data-placement="bottom"></div>
+                                            <div class="avatar"
+                                            {% if avatar %} 
+                                            style="background-image: url('/media/{{avatar}}');"
+                                            {% endif %}
+                                            data-toggle="tooltip" 
+                                            title="Conta" 
+                                            data-placement="bottom"></div>
                                         </li>
 
                                         <li>

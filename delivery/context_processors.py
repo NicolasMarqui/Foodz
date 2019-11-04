@@ -10,8 +10,16 @@ def notificacoes(request):
 
 def profile_picture_owner(request):
 
-    avatar = Restaurante.objects.get(user_id=request.user.id)
+    have_finished = Restaurante.objects.filter(user_id = request.user.id)
 
-    return {
-        'avatar': avatar.logo,
-    }
+    if '/dashboard' in request.path and have_finished:
+        avatar = Restaurante.objects.get(user_id=request.user.id)
+
+        return {
+            'avatar': avatar.logo,
+        }
+
+    else:
+        return {
+            'Hello':  'Go to Dashboard to see profile'
+        }

@@ -1720,6 +1720,7 @@ footer .footer .fot-bottom p {
   height: 35px;
   width: 35px;
   border-radius: 50%;
+  background-position: center;
   background-image: url("https://images-na.ssl-images-amazon.com/images/M/MV5BMTUxNTExMzUzOF5BMl5BanBnXkFtZTgwOTI1MjA3OTE@._V1_UX172_CR0,0,172,256_AL_.jpg");
   background-size: cover;
 }
