@@ -144,8 +144,13 @@ def login(request):
 
         usuario = User.objects.filter(email=email)
 
-        for i in usuario:
-            user = auth.authenticate(username=i, password=senha)
+        print(usuario.exists())
+
+        if usuario.exists():
+            for i in usuario:
+                user = auth.authenticate(username=i, password=senha)
+        else:
+            user = None
 
         if user is not None:
             auth.login(request, user)
@@ -162,7 +167,6 @@ def login(request):
     )
 
 def register(request):
-
     if request.method == 'POST':
         nome    = request.POST['nome']
         email   = request.POST['email']
@@ -178,6 +182,8 @@ def register(request):
             if(tipo == 'Dono'):
                 grupo_dono = Group.objects.get(name="Donos")
                 grupo_dono.user_set.add(user)
+
+            print(user)
 
             notificacao = Notificacao(id_user=request.user, mensagem="Bem vindo ao nosso sistema")
             notificacao.save()
