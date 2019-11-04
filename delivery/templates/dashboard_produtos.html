@@ -1,8 +1,9 @@
 {% extends 'base_dashboard.html' %}
 {% load static %}
+{{ form.media }}
 
 {% block title %}
-    Dashboard > Financeiro
+    Dashboard > Produtos
 {% endblock %}
 
 <div class="wrapper-dashboard">
@@ -14,8 +15,9 @@
             <h2>Produtos</h2>
 
             {% if form %}
+
             <div class="row">
-                <div class="col-xs-12 col-md-6">
+                <div class="col-xs-12">
                     <h3>Adicionar novos produtos</h3>
 
                     <form action="{% url 'Dashboard_produtos' %}" method="post" enctype='multipart/form-data'>
@@ -24,39 +26,13 @@
                             <div class="form-group row">
                                 <label for="{{f.label}}" class="col-sm-2 col-form-label">{{f.label}}</label>
                                 <div class="col-sm-10">
-                                    {{f}}
+                                    {{ f|safe }}
                                 </div>
                             </div>
                         {% endfor %}
     
                         <button type="submit">Salvar</button>
                     </form>
-                </div>
-
-                <div class="col-xs-12 col-md-offset-1 col-md-5">
-                    <h3>Todos os produtos</h3>
-
-                    <div class="table-responsive">
-                        <table class="table table-striped table-hover">
-                            <thead>
-                                <tr>
-                                    <td>Nome</td>
-                                    <td>Descrição</td>
-                                    <td>Preço</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for p in produtos %}
-                                <tr>
-                                    <td>{{p.nome}}</td>
-                                    <td>{{p.descricao}}</td>
-                                    <td>R${{p.preco}}</td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-
                 </div>
             </div>
             {% else %}

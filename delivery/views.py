@@ -171,7 +171,6 @@ def dashboard_config(request):
             novo_restaurante.save()
             return redirect('/dashboard/')
             
-
     return render(
         request,
         'dashboard_config.html',
@@ -301,7 +300,6 @@ def minha_conta(request, id):
         {
             "id": id,
             "cliente": cliente,
-            "range": range(10)
         }
     )
 

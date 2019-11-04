@@ -15,5 +15,5 @@ urlpatterns = [
     path('produtos/info/<int:id>/', views.produto_info, name="Informação Produto"),
     path('restaurantes/', views.restaurantes, name="Restaurantes"),
     path('conta/<int:id>', views.minha_conta,name="Minha Conta"),
-    path('logout',views.logout,name="logout")
+    path('logout',views.logout,name="logout"),
 ]

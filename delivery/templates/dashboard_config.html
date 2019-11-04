@@ -9,7 +9,7 @@
     
     {% block content %}
         <div class="content-config">
-            
+
             <h2>Sua Conta</h2>
 
             {% if first_time %}
@@ -22,14 +22,71 @@
             <div class="display-info">
                 <form action="{% url 'Dashboard_config' %}" method="post" enctype='multipart/form-data'>
                     {% csrf_token %}
-                    {% for f in form %}
-                        <div class="form-group row">
-                            <label for="{{f.label}}" class="col-sm-2 col-form-label">{{f.label}}</label>
-                            <div class="col-sm-10">
-                                {{f}}
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <div class="form-group row">
+                                <label for="{{form.nome.label}}" class="col-sm-2 col-form-label">{{form.nome.label}}</label>
+                                <div class="col-sm-10">
+                                    {{form.nome}}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="{{form.cep.label}}" class="col-sm-2 col-form-label">{{form.cep.label}}</label>
+                                <div class="col-sm-10">
+                                    {{form.cep}}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="{{form.estado.label}}" class="col-sm-2 col-form-label">{{form.estado.label}}</label>
+                                <div class="col-sm-10">
+                                    {{form.estado}}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="{{form.cidade.label}}" class="col-sm-2 col-form-label">{{form.cidade.label}}</label>
+                                <div class="col-sm-10">
+                                    {{form.cidade}}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="{{form.razao_social.label}}" class="col-sm-2 col-form-label">{{form.razao_social.label}}</label>
+                                <div class="col-sm-10">
+                                    {{form.razao_social}}
+                                </div>
                             </div>
                         </div>
-                    {% endfor %}
+                        <div class="col-xs-12 col-md-6">
+                            <div class="form-group row">
+                                <label for="{{form.endereco.label}}" class="col-sm-2 col-form-label">{{form.endereco.label}}</label>
+                                <div class="col-sm-10">
+                                    {{form.endereco}}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="{{form.numero.label}}" class="col-sm-2 col-form-label">{{form.numero.label}}</label>
+                                <div class="col-sm-10">
+                                    {{form.numero}}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="{{form.complemento.label}}" class="col-sm-2 col-form-label">{{form.complemento.label}}</label>
+                                <div class="col-sm-10">
+                                    {{form.complemento}}
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="{{form.especialidade.label}}" class="col-sm-2 col-form-label">{{form.especialidade.label}}</label>
+                                <div class="col-sm-10">
+                                    {{form.especialidade}}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12">
+                            <p>{{form.descricao.label}}</p>
+                            {{form.descricao}}
+                        </div>
+                    </div>
 
                     <button type="submit">Salvar</button>
                 </form>

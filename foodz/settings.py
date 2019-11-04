@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_summernote',
     'delivery',
 ]
 
@@ -69,6 +70,8 @@ TEMPLATES = [
         },
     },
 ]
+
+SUMMERNOTE_THEME = 'bs3'
 
 WSGI_APPLICATION = 'foodz.wsgi.application'
 
@@ -131,3 +134,43 @@ STATICFILES_DIRS = ( os.path.join('static'), )
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 LOGIN_REDIRECT_URL = '/'
+
+SUMMERNOTE_CONFIG = {
+    # Using SummernoteWidget - iframe mode, default
+    'iframe': True,
+    # You can put custom Summernote settings
+    'summernote': {
+        # Change editor size
+        'width': '100%',
+        'height': '380',
+    },
+
+    # You can add custom css/js for SummernoteWidget.
+    'base_css': (
+        '//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'
+    ),
+    'base_js': (
+        '//ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js',
+        '//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'
+    ),
+
+    'css': (
+    '//cdnjs.cloudflare.com/ajax/libs/codemirror/5.29.0/theme/monokai.min.css',
+    ),
+
+
+    'disable_upload': False,
+
+    'theme': 'monokai',
+
+    'default_css': (
+    os.path.join(STATIC_URL, 'django_summernote/summernote.css'),
+    os.path.join(STATIC_URL, 'django_summernote/django_summernote.css'),
+    ),
+    'default_js': (
+        os.path.join(STATIC_URL, 'django_summernote/jquery.ui.widget.js'),
+        os.path.join(STATIC_URL, 'django_summernote/jquery.iframe-transport.js'),
+        os.path.join(STATIC_URL, 'django_summernote/jquery.fileupload.js'),
+        os.path.join(STATIC_URL, 'django_summernote/summernote.min.js'),
+    ),
+}
