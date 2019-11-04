@@ -10,7 +10,7 @@ TIPO_CHOICE = (
 )
 
 ESPECIALIDADE_CHOICE = (
-    ('saldados', 'Salgados'),
+    ('salgados', 'Salgados'),
     ('saladas', 'Saladas'),
     ('italiana', 'Italiana'),
     ('doces', 'Doces'),
@@ -27,7 +27,7 @@ ESPECIALIDADE_CHOICE = (
 )
 
 CATEGORIAS_CHOICES = (
-    ('saldados', 'Salgados'),
+    ('salgados', 'Salgados'),
     ('saladas', 'Saladas'),
     ('italiana', 'Italiana'),
     ('doces', 'Doces'),

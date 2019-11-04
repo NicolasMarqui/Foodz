@@ -196,4 +196,23 @@ $(document).ready(function(){
     })
   })
 
+  //Menu Dashboard
+    // $('.menu-toggle').click(function(){
+    //   $('.click_toggle').hide();
+
+    //   $('.sidenav').css({
+    //     width: '50px'
+    //   });
+
+    //   $('.main-content-dashboard').css({
+    //     width: 'calc(100% - 50px)',
+    //     marginLeft: '50px'
+    //   });
+
+    //   $('.sidenav h1 a span').html('F')
+
+    //   $('.sidenav h1').css({
+    //     padding: '24px 8px'
+    //   })
+    // })
 })

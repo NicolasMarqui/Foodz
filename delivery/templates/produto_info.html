@@ -2,46 +2,62 @@
 {% load static %}
 
 {% block title %}
-    Produto > {{id}}
+    {{produto.nome}}
 {% endblock %}
 
 {% block content %}
+    <div class="banner-interno" style="background-image: url('https://images.pexels.com/photos/1640772/pexels-photo-1640772.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940')">
+        <div class="over"></div>
+
+        <div class="container">
+            <div class="bread-banner">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li> <span> / </span> </li>
+                    <li><h1>Produtos</h1></li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
     <div class="product-display">
 
         <div class="container">
             <div class="row">
 
-                <div class="col-xs-12 col-md-6">
-                    <div class="main-image"></div>
-                </div>
-
-                <div class="col-xs-12 col-md-6" id="ifp">
-
-                    <div class="starts-area">
-                        <ul>
-                            {% for i in range %}
-                                <li><i class="far fa-star fa-2x"></i></li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-
-                    <p class="small-title">
-                        Lanches
-                    </p>
-
-                    <h1 class="big-title">
-                        Combo <br> Hamburguer
-                    </h1>
-
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur ipsa officia illum, iste numquam non a ad quo excepturi repellendus minus sint illo obcaecati eius, iure recusandae ratione quasi alias beatae, accusamus iusto quia! Nulla suscipit totam quas, exercitationem laboriosam ab culpa, unde quasi sed dolorem possimus repudiandae ducimus ea.</p>
-
-                    <div class="buy-and-quantity">
-                        <a href="#" class="btn">Comprar</a>
-
-                        <input type="number" value="1">
-                    </div>
-                </div>
-
+                {% if produto %}
+                    <div class="col-xs-12 col-md-6">
+                            <div class="main-image" style="background-image: url('/media/{{produto.foto}}');"></div>
+                        </div>
+        
+                        <div class="col-xs-12 col-md-6" id="ifp">
+        
+                            <div class="starts-area">
+                                <ul>
+                                    {% for i in nota %}
+                                        <p>{{i}}</p>
+                                        <li><i class="far fa-star fa-2x"></i></li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+        
+                            <p class="small-title">
+                                {{produto.categoria}}
+                            </p>
+        
+                            <h1 class="big-title">
+                                {{produto.nome}}
+                            </h1>
+        
+                            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur ipsa officia illum, iste numquam non a ad quo excepturi repellendus minus sint illo obcaecati eius, iure recusandae ratione quasi alias beatae, accusamus iusto quia! Nulla suscipit totam quas, exercitationem laboriosam ab culpa, unde quasi sed dolorem possimus repudiandae ducimus ea.</p>
+        
+                            <div class="buy-and-quantity">
+                                <a href="#" class="btn">Comprar</a>
+        
+                                <input type="number" value="1">
+                            </div>
+                        </div>
+                {% endif %}
             </div>
         </div>
 
@@ -56,13 +72,13 @@
 
                     <p class="small-title">Vendido por</p>
 
-                    <h2 class="big-title"> Restaurante <br> <span>SóDelicia</span> </h2>
+                    <h2 class="big-title"> Restaurante <br> <span>{{produto.restaurante.nome}}</span> </h2>
 
                     <div class="rating-restaurante">
                         <ul>
-                            {% for i in range %}
+                            <!-- {% for i in range %}
                                 <li><i class="far fa-star fa-2x"></i></li>
-                            {% endfor %}
+                            {% endfor %} -->
                         </ul>
                     </div>
 
@@ -70,38 +86,23 @@
 
                 <div class="col-xs-12 col-md-7 col-md-offset-1">
                     <div class="featured-products">
-                        <div class="product product-1">
-                            <div class="inside-top">
-                                <span> 01 </span>
-
-                                <p>
-                                    R$14.50
-                                </p>
+                        {% for r in mais_produtos %}
+                            <div class="product product-1">
+                                <div class="inside-top">
+                                    <span> 01 </span>
+    
+                                    <p>
+                                        {{r.preco}}
+                                    </p>
+                                </div>
+    
+                                <div class="inside-bottom">
+                                    <p>Restaurante {{r.restaurante.nome}}</p>
+    
+                                    <h3>{{r.nome}}</h3>
+                                </div>
                             </div>
-
-                            <div class="inside-bottom">
-                                <p>Restaurante SóDelicia</p>
-
-                                <h3>Hamburguer <br> Especial </h3>
-                            </div>
-                        </div>
-
-                        <div class="product product-2">
-                            <div class="inside-top">
-                                <span> 02 </span>
-
-                                <p>
-                                    R$14.50
-                                </p>
-                            </div>
-
-                            <div class="inside-bottom">
-                                <p>Restaurante SóDelicia</p>
-
-                                <h3>Hamburguer <br> Especial </h3>
-                            </div>
-                        </div>
-
+                        {% endfor %}
                         <div class="saiba-mais-card">
                             <a href="#">
                                 <p>Saiba Mais <span><i class="fas fa-arrow-right"></i></span> </p>

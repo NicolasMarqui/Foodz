@@ -55,41 +55,41 @@
                         <ul>
                             <li>
                                 {% if request.path == '/dashboard/' %}
-                                <a href="/dashboard/" class="active-dash"> <i class="fas fa-home"></i> <span>Home</span> </a>
+                                <a href="/dashboard/" class="active-dash"> <i class="fas fa-home"></i> <span class="click_toggle">Home</span> </a>
                                 {% else %}
-                                <a href="/dashboard/"> <i class="fas fa-home"></i> <span>Home</span> </a>
+                                <a href="/dashboard/"> <i class="fas fa-home"></i> <span class="click_toggle">Home</span> </a>
                                 {% endif %}
                             </li>
                 
                             <li>
                                 {% if request.path == '/dashboard/financeiro' %}
-                                <a href="/dashboard/financeiro" class="active-dash"> <i class="fas fa-dollar-sign"></i> <span>Financeiro</span> </a>
+                                <a href="/dashboard/financeiro" class="active-dash"> <i class="fas fa-dollar-sign"></i> <span class="click_toggle">Financeiro</span> </a>
                                 {% else %}
-                                <a href="/dashboard/financeiro"> <i class="fas fa-dollar-sign"></i> <span>Financeiro</span> </a>
+                                <a href="/dashboard/financeiro"> <i class="fas fa-dollar-sign"></i> <span class="click_toggle">Financeiro</span> </a>
                                 {% endif %}                                
                             </li>
                 
                             <li>
                                 {% if request.path == '/dashboard/produtos' %}
-                                <a href="/dashboard/produtos" class="active-dash"> <i class="fab fa-product-hunt"></i> <span>Produtos</span> </a>
+                                <a href="/dashboard/produtos" class="active-dash"> <i class="fab fa-product-hunt"></i> <span class="click_toggle">Produtos</span> </a>
                                 {% else %}
-                                <a href="/dashboard/produtos"> <i class="fab fa-product-hunt"></i> <span>Produtos</span> </a>
+                                <a href="/dashboard/produtos"> <i class="fab fa-product-hunt"></i> <span class="click_toggle">Produtos</span> </a>
                                 {% endif %}
                             </li>
                 
                             <li>
-                                <a href="#"> <i class="fas fa-chart-line"></i> <span>Vendas</span> </a>
+                                <a href="#"> <i class="fas fa-chart-line"></i> <span class="click_toggle">Vendas</span> </a>
                             </li>
                 
                             <li>
-                                <a href="#"> <i class="fas fa-clipboard-list"></i> <span>Relatório</span> </a>
+                                <a href="#"> <i class="fas fa-clipboard-list"></i> <span class="click_toggle">Relatório</span> </a>
                             </li>
 
                             <li>
                                 {% if request.path == '/dashboard/config' %}
-                                <a href="/dashboard/config" class="active-dash"> <i class="fas fa-cog"></i> <span>Configurações</span> </a>
+                                <a href="/dashboard/config" class="active-dash"> <i class="fas fa-cog"></i> <span class="click_toggle">Configurações</span> </a>
                                 {% else %}
-                                <a href="/dashboard/config"> <i class="fas fa-cog"></i> <span>Configurações</span> </a>
+                                <a href="/dashboard/config"> <i class="fas fa-cog"></i> <span class="click_toggle">Configurações</span> </a>
                                 {% endif %}
                             </li>
                         </ul>

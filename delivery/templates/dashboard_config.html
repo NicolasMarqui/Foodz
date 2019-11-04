@@ -12,7 +12,12 @@
             
             <h2>Sua Conta</h2>
 
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis, quia! Expedita, quod maxime. Dignissimos iusto distinctio iste odit ratione pariatur ipsam voluptatum esse mollitia fugit quasi, vero aliquid sapiente voluptates quas optio voluptate maiores praesentium voluptatem similique, adipisci quae neque eos autem. Sequi ipsum adipisci tenetur doloremque officiis minima unde.</p>
+            {% if first_time %}
+            <p>Que legal!! Novamente seja bem vindo a nosso sistema. Insira os dados para sabermos mais de você e sua empresa! :)</p>
+            {% else %}
+            <p>Precisando mudar algum dado?</p>
+            <p>Mude abaixo que seus dados serão alterados :)</p>
+            {% endif %}
 
             <div class="display-info">
                 <form action="{% url 'Dashboard_config' %}" method="post" enctype='multipart/form-data'>

@@ -71,6 +71,7 @@ class Produto(models.Model):
     ingredientes                = models.TextField(blank=True)
     preco                       = models.DecimalField(max_digits=5,decimal_places=2)
     ativo                       = models.BooleanField(default=True)
+    nota                        = models.IntegerField(blank=True, default=0)
 
     def __str__(self):
         return 'ID: {} e nome: {} '.format(self.id, self.nome)

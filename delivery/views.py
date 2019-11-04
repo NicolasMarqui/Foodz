@@ -11,6 +11,10 @@ import datetime
 
 # Create your views here.
 def home(request):
+
+    # if request.user.is_authenticated and not request.user.groups.filter(name="Donos").exists():
+    #     P
+
     return render(
         request,
         'index.html',
@@ -30,11 +34,15 @@ def sobre_nos(request):
     )
 
 def produtos(request):
+
+    produtos = Produto.objects.all()
+
     return render(
         request,
         'produtos.html',
         {
             'range': range(9),
+            'produtos': produtos
         }
     )
 
@@ -89,16 +97,21 @@ def dashboard_produtos(request):
         }
 
         form = AddProducts(request.POST or None, request.FILES or None ,initial=data)
+        produtos = Produto.objects.filter(restaurante_id=rest.id)
     
     else:
         form = None
+        produtos = None
 
     if request.method == 'POST':
         if form.is_valid():
+            nome = request.POST['nome']
             novo_produto = form.save()
-            print('eae')
 
-            print(novo_produto)
+            mensagem = 'Parabéns, você adicionou o produto {} !'.format(nome)
+            notificacao = Notificacao(id_user=request.user, mensagem=mensagem)
+            notificacao.save()
+
             return redirect('/dashboard/')
 
     return render(
@@ -106,7 +119,8 @@ def dashboard_produtos(request):
         'dashboard_produtos.html',
         {
             'range': range(9),
-            'form': form
+            'form': form,
+            'produtos': produtos
         }
     )
 
@@ -117,6 +131,9 @@ def dashboard_config(request):
     info_restaurante = Restaurante.objects.filter(user_id = id)
 
     if info_restaurante:
+
+        first_time = False
+
         for i in info_restaurante:
             data = {
                 'user': request.user.username,
@@ -136,6 +153,7 @@ def dashboard_config(request):
             form = MoreInfoRestaurant( request.POST or None, request.FILES or None ,initial=data ,instance=instance)
 
     else:
+        first_time = True
         form = MoreInfoRestaurant(request.POST, request.FILES or None)
 
 
@@ -160,7 +178,8 @@ def dashboard_config(request):
         {
             'range': range(9),
             'info': info_restaurante,
-            'form': form
+            'form': form,
+            'first_time': first_time,
         }
     )
 
@@ -228,12 +247,18 @@ def register(request):
     )
 
 def produto_info(request,id = None):
+
+    produto = Produto.objects.get(id=id)
+
+    mais_produtos = Produto.objects.filter(restaurante_id=produto.restaurante.id)[:2]
+
     return render(
         request,
         'produto_info.html',
         {
-            'range': range(5),
-            'id': id,
+            'nota': str(produto.nota),
+            'produto': produto,
+            'mais_produtos': mais_produtos
         }
     )
 
