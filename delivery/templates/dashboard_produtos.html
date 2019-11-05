@@ -16,25 +16,65 @@
 
             {% if form %}
 
-            <div class="row">
-                <div class="col-xs-12">
-                    <h3>Adicionar novos produtos</h3>
-
-                    <form action="{% url 'Dashboard_produtos' %}" method="post" enctype='multipart/form-data'>
-                        {% csrf_token %}
-                        {% for f in form %}
-                            <div class="form-group row">
-                                <label for="{{f.label}}" class="col-sm-2 col-form-label">{{f.label}}</label>
-                                <div class="col-sm-10">
-                                    {{ f|safe }}
-                                </div>
+            <form action="{% url 'Dashboard_produtos' %}" method="POST" enctype='multipart/form-data'>
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-xs-12 col-md-6">
+                        <div class="form-group row">
+                            <label for="{{form.nome.label}}" class="col-sm-2 col-form-label">{{form.nome.label}}</label>
+                            <div class="col-sm-10">
+                                {{form.nome}}
                             </div>
-                        {% endfor %}
-    
-                        <button type="submit">Salvar</button>
-                    </form>
+                        </div>
+                        <div class="form-group row">
+                            <label for="{{form.foto.label}}" class="col-sm-2 col-form-label">{{form.foto.label}}</label>
+                            <div class="col-sm-10">
+                                {{form.foto}}
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="{{form.categoria.label}}" class="col-sm-2 col-form-label">{{form.categoria.label}}</label>
+                            <div class="col-sm-10">
+                                {{form.categoria}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-6">
+                        <div class="form-group row">
+                            <label for="{{form.preco.label}}" class="col-sm-2 col-form-label">{{form.preco.label}}</label>
+                            <div class="col-sm-10">
+                                {{form.preco}}
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="{{form.ativo.label}}" class="col-sm-2 col-form-label">{{form.ativo.label}}</label>
+                            <div class="col-sm-10">
+                                {{form.ativo}}
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-10">
+                                {{form.restaurante}}
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <div class="col-xs-12">
+                        <p>{{form.ingredientes.label}}</p>
+                        {{form.ingredientes}}
+                    </div>
+
+                    <div class="col-xs-12">
+                        <p>{{form.descricao.label}}</p>
+                        {{form.descricao}}
+                    </div>
                 </div>
-            </div>
+
+                <button type="submit">Salvar</button>
+
+            </form>
+
             {% else %}
                 <div class="not-logged-produtos">
                     <h2>Você ainda <span>não</span> pode adicionar produtos</h2>

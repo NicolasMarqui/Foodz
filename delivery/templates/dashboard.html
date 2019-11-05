@@ -9,7 +9,6 @@
     
     {% block content %}
         {% if info %}
-            {% for restaurante in info %}
 
             <div class="modal-more-orders">
                 
@@ -52,11 +51,11 @@
                 <div class="info-sales">
                     <div class="info sales">
                         <h3>Total de Venda Feitas</h3>
-                        <p> {{restaurante.total_vendas}} </p>
+                        <p> {{info.total_vendas}} </p>
                     </div>
             
                     <div class="info lucro">
-                        <h3>Lucro total</h3>
+                        <h3>Total Vendido</h3>
                         <p> R$ <span>450,00</span> </p>
                     </div>
             
@@ -65,38 +64,70 @@
                     </div>
                 </div>
             
-                <div class="last-orders">
-                    <h4>Suas últimas vendas</h4>
-            
-                    <div class="table-responsive">
-                        <table class="table table-striped table-hover">
-                            <thead>
-                                <tr>
-                                    <td>Nome</td>
-                                    <td>Descrição</td>
-                                    <td>Preço</td>
-                                    <td>Qnt</td>
-                                    <td>Comprador</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for i in vendas %}
-                                <tr>
-                                    <td>Hambuguer</td>
-                                    <td>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Architecto, sint.</td>
-                                    <td>19.90</td>
-                                    <td>5</td>
-                                    <td>Nicolas Marqui</td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
+                <div class="section-2-dash">
+                    <div class="row">
+                        <div class="col-xs-12 col-lg-6">
+                            <div class="last-orders">
+                                <h4>Suas últimas vendas</h4>
+                        
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <td>Nome</td>
+                                                <td>Descrição</td>
+                                                <td>Preço</td>
+                                                <td>Qnt</td>
+                                                <td>Comprador</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for i in vendas %}
+                                            <tr>
+                                                <td>Hambuguer</td>
+                                                <td>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Architecto, sint.</td>
+                                                <td>19.90</td>
+                                                <td>5</td>
+                                                <td>Nicolas Marqui</td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                        
+                                <a href="#" class="ver-todos-order">Ver Todos</a>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12 col-lg-6">
+                            <div class="last-products">
+                                <h4>Últimos produtos</h4>
+
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <td>Nome</td>
+                                                <td>Preço</td>
+                                                <td>Link</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for i in ult_produtos %}
+                                            <tr>
+                                                <td>{{i.nome}}</td>
+                                                <td>R${{i.preco}}</td>
+                                                <td><a href="/produtos/info/{{i.id}}" title="{{i.nome}}" target="_blank">Link</a></td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-            
-                    <a href="#" class="ver-todos-order">Ver Todos</a>
                 </div>
             </div>
-            {% endfor %}
         {% else %}
         <div class="first-login">
 

@@ -64,7 +64,10 @@ def dashboard(request):
 
     id = request.user.id
 
-    info_restaurante = Restaurante.objects.filter(user_id = id)
+    info_restaurante = Restaurante.objects.get(user_id = id)
+    info_produtos = Produto.objects.filter(restaurante_id=info_restaurante.id)
+
+    print(info_restaurante.id)
     
     return render(
         request,
@@ -72,6 +75,7 @@ def dashboard(request):
         {
             'range': range(9),
             'info': info_restaurante,
+            'ult_produtos': info_produtos,
         }
     )
 
@@ -88,7 +92,7 @@ def dashboard_produtos(request):
 
     id = request.user.id
 
-    info_restaurante = Restaurante.objects.filter(user_id = id)
+    info_restaurante = Restaurante.objects.get(user_id = id)
 
     if info_restaurante:
 
@@ -98,17 +102,21 @@ def dashboard_produtos(request):
             'restaurante': rest.id
         }
 
+
         form = AddProducts(request.POST or None, request.FILES or None ,initial=data)
         produtos = Produto.objects.filter(restaurante_id=rest.id)
     
     else:
         form = None
         produtos = None
+        print('deu ruim')
 
+    print(form.is_valid())
     if request.method == 'POST':
         if form.is_valid():
             nome = request.POST['nome']
             novo_produto = form.save()
+
 
             mensagem = 'Parabéns, você adicionou o produto {} !'.format(nome)
             notificacao = Notificacao(id_user=request.user, mensagem=mensagem)

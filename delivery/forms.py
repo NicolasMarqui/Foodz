@@ -20,8 +20,9 @@ class AddProducts(forms.ModelForm):
         fields = ['nome', 'foto', 'categoria' , 'restaurante' , 'descricao' , 'ingredientes' , 'preco' , 'ativo']
 
         widgets = {
-            'restaurante': forms.HiddenInput(attrs={'readonly': 'readonly'}),
+            'restaurante': forms.TextInput(attrs={'readonly': 'readonly'}),
             'descricao': SummernoteWidget(),
+            'ingredientes': SummernoteWidget(),
         }
 
         labels = {

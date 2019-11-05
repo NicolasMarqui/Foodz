@@ -1910,6 +1910,21 @@ footer .footer .fot-bottom p {
   font-weight: 600;
 }
 
+.wrapper-dashboard .main-content-dashboard .content-owner .last-products {
+  min-height: 200px;
+  width: 100%;
+  margin: 50px auto;
+  background-color: #fff;
+  padding: 14px;
+  position: relative;
+}
+
+.wrapper-dashboard .main-content-dashboard .content-owner .last-products h4 {
+  padding: 20px 5px;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
 @media (min-width: 992px) {
   .wrapper-dashboard .main-content-dashboard .content-owner h2 {
     text-align: left;
@@ -3715,5 +3730,49 @@ footer .footer .fot-bottom p {
           transform: translate(-50%, -50%);
   font-size: 12px;
   color: #fff;
+}
+
+.content-produtos form label, .content-produtos form p {
+  vertical-align: middle;
+  margin: 5px;
+  font-size: 18px;
+  font-weight: 600;
+  width: 100%;
+}
+
+.content-produtos form input {
+  padding: 8px;
+  border-radius: 15px;
+  border: none;
+  outline: none;
+  width: 100%;
+}
+
+.content-produtos form input:focus {
+  -webkit-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.75);
+}
+
+.content-produtos form select {
+  padding: 8px;
+  border-radius: 15px;
+  width: 100%;
+  outline: none;
+}
+
+.content-produtos form button {
+  padding: 24px;
+  background-color: #E04040;
+  margin: 50px  auto;
+  display: block;
+  width: 200px;
+  border-radius: 25px;
+  color: #fff;
+  border: none;
+  outline: none;
+}
+
+.content-produtos form button:hover {
+  background-color: #e76c6c;
 }
 /*# sourceMappingURL=styles.css.map */
