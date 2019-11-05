@@ -34,7 +34,10 @@
                                     </div>
 
                                     <div class="check">
-                                        <a href="#" id="{{n.id}}"><i class="fas fa-check" data-toggle="tooltip" title="Lida" data-placement="bottom"></i></a>
+                                        <a href="#" id="{{n.id}}">
+                                            <i class="fas fa-check" data-toggle="tooltip" title="Lida" data-placement="bottom"></i>
+                                            <i class="far fa-trash-alt" data-toggle="tooltip" title="Lixeira" data-placement="bottom"></i>
+                                        </a>
                                     </div>
                                 </li>
                             {% endif %}
@@ -46,6 +49,19 @@
                         </div>
                     {% endif %}
                 </ul>
+
+                <div class="bottom-button">
+                    <div class="todas-lidas">       
+                        <a href="#" id="{{n.id}}"><i class="far fa-envelope-open" data-toggle="tooltip" title="Todas Lidas" data-placement="top"></i></a>
+                        <div class="total-lidas">
+                            <span>{{lidas.count}}</span>
+                        </div>
+                    </div>
+    
+                    <div class="lixeira">
+                        <a href="#" id="{{n.id}}"><i class="far fa-trash-alt" data-toggle="tooltip" title="Lixeira" data-placement="top"></i></a>
+                    </div>
+                </div>
             </div>
 
             <div class="wrapper-dashboard">

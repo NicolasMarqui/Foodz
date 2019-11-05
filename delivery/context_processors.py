@@ -4,8 +4,11 @@ def notificacoes(request):
 
     notificacoes = Notificacao.objects.filter(id_user=request.user.id, foi_lida=0)
 
+    todas_lidas = Notificacao.objects.filter(id_user=request.user.id, foi_lida=1)
+
     return {
         'notificacoes': notificacoes,
+        'lidas': todas_lidas,
     }
 
 def profile_picture_owner(request):

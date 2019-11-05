@@ -3619,6 +3619,48 @@ footer .footer .fot-bottom p {
           transform: translate(-50%, -50%);
 }
 
+.display-notificacoes .bottom-button {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  padding: 15px;
+}
+
+.display-notificacoes .bottom-button .todas-lidas {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  text-align: center;
+  position: relative;
+}
+
+.display-notificacoes .bottom-button .todas-lidas a i {
+  color: #000;
+  font-size: 30px;
+}
+
+.display-notificacoes .bottom-button .lixeira {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  text-align: center;
+}
+
+.display-notificacoes .bottom-button .lixeira a i {
+  color: #000;
+  font-size: 30px;
+}
+
 .content-produtos {
   width: 95%;
   margin: 15px auto 0;
@@ -3653,5 +3695,25 @@ footer .footer .fot-bottom p {
 .read-all {
   text-align: center;
   padding: 50px;
+}
+
+.total-lidas {
+  position: absolute;
+  bottom: 92%;
+  left: 50%;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background-color: #E04040;
+}
+
+.total-lidas span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  font-size: 12px;
+  color: #fff;
 }
 /*# sourceMappingURL=styles.css.map */

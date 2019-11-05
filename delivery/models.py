@@ -117,6 +117,7 @@ class Notificacao(models.Model):
     id_user                     = models.ForeignKey(User, on_delete=models.CASCADE)
     mensagem                    = models.TextField(blank=True, null=True)
     foi_lida                    = models.BooleanField(default=False)
+    lixeira                     = models.BooleanField(default=False)
     data_comentario             = models.DateTimeField(default=now, blank=True)
 
     def __str__(self):
