@@ -233,23 +233,53 @@ $(document).ready(function(){
   }
 
     //Marca notificação como lida
+  
     $('.check').click(function(){
-      $.ajax({
-        type: "POST",
-        url: "/lida",
-        data: {
-          id: $('.check a').attr('id'),
-          csrfmiddlewaretoken: getCookie('csrftoken'),
-          lida: 1
-        },
-        success: function (response) {
-          var options = {
-            settings: {
-              duration: 2000
-            }
-          };
-          iqwerty.toast.Toast('Mensagem Lida!', options);
-        }
-      });
+        $.ajax({
+          type: "POST",
+          url: "/lida",
+          data: {
+            id: $(this).parent().attr('id'),
+            csrfmiddlewaretoken: getCookie('csrftoken'),
+            lida: 1
+          },
+          dataType: 'json',
+          complete: function (response) {
+              // console.log(response.responseJSON.notificacoes[0]);
+              
+              if(response.responseJSON.status === 'Success'){
+                
+                if(response.responseJSON.notificacoes.length){
+                  var url = response.responseJSON.notificacoes[0];
+                tem_not = $('.notificacoes').find(`li#${url.id}`).fadeOut(300, function() { $(this).remove()});
+
+                $('.notificacoes').find(`li#${url.id}`).fadeOut(300, function() { $(this).remove()});
+
+                $('.total-notificacoes span').html($('.notificacoes li').length - 1)
+                
+                if($('.total-notificacoes span').html() == '0'){
+                  $('.notificacoes').append('<p class="read-all">Você leu todas as suas notificações!!<p>')
+                }
+                
+                var options = {
+                  settings: {
+                    duration: 2000
+                  }
+                };
+                iqwerty.toast.Toast('Mensagem Marcado como lida!', options);
+                }
+              }else{
+                console.log('fudeu');
+                
+              }
+
+          }
+        });
     })
+
+
+
+
+
+
 })

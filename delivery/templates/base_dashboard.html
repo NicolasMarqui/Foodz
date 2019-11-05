@@ -23,11 +23,11 @@
 
                 <h2>Central de Notificações</h2>
 
-                <ul>
+                <ul class="notificacoes">
                     {% if notificacoes %}
                         {% for n in notificacoes %}
                             {% if n.foi_lida == 0 %}
-                                <li>
+                                <li id="{{n.id}}">
                                     <div class="info">
                                         <p>{{n.mensagem}}</p>
                                         <p class="date">{{ n.data_comentario|date:"d M Y" }} {{ n.data_comentario|time:"H:i" }}</p>

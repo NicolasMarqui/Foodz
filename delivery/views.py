@@ -9,6 +9,7 @@ from .forms import MoreInfoRestaurant, AddProducts
 from django.shortcuts import get_object_or_404
 import datetime
 from django.http import JsonResponse
+from django.core import serializers
 
 # Create your views here.
 def home(request):
@@ -314,13 +315,19 @@ def lida(request):
 
     id = request.POST['id']
 
+    print(id)
+
     if request.method == 'POST' and request.is_ajax():
         try:
             notificacao = Notificacao.objects.get(id=id)
             notificacao.foi_lida = request.POST['lida']
 
+            not_faltando = Notificacao.objects.filter(id=id, foi_lida=0);
+            data = list(not_faltando.values())
+
             notificacao.save()
-            return JsonResponse({ 'status': 'Success', 'msg': 'Notificação foi lida' })
+
+            return JsonResponse({ 'status': 'Success', 'msg': 'Notificação foi lida' , 'notificacoes': data})
 
         except Notificacao.DoesNotExist:
             return JsonResponse({'status':'Fail', 'msg': 'Object does not exist'})

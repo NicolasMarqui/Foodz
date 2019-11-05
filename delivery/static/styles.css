@@ -3649,4 +3649,9 @@ footer .footer .fot-bottom p {
 .content-produtos .not-logged-produtos a:hover {
   background-color: #e76c6c;
 }
+
+.read-all {
+  text-align: center;
+  padding: 50px;
+}
 /*# sourceMappingURL=styles.css.map */
