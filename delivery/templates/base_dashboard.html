@@ -26,16 +26,18 @@
                 <ul>
                     {% if notificacoes %}
                         {% for n in notificacoes %}
-                        <li>
-                            <div class="info">
-                                <p>{{n.mensagem}}</p>
-                                <p class="date">22/10/2019 ás 21:00</p>
-                            </div>
+                            {% if n.foi_lida == 0 %}
+                                <li>
+                                    <div class="info">
+                                        <p>{{n.mensagem}}</p>
+                                        <p class="date">{{ n.data_comentario|date:"d M Y" }} {{ n.data_comentario|time:"H:i" }}</p>
+                                    </div>
 
-                            <div class="check">
-                                <a href="#"><i class="fas fa-check" data-toggle="tooltip" title="Lida" data-placement="bottom"></i></a>
-                            </div>
-                        </li>
+                                    <div class="check">
+                                        <a href="#" id="{{n.id}}"><i class="fas fa-check" data-toggle="tooltip" title="Lida" data-placement="bottom"></i></a>
+                                    </div>
+                                </li>
+                            {% endif %}
                         {% endfor %}
                     {% else %}
                         <div class="nenhuma-not">
@@ -152,6 +154,7 @@
         </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="{% static 'lib/slick-1.8.1/slick/slick.min.js' %}"></script>
+    <script src="{% static 'lib/js-toast-master/toast.min.js' %}"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/13e048d385.js"></script>
     <script src="{% static 'script.js' %}" async defer></script>

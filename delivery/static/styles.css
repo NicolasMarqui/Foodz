@@ -3421,6 +3421,7 @@ footer .footer .fot-bottom p {
   padding: 8px;
   border-radius: 15px;
   width: 100%;
+  outline: none;
 }
 
 .display-info form button {

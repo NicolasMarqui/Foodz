@@ -8,6 +8,7 @@ from django.contrib import messages
 from .forms import MoreInfoRestaurant, AddProducts
 from django.shortcuts import get_object_or_404
 import datetime
+from django.http import JsonResponse
 
 # Create your views here.
 def home(request):
@@ -161,13 +162,15 @@ def dashboard_config(request):
         if form.is_valid():
             if info_restaurante:
                 novo_restaurante = form.save()
-                print('eae')
+                msg = "Seu perfil foi alterado com sucesso!"
+                notificacao = Notificacao(id_user=request.user, mensagem=msg)
+                notificacao.save()
+
             else:
                 novo_restaurante = form.save(commit=False)
                 novo_restaurante.user_id = request.user.id
                 novo_restaurante.total_vendas = 0
 
-            print(novo_restaurante)
             novo_restaurante.save()
             return redirect('/dashboard/')
             
@@ -306,3 +309,21 @@ def minha_conta(request, id):
 def logout(request):
     django_logout(request)
     return redirect('/')
+
+def lida(request):
+
+    id = request.POST['id']
+
+    if request.method == 'POST' and request.is_ajax():
+        try:
+            notificacao = Notificacao.objects.get(id=id)
+            notificacao.foi_lida = request.POST['lida']
+
+            notificacao.save()
+            return JsonResponse({ 'status': 'Success', 'msg': 'Notificação foi lida' })
+
+        except Notificacao.DoesNotExist:
+            return JsonResponse({'status':'Fail', 'msg': 'Object does not exist'})
+
+    else:
+        return JsonResponse({'status':'Fail', 'msg':'Request não é valido'})

@@ -2,7 +2,7 @@ from .models import Notificacao, Restaurante
 
 def notificacoes(request):
 
-    notificacoes = Notificacao.objects.filter(id_user=request.user.id)
+    notificacoes = Notificacao.objects.filter(id_user=request.user.id, foi_lida=0)
 
     return {
         'notificacoes': notificacoes,

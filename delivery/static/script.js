@@ -215,4 +215,41 @@ $(document).ready(function(){
     //     padding: '24px 8px'
     //   })
     // })
+
+    function getCookie(name) {
+      var cookieValue = null;
+      if (document.cookie && document.cookie !== '') {
+          var cookies = document.cookie.split(';');
+          for (var i = 0; i < cookies.length; i++) {
+              var cookie = cookies[i].trim();
+              // Does this cookie string begin with the name we want?
+              if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                  cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                  break;
+              }
+          }
+      }
+      return cookieValue;
+  }
+
+    //Marca notificação como lida
+    $('.check').click(function(){
+      $.ajax({
+        type: "POST",
+        url: "/lida",
+        data: {
+          id: $('.check a').attr('id'),
+          csrfmiddlewaretoken: getCookie('csrftoken'),
+          lida: 1
+        },
+        success: function (response) {
+          var options = {
+            settings: {
+              duration: 2000
+            }
+          };
+          iqwerty.toast.Toast('Mensagem Lida!', options);
+        }
+      });
+    })
 })
