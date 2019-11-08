@@ -26,20 +26,22 @@
             <div class="row">
 
                 {% if produto %}
-                    <div class="col-xs-12 col-md-6">
-                            <div class="main-image" style="background-image: url('/media/{{produto.foto}}');"></div>
+                    <div class="col-xs-12 col-md-3">
+                            <div class="main-image">
+                                <img src="/media/{{produto.foto}}" alt="">
+                            </div>
                         </div>
         
-                        <div class="col-xs-12 col-md-6" id="ifp">
+                        <div class="col-xs-12 col-md-9" id="ifp">
         
-                            <div class="starts-area">
+                            <!-- <div class="starts-area">
                                 <ul>
                                     {% for i in nota %}
                                         <p>{{i}}</p>
                                         <li><i class="far fa-star fa-2x"></i></li>
                                     {% endfor %}
                                 </ul>
-                            </div>
+                            </div> -->
         
                             <p class="small-title">
                                 {{produto.categoria}}
@@ -49,8 +51,8 @@
                                 {{produto.nome}}
                             </h1>
         
-                            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aspernatur ipsa officia illum, iste numquam non a ad quo excepturi repellendus minus sint illo obcaecati eius, iure recusandae ratione quasi alias beatae, accusamus iusto quia! Nulla suscipit totam quas, exercitationem laboriosam ab culpa, unde quasi sed dolorem possimus repudiandae ducimus ea.</p>
-        
+                            <p>{{produto.descricao|striptags }}</p>
+
                             <div class="buy-and-quantity">
                                 <a href="#" class="btn">Comprar</a>
         
@@ -104,7 +106,7 @@
                             </div>
                         {% endfor %}
                         <div class="saiba-mais-card">
-                            <a href="#">
+                            <a href="/restaurante/info/{{r.restaurante.id}}">
                                 <p>Saiba Mais <span><i class="fas fa-arrow-right"></i></span> </p>
                             </a>
                         </div>

@@ -17,6 +17,8 @@
     <body>
         <div class="main-container">
 
+            <div class="black-hover"></div>
+
             <div class="display-shopping-cart">
 
                 <div class="inside-header">
@@ -146,7 +148,11 @@
                                             <li><a href="/">Home</a></li>
                                         {% endif %}
                                 
-                                        <li><a href="/sobre-nos">Sobre Nós</a></li>
+                                        {% if '/sobre-nos' in request.path  %}
+                                            <li class="active"><a href="/sobre-nos">Sobre Nós</a></li>
+                                        {% else %}
+                                            <li><a href="/sobre-nos">Sobre Nós</a></li>
+                                        {% endif %}
                                 
                                         {% if '/produtos' in request.path  %}
                                             <li class="active"><a href="/produtos">Produtos</a></li>

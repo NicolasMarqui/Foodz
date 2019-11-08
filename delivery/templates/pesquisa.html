@@ -12,6 +12,7 @@
 
                 <form action="/pesquisa/" method="POST">
                     {% csrf_token %}
+                    <h2>Pesquisar</h2>
                     <input type="text" name="query" placeholder="Pesquisar" required>
                     <button type="submit">
                         Pesquisar

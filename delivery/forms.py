@@ -17,9 +17,10 @@ class MoreInfoRestaurant(forms.ModelForm):
 class AddProducts(forms.ModelForm):
     class Meta:
         model = Produto
-        fields = ['nome', 'foto', 'categoria' , 'restaurante' , 'descricao' , 'ingredientes' , 'preco' , 'ativo']
+        fields = ['id', 'nome', 'foto', 'categoria' , 'restaurante' , 'descricao' , 'ingredientes' , 'preco' , 'ativo']
 
         widgets = {
+            'id': forms.TextInput(attrs={'readonly': 'readonly'}),
             'restaurante': forms.TextInput(attrs={'readonly': 'readonly'}),
             'descricao': SummernoteWidget(),
             'ingredientes': SummernoteWidget(),

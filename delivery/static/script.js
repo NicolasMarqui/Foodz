@@ -277,9 +277,126 @@ $(document).ready(function(){
         });
     })
 
+    //Pega os produtos
+    $('#load-products').click(function(){
 
+      $('#todos_produtos > tbody > tr').remove()
 
+      $.ajax({
+        type: "get",
+        url: "/produtos/todos",
+        dataType: "json",
 
+        beforeSend: function(){
+          $('body').loading({
+            stoppable: true
+          });
+        },
+        success: function (data) {
+          let produtos;
+
+          data.produtos.forEach(prod => {
+
+            produtos += `
+            <tr id="${prod.id}" class="edit-prod">
+            <td>${prod.id}</td>
+            <td><img src="/media/${prod.foto}" alt="${prod.nome}"></td>
+            <td>${prod.nome}</td>
+            <td>
+              ${prod.descricao.slice(0,7)}...
+            </td>
+            <td>
+              <button class="btn updateBtn" data-id="${prod.id}">Editar</button>
+            </td>
+            <td>
+              <button class="btn deleteBtn btn-danger" data-id="${prod.id}">Deletar</button>
+            </td>
+          </tr>`;
+          });
+
+          $('#todos_produtos > tbody').append(produtos)
+
+          $('body').loading('stop');
+        }
+      });
+    })
+
+    $('#todos_produtos').on('click', $('.updateBtn'), function(){
+        $.ajax({
+          type: "method",
+          url: "url",
+          data: "data",
+          dataType: "dataType",
+          success: function (response) {
+            
+          }
+        });
+    })
+
+    $('.edit-prod').click(function(){
+
+      id = $(this).attr('id')
+
+      $.ajax({
+        type: "post",
+        url: `get-produto-editar/`,
+        data: {
+          id: id,
+          csrfmiddlewaretoken: getCookie('csrftoken'),
+        },
+        dataType: "json",
+        complete: function (response) {
+          modal = response.responseText;
+
+          $(document).find('.open-modal').remove()
+          $('.content-produtos').append('<div class="open-modal"><div class="modal-edit" ><div class="header-edit"><i class="fas fa-times" id="close-edit"></i></div><form method="POST" enctype="multipart/form-data">'+ modal +'<button type="submit" id="salvar_editar" value=' + id +'>Salvar</button></form></div></div>')
+        }
+      });
+
+    });
+
+    $('.content-produtos').on('click', ".header-edit .fa-times" ,function(){
+      $('.open-modal').css('display', 'none');
+      $('.modal-edit').css('display', 'none');
+    })
+
+    $('.content-produtos').on('click', '#salvar_editar' ,function(e){
+      e.preventDefault();
+      
+      data = $('.modal-edit form').serializeArray();
+      
+      data_JSON = JSON.stringify(data)
+
+      $.ajax({
+        type: "POST",
+        url: "/save-produto-editar",
+        data: {
+          data: data_JSON,
+          csrfmiddlewaretoken: getCookie('csrftoken'),
+          id: $('#salvar_editar').val(),
+        },
+        dataType: "dataType",
+        complete: function (response) {
+
+          console.log(response)
+          var parsed = JSON.parse(response.responseText);
+
+          
+          if(parsed.status == 'success'){
+            var options = {
+              settings: {
+                duration: 2000
+              }
+            };
+            iqwerty.toast.Toast('Produto atualizado!', options);
+
+            $('.open-modal').css('display', 'none');
+            $('.modal-edit').css('display', 'none');
+          }
+        }
+      });
+
+    })
 
 
 })

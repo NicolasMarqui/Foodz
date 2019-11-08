@@ -14,78 +14,130 @@
 
             <h2>Produtos</h2>
 
-            {% if form %}
+            {% if produtos %}
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#adicionar">Adicionar</a></li>
+                <li><a data-toggle="tab" href="#editar" id="load-products">Editar</a></li>
+                <li><a data-toggle="tab" href="#todos">Todos</a></li>
+            </ul>
 
-            <form action="{% url 'Dashboard_produtos' %}" method="POST" enctype='multipart/form-data'>
-                {% csrf_token %}
-                <div class="row">
-                    <div class="col-xs-12 col-md-6">
-                        <div class="form-group row">
-                            <label for="{{form.nome.label}}" class="col-sm-2 col-form-label">{{form.nome.label}}</label>
-                            <div class="col-sm-10">
-                                {{form.nome}}
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="{{form.foto.label}}" class="col-sm-2 col-form-label">{{form.foto.label}}</label>
-                            <div class="col-sm-10">
-                                {{form.foto}}
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="{{form.categoria.label}}" class="col-sm-2 col-form-label">{{form.categoria.label}}</label>
-                            <div class="col-sm-10">
-                                {{form.categoria}}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-md-6">
-                        <div class="form-group row">
-                            <label for="{{form.preco.label}}" class="col-sm-2 col-form-label">{{form.preco.label}}</label>
-                            <div class="col-sm-10">
-                                {{form.preco}}
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="{{form.ativo.label}}" class="col-sm-2 col-form-label">{{form.ativo.label}}</label>
-                            <div class="col-sm-10">
-                                {{form.ativo}}
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-sm-10">
-                                {{form.restaurante}}
-                            </div>
-                        </div>
-                        
-                    </div>
+            <div class="tab-content">
+                <div id="adicionar" class="tab-pane fade in active">
+                    {% if form %}
 
-                    <div class="col-xs-12">
-                        <p>{{form.ingredientes.label}}</p>
-                        {{form.ingredientes}}
-                    </div>
+                    <form action="{% url 'Dashboard_produtos' %}" method="POST" enctype='multipart/form-data'>
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-xs-12 col-md-6">
+                                <div class="form-group row">
+                                    <label for="{{form.nome.label}}" class="col-sm-2 col-form-label">{{form.nome.label}}</label>
+                                    <div class="col-sm-10">
+                                        {{form.nome}}
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="{{form.foto.label}}" class="col-sm-2 col-form-label">{{form.foto.label}}</label>
+                                    <div class="col-sm-10">
+                                        {{form.foto}}
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="{{form.categoria.label}}" class="col-sm-2 col-form-label">{{form.categoria.label}}</label>
+                                    <div class="col-sm-10">
+                                        {{form.categoria}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <div class="form-group row">
+                                    <label for="{{form.preco.label}}" class="col-sm-2 col-form-label">{{form.preco.label}}</label>
+                                    <div class="col-sm-10">
+                                        {{form.preco}}
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="{{form.ativo.label}}" class="col-sm-2 col-form-label">{{form.ativo.label}}</label>
+                                    <div class="col-sm-10">
+                                        {{form.ativo}}
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-10">
+                                        {{form.restaurante}}
+                                    </div>
+                                </div>
+                                
+                            </div>
 
-                    <div class="col-xs-12">
-                        <p>{{form.descricao.label}}</p>
-                        {{form.descricao}}
-                    </div>
+                            <div class="col-xs-12">
+                                <p>{{form.ingredientes.label}}</p>
+                                {{form.ingredientes}}
+                            </div>
+
+                            <div class="col-xs-12">
+                                <p>{{form.descricao.label}}</p>
+                                {{form.descricao}}
+                            </div>
+                        </div>
+
+                        <button type="submit">Salvar</button>
+
+                    </form>
+
+                    {% else %}
+                        <div class="not-logged-produtos">
+                            <h2>Você ainda <span>não</span> pode adicionar produtos</h2>
+
+                            <p>Não se preocupe, após a finalização do seu cadastro, iremos verificar se você está apto para vender em nossa plataforma</p>
+
+                            <p>Então ta esperando o que?</p>
+
+                            <a href="/dashboard/config">Finalize seu cadastro</a>
+                        </div>
+                    {% endif %}
                 </div>
 
-                <button type="submit">Salvar</button>
-
-            </form>
-
-            {% else %}
-                <div class="not-logged-produtos">
-                    <h2>Você ainda <span>não</span> pode adicionar produtos</h2>
-
-                    <p>Não se preocupe, após a finalização do seu cadastro, iremos verificar se você está apto para vender em nossa plataforma</p>
-
-                    <p>Então ta esperando o que?</p>
-
-                    <a href="/dashboard/config">Finalize seu cadastro</a>
+                <div id="editar" class="tab-pane fade">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover" id="todos_produtos">
+                                <thead>
+                                    <tr class="title">
+                                        <td>id</td>
+                                        <td>Foto</td>
+                                        <td>Nome</td>
+                                        <td>Descrição</td>
+                                        <td>Editar</td>
+                                        <td>Remover</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- {% for i in produtos %}
+                                    <tr class="edit-prod" id="{{i.id}}">
+                                        <td>{{i.id}}</td>
+                                        <td><img src="/media/{{i.foto}}" alt="{{i.nome}}"></td>
+                                        <td>{{i.nome}}</td>
+                                        <td>{{i.descricao|truncatechars:20}}</td>
+                                        <td>{{i.ingredientes|truncatechars:20}}</td>
+                                        <td>{{i.ativo}}</td>
+                                        <td>{{i.categoria}}</td>
+                                    </tr>
+                                    {% endfor %} -->
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <div class="sem-produto">
+                            <h3>Você não possui nenhum produto cadastrado no momento :(</h3>
+                        </div>
+                    {% endif %}
                 </div>
-            {% endif %}
+
+                <div id="todos" class="tab-pane fade">
+                    eae
+                </div>
+            </div>
+
+            
         </div>
 
     {% endblock %}

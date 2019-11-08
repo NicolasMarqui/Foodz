@@ -43,11 +43,11 @@ Produtos
             
             <div class="row">
                 {% for p in produtos %}
-                    <div class="col-xs-12 col-md-4">
+                    <div class="col-xs-12 col-md-4" id="go-to-product">
                         <a href="/produtos/info/{{p.id}}">
                             <div class="wrap-results">
                                 <div class="result-produtos" style="background-image: url('/media/{{p.foto}}')">
-                                    <div class="over"></div>
+                                    <!-- <div class="over"></div> -->
                                 </div>
     
                                 <div class="info-prods">
@@ -55,6 +55,7 @@ Produtos
                                     <h4>
                                         R$ <span>{{p.preco}}</span>
                                     </h4>
+                                    <p>Vendido por: {{p.restaurante.nome}}</p>
                                 </div>
                             </div>
                         </a>

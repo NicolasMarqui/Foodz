@@ -17,4 +17,8 @@ urlpatterns = [
     path('conta/<int:id>', views.minha_conta,name="Minha Conta"),
     path('logout',views.logout,name="logout"),
     path('lida',views.lida,name="Lida"),
+    path('produtos/todos',views.produtos_todos,name="Todos os Produtos"),
+    path('produtos/editar/<int:id>',views.produtos_editar,name="Editar produtos"),
+    path('get-produto-editar',views.get_produto_editar,name="Editar Produto"),
+    path('save-produto-editar',views.save_produto_editar,name="Editar Produto"),
 ]
