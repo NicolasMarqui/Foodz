@@ -2733,7 +2733,7 @@ footer .footer .fot-bottom p {
   display: -ms-flexbox;
   display: flex;
   border: 2px solid #f8f8f8;
-  height: 250px;
+  height: 300px;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -2812,8 +2812,7 @@ footer .footer .fot-bottom p {
   display: flex;
 }
 
-.wrapper-random-products .display-choices-products .displayed-ones .more-info .infos p {
-  margin: 10px 5px;
+.wrapper-random-products .display-choices-products .displayed-ones .more-info .infos a {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
@@ -2821,19 +2820,20 @@ footer .footer .fot-bottom p {
   background-color: #E04040;
   cursor: pointer;
   color: #fff;
+  display: block;
   text-align: center;
   font-size: 12px;
 }
 
-.wrapper-random-products .display-choices-products .displayed-ones .more-info .infos p:hover {
+.wrapper-random-products .display-choices-products .displayed-ones .more-info .infos a:hover {
   background-color: #e76c6c;
 }
 
-.wrapper-random-products .display-choices-products .displayed-ones .more-info .infos p:last-child {
+.wrapper-random-products .display-choices-products .displayed-ones .more-info .infos a:last-child {
   background-color: #282828;
 }
 
-.wrapper-random-products .display-choices-products .displayed-ones .more-info .infos p:last-child:hover {
+.wrapper-random-products .display-choices-products .displayed-ones .more-info .infos a:last-child:hover {
   background-color: #424242;
 }
 

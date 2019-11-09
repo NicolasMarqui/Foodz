@@ -110,12 +110,26 @@ $(document).ready(function(){
         console.log('eae')
     })
 
+    function getCarrinhoItems(){
+      $.ajax({
+        type: "GET",
+        url: "carrinho/todos",
+        dataType: "json",
+        complete: function (response) {
+          console.log(response)
+        }
+      });
+    }
+
     //Open Carrinho de compras
     $('.shopping-cart').click(function(){
         $('.display-shopping-cart').css({
           display: 'block',
           width: '350px',
       });
+
+      getCarrinhoItems();
+      
     })
 
     //Fechar Carrinho de Compras
@@ -405,6 +419,49 @@ $(document).ready(function(){
       });
 
     })
+
+    //Add to cart
+    $('.add-carrinho').click(function () {
+      
+      id = $(this).attr('id');
+
+      data = {
+        csrfmiddlewaretoken: getCookie('csrftoken'),
+        id: id,
+      }
+      
+      $.ajax({
+        type: "POST",
+        url: "carrinho/add",
+        data: data,
+        dataType: "json",
+        beforeSend: function(){
+          $('body').loading({
+            stoppable: true
+          });
+        },
+        complete: function (response) {
+
+          status = response.responseJSON.status
+          msg = response.responseJSON.msg
+
+          var options = {
+            settings: {
+              duration: 2000
+            }
+          };
+          iqwerty.toast.Toast(msg, options);
+
+          if(status == 'success'){
+            $('.amount-cart span').html('1')
+          }
+
+          $('body').loading('stop');
+          
+        }
+      });
+      
+    });
 
 
 })

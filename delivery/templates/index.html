@@ -28,7 +28,7 @@ Home
     <div class="wrapper-banner-call">
         <div class="container">
             <div class="col-xs-12 col-md-4 p-l-0">
-                <a href="#">
+                <a href="/promocoes#pizza-grande">
                     <div class="item-banner-call" style="background-image: url('https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80')">
 
                         <div class="over"></div>
@@ -42,7 +42,7 @@ Home
             </div>
 
             <div class="col-xs-12 col-md-4">
-                <a href="#">
+                <a href="/promocoes#comida-japonesa">
                     <div class="item-banner-call" style="background-image: url('https://images.unsplash.com/photo-1553621042-f6e147245754?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=925&q=80')">
 
                         <div class="over"></div>
@@ -56,7 +56,7 @@ Home
             </div>
 
             <div class="col-xs-12 col-md-4 p-r-0">
-                <a href="#">
+                <a href="/promocoes#melhor-sabor">
                     <div class="item-banner-call" style="background-image: url('https://images.unsplash.com/photo-1529565214304-a882ebc5a8e6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80')">
 
                         <div class="over"></div>
@@ -83,27 +83,29 @@ Home
             <div class="display-choices-products">
                 {% for i in produtos %}
                     <div class="item">
-                        <div class="displayed-ones" data-aos="fade-left">
-                            <a href="/produtos/info/{{i.id}}" class="h-100">
-                                <div class="thumb" style="background-image: url('/media/{{i.foto}}')"></div>
-        
-                                <div class="more-info">
-                                    <div class="title">
-                                        <h4>{{i.nome}}</h4>
-                                    </div>
+                        <div class="displayed-ones">
+                            
+                            <div class="thumb" style="background-image: url('/media/{{i.foto}}')"></div>
     
-                                    <div class="price">
-                                        <p>R$ <span>{{i.preco}}</span> </p>
-                                    </div>
-    
-                                    <div class="infos">
-                                        <p> Carrinho</p>
-    
-                                        <p> Info </p>
-                                    </div>
-    
+                            <div class="more-info">
+                                <div class="title">
+                                    <h4>{{i.nome}}</h4>
                                 </div>
-                            </a>
+
+                                <div class="price">
+                                    <p>R$ <span>{{i.preco}}</span> </p>
+                                </div>
+
+                                <div class="infos">
+
+                                    <a href="#carrinho-{{i.id}}" class="add-carrinho" id="{{i.id}}">
+                                        Carrinho
+                                    </a>
+
+                                    <a href="/produtos/info/{{i.id}}" class="h-100">Info</a>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
                 {% endfor %}
@@ -121,7 +123,7 @@ Home
         
             <h2 class="big-title"> As categorias mais acessadas </h2>
 
-            <div class="container-categoria" style="overflow: hidden">
+            <div class="container-categoria">
 
                 <div class="first-col">
                     <a href="#" >

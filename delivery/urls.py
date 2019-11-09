@@ -14,6 +14,7 @@ urlpatterns = [
     path('register/', views.register, name="register"),
     path('produtos/info/<int:id>/', views.produto_info, name="Informação Produto"),
     path('restaurante/info/<int:id>/', views.restaurante_info, name="Informação Restaurante"),
+    path('promocoes', views.promocoes, name="Promoções"),
     path('restaurantes/', views.restaurantes, name="Restaurantes"),
     path('conta/<int:id>', views.minha_conta,name="Minha Conta"),
     path('logout',views.logout,name="logout"),
@@ -22,4 +23,5 @@ urlpatterns = [
     path('produtos/editar/<int:id>',views.produtos_editar,name="Editar produtos"),
     path('get-produto-editar',views.get_produto_editar,name="Editar Produto"),
     path('save-produto-editar',views.save_produto_editar,name="Editar Produto"),
+    path('carrinho/add',views.carrinho_add,name="Adicionar Carrinho"),
 ]

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Cliente, Produto, Restaurante, Notificacao
+from .models import Cliente, Produto, Restaurante, Notificacao, Carrinho
 from django.contrib.auth import logout as django_logout
 from django.contrib.auth.models import User, auth, Group
 from django.db.models import Q
@@ -451,3 +451,56 @@ def produtos_editar(request, id):
 
     # return JsonResponse(data)
     pass
+
+def promocoes(request):
+    return render(
+        request,
+        'promocoes.html',
+    )
+
+def carrinho_add(request):
+    
+    if request.method == 'POST' and request.is_ajax():
+
+        if not request.user.is_authenticated:
+            return JsonResponse({ 'status': 'error', 'msg': 'Você deve estar logado para realizar essa ação'})
+
+        if request.user.groups.filter(name="Donos").exists():
+            return JsonResponse({ 'status': 'error', 'msg': 'Donos de restaurante não podem efetuar essa ação'})
+
+        #Id do produto
+        id = request.POST['id']
+
+        #Instancia do produto e do cliente
+        id_produto = Produto.objects.get(id=id)
+        id_user = Cliente.objects.get(user_id=request.user.id)
+
+        #Verifica se o item ja esta no carrinho
+        is_item = Carrinho.objects.get(id_produto=id_produto)
+
+        if is_item:
+            quantidade = is_item.quantidade
+            is_item.quantidade = quantidade + 1
+
+            is_item.save()
+
+            msg = 'Mais uma unidade de {} adicionada ao carrinho'.format(is_item.id_produto.nome)
+
+            return JsonResponse({ 'status': 'success', 'msg': msg, 'qnt_carrinho': is_item.quantidade})
+
+        else:
+            #Cria uma instancia do carrinho
+            item = Carrinho(id_cliente=id_user, id_produto=id_produto, is_carrinho=1)
+
+            #Salva o produto no carrinho
+            # item.save()
+
+            todos_no_carrinho = Carrinho.objects.filter(id_cliente=id_user, is_carrinho=1)
+
+            prod = Produto.objects.get(id=id)
+
+            msg = '{} adicionado ao carrinho'.format(prod.nome)
+
+            return JsonResponse({ 'status': 'success', 'msg': msg, 'qnt_carrinho': todos_no_carrinho.count()})
+
+

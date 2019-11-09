@@ -122,3 +122,10 @@ class Notificacao(models.Model):
 
     def __str__(self):
         return 'user_id: {} e mensagem: {}'.format(self.id_user, self.mensagem)
+
+class Carrinho(models.Model):
+    id_cliente                  = models.ForeignKey(Cliente, on_delete=models.CASCADE)
+    id_produto                  = models.ForeignKey(Produto, on_delete=models.CASCADE)
+    adicionado_carrinho         = models.DateTimeField(auto_now=True,blank=True)
+    quantidade                  = models.IntegerField(default=1)
+    is_carrinho                 = models.BooleanField(default=False)
