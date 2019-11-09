@@ -112,11 +112,10 @@ $(document).ready(function(){
 
     //Open Carrinho de compras
     $('.shopping-cart').click(function(){
-
         $('.display-shopping-cart').css({
-            display: 'block',
-            width: '350px',
-        });
+          display: 'block',
+          width: '350px',
+      });
     })
 
     //Fechar Carrinho de Compras
@@ -169,10 +168,17 @@ $(document).ready(function(){
 
     //Abre carrinho no icone de carrinho para mobilão
     $('.mobile-cart').click(function(){
+      if (window.matchMedia("(max-width: 768px)").matches) {
         $('.display-shopping-cart').css({
+            display: 'block',
+            width: '100%',
+        });
+      } else {
+          $('.display-shopping-cart').css({
             display: 'block',
             width: '350px',
         });
+      }
     })
 
     //Abrir Search Mobile

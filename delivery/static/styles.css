@@ -2985,6 +2985,12 @@ footer .footer .fot-bottom p {
   background-color: #e76c6c;
 }
 
+@media (max-width: 768px) {
+  .display-shopping-cart {
+    overflow-y: auto;
+  }
+}
+
 .menu-mobile-wrapper {
   position: fixed;
   top: 0;
