@@ -10,6 +10,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,900&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="{% static 'lib/slick-1.8.1/slick/slick.css' %}">
+        <link rel="stylesheet" href="{% static 'lib/animate.css' %}">
+        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <link rel="stylesheet" href="{% static 'reset.css' %}">
         <link rel="stylesheet" href="{% static 'styles.css' %}">
@@ -73,7 +75,7 @@
                 <div class="center-menu">
                     <ul>
                         <li>
-                            <a href="#">Home</a>
+                            <a href="/">Home</a>
                         </li>
 
                         <li>
@@ -81,11 +83,20 @@
                         </li>
 
                         <li>
-                            <a href="#">Produtos</a>
+                            <a href="/produtos/">Produtos</a>
                         </li>
 
                         <li>
-                            <a href="#">Login</a>
+                            {% if user.is_authenticated %}
+                            <a href="/conta/{{user.id}}">Conta</a>
+
+                            <div class="logout-header">
+                                <a href="{% url 'logout' %}">logout</a>
+                            </div>
+
+                            {% else %}
+                            <a href="/login">Login</a>
+                            {% endif %}
                         </li>
                     </ul>
                 </div>
@@ -121,13 +132,13 @@
                     <div class="container">
                         <div class="row fs-0">
 
-                            <div class="col-xs-3 col-sm-2 col-in-block text-left">
-                                <div class="logo">
+                            <div class="col-xs-3 col-md-2 col-in-block text-left">
+                                <div class="logo"  class="animated heartBeat delay-2s">
                                     <h1><a href="/">Foodz</a></h1>
                                 </div>
                             </div>
 
-                            <div class="col-sm-5 col-md-3 hidden-xs col-in-block v-bottom">
+                            <div class="hidden-sm col-md-4 col-lg-4 hidden-xs col-in-block v-bottom">
                                 <div class="search-nav">
                                     <form action="/pesquisa/" method="POST">
                                         {% csrf_token %}
@@ -139,7 +150,7 @@
                                 </div>
                             </div>
 
-                            <div class="hidden-xs col-sm-5 col-md-4 col-in-block text-right">
+                            <div class="hidden-xs col-sm-5 col-md-4 col-lg-3 col-in-block text-right">
                                 <div class="menu">
                                     <ul>
                                         {% if request.path == '/' %}
@@ -163,7 +174,7 @@
                                 </div>
                             </div>
 
-                            <div class="hidden-xs hidden-sm col-xs-3 col-md-3 col-in-block">
+                            <div class="hidden-xs col-xs-2 col-md-2 col-lg-3 col-in-block">
                                 <div class="side-info-header">
                                     <ul>
                                         <li class="login-header">
@@ -191,7 +202,7 @@
                                 </div>
                             </div>
 
-                            <div class="hidden-md hidden-lg hidden-sm col-xs-6 col-in-block text-left">
+                            <div class="hidden-md hidden-lg col-xs-6 col-sm-2 col-in-block text-left">
                                 <div class="search-m">
                                     <i class="fas fa-search fa-2x"></i>
                                 </div>
@@ -228,7 +239,7 @@
 
                         <div class="row fs-0">
 
-                            <div class="col-xs-12 col-md-3 col-in-block ">
+                            <div class="col-xs-12 col-md-3 col-in-block">
                                 <h3>Foodz</h3>
 
                                 <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui vero dolorum optio totam! Autem minus amet maxime. Aspernatur nulla blanditiis maxime eos facilis consequuntur nihil!</p>
@@ -278,6 +289,7 @@
 
     </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
         <script src="{% static 'lib/slick-1.8.1/slick/slick.min.js' %}"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
         <script src="https://kit.fontawesome.com/13e048d385.js"></script>

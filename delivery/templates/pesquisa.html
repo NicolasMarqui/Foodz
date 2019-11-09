@@ -14,7 +14,7 @@
                     {% csrf_token %}
                     <h2>Pesquisar</h2>
                     <input type="text" name="query" placeholder="Pesquisar" required>
-                    <button type="submit">
+                    <button type="submit" id="pesquisar">
                         Pesquisar
                     </button>
                 </form>
@@ -28,19 +28,64 @@
                     <div class="search-content">
 
                         <ul class="nav nav-tabs">
-                            <li class="active"><a data-toggle="tab" href="#produtos">Produtos</a></li>
-                            <li><a data-toggle="tab" href="#restaurantes">Restaurantes</a></li>
+                            <li class="active"><a data-toggle="tab" href="#produtos">Produtos <span class="badge">{{produtos.count}}</span></a></li>
+                            <li><a data-toggle="tab" href="#restaurantes">Restaurantes <span class="badge">{{restaurantes.count}}</span></a></li>
                         </ul>
 
                         <div class="tab-content">
                             <div id="produtos" class="tab-pane fade in active">
                                 <div class="display-produtos-pesquisa">
-                                    
+                                    {% if produtos %}
+                                        {% for p in produtos %}
+                                        <div class="display">
+                                            <div class="thumb" style="background-image: url('/media/{{p.foto}}');">
+                                            </div>
+
+                                            <div class="text">
+                                                <h3>{{p.nome}}</h3>
+                                                <p class="desc">{{p.descricao}}</p>
+
+                                                <a href="/produtos/info/{{p.id}}">Info</a>
+                                            </div>
+
+                                            <div class="side-rest-info" style="background-image: url('/media/{{p.restaurante.logo}}');">
+                                                <a href="/restaurante/info/{{p.restaurante.id}}">
+                                                    <div class="over"></div>
+                                                    <h6>Vendido por <span>{{p.restaurante.nome}}</span> </h6>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                    {% else %}
+                                    <div class="no-results">
+                                        <h3>Nenhum resultado encontrado</h3>
+                                    </div>
+                                    {% endif %}
                                 </div>
                             </div>
         
                             <div id="restaurantes" class="tab-pane fade">
-                                
+                                <div class="display-produtos-pesquisa">
+                                    {% if restaurantes %}
+                                        {% for r in restaurantes %}
+                                        <div class="display">
+                                            <div class="thumb" style="background-image: url('/media/{{r.logo}}');">
+                                            </div>
+
+                                            <div class="text">
+                                                <h3>{{r.nome}}</h3>
+                                                <p class="desc">{{r.descricao}}</p>
+
+                                                <a href="/restaurante/info/{{i.id}}">Info</a>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                    {% else %}
+                                    <div class="no-results">
+                                        <h3>Nenhum resultado encontrado</h3>
+                                    </div>
+                                    {% endif %}
+                                </div>
                             </div>
                         </div>
 

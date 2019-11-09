@@ -15,8 +15,8 @@ from django.core import serializers
 # Create your views here.
 def home(request):
 
-    # if request.user.is_authenticated and not request.user.groups.filter(name="Donos").exists():
-    #     P
+    produtos = Produto.objects.all().order_by('-id')[:10]
+    restaurantes = Restaurante.objects.all()[:10]
 
     return render(
         request,
@@ -24,6 +24,8 @@ def home(request):
         {
             'range': range(9),
             'range2': range(9),
+            'produtos': produtos,
+            'restaurantes': restaurantes,
         }
     )
 
@@ -275,6 +277,21 @@ def produto_info(request,id = None):
         }
     )
 
+def restaurante_info(request,id = None):
+
+    restaurante = Restaurante.objects.get(id=id)
+
+    mais_produtos = Produto.objects.filter(restaurante_id=restaurante.id)[:4]
+
+    return render(
+        request,
+        'restaurante_info.html',
+        {
+            'restaurante': restaurante,
+            'mais_produtos': mais_produtos
+        }
+    )
+
 def cadastro_restaurantes(request):
     return render(
         request,
@@ -288,16 +305,18 @@ def pesquisa(request):
 
     query = request.POST['query']
     
-    # q_produtos = Produto.objects.filter(nome__icontains=query)
-    # q_restaurantes = Restaurante.objects.filter(Q(nome__icontains=query) | Q(endereco__icontains=query))
+    q_produtos = Produto.objects.filter(nome__icontains=query)
+    q_restaurantes = Restaurante.objects.filter(nome__icontains=query)
+
+    print(q_produtos)
 
     return render(
         request,
         'pesquisa.html',
         {
             'query': query,
-            # 'produtos': q_produtos,
-            # 'restaurantes': q_restaurantes,
+            'produtos': q_produtos,
+            'restaurantes': q_restaurantes,
         }
     )
 

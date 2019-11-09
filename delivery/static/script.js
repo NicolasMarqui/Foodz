@@ -1,5 +1,7 @@
 $(document).ready(function(){
 
+    AOS.init();
+
     $('.display-choices-products').slick({
         lazyLoad: 'ondemand',
         dots: true,

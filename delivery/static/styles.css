@@ -2781,7 +2781,7 @@ footer .footer .fot-bottom p {
 .wrapper-random-products .display-choices-products .displayed-ones .more-info .title h4 {
   color: #000;
   text-align: center;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 @media (min-width: 992px) {
@@ -3016,11 +3016,8 @@ footer .footer .fot-bottom p {
           transform: translate(-50%, -50%);
 }
 
-.menu-mobile-wrapper .center-menu ul li {
-  padding: 24px 0;
-}
-
 .menu-mobile-wrapper .center-menu ul li a {
+  padding: 24px 0;
   display: block;
   font-size: 36px;
   color: #fff;
@@ -3374,7 +3371,7 @@ footer .footer .fot-bottom p {
 .pesquisa-wrapper {
   position: relative;
   width: 100%;
-  height: 100%;
+  min-height: 100%;
 }
 
 .pesquisa-wrapper .pesquisa-interna {
@@ -3389,9 +3386,10 @@ footer .footer .fot-bottom p {
 .pesquisa-wrapper .pesquisa-interna form {
   position: absolute;
   top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
+  left: 0;
+  right: 0;
+  -webkit-transform: translate(0, -50%);
+          transform: translate(0, -50%);
   width: 70%;
   margin: 0 auto;
   display: -webkit-box;
@@ -3409,8 +3407,13 @@ footer .footer .fot-bottom p {
           flex-direction: column;
 }
 
+.pesquisa-wrapper .pesquisa-interna form h2 {
+  font-size: 24px;
+  color: #fff;
+}
+
 .pesquisa-wrapper .pesquisa-interna form input {
-  width: 50%;
+  width: 100%;
   border: 1px solid #666;
   padding: 8px;
   border-radius: 15px;
@@ -3426,6 +3429,7 @@ footer .footer .fot-bottom p {
   background-color: #E04040;
   color: #fff;
   border-radius: 10px;
+  width: 100%;
 }
 
 .pesquisa-wrapper .pesquisa-interna form button:hover {
@@ -3450,6 +3454,33 @@ footer .footer .fot-bottom p {
 .pesquisa-wrapper .container-pesquisa h1 span {
   color: #E04040;
   font-size: 30px;
+}
+
+@media (min-width: 768px) {
+  .pesquisa-wrapper .pesquisa-interna form {
+    right: auto;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+  }
+  .pesquisa-wrapper .pesquisa-interna form h2 {
+    font-size: calc(1.475rem + 2.7vw);
+  }
+}
+
+@media (min-width: 768px) and (min-width: 1200px) {
+  .pesquisa-wrapper .pesquisa-interna form h2 {
+    font-size: 3.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .pesquisa-wrapper .pesquisa-interna form input {
+    width: 50%;
+  }
+  .pesquisa-wrapper .pesquisa-interna form button {
+    width: auto;
+  }
 }
 
 .content-config {
@@ -3969,6 +4000,160 @@ footer .footer .fot-bottom p {
 @media (min-width: 992px) {
   .historia-empresa h2 {
     text-align: left;
+  }
+}
+
+.display-produtos-pesquisa .display {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 100%;
+  height: 100%;
+  margin: 8px 0;
+  -webkit-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.75);
+  overflow: hidden;
+}
+
+.display-produtos-pesquisa .display:hover {
+  -webkit-box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.75);
+}
+
+.display-produtos-pesquisa .display .thumb {
+  -webkit-box-flex: 2;
+      -ms-flex: 2;
+          flex: 2;
+  padding-bottom: 50%;
+  background-position: center;
+  background-size: cover;
+}
+
+.display-produtos-pesquisa .display .text {
+  -webkit-box-flex: 3;
+      -ms-flex: 3;
+          flex: 3;
+  position: relative;
+  padding: 24px;
+  text-align: center;
+}
+
+.display-produtos-pesquisa .display .text p.small-title {
+  text-align: left;
+}
+
+.display-produtos-pesquisa .display .text .desc {
+  padding: 15px 0;
+}
+
+.display-produtos-pesquisa .display .text h3 {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.display-produtos-pesquisa .display .text a {
+  display: block;
+  font-size: 14px;
+  padding: 14px;
+  background-color: #E04040;
+  width: 100%;
+  border-radius: 25px;
+  text-align: center;
+  color: #fff;
+  text-decoration: none;
+}
+
+.display-produtos-pesquisa .display .text a:hover {
+  background-color: #e76c6c;
+}
+
+.display-produtos-pesquisa .display .side-rest-info {
+  background-position: center;
+  background-size: cover;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  height: auto;
+  position: relative;
+}
+
+.display-produtos-pesquisa .display .side-rest-info:hover {
+  -webkit-transform: scale(1.12);
+          transform: scale(1.12);
+  -webkit-transition: all .5s linear;
+  transition: all .5s linear;
+}
+
+.display-produtos-pesquisa .display .side-rest-info .over {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.display-produtos-pesquisa .display .side-rest-info a {
+  height: 100%;
+  width: 100%;
+}
+
+.display-produtos-pesquisa .display .side-rest-info h6 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  color: #fff;
+  text-align: center;
+}
+
+.display-produtos-pesquisa .display .side-rest-info h6 span {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.display-produtos-pesquisa .no-results {
+  width: 100%;
+  height: 100%;
+  padding: 50px 0;
+  text-align: center;
+  font-size: 24px;
+}
+
+@media (min-width: 768px) {
+  .display-produtos-pesquisa .display {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+  }
+  .display-produtos-pesquisa .display .thumb {
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+    padding-bottom: 20%;
+  }
+  .display-produtos-pesquisa .display .text {
+    text-align: left;
+  }
+  .display-produtos-pesquisa .display .text a {
+    width: 200px;
+  }
+  .display-produtos-pesquisa .display .text h3 {
+    font-size: 20px;
+  }
+}
+
+.badge {
+  font-weight: 400;
+}
+
+@media (max-width: 400px) {
+  .search-content .nav-tabs > li {
+    width: 100% !important;
+  }
+  .search-content .nav-tabs > li a {
+    text-align: center;
   }
 }
 /*# sourceMappingURL=styles.css.map */

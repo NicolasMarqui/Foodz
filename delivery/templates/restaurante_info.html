@@ -1,0 +1,173 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    {{restaurante.nome}}
+{% endblock %}
+
+{% block content %}
+    <div class="banner-interno" style="background-image: url('https://images.pexels.com/photos/1640772/pexels-photo-1640772.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940')">
+        <div class="over"></div>
+
+        <div class="container">
+            <div class="bread-banner">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li> <span> / </span> </li>
+                    <li><h1>Produtos</h1></li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    <div class="product-display">
+
+        <div class="container">
+            <div class="row">
+
+                {% if produto %}
+                    <div class="col-xs-12 col-md-3">
+                            <div class="main-image">
+                                <img src="/media/{{produto.foto}}" alt="">
+                            </div>
+                        </div>
+        
+                        <div class="col-xs-12 col-md-9" id="ifp">
+        
+                            <!-- <div class="starts-area">
+                                <ul>
+                                    {% for i in nota %}
+                                        <p>{{i}}</p>
+                                        <li><i class="far fa-star fa-2x"></i></li>
+                                    {% endfor %}
+                                </ul>
+                            </div> -->
+        
+                            <p class="small-title">
+                                {{produto.categoria}}
+                            </p>
+        
+                            <h1 class="big-title">
+                                {{produto.nome}}
+                            </h1>
+        
+                            <p>{{produto.descricao|striptags }}</p>
+
+                            <div class="buy-and-quantity">
+                                <a href="#" class="btn">Comprar</a>
+        
+                                <input type="number" value="1">
+                            </div>
+                        </div>
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+
+    <div class="get-rest-name-info padding-sections">
+
+        <div class="container">
+            <div class="row">
+
+                <div class="col-xs-12 col-md-4">
+
+                    <p class="small-title">Vendido por</p>
+
+                    <h2 class="big-title"> Restaurante <br> <span>{{produto.restaurante.nome}}</span> </h2>
+
+                    <div class="rating-restaurante">
+                        <ul>
+                            <!-- {% for i in range %}
+                                <li><i class="far fa-star fa-2x"></i></li>
+                            {% endfor %} -->
+                        </ul>
+                    </div>
+
+                </div>
+
+                <div class="col-xs-12 col-md-7 col-md-offset-1">
+                    <div class="featured-products">
+                        {% for r in mais_produtos %}
+                            <div class="product product-1">
+                                <div class="inside-top">
+                                    <span> 01 </span>
+    
+                                    <p>
+                                        {{r.preco}}
+                                    </p>
+                                </div>
+    
+                                <div class="inside-bottom">
+                                    <p>Restaurante {{r.restaurante.nome}}</p>
+    
+                                    <h3>{{r.nome}}</h3>
+                                </div>
+                            </div>
+                        {% endfor %}
+                        <div class="saiba-mais-card">
+                            <a href="/restaurante/info/{{r.restaurante.id}}">
+                                <p>Saiba Mais <span><i class="fas fa-arrow-right"></i></span> </p>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="comment-section padding-sections">
+        
+        <div class="container">
+
+            <div class="row">
+                <div class="col-xs-12 col-md-7">
+
+                    <h2 class="big-title">Comentários</h2>
+    
+                    <p class="small-title">
+                        Mostrando <span>8</span> de <span>120</span>
+                    </p>
+
+                    <div class="display-comments">
+
+                        {% for i in range %}
+
+                            <div class="comment comment1">
+
+                                <div class="rating-comment">
+                                    <ul>
+                                        <li><i class="far fa-star "></i> </li>
+                                        <li><i class="far fa-star "></i> </li>
+                                        <li><i class="far fa-star "></i> </li>
+                                        <li><i class="far fa-star "></i> </li>
+                                        <li><i class="far fa-star "></i> </li>
+
+                                        <li><p>4/5</p></li>
+                                    </ul>
+                                </div>
+
+                                <h3> Nicolas Marqui </h3>
+                                <p class="small-title"> 16/08/2019 ás <span>19:30</span> </p>
+
+                                <div class="review">
+                                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore officiis blanditiis voluptas possimus maxime aspernatur asperiores similique sint architecto nihil. Culpa magnam ab beatae debitis.</p>
+                                </div>
+
+                            </div>
+
+                        {% endfor %}
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+{% endblock %}

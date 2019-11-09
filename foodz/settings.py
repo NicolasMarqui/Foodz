@@ -66,6 +66,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'delivery.context_processors.notificacoes',
                 'delivery.context_processors.profile_picture_owner',
+                # 'delivery.context_processors.cliente_ip',
             ],
         },
     },
@@ -132,6 +133,8 @@ MEDIA_URL = '/media/'
 
 STATICFILES_DIRS = ( os.path.join('static'), )
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+GEOIP_PATH = os.path.join(BASE_DIR, 'location')
 
 LOGIN_REDIRECT_URL = '/'
 

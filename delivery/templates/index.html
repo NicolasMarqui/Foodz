@@ -81,19 +81,19 @@ Home
             <h2>Escolhas do dia</h2>
 
             <div class="display-choices-products">
-                {% for i in range2 %}
+                {% for i in produtos %}
                     <div class="item">
-                        <div class="displayed-ones">
-                            <a href="#" class="h-100">
-                                <div class="thumb" style="background-image: url('https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940')"></div>
+                        <div class="displayed-ones" data-aos="fade-left">
+                            <a href="/produtos/info/{{i.id}}" class="h-100">
+                                <div class="thumb" style="background-image: url('/media/{{i.foto}}')"></div>
         
                                 <div class="more-info">
                                     <div class="title">
-                                        <h4>Combo Hamburguer</h4>
+                                        <h4>{{i.nome}}</h4>
                                     </div>
     
                                     <div class="price">
-                                        <p>R$ <span>0.00</span> </p>
+                                        <p>R$ <span>{{i.preco}}</span> </p>
                                     </div>
     
                                     <div class="infos">
@@ -121,10 +121,10 @@ Home
         
             <h2 class="big-title"> As categorias mais acessadas </h2>
 
-            <div class="container-categoria">
+            <div class="container-categoria" style="overflow: hidden">
 
                 <div class="first-col">
-                    <a href="#">
+                    <a href="#" >
                         <div class="item" style="background-image: url('https://images.unsplash.com/photo-1540265556701-ae209ac395cd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80')">
                             <div class="over"></div>
     
@@ -132,6 +132,9 @@ Home
                         </div>
                     </a>
                 </div>
+
+                <p>{{city}}</p>
+                
 
                 <div class="second-col">
                     <div class="second-first-row">
@@ -161,7 +164,7 @@ Home
                     </div>
                 </div>
 
-                <div class="third-col">
+                <div class="third-col" >
                     <div class="third-first-row">
                         <div class="item-1" style="background-image: url('https://images.unsplash.com/photo-1497534446932-c925b458314e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=707&q=80')">
                             <a href="#">
@@ -223,12 +226,12 @@ Home
             <h2 class="big-title text-center">Melhores <br> Restaurantes </h2>
 
             <div class="melhores-rest">
-                {% for i in range %}
+                {% for i in restaurantes %}
 
                 <div class="col-xs-12 col-md-4">
                     
                     <a href="#">
-                        <div class="melhores-restaurantes rest-1">
+                        <div class="melhores-restaurantes rest-1" data-aos="zoom-in">
                     
                             <div class="over"></div>
 
@@ -237,9 +240,9 @@ Home
                             </div>
     
                             <div class="rest-down">
-                                <h3>Restaurante <br> SóDelicia </h3>
+                                <h3>Restaurante <br> {{i.nome}} </h3>
 
-                                <a href="#" class="bt">Saiba Mais</a>
+                                <a href="/restaurante/info/{{i.info}}" class="bt">Saiba Mais</a>
                             </div>
     
                         </div>
