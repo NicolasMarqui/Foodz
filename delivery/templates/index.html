@@ -92,17 +92,19 @@ Home
                                     <h4>{{i.nome}}</h4>
                                 </div>
 
-                                <div class="price">
+                                <div class="price" id="price-{{i.id}}">
                                     <p>R$ <span>{{i.preco}}</span> </p>
                                 </div>
 
                                 <div class="infos">
 
                                     <a href="#carrinho-{{i.id}}" class="add-carrinho" id="{{i.id}}">
-                                        Carrinho
+                                        <i class="fas fa-shopping-cart"></i> Carrinho
                                     </a>
 
-                                    <a href="/produtos/info/{{i.id}}" class="h-100">Info</a>
+                                    <a href="/produtos/info/{{i.id}}" class="h-100">
+                                        <i class="fas fa-info"></i> Info
+                                    </a>
                                 </div>
 
                             </div>

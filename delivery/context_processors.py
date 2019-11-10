@@ -74,3 +74,29 @@ def quantidadeCarrinho(request):
         return{
             'quantidade': 0
         }
+
+def precoCarrinho(request):
+    if not request.user.is_authenticated:
+        return{
+            'preco': 0.00
+        }
+
+    try:
+        id_user = Cliente.objects.get(user_id=request.user.id)
+    except Cliente.DoesNotExist:
+        id_user = None
+
+    try:
+        preco = Carrinho.objects.filter(id_cliente=id_user, is_carrinho=1)
+        total = 0
+
+        for i in preco:
+            total += (i.id_produto.preco * i.quantidade)
+
+        return{
+            'preco': total
+        }
+    except Carrinho.DoesNotExist:
+        return{
+            'preco': 0.00
+        }

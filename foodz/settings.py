@@ -67,6 +67,7 @@ TEMPLATES = [
                 'delivery.context_processors.notificacoes',
                 'delivery.context_processors.profile_picture_owner',
                 'delivery.context_processors.quantidadeCarrinho',
+                'delivery.context_processors.precoCarrinho',
             ],
         },
     },

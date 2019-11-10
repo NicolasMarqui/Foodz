@@ -172,9 +172,10 @@ $(document).ready(function(){
 
     function deleteItemCarrinho(id){
         if(id){
-            valor_total   = Number($('.total p span').html())
-            quantidade    = Number($('.display-shopping-item').find(`ul li#${id} .display .amount p span`).html())
-            preco         = Number($('.display-shopping-item').find(`ul li#${id} .display .preco p span`).html())
+            valor_total       = Number($('.total p span').html())
+            quantidade        = Number($('.display-shopping-item').find(`ul li#${id} .display .amount p span`).html())
+            preco             = Number($('.display-shopping-item').find(`ul li#${id} .display .preco p span`).html())
+            quantidade_header = Number($('.amount-cart span').html())
 
             data = {
               id: id,
@@ -208,11 +209,70 @@ $(document).ready(function(){
                 $('body').loading('stop');
 
                 $('.total p span').html((valor_total - (quantidade * preco)).toFixed(2));
+                $('.price-header span').html((valor_total - (quantidade * preco)).toFixed(2));
+                $('.amount-cart span').html(quantidade_header - 1)
+                $('.mobile-cart span').html(quantidade_header - 1)
               }
 
             });
         }
     }
+
+    function deleteItemPage(id){
+      if(id){
+          valor_total       = Number($('.info-final .preco span').html())
+          quantidade        = Number($('.todos-items').find(`div#${id} .quantidade input`).val())
+          preco             = Number($('.todos-items').find(`div#${id} .preco p span`).html())
+          quantidade_header = Number($('.amount-cart span').html())
+          frete             = Number($('.frete span').html())
+          final             = Number($('.info-final .final span').html())
+
+          data = {
+            id: id,
+            csrfmiddlewaretoken: getCookie('csrftoken'),
+          }
+
+          $.ajax({
+            type: "POST",
+            url: "/carrinho/excluir",
+            data: data,
+            dataType: "json",
+
+            beforeSend: function(){
+              $('body').loading({
+                stoppable: true
+              });
+            },
+
+            success: function (response) {
+              console.log(response)
+              if(response.status == 'success'){
+                $('.todos-items').find(`div#${id}`).fadeOut(300, function() { $(this).remove()});
+              }
+
+              var options = {
+                settings: {
+                  duration: 2000
+                }
+              };
+              iqwerty.toast.Toast(response.msg, options);
+              $('body').loading('stop');
+
+              $('.info-final .preco span').html((valor_total - (quantidade * preco)).toFixed(2));
+              $('.price-header span').html((valor_total - (quantidade * preco)).toFixed(2));
+              $('.amount-cart span').html(quantidade_header - 1)
+              $('.mobile-cart span').html(quantidade_header - 1)
+            }
+
+          });
+      }
+  }
+
+    $('.deleteFromCart').click(function(){
+      id = $(this).attr('id');
+
+      deleteItemPage(id)
+    })
 
     //Open Carrinho de compras
     $('.shopping-cart').click(function(){
@@ -527,9 +587,10 @@ $(document).ready(function(){
     //Add to cart
     $('.add-carrinho').click(function () {
       
-      id = $(this).attr('id');
-      totalCarrinho = Number($('.amount-cart span').html())
+      id                  = $(this).attr('id');
+      totalCarrinho       = Number($('.amount-cart span').html())
       totalCarrinhoMobile = Number($('.mobile-cart span').html())
+      total_preco         = Number($('.price-header span').html())
 
       data = {
         csrfmiddlewaretoken: getCookie('csrftoken'),
@@ -567,9 +628,15 @@ $(document).ready(function(){
               $('.amount-cart span').html(totalCarrinho + 1)
               $('.mobile-cart span').html(totalCarrinho + 1)
             }
+
+            final_cara = total_preco + Number($(`#price-${id} p span`).html())
+
+            $('.price-header span').html(Number(final_cara).toFixed(2))            
+            
           }
 
           $('.mobile-cart').addClass('infinite slower delay-3s')
+          $(this).parents().addClass('slideOutUp')
 
           $('body').loading('stop');
           

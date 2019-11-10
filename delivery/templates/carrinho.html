@@ -31,7 +31,7 @@
                     {% if success %}
                         <div class="todos-items">
                             {% for i in produtos %}
-                                <div class="item">
+                                <div class="item" id="{{i.id}}">
                                     <div class="col-xs-12 col-md-4 col-in-block v-middle">
                                         <div class="thumb" style="background-image: url('/media/{{i.id_produto.foto}}')">
                                         </div>
@@ -53,7 +53,9 @@
                                     </div>
 
                                     <div class="col-xs-12 col-md-2 col-in-block v-middle text-right">
-                                        <i class="fas fa-times deleteCart" id="deleteFromCart"></i>
+                                        <a href="#deleta-{{i.id_produto.nome}}" class="deleteFromCart" id="{{i.id}}">
+                                            <i class="fas fa-times deleteCart"></i>
+                                        </a>
                                     </div>
                                 </div>
                                 {% endfor %}
@@ -66,8 +68,8 @@
                             </div>
                                 
                             <div class="info-final">
-                                <p>R$ <span>{{preco}}</span></p>
-                                <p class="frete">{{taxa}}</p>
+                                <p class="preco">R$ <span>{{preco_carrinho}}</span></p>
+                                <p class="frete">R$ <span>{{taxa}}</span> </p>
                                 <p class="final"> R$ <span>{{final}}</span> </p>
                             </div>
                                 
@@ -76,7 +78,7 @@
                         <h2>Ooopsie daisy</h2>
                         {% endif %}
                 </div>
-                        
+ 
                 <div class="col-xs-12 col-md-4">
                     <div class="calcula-frete">
                         {% if msg_entrega %}

@@ -586,8 +586,8 @@ def carrinho(request):
 
     if not request.user.is_authenticated:
         msg = 'Você tem que estar logado para adicionar items no carrinho'
-        success = False
-        preco = 0
+        success = None
+        preco_carrinho = 0
         item = None
         taxa_entrega = 0
         msg_entrega = []
@@ -595,8 +595,8 @@ def carrinho(request):
 
     if request.user.groups.filter(name="Donos").exists():
         msg = 'Você tem que ser cliente para adicionar items no carrinho'
-        success = False
-        preco = 0
+        success = None
+        preco_carrinho = 0
         item = None
         taxa_entrega = 0
         msg_entrega = []
@@ -616,32 +616,36 @@ def carrinho(request):
             item = Carrinho.objects.filter(id_cliente=id_user, is_carrinho=1)
             success = True
             msg = None
-            preco = 0
+            preco_carrinho = 0
             taxa_entrega = 0
             msg_entrega = []
             final = 0
 
             for index, i in enumerate(item, start=1):
-                preco += (i.quantidade * i.id_produto.preco)
 
-                if index >= 1:
+                if index >= 1 and i.id_produto.restaurante.nome != i.id_produto.restaurante.nome:
                     msg_entrega.append("Restaurante {} possui taxa de entrega de R${}".format(i.id_produto.restaurante.nome, i.id_produto.restaurante.taxa_entrega))
                     taxa_entrega += i.id_produto.restaurante.taxa_entrega
+                else:
+                    msg_entrega.append("Restaurante {} possui taxa de entrega de R${}".format(i.id_produto.restaurante.nome, i.id_produto.restaurante.taxa_entrega))
+                    taxa_entrega = i.id_produto.restaurante.taxa_entrega
 
-            final = preco + taxa_entrega
+                preco_carrinho += (i.id_produto.preco * i.quantidade)
+
+            final = preco_carrinho + taxa_entrega
 
         except Carrinho.DoesNotExist:
             item = None
-            success = False
+            success = None
             msg = 'Nenhum item no carrinho'
-            preco = 0
+            preco_carrinho = 0
             taxa_entrega = 0
             msg_entrega = []
             final = 0
     else:
-        success = False
+        success = None
         msg = 'User não encontrado'
-        preco = 0
+        preco_carrinho = 0
         taxa_entrega = 0
         msg_entrega = []
         final = 0
@@ -654,7 +658,7 @@ def carrinho(request):
             'msg': msg,
             'success': success,
             'produtos': item,
-            'preco': preco,
+            'preco_carrinho': preco_carrinho,
             'taxa': taxa_entrega,
             'msg_entrega': msg_entrega,
             'final': final
