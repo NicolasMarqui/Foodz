@@ -578,5 +578,34 @@ $(document).ready(function(){
       
     });
 
+    $('#calcularFrete').submit(function(e){
+      e.preventDefault();
+
+      $.ajax({
+        type: "POST",
+        url: "/carrinho/cep",
+        data: {
+          cep: $('#num_frete').val(),
+          csrfmiddlewaretoken: getCookie('csrftoken'),
+        },
+        dataType: "json",
+        beforeSend: function(){
+          $('.calcula-frete').loading({
+            stoppable: true
+          });
+        },
+        success: function (response) {
+          var x2js = new X2JS();
+          text = String(response.cep)
+          var jsonObj = x2js.xml_str2json( JSON.parse(response.cep) );
+
+          console.log(jsonObj)
+
+          $('.calcula-frete').loading('stop');
+
+        }
+      });
+    })
+
 
 })

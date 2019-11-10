@@ -11,6 +11,7 @@ import datetime
 from django.http import JsonResponse
 import json
 from django.core import serializers
+import requests
 
 # Create your views here.
 def home(request):
@@ -580,3 +581,96 @@ def carrinho_excluir(request):
 
         except Carrinho.DoesNotExist:
             return JsonResponse({'status': 'error', 'msg': 'Erro ao deletar o produto'})
+
+def carrinho(request):
+
+    if not request.user.is_authenticated:
+        msg = 'Você tem que estar logado para adicionar items no carrinho'
+        success = False
+        preco = 0
+        item = None
+
+    if request.user.groups.filter(name="Donos").exists():
+        msg = 'Você tem que ser cliente para adicionar items no carrinho'
+        success = False
+        preco = 0
+        item = None
+
+    try:
+        id_user = Cliente.objects.get(user_id=request.user.id)
+    except Cliente.DoesNotExist:
+        id_user = None
+        item = None
+
+    if id_user is not None:
+        try:
+            item = Carrinho.objects.filter(id_cliente=id_user, is_carrinho=1)
+            success = True
+            msg = None
+            preco = 0
+
+            for i in item:
+                preco += (i.quantidade * i.id_produto.preco)
+
+        except Carrinho.DoesNotExist:
+            item = None
+            success = False
+            msg = 'Nenhum item no carrinho'
+            preco = 0
+    else:
+        success = False
+        msg = 'User não encontrado'
+        preco = 0
+
+    
+    return render(
+        request,
+        'carrinho.html',
+        {
+            'msg': msg,
+            'success': success,
+            'produtos': item,
+            'preco': preco
+        }
+    )
+
+def carrinho_cep(request):
+    if request.method == 'POST' and request.is_ajax():
+        if not request.user.is_authenticated:
+            msg = 'Você tem que estar logado para calcular o CEP'
+            return JsonResponse({ 'status': 'erro' , 'msg': msg})
+
+        if request.user.groups.filter(name="Donos").exists():
+            msg = 'Você tem que ser cliente para calcular o CEP'
+            return JsonResponse({ 'status': 'erro' , 'msg': msg})
+
+        try:
+            id_user = Cliente.objects.get(user_id=request.user.id)
+        except Cliente.DoesNotExist:
+            id_user = None
+
+        if id_user is not None:
+            cep_user = request.POST['cep']
+            try:
+                item = Carrinho.objects.filter(id_cliente=id_user, is_carrinho=1).distinct()
+                success = True
+                msg = None
+                preco = 0
+
+                for i in item:
+                    # print(i.id_produto.restaurante.cep)
+                    url = "http://ws.correios.com.br/calculador/CalcPrecoPrazo.aspx?“nCdEmpresa=''&sDsSenha=''&sCepOrigem={}&sCepDestino={}&nVlPeso=1&nCdFormato=1&nVlComprimento=20&nVlAltura=5&nVlLargura=15&nCdServico=41106&StrRetorno=xml".format(i.id_produto.restaurante.cep, cep_user)
+                    r = requests.get(url, data=request.GET)
+
+                msg = 'Teste'
+                return JsonResponse({ 'status': 'success' , 'msg': msg, 'cep': json.dumps(r.text)}, json_dumps_params={'ensure_ascii': False},safe=False)
+
+            except Carrinho.DoesNotExist:
+                msg = 'Erro ao calcular o CEP'
+                return JsonResponse({ 'status': 'erro' , 'msg': msg})
+        else:
+            msg = 'Erro ao calcular o CEP'
+            return JsonResponse({ 'status': 'erro' , 'msg': msg})
+
+
+        # api_url = "http://ws.correios.com.br/calculador/CalcPrecoPrazo.aspx?"

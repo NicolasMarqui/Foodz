@@ -26,4 +26,6 @@ urlpatterns = [
     path('carrinho/add',views.carrinho_add,name="Adicionar Carrinho"),
     path('carrinho/todos',views.carrinho_todos,name="Todos os items no carrinho"),
     path('carrinho/excluir',views.carrinho_excluir,name="Excluir items no carrinho"),
+    path('carrinho/',views.carrinho,name="carrinho"),
+    path('carrinho/cep',views.carrinho_cep,name="Calcular CEP"),
 ]

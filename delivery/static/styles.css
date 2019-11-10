@@ -4200,4 +4200,178 @@ footer .footer .fot-bottom p {
 .no-items a:hover {
   background-color: #e76c6c;
 }
+
+.carrinho-wrapper h1 {
+  font-size: calc(1.4375rem + 2.25vw);
+  font-weight: 600;
+  margin: 0 0 25px;
+}
+
+@media (min-width: 1200px) {
+  .carrinho-wrapper h1 {
+    font-size: 3.125rem;
+  }
+}
+
+.carrinho-wrapper .valor-total {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 12px 24px;
+}
+
+.carrinho-wrapper .valor-total h3 {
+  font-size: 25px;
+  margin: 8px 0;
+}
+
+.carrinho-wrapper .valor-total h4 {
+  font-size: 18px;
+  margin: 8px 0;
+}
+
+.carrinho-wrapper .valor-total p {
+  font-size: 20px;
+  margin: 8px 0;
+}
+
+.carrinho-wrapper .valor-total p span {
+  font-weight: 600;
+}
+
+.carrinho-wrapper .valor-total .info-final p {
+  text-align: right;
+}
+
+.carrinho-wrapper .valor-total .info-final .frete {
+  text-align: right;
+  font-size: 14px;
+}
+
+.carrinho-wrapper .valor-total .info-final .final {
+  font-size: 20px;
+  text-align: right;
+}
+
+.carrinho-wrapper .valor-total .info-final .final span {
+  font-weight: 600;
+}
+
+.carrinho-wrapper .calcula-frete {
+  padding: 12px;
+  background-color: #494949;
+}
+
+.carrinho-wrapper .calcula-frete h2 {
+  font-size: 20px;
+  text-align: center;
+  color: #fff;
+}
+
+.carrinho-wrapper .calcula-frete form {
+  text-align: center;
+  margin: 10px 0;
+}
+
+.carrinho-wrapper .calcula-frete form label {
+  font-size: 16px;
+  color: #fff;
+  margin: 0 5px 0 0;
+}
+
+.carrinho-wrapper .calcula-frete form input {
+  font-size: 16px;
+}
+
+.carrinho-wrapper .calcula-frete form button {
+  font-size: 14px;
+  display: block;
+  background-color: #E04040;
+  padding: 14px;
+  margin: 8px auto;
+  outline: none;
+  border: none;
+  color: #fff;
+}
+
+.carrinho-wrapper .calcula-frete form button:hover {
+  background-color: #e76c6c;
+}
+
+.todos-items {
+  padding: 24px 0;
+  min-height: 200px;
+}
+
+.todos-items .item {
+  border-bottom: 1px solid #ccc;
+  padding: 15px;
+  height: 100%;
+  width: 100%;
+}
+
+.todos-items .item .thumb {
+  padding-bottom: 54%;
+  background-position: center;
+  background-size: cover;
+}
+
+.todos-items .item .thumb p {
+  font-size: 14px;
+}
+
+.todos-items .item .nome p {
+  font-size: 16px;
+  text-align: center;
+  padding: 8px 0;
+}
+
+.todos-items .item .quantidade {
+  font-size: 14px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  text-align: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.todos-items .item .quantidade input {
+  width: 50%;
+  text-align: center;
+}
+
+.todos-items .item .quantidade i {
+  display: inline-block;
+  margin: 8px;
+  vertical-align: middle;
+}
+
+.todos-items .item .preco p {
+  font-size: 18px;
+  text-align: right;
+}
+
+.todos-items .item .preco p span {
+  font-weight: 600;
+  border-bottom: 2px solid #E04040;
+}
+
+.todos-items .item .deleteCart {
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.voltar {
+  margin: 10px 0 2px;
+  display: block;
+}
 /*# sourceMappingURL=styles.css.map */
