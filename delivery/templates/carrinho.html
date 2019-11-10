@@ -32,7 +32,6 @@
                         <div class="todos-items">
                             {% for i in produtos %}
                                 <div class="item">
-
                                     <div class="col-xs-12 col-md-4 col-in-block v-middle">
                                         <div class="thumb" style="background-image: url('/media/{{i.id_produto.foto}}')">
                                         </div>
@@ -57,51 +56,63 @@
                                         <i class="fas fa-times deleteCart" id="deleteFromCart"></i>
                                     </div>
                                 </div>
-                            {% endfor %}
+                                {% endfor %}
                         </div>
                         <div class="valor-total">
-                            
                             <div class="label-final">
                                 <h4>Valor Total</h4>
-                                <p>+ frete</p>
+                                <p>+ entrega/frete</p>
                                 <h3>Final</h3>
                             </div>
-
+                                
                             <div class="info-final">
                                 <p>R$ <span>{{preco}}</span></p>
-                                <p class="frete">0.00</p>
-                                <p class="final"> R$ <span>0.00</span> </p>
+                                <p class="frete">{{taxa}}</p>
+                                <p class="final"> R$ <span>{{final}}</span> </p>
                             </div>
-
+                                
                         </div>
                     {% else %}
                         <h2>Ooopsie daisy</h2>
-                    {% endif %}
+                        {% endif %}
                 </div>
-    
+                        
                 <div class="col-xs-12 col-md-4">
                     <div class="calcula-frete">
-                        <h2>Calculo De frete</h2>
-
-                        <form action="/calcular/frete" method="POST" id="calcularFrete">
-                            {% csrf_token %}
-
-                            <div class="form-group">
-                                <label for="num_frete">CEP</label>
-                                <input type="text" id="num_frete" name="cep">
-
-                                <button type="submit">Calcular</button>
-                            </div>
-                        </form>
-
-                        <div class="frete-opcoes">
+                        {% if msg_entrega %}
+                            <h2>Taxa de Entrega</h2>
                             <ul>
-                                <!-- Ajax aqui -->
+                                {% for i in msg_entrega %}
+                                <li>
+                                    <p>{{i}}</p>
+                                </li>
+                                {% endfor %}
+
+                                <li>Valor da entrega: <p>R$ <span>{{taxa}}</span> </p></li>
                             </ul>
-                        </div>
+                        {% else %}
+                            <h2>Calculo De frete</h2>
+
+                            <form action="/calcular/frete" method="POST" id="calcularFrete">
+                                {% csrf_token %}
+
+                                <div class="form-group">
+                                    <label for="num_frete">CEP</label>
+                                    <input type="text" id="num_frete" name="cep">
+
+                                    <button type="submit">Calcular</button>
+                                </div>
+                            </form>
+
+                            <div class="frete-opcoes">
+                                <ul>
+                                    <!-- Ajax aqui -->
+                                </ul>
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
         </div>
     </div>
-{% endblock %}
+    {% endblock %}

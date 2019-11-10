@@ -4301,6 +4301,12 @@ footer .footer .fot-bottom p {
   background-color: #e76c6c;
 }
 
+.carrinho-wrapper .calcula-frete ul li p {
+  font-size: 14px;
+  padding: 14px;
+  color: #fff;
+}
+
 .todos-items {
   padding: 24px 0;
   min-height: 200px;

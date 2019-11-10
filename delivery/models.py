@@ -51,6 +51,7 @@ class Restaurante(models.Model):
     descricao                   = models.CharField(max_length=255)
     logo                        = models.ImageField(upload_to="pics/restaurantes", default='pics/None/no-img.png')
     cnpj                        = models.CharField(max_length=18)
+    taxa_entrega                = models.DecimalField(max_digits=5,decimal_places=2,default=5)
 
     def __str__(self):
         return 'ID: {} e nome: {} '.format(self.id, self.nome)

@@ -589,18 +589,27 @@ def carrinho(request):
         success = False
         preco = 0
         item = None
+        taxa_entrega = 0
+        msg_entrega = []
+        final = 0
 
     if request.user.groups.filter(name="Donos").exists():
         msg = 'Você tem que ser cliente para adicionar items no carrinho'
         success = False
         preco = 0
         item = None
+        taxa_entrega = 0
+        msg_entrega = []
+        final = 0
 
     try:
         id_user = Cliente.objects.get(user_id=request.user.id)
     except Cliente.DoesNotExist:
         id_user = None
         item = None
+        taxa_entrega = 0
+        msg_entrega = []
+        final = 0
 
     if id_user is not None:
         try:
@@ -608,19 +617,34 @@ def carrinho(request):
             success = True
             msg = None
             preco = 0
+            taxa_entrega = 0
+            msg_entrega = []
+            final = 0
 
-            for i in item:
+            for index, i in enumerate(item, start=1):
                 preco += (i.quantidade * i.id_produto.preco)
+
+                if index >= 1:
+                    msg_entrega.append("Restaurante {} possui taxa de entrega de R${}".format(i.id_produto.restaurante.nome, i.id_produto.restaurante.taxa_entrega))
+                    taxa_entrega += i.id_produto.restaurante.taxa_entrega
+
+            final = preco + taxa_entrega
 
         except Carrinho.DoesNotExist:
             item = None
             success = False
             msg = 'Nenhum item no carrinho'
             preco = 0
+            taxa_entrega = 0
+            msg_entrega = []
+            final = 0
     else:
         success = False
         msg = 'User não encontrado'
         preco = 0
+        taxa_entrega = 0
+        msg_entrega = []
+        final = 0
 
     
     return render(
@@ -630,7 +654,10 @@ def carrinho(request):
             'msg': msg,
             'success': success,
             'produtos': item,
-            'preco': preco
+            'preco': preco,
+            'taxa': taxa_entrega,
+            'msg_entrega': msg_entrega,
+            'final': final
         }
     )
 
@@ -671,6 +698,3 @@ def carrinho_cep(request):
         else:
             msg = 'Erro ao calcular o CEP'
             return JsonResponse({ 'status': 'erro' , 'msg': msg})
-
-
-        # api_url = "http://ws.correios.com.br/calculador/CalcPrecoPrazo.aspx?"
