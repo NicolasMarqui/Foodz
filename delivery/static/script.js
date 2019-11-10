@@ -113,7 +113,7 @@ $(document).ready(function(){
     function getCarrinhoItems(){
       $.ajax({
         type: "GET",
-        url: "carrinho/todos",
+        url: "/carrinho/todos",
         dataType: "json",
         beforeSend: function(){
           $('body').loading({
@@ -122,39 +122,48 @@ $(document).ready(function(){
         },
         complete: function (response) {
 
-          console.log(response.responseJSON)
+          console.log(response)
 
           let produtos = response.responseJSON.produtos;
           let rows = '';
           let info = response.responseJSON.info
-          let total = response.responseJSON.total      
+          let total = response.responseJSON.total
+          let empty = response.responseJSON.empty ? response.responseJSON.empty : False      
 
           $('.display-shopping-item > ul > li').remove();
 
-          produtos.forEach((prod, i) => {
-            rows += `
-              <li>
-                <div class="display">
-                  <div class="amount">
-                    <p>x <span>${prod.quantidade}</span> </p>
-                  </div>
+          if(!empty){
+              produtos.forEach((prod, i) => {
+                rows += `
+                  <li>
+                    <div class="display">
+                      <div class="amount">
+                        <p>x <span>${prod.quantidade}</span> </p>
+                      </div>
+    
+                      <div class="info">
+                        <h5>${info[i].nome}</h5>
+                        <p><strong>Vendido por: </strong> ${info[i].restaurante} </p>
+                      </div>
+    
+                      <div class="preco">
+                        <p>R$ <span>${info[i].preco}</span> </p>
+                      </div>
+                    </div>
+                  </li>
+                ` 
+              });
 
-                  <div class="info">
-                    <h5>${info[i].nome}</h5>
-                    <p><strong>Vendido por: </strong> ${info[i].restaurante} </p>
-                  </div>
-
-                  <div class="preco">
-                    <p>R$ <span>${info[i].preco}</span> </p>
-                  </div>
-                </div>
-              </li>
-            ` 
-          });
-
-          $('.total p span').html(total)
-
-          $('.display-shopping-item > ul').append(rows);
+              $('.total p span').html(total)
+    
+              $('.display-shopping-item > ul').append(rows);
+          }else{
+            $('.display-shopping-item > ul > div').remove()
+            $('.total').hide();
+            $('.go-checkout-info').hide()
+            msg = '<div class="no-items"> <p>Você não possui nenhum item no seu carrinho</p> <a href="/produtos">Explorar</a> </div>';
+            $('.display-shopping-item > ul').append(msg);
+          }
 
           $('body').loading('stop');
 

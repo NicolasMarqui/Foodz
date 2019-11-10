@@ -4162,4 +4162,28 @@ footer .footer .fot-bottom p {
     text-align: center;
   }
 }
+
+.no-items {
+  padding: 20px;
+}
+
+.no-items p {
+  text-align: center;
+  font-size: 18px;
+}
+
+.no-items a {
+  display: block;
+  width: 80%;
+  margin: 15px auto;
+  background-color: #E04040;
+  padding: 14px;
+  text-align: center;
+  color: #fff;
+  text-decoration: none;
+}
+
+.no-items a:hover {
+  background-color: #e76c6c;
+}
 /*# sourceMappingURL=styles.css.map */
