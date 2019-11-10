@@ -489,7 +489,7 @@ def carrinho_add(request):
 
             msg = 'Mais uma unidade de {} adicionada ao carrinho'.format(is_item.id_produto.nome)
 
-            return JsonResponse({ 'status': 'success', 'msg': msg, 'qnt_carrinho': is_item.quantidade})
+            return JsonResponse({ 'status': 'success', 'msg': msg, 'qnt_carrinho': is_item.quantidade, 'ja_tem': True})
 
         else:
             #Cria uma instancia do carrinho

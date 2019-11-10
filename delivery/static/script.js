@@ -550,6 +550,7 @@ $(document).ready(function(){
           console.log(response.responseJSON)
           status = response.responseJSON.status
           msg = response.responseJSON.msg
+          ja_tem = response.responseJSON.ja_tem ? response.responseJSON.ja_tem : false
 
           var options = {
             settings: {
@@ -559,9 +560,16 @@ $(document).ready(function(){
           iqwerty.toast.Toast(msg, options);
 
           if(status == 'success'){
-            $('.amount-cart span').html(totalCarrinho + 1)
-            $('.mobile-cart span').html(totalCarrinho + 1)
+            if(ja_tem){
+              $('.amount-cart span').html(totalCarrinho)
+              $('.mobile-cart span').html(totalCarrinho)
+            }else{
+              $('.amount-cart span').html(totalCarrinho + 1)
+              $('.mobile-cart span').html(totalCarrinho + 1)
+            }
           }
+
+          $('.mobile-cart').addClass('infinite slower delay-3s')
 
           $('body').loading('stop');
           
