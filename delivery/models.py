@@ -130,3 +130,9 @@ class Carrinho(models.Model):
     adicionado_carrinho         = models.DateTimeField(auto_now=True,blank=True)
     quantidade                  = models.IntegerField(default=1)
     is_carrinho                 = models.BooleanField(default=False)
+
+class Favoritos(models.Model):
+    id_cliente                  = models.ForeignKey(Cliente, on_delete=models.CASCADE)
+    id_produto                  = models.ForeignKey(Produto, on_delete=models.CASCADE)
+    is_favorito                 = models.BooleanField(default=False)
+    adicionado_favorito         = models.DateTimeField(auto_now=True,blank=True)

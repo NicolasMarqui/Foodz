@@ -2745,6 +2745,7 @@ footer .footer .fot-bottom p {
   overflow: hidden;
   -webkit-transition: all .5s linear;
   transition: all .5s linear;
+  position: relative;
 }
 
 .wrapper-random-products .display-choices-products .displayed-ones a {
@@ -4417,5 +4418,29 @@ footer .footer .fot-bottom p {
 
 .deleteFromCart i {
   color: #000;
+}
+
+.addFavorite {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  z-index: 4;
+  cursor: pointer;
+}
+
+.addFavorite i.removeMe, .addFavorite i.addMe {
+  font-size: 20px;
+}
+
+.addFavorite i.removeMe {
+  color: red;
+}
+
+.addFavorite i.removeMe:hover {
+  color: #000;
+}
+
+.addFavorite:hover i {
+  color: #E04040;
 }
 /*# sourceMappingURL=styles.css.map */

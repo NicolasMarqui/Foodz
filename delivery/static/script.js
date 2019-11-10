@@ -665,14 +665,82 @@ $(document).ready(function(){
           var x2js = new X2JS();
           text = String(response.cep)
           var jsonObj = x2js.xml_str2json( JSON.parse(response.cep) );
-
-          console.log(jsonObj)
-
           $('.calcula-frete').loading('stop');
-
         }
       });
     })
+
+
+    $('.addFavorite').on('click', 'i.addMe', function(){
+        id = $(this).attr('id')
+
+        console.log('clciked');
+        
+
+        data = {
+          csrfmiddlewaretoken: getCookie('csrftoken'),
+          id: id,
+        }
+
+        $.ajax({
+          type: "POST",
+          url: "/favoritos/add",
+          data: data,
+          dataType: "json",
+          beforeSend: function(){
+            $('.display-choices-products').loading({
+              stoppable: true
+            });
+          },
+          success: function (response) {
+
+            $('.addFavorite').find(`i#${id}`).removeClass('far addMe')
+            $('.addFavorite').find(`i#${id}`).addClass('fas removeMe')
+
+            var options = {
+              settings: {
+                duration: 2000
+              }
+            };
+            iqwerty.toast.Toast(response.msg, options);
+
+            $('.display-choices-products').loading('stop');
+          }
+        });
+    });
+
+    $('.addFavorite').on('click', 'i.removeMe', function(){
+      id = $(this).attr('id');
+
+      data = {
+        csrfmiddlewaretoken: getCookie('csrftoken'),
+        id: id,
+      }
+
+      $.ajax({
+        type: "POST",
+        url: "/favoritos/remove",
+        data: data,
+        dataType: "json",
+        beforeSend: function(){
+          $('.display-choices-products').loading({
+            stoppable: true
+          });
+        },
+        success: function (response) {
+            $('.addFavorite').find(`i#${id}`).removeClass('fas removeMe')
+            $('.addFavorite').find(`i#${id}`).addClass('far addMe')
+            var options = {
+              settings: {
+                duration: 2000
+              }
+            };
+            iqwerty.toast.Toast(response.msg, options);
+
+            $('.display-choices-products').loading('stop');
+        }
+      });
+  });
 
 
 })

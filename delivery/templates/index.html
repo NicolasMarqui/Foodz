@@ -84,6 +84,14 @@ Home
                 {% for i in produtos %}
                     <div class="item">
                         <div class="displayed-ones">
+
+                            <div class="addFavorite">
+                                {% if i.nome in teste %}
+                                    <i class="fas fa-heart removeMe" id="{{i.id}}"></i>
+                                {% else %}
+                                    <i class="far fa-heart addMe" id="{{i.id}}"></i>
+                                {% endif %}
+                            </div>
                             
                             <div class="thumb" style="background-image: url('/media/{{i.foto}}')"></div>
     

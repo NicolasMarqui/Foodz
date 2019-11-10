@@ -28,4 +28,6 @@ urlpatterns = [
     path('carrinho/excluir',views.carrinho_excluir,name="Excluir items no carrinho"),
     path('carrinho/',views.carrinho,name="carrinho"),
     path('carrinho/cep',views.carrinho_cep,name="Calcular CEP"),
+    path('favoritos/add',views.favoritos_add,name="Adicionar Favoritos"),
+    path('favoritos/remove',views.favoritos_remove,name="Remover dos Favoritos"),
 ]

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Cliente, Produto, Restaurante, Notificacao, Carrinho
+from .models import Cliente, Produto, Restaurante, Notificacao, Carrinho, Favoritos
 from django.contrib.auth import logout as django_logout
 from django.contrib.auth.models import User, auth, Group
 from django.db.models import Q
@@ -18,6 +18,27 @@ def home(request):
 
     produtos = Produto.objects.all().order_by('-id')[:10]
     restaurantes = Restaurante.objects.all()[:10]
+    ta_nos_favoritos = []
+
+    if not request.user.is_authenticated:
+        favoritos = None
+
+    if request.user.groups.filter(name="Donos").exists():
+        favoritos = None
+
+    try:
+        id_user = Cliente.objects.get(user_id=request.user.id)
+    except Cliente.DoesNotExist:
+        id_user = None
+
+    if id_user is not None:
+        favoritos = Favoritos.objects.filter(id_cliente=id_user, is_favorito=1)
+
+        for i in favoritos:
+            ta_nos_favoritos.append(i.id_produto.nome)
+    else:
+        favoritos: None
+        ta_nos_favoritos = []
 
     return render(
         request,
@@ -27,6 +48,8 @@ def home(request):
             'range2': range(9),
             'produtos': produtos,
             'restaurantes': restaurantes,
+            'favoritos': favoritos,
+            'teste': ta_nos_favoritos
         }
     )
 
@@ -701,4 +724,90 @@ def carrinho_cep(request):
                 return JsonResponse({ 'status': 'erro' , 'msg': msg})
         else:
             msg = 'Erro ao calcular o CEP'
+            return JsonResponse({ 'status': 'erro' , 'msg': msg})
+
+def favoritos_add(request):
+    if request.method == 'POST' and request.is_ajax():
+        id = request.POST['id']
+        if not request.user.is_authenticated:
+            msg = 'Você tem que estar logado para adicionar aos favoritos'
+            return JsonResponse({ 'status': 'erro' , 'msg': msg})
+
+        if request.user.groups.filter(name="Donos").exists():
+            msg = 'Você tem que ser cliente para adicionar aos favoritos'
+            return JsonResponse({ 'status': 'erro' , 'msg': msg})
+
+        try:
+            id_user = Cliente.objects.get(user_id=request.user.id)
+        except Cliente.DoesNotExist:
+            id_user = None
+
+        try:
+            id_produto = Produto.objects.get(id=id)
+        except Produto.DoesNotExist:
+            id_produto = None
+
+        try:
+            already_exists = Favoritos.objects.get(id_produto=id_produto)
+        except Favoritos.DoesNotExist:
+            already_exists = None
+        
+
+        if id_user is not None and already_exists is None:
+            fav = Favoritos(is_favorito=1, id_cliente=id_user, id_produto=id_produto)
+            fav.save()
+
+            try:
+                just_added = Favoritos.objects.get(id_produto=id)
+                msg = '{} adicionado aos favoritos'.format(just_added.id_produto.nome)
+            except:
+                msg = 'Adicionado aos favoritos'
+                just_added = None
+
+            return JsonResponse({ 'status': 'success' , 'msg': msg})
+        else:
+            msg = 'Erro ao adicionar aos favoritos'
+            return JsonResponse({ 'status': 'erro' , 'msg': msg})
+
+def favoritos_remove(request):
+    if request.method == 'POST' and request.is_ajax():
+        id = request.POST['id']
+        if not request.user.is_authenticated:
+            msg = 'Como assim você conseguiu adicionar algo nos favoritos?'
+            return JsonResponse({ 'status': 'erro' , 'msg': msg})
+
+        if request.user.groups.filter(name="Donos").exists():
+            msg = 'Como assim você conseguiu adicionar algo nos favoritos?'
+            return JsonResponse({ 'status': 'erro' , 'msg': msg})
+
+        try:
+            id_user = Cliente.objects.get(user_id=request.user.id)
+        except Cliente.DoesNotExist:
+            id_user = None
+
+        try:
+            id_produto = Produto.objects.get(id=id)
+        except Produto.DoesNotExist:
+            id_produto = None
+
+        try:
+            already_exists = Favoritos.objects.get(id_produto=id_produto)
+        except Favoritos.DoesNotExist:
+            already_exists = None
+        
+
+        if id_user is not None and already_exists is not None:
+            fav = Favoritos.objects.get(id_cliente=id_user, id_produto=id_produto)
+            fav.delete()
+
+            try:
+                just_removed = Produto.objects.get(id=id)
+                msg = '{} removido dos favoritos'.format(just_removed.nome)
+            except:
+                msg = 'Removido dos favoritos'
+                just_removed = None
+
+            return JsonResponse({ 'status': 'success' , 'msg': msg})
+        else:
+            msg = 'Erro ao remover dos favoritos'
             return JsonResponse({ 'status': 'erro' , 'msg': msg})
