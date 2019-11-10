@@ -481,7 +481,7 @@ def carrinho_add(request):
         except Carrinho.DoesNotExist:
             is_item = None
 
-        if is_item:
+        if is_item is not None:
             quantidade = is_item.quantidade
             is_item.quantidade = quantidade + 1
 
@@ -512,11 +512,11 @@ def carrinho_todos(request):
 
         if not request.user.is_authenticated:
             msg = 'Você ainda não possui item! Faça o login para adicionar produtos'
-            return JsonResponse({ 'status': 'sucess', 'qnt_items': 0, 'msg': msg},json_dumps_params={'ensure_ascii': False},safe=False)
+            return JsonResponse({ 'status': 'sucess', 'qnt_items': 0, 'msg': msg, 'empty': True},json_dumps_params={'ensure_ascii': False},safe=False)
 
         if request.user.groups.filter(name="Donos").exists():
             msg = 'Você ainda não possui item! Crie uma conta como cliente para adicionar produtos'
-            return JsonResponse({ 'status': 'error', 'qnt_items': 0, 'msg': msg})
+            return JsonResponse({ 'status': 'error', 'qnt_items': 0, 'msg': msg, 'empty': True})
 
         
         try:
@@ -527,9 +527,7 @@ def carrinho_todos(request):
             id_user = Cliente.objects.get(user_id=request.user.id)
             
             #Pega os valores
-            produtos_carrinho = list(Carrinho.objects.filter(id_cliente=id_user.id, is_carrinho=1).values())
-
-            # print(produtos_carrinho[0])       
+            produtos_carrinho = list(Carrinho.objects.filter(id_cliente=id_user.id, is_carrinho=1).values()) 
 
             #Add info to JSON
             data['produtos'] = produtos_carrinho
@@ -548,7 +546,7 @@ def carrinho_todos(request):
 
                     for j in prod:
 
-                        total += j.preco
+                        total += (j.preco * i['quantidade'])
 
                         info = {
                             'nome': j.nome,
@@ -564,3 +562,21 @@ def carrinho_todos(request):
             return JsonResponse(data)
         except Cliente.DoesNotExist:
             return JsonResponse({'empty': True})
+
+
+def carrinho_excluir(request):
+    if request.method == 'POST' and request.is_ajax():
+        
+        id = request.POST['id']
+
+        try:
+            item = Carrinho.objects.get(id=id)
+            item.delete()
+
+            print(item)
+
+            msg = '{} excluido com sucesso'.format(item.id_produto.nome)
+            return JsonResponse({ 'status': 'success' , 'msg': msg})
+
+        except Carrinho.DoesNotExist:
+            return JsonResponse({'status': 'error', 'msg': 'Erro ao deletar o produto'})

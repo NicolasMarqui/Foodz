@@ -1,4 +1,4 @@
-from .models import Notificacao, Restaurante
+from .models import Notificacao, Restaurante, Carrinho, Cliente
 from ipware import get_client_ip
 from django.contrib.gis.geoip2 import GeoIP2
 
@@ -51,3 +51,26 @@ def profile_picture_owner(request):
 #     return{
 #         'city': city
 #     }
+
+def quantidadeCarrinho(request):
+
+    if not request.user.is_authenticated:
+        return{
+            'quantidade': 0
+        }
+
+    try:
+        id_user = Cliente.objects.get(user_id=request.user.id)
+    except Cliente.DoesNotExist:
+        id_user = None
+
+    try:
+        quantidade = Carrinho.objects.filter(id_cliente=id_user, is_carrinho=1)
+
+        return{
+            'quantidade': quantidade.count()
+        }
+    except Carrinho.DoesNotExist:
+        return{
+            'quantidade': 0
+        }

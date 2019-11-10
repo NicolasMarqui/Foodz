@@ -33,18 +33,18 @@
 
                 <div class="display-shopping-item">
                     <ul>
-                        
+                        <!-- Ajax vem aqui -->
                     </ul>
 
                     <div class="total">
                         <h2>Valor Total: </h2>
 
-                        <p>R$ <span>0.00</span> </p>
+                        <p>R$ <span>-</span> </p>
                     </div>
                 </div>
 
                 <div class="go-checkout-info">
-                    <a href="#" class="bt">Continuar</a>
+                    <a href="/checkout" class="bt">Continuar</a>
                 </div>
             </div>
 
@@ -94,6 +94,7 @@
             </div>
 
             <div class="mobile-cart">
+                <span class="total">{{quantidade}}</span>
                 <i class="fas fa-shopping-cart"></i>
             </div>
 
@@ -172,7 +173,7 @@
                                         <li class="shopping-cart">
                                             <a href="#">
                                                 <div class="amount-cart">
-                                                    <span>0</span>
+                                                    <span>{{quantidade}}</span>
                                                 </div>
 
                                                 <a href="#">R$ <span>0.00</span></a>

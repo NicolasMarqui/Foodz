@@ -66,7 +66,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'delivery.context_processors.notificacoes',
                 'delivery.context_processors.profile_picture_owner',
-                # 'delivery.context_processors.cliente_ip',
+                'delivery.context_processors.quantidadeCarrinho',
             ],
         },
     },

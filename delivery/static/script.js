@@ -111,6 +111,7 @@ $(document).ready(function(){
     })
 
     function getCarrinhoItems(){
+
       $.ajax({
         type: "GET",
         url: "/carrinho/todos",
@@ -121,21 +122,18 @@ $(document).ready(function(){
           });
         },
         complete: function (response) {
-
-          console.log(response)
-
           let produtos = response.responseJSON.produtos;
           let rows = '';
           let info = response.responseJSON.info
           let total = response.responseJSON.total
-          let empty = response.responseJSON.empty ? response.responseJSON.empty : False      
+          let empty = response.responseJSON.empty ? response.responseJSON.empty : false      
 
           $('.display-shopping-item > ul > li').remove();
 
           if(!empty){
               produtos.forEach((prod, i) => {
                 rows += `
-                  <li>
+                  <li id="${prod.id}" class="${prod.id_produto_id}">
                     <div class="display">
                       <div class="amount">
                         <p>x <span>${prod.quantidade}</span> </p>
@@ -157,6 +155,7 @@ $(document).ready(function(){
               $('.total p span').html(total)
     
               $('.display-shopping-item > ul').append(rows);
+
           }else{
             $('.display-shopping-item > ul > div').remove()
             $('.total').hide();
@@ -171,6 +170,50 @@ $(document).ready(function(){
       });
     }
 
+    function deleteItemCarrinho(id){
+        if(id){
+            valor_total   = Number($('.total p span').html())
+            quantidade    = Number($('.display-shopping-item').find(`ul li#${id} .display .amount p span`).html())
+            preco         = Number($('.display-shopping-item').find(`ul li#${id} .display .preco p span`).html())
+
+            data = {
+              id: id,
+              csrfmiddlewaretoken: getCookie('csrftoken'),
+            }
+
+            $.ajax({
+              type: "POST",
+              url: "/carrinho/excluir",
+              data: data,
+              dataType: "json",
+
+              beforeSend: function(){
+                $('body').loading({
+                  stoppable: true
+                });
+              },
+
+              success: function (response) {
+                console.log(response)
+                if(response.status == 'success'){
+                  $('.display-shopping-item').find(`ul li#${id}`).fadeOut(300, function() { $(this).remove()});
+                }
+
+                var options = {
+                  settings: {
+                    duration: 2000
+                  }
+                };
+                iqwerty.toast.Toast(response.msg, options);
+                $('body').loading('stop');
+
+                $('.total p span').html((valor_total - (quantidade * preco)).toFixed(2));
+              }
+
+            });
+        }
+    }
+
     //Open Carrinho de compras
     $('.shopping-cart').click(function(){
         $('.display-shopping-cart').css({
@@ -180,6 +223,15 @@ $(document).ready(function(){
 
       getCarrinhoItems();
       
+    })
+
+    $('.display-shopping-item').on('click' , 'ul li', function(){
+      
+        id_carrinho = $(this).attr('id');
+        id_produto = $(this).attr('class');
+
+        deleteItemCarrinho(id_carrinho)
+
     })
 
     //Fechar Carrinho de Compras
@@ -243,6 +295,8 @@ $(document).ready(function(){
             width: '350px',
         });
       }
+
+      getCarrinhoItems();
     })
 
     //Abrir Search Mobile
@@ -312,7 +366,7 @@ $(document).ready(function(){
           url: "/lida",
           data: {
             id: $(this).parent().attr('id'),
-            csrfmiddlewaretoken: getCookie('csrftoken'),
+            
             lida: 1
           },
           dataType: 'json',
@@ -474,6 +528,8 @@ $(document).ready(function(){
     $('.add-carrinho').click(function () {
       
       id = $(this).attr('id');
+      totalCarrinho = Number($('.amount-cart span').html())
+      totalCarrinhoMobile = Number($('.mobile-cart span').html())
 
       data = {
         csrfmiddlewaretoken: getCookie('csrftoken'),
@@ -503,7 +559,8 @@ $(document).ready(function(){
           iqwerty.toast.Toast(msg, options);
 
           if(status == 'success'){
-            $('.amount-cart span').html('1')
+            $('.amount-cart span').html(totalCarrinho + 1)
+            $('.mobile-cart span').html(totalCarrinho + 1)
           }
 
           $('body').loading('stop');
