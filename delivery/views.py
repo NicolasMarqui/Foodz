@@ -475,8 +475,11 @@ def carrinho_add(request):
         id_produto = Produto.objects.get(id=id)
         id_user = Cliente.objects.get(user_id=request.user.id)
 
-        #Verifica se o item ja esta no carrinho
-        is_item = Carrinho.objects.get(id_produto=id_produto)
+        #Verifica se o item ja esta no carrinho   
+        try:
+            is_item = Carrinho.objects.get(id_produto=id_produto)
+        except Carrinho.DoesNotExist:
+            is_item = None
 
         if is_item:
             quantidade = is_item.quantidade
@@ -493,7 +496,7 @@ def carrinho_add(request):
             item = Carrinho(id_cliente=id_user, id_produto=id_produto, is_carrinho=1)
 
             #Salva o produto no carrinho
-            # item.save()
+            item.save()
 
             todos_no_carrinho = Carrinho.objects.filter(id_cliente=id_user, is_carrinho=1)
 
@@ -503,4 +506,69 @@ def carrinho_add(request):
 
             return JsonResponse({ 'status': 'success', 'msg': msg, 'qnt_carrinho': todos_no_carrinho.count()})
 
+def carrinho_todos(request):
 
+    if request.method == 'GET' and request.is_ajax():
+
+        if not request.user.is_authenticated:
+            msg = 'Você ainda não possui item! Faça o login para adicionar produtos'
+            return JsonResponse({ 'status': 'sucess', 'qnt_items': 0, 'msg': msg},json_dumps_params={'ensure_ascii': False},safe=False)
+
+        if request.user.groups.filter(name="Donos").exists():
+            msg = 'Você ainda não possui item! Crie uma conta como cliente para adicionar produtos'
+            return JsonResponse({ 'status': 'error', 'qnt_items': 0, 'msg': msg})
+
+        #Inicializa dictionario
+        data = dict()
+
+        #Pega id do usuario
+        id_user = Cliente.objects.get(user_id=request.user.id)
+
+        #Pega Nome, restaurante e valor do produto
+        pega_id_carrinho = Carrinho.objects.filter(id_cliente=id_user.id)
+         
+        # print(pega_id_carrinho)
+
+        # if pega_id_carrinho:
+        #     for i in pega_id_carrinho:
+        #         # print(i)
+        #         # data['nome'] = i.nome
+        #         # data['restaurante'] = i.restaurante.nome
+        #         # data['preco'] = i.preco
+
+        #Pega os valores
+        produtos_carrinho = list(Carrinho.objects.filter(id_cliente=id_user.id, is_carrinho=1).values())
+
+        # print(produtos_carrinho[0])       
+
+        #Add info to JSON
+        data['produtos'] = produtos_carrinho
+        data['status'] = 'success'
+        data['qnt_items'] = 0
+        data['msg'] = 'null'
+        info_prod = []
+        total = 0
+
+        # prod_nome = Produto.objects.filter(id=id)
+
+        if produtos_carrinho:
+            for i in produtos_carrinho:
+                print(i['id'])
+                prod = Produto.objects.filter(id=i['id_produto_id'])
+
+                for j in prod:
+
+                    total += j.preco
+
+                    info = {
+                        'nome': j.nome,
+                        'preco': j.preco,
+                        'restaurante': j.restaurante.nome,
+                    }
+
+                    info_prod.append(info)
+                    print(i)
+                    data['info'] = list(info_prod)
+                    data['total'] = total
+
+        return JsonResponse(data)

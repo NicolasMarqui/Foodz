@@ -115,8 +115,49 @@ $(document).ready(function(){
         type: "GET",
         url: "carrinho/todos",
         dataType: "json",
+        beforeSend: function(){
+          $('body').loading({
+            stoppable: true
+          });
+        },
         complete: function (response) {
-          console.log(response)
+
+          console.log(response.responseJSON)
+
+          let produtos = response.responseJSON.produtos;
+          let rows = '';
+          let info = response.responseJSON.info
+          let total = response.responseJSON.total      
+
+          $('.display-shopping-item > ul > li').remove();
+
+          produtos.forEach((prod, i) => {
+            rows += `
+              <li>
+                <div class="display">
+                  <div class="amount">
+                    <p>x <span>${prod.quantidade}</span> </p>
+                  </div>
+
+                  <div class="info">
+                    <h5>${info[i].nome}</h5>
+                    <p><strong>Vendido por: </strong> ${info[i].restaurante} </p>
+                  </div>
+
+                  <div class="preco">
+                    <p>R$ <span>${info[i].preco}</span> </p>
+                  </div>
+                </div>
+              </li>
+            ` 
+          });
+
+          $('.total p span').html(total)
+
+          $('.display-shopping-item > ul').append(rows);
+
+          $('body').loading('stop');
+
         }
       });
     }
@@ -441,7 +482,7 @@ $(document).ready(function(){
           });
         },
         complete: function (response) {
-
+          console.log(response.responseJSON)
           status = response.responseJSON.status
           msg = response.responseJSON.msg
 
