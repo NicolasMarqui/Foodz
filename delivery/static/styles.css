@@ -3368,18 +3368,45 @@ footer .footer .fot-bottom p {
 .logout-header {
   position: absolute;
   top: 100%;
-  left: 0;
-  right: 0;
-  background-color: #494949;
+  left: -40px;
+  right: -40px;
+  background-color: #dddd;
   z-index: 2;
   visibility: hidden;
 }
 
-.logout-header a {
+.logout-header ul li {
+  padding: 8px 50px !important;
+  width: 100%;
+}
+
+.logout-header ul li a {
   padding: 14px;
-  color: #fff !important;
+  color: #000 !important;
   display: block;
   text-align: center;
+}
+
+.logout-header ul li a span {
+  text-align: center;
+  text-transform: capitalize;
+}
+
+.logout-header ul li i {
+  position: relative !important;
+  font-size: 14px !important;
+}
+
+.logout-header ul li:hover {
+  background-color: #494949;
+}
+
+.logout-header ul li:hover a {
+  color: #fff !important;
+}
+
+.logout-header ul li:hover i {
+  color: #fff;
 }
 
 .input-tipo select {

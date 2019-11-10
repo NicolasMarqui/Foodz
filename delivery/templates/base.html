@@ -72,13 +72,21 @@
                             <a href="/conta/{{user.id}}">Conta</a>
 
                             <div class="logout-header">
-                                <a href="{% url 'logout' %}">logout</a>
+                                <ul>
+                                    
+                                </ul>
                             </div>
 
                             {% else %}
                             <a href="/login">Login</a>
                             {% endif %}
                         </li>
+                        {% if user.is_authenticated %}
+                            <li>
+                                <li><a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Sair</a></li>
+                                
+                            </li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>
@@ -164,7 +172,26 @@
                                             <a href="/conta/{{user.id}}">Conta</a>
 
                                             <div class="logout-header">
-                                                <a href="{% url 'logout' %}">logout</a>
+                                                <ul>
+                                                    <li>
+                                                        <a href="/conta/{{user.id}}">
+                                                            <i class="fas fa-user"></i>
+                                                            Olá , <span>{{user.username}}</span>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#favoritos-{{user.username}}">
+                                                            <i class="fas fa-heart"></i>
+                                                            <span>Favoritos</span>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="{% url 'logout' %}">
+                                                            <i class="fas fa-sign-out-alt"></i>  
+                                                            <span>Sair</span> 
+                                                        </a>
+                                                    </li>
+                                                </ul>
                                             </div>
 
                                             {% else %}

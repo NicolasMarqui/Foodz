@@ -117,7 +117,7 @@ $(document).ready(function(){
         url: "/carrinho/todos",
         dataType: "json",
         beforeSend: function(){
-          $('body').loading({
+          $('.display-shopping-item').loading({
             stoppable: true
           });
         },
@@ -164,7 +164,7 @@ $(document).ready(function(){
             $('.display-shopping-item > ul').append(msg);
           }
 
-          $('body').loading('stop');
+          $('.display-shopping-item').loading('stop');
 
         }
       });
