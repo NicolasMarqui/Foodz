@@ -200,12 +200,13 @@ $(document).ready(function(){
                   $('.display-shopping-item').find(`ul li#${id}`).fadeOut(300, function() { $(this).remove()});
                 }
 
-                var options = {
-                  settings: {
-                    duration: 2000
-                  }
-                };
-                iqwerty.toast.Toast(response.msg, options);
+                $.toast({
+                  heading: 'Removido :(',
+                  text: response.msg,
+                  showHideTransition: 'slide',
+                  icon: 'success'
+                })
+
                 $('body').loading('stop');
 
                 $('.total p span').html((valor_total - (quantidade * preco)).toFixed(2));
@@ -250,12 +251,13 @@ $(document).ready(function(){
                 $('.todos-items').find(`div#${id}`).fadeOut(300, function() { $(this).remove()});
               }
 
-              var options = {
-                settings: {
-                  duration: 2000
-                }
-              };
-              iqwerty.toast.Toast(response.msg, options);
+              $.toast({
+                heading: 'Removido :(',
+                text: response.msg,
+                showHideTransition: 'slide',
+                icon: 'success'
+              })
+
               $('body').loading('stop');
 
               $('.info-final .preco span').html((valor_total - (quantidade * preco)).toFixed(2));
@@ -437,22 +439,22 @@ $(document).ready(function(){
                 
                 if(response.responseJSON.notificacoes.length){
                   var url = response.responseJSON.notificacoes[0];
-                tem_not = $('.notificacoes').find(`li#${url.id}`).fadeOut(300, function() { $(this).remove()});
+                  tem_not = $('.notificacoes').find(`li#${url.id}`).fadeOut(300, function() { $(this).remove()});
 
-                $('.notificacoes').find(`li#${url.id}`).fadeOut(300, function() { $(this).remove()});
+                  $('.notificacoes').find(`li#${url.id}`).fadeOut(300, function() { $(this).remove()});
 
-                $('.total-notificacoes span').html($('.notificacoes li').length - 1)
-                
-                if($('.total-notificacoes span').html() == '0'){
-                  $('.notificacoes').append('<p class="read-all">Você leu todas as suas notificações!!<p>')
-                }
-                
-                var options = {
-                  settings: {
-                    duration: 2000
+                  $('.total-notificacoes span').html($('.notificacoes li').length - 1)
+                  
+                  if($('.total-notificacoes span').html() == '0'){
+                    $('.notificacoes').append('<p class="read-all">Você leu todas as suas notificações!!<p>')
                   }
-                };
-                iqwerty.toast.Toast('Mensagem Marcado como lida!', options);
+                  
+                  $.toast({
+                    heading: 'Lida :)',
+                    text: 'Mensagem lida!',
+                    showHideTransition: 'slide',
+                    icon: 'success'
+                  })
                 }
               }else{
                 console.log('fudeu');
@@ -563,23 +565,20 @@ $(document).ready(function(){
         },
         dataType: "dataType",
         complete: function (response) {
-
-          console.log(response)
           var parsed = JSON.parse(response.responseText);
 
-          
           if(parsed.status == 'success'){
-            var options = {
-              settings: {
-                duration: 2000
-              }
+              $.toast({
+                heading: 'Atualizado :)',
+                text: 'Produto atualizado com sucesso',
+                showHideTransition: 'slide',
+                icon: 'success'
+              });
             };
-            iqwerty.toast.Toast('Produto atualizado!', options);
 
             $('.open-modal').css('display', 'none');
             $('.modal-edit').css('display', 'none');
           }
-        }
       });
 
     })
@@ -613,12 +612,12 @@ $(document).ready(function(){
           msg = response.responseJSON.msg
           ja_tem = response.responseJSON.ja_tem ? response.responseJSON.ja_tem : false
 
-          var options = {
-            settings: {
-              duration: 2000
-            }
-          };
-          iqwerty.toast.Toast(msg, options);
+          $.toast({
+            heading: 'Adicionado :)',
+            text: msg,
+            showHideTransition: 'slide',
+            icon: 'success'
+          })
 
           if(status == 'success'){
             if(ja_tem){
@@ -697,12 +696,12 @@ $(document).ready(function(){
             $('.addFavorite').find(`i#${id}`).removeClass('far addMe')
             $('.addFavorite').find(`i#${id}`).addClass('fas removeMe')
 
-            var options = {
-              settings: {
-                duration: 2000
-              }
-            };
-            iqwerty.toast.Toast(response.msg, options);
+            $.toast({
+              heading: 'Adicionado :)',
+              text: response.msg,
+              showHideTransition: 'slide',
+              icon: 'success'
+            })
 
             $('.display-choices-products').loading('stop');
           }
@@ -730,12 +729,12 @@ $(document).ready(function(){
         success: function (response) {
             $('.addFavorite').find(`i#${id}`).removeClass('fas removeMe')
             $('.addFavorite').find(`i#${id}`).addClass('far addMe')
-            var options = {
-              settings: {
-                duration: 2000
-              }
-            };
-            iqwerty.toast.Toast(response.msg, options);
+            $.toast({
+              heading: 'Removido :(',
+              text: response.msg,
+              showHideTransition: 'slide',
+              icon: 'success'
+            })
 
             $('.display-choices-products').loading('stop');
         }
