@@ -53,10 +53,16 @@
         
                             <p>{{produto.descricao|striptags }}</p>
 
-                            <div class="buy-and-quantity">
-                                <a href="#" class="btn">Comprar</a>
-        
-                                <input type="number" value="1">
+                            <div class="price-info">
+                                <h4>
+                                    <p>R$ <span>{{produto.preco}}</span> </p>
+                                </h4>
+
+                                <div class="buy-and-quantity">
+                                    <a href="#" class="btn">Comprar</a>
+            
+                                    <input type="number" value="1">
+                                </div>
                             </div>
                         </div>
                 {% endif %}

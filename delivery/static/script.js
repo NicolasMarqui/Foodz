@@ -584,7 +584,7 @@ $(document).ready(function(){
     })
 
     //Add to cart
-    $('.add-carrinho').click(function () {
+    $('.infos').on('click', 'a.add-carrinho', function () {
       
       id                  = $(this).attr('id');
       totalCarrinho       = Number($('.amount-cart span').html())
@@ -598,7 +598,7 @@ $(document).ready(function(){
       
       $.ajax({
         type: "POST",
-        url: "carrinho/add",
+        url: "/carrinho/add",
         data: data,
         dataType: "json",
         beforeSend: function(){
@@ -612,13 +612,6 @@ $(document).ready(function(){
           msg = response.responseJSON.msg
           ja_tem = response.responseJSON.ja_tem ? response.responseJSON.ja_tem : false
 
-          $.toast({
-            heading: 'Adicionado :)',
-            text: msg,
-            showHideTransition: 'slide',
-            icon: 'success'
-          })
-
           if(status == 'success'){
             if(ja_tem){
               $('.amount-cart span').html(totalCarrinho)
@@ -628,10 +621,25 @@ $(document).ready(function(){
               $('.mobile-cart span').html(totalCarrinho + 1)
             }
 
+            $.toast({
+              heading: 'Adicionado :)',
+              text: msg,
+              showHideTransition: 'slide',
+              icon: 'success'
+            })
+
             final_cara = total_preco + Number($(`#price-${id} p span`).html())
 
-            $('.price-header span').html(Number(final_cara).toFixed(2))            
+            $('.price-header span').html(Number(final_cara).toFixed(2)) 
             
+            
+          }else{
+            $.toast({
+              heading: 'Ops :)',
+              text: msg,
+              showHideTransition: 'slide',
+              icon: 'error'
+            })
           }
 
           $('.mobile-cart').addClass('infinite slower delay-3s')
@@ -693,15 +701,24 @@ $(document).ready(function(){
           },
           success: function (response) {
 
-            $('.addFavorite').find(`i#${id}`).removeClass('far addMe')
-            $('.addFavorite').find(`i#${id}`).addClass('fas removeMe')
+            if(response.status == 'success'){
+              $('.addFavorite').find(`i#${id}`).removeClass('far addMe')
+              $('.addFavorite').find(`i#${id}`).addClass('fas removeMe')
 
-            $.toast({
-              heading: 'Adicionado :)',
-              text: response.msg,
-              showHideTransition: 'slide',
-              icon: 'success'
-            })
+              $.toast({
+                heading: 'Adicionado :)',
+                text: response.msg,
+                showHideTransition: 'slide',
+                icon: 'success'
+              })
+            }else{
+              $.toast({
+                heading: 'Ops :)',
+                text: response.msg,
+                showHideTransition: 'slide',
+                icon: 'error'
+              })
+            }
 
             $('.display-choices-products').loading('stop');
           }

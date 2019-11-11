@@ -44,21 +44,29 @@ Produtos
             <div class="row">
                 {% for p in produtos %}
                     <div class="col-xs-12 col-md-4" id="go-to-product">
-                        <a href="/produtos/info/{{p.id}}">
-                            <div class="wrap-results">
-                                <div class="result-produtos" style="background-image: url('/media/{{p.foto}}')">
-                                    <!-- <div class="over"></div> -->
-                                </div>
-    
-                                <div class="info-prods">
-                                    <h3>{{p.nome}}</h3>
-                                    <h4>
-                                        R$ <span>{{p.preco}}</span>
-                                    </h4>
-                                    <p>Vendido por: {{p.restaurante.nome}}</p>
-                                </div>
+                        <div class="wrap-results">
+                            <div class="result-produtos" style="background-image: url('/media/{{p.foto}}')">
+                                <!-- <div class="over"></div> -->
                             </div>
-                        </a>
+
+                            <div class="info-prods">
+                                <h3>{{p.nome}}</h3>
+                                <h4 id="price-{{p.id}}">
+                                    <p>R$ <span>{{p.preco}}</span></p>
+                                </h4>
+                                <p>Vendido por: {{p.restaurante.nome}}</p>
+                            </div>
+
+                            <div class="infos">
+                                <a href="#carrinho-{{p.id}}" class="add-carrinho" id="{{p.id}}">
+                                    <i class="fas fa-shopping-cart"></i> Carrinho
+                                </a>
+
+                                <a href="/produtos/info/{{p.id}}" class="h-100">
+                                    <i class="fas fa-info"></i> Info
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 {% endfor %}
             </div>

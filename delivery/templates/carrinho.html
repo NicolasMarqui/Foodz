@@ -69,19 +69,34 @@
                                 
                             <div class="info-final">
                                 <p class="preco">R$ <span>{{preco_carrinho}}</span></p>
-                                <p class="frete">R$ <span>{{taxa}}</span> </p>
+                                <p class="frete">+R$ <span>{{taxa}}</span> </p>
                                 <p class="final"> R$ <span>{{final}}</span> </p>
                             </div>
                                 
                         </div>
+                        <div class="avancar-checkout">
+                            <a href="/checkout">
+                                Finalizar
+                            </a>
+                        </div>
                     {% else %}
-                        <h2>Ooopsie daisy</h2>
-                        {% endif %}
+                        <div class="display-msg">
+                            <h2>{{msg}}</h2>
+                            
+                            <a href="/login">
+                                Faça Login
+                            </a>
+                            <span>Ou</span>
+                            <a href="/produtos">
+                                Veja os produtos
+                            </a>
+                        </div>
+                    {% endif %}
                 </div>
  
                 <div class="col-xs-12 col-md-4">
-                    <div class="calcula-frete">
-                        {% if msg_entrega %}
+                    {% if success %}
+                        <div class="calcula-frete">
                             <h2>Taxa de Entrega</h2>
                             <ul>
                                 {% for i in msg_entrega %}
@@ -92,26 +107,26 @@
 
                                 <li>Valor da entrega: <p>R$ <span>{{taxa}}</span> </p></li>
                             </ul>
-                        {% else %}
-                            <h2>Calculo De frete</h2>
+                    {% elif success and not taxa_entrega%}
+                        <h2>Calculo De frete</h2>
 
-                            <form action="/calcular/frete" method="POST" id="calcularFrete">
-                                {% csrf_token %}
+                        <form action="/calcular/frete" method="POST" id="calcularFrete">
+                            {% csrf_token %}
 
-                                <div class="form-group">
-                                    <label for="num_frete">CEP</label>
-                                    <input type="text" id="num_frete" name="cep">
+                            <div class="form-group">
+                                <label for="num_frete">CEP</label>
+                                <input type="text" id="num_frete" name="cep">
 
-                                    <button type="submit">Calcular</button>
-                                </div>
-                            </form>
-
-                            <div class="frete-opcoes">
-                                <ul>
-                                    <!-- Ajax aqui -->
-                                </ul>
+                                <button type="submit">Calcular</button>
                             </div>
-                        {% endif %}
+                        </form>
+
+                        <div class="frete-opcoes">
+                            <ul>
+                                <!-- Ajax aqui -->
+                            </ul>
+                        </div>
+                    {% endif %}
                     </div>
                 </div>
             </div>

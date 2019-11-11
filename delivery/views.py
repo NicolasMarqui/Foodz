@@ -19,6 +19,7 @@ def home(request):
     produtos = Produto.objects.all().order_by('-id')[:10]
     restaurantes = Restaurante.objects.all()[:10]
     ta_nos_favoritos = []
+    favoritos = None
 
     if not request.user.is_authenticated:
         favoritos = None
@@ -86,7 +87,10 @@ def restaurantes(request):
 
 def dashboard(request):
 
-    if(not request.user.is_authenticated):
+    if not request.user.is_authenticated:
+        return redirect('/login')
+
+    if not request.user.groups.filter(name="Donos").exists():
         return redirect('/login')
 
     id = request.user.id
@@ -272,7 +276,9 @@ def register(request):
             messages.info(request, 'Esse email ja existe')
         else:
             user = User.objects.create_user(username=nome, email=email, password=senha)
-            user.save()
+
+            new_cliente = Cliente(user_id=user.pk)
+            new_cliente.save()
 
             if(tipo == 'Dono'):
                 grupo_dono = Group.objects.get(name="Donos")
@@ -350,6 +356,8 @@ def minha_conta(request, id):
 
     if request.user.groups.filter(name="Donos").exists():
         return redirect('/dashboard')
+    
+
     
     return render(
         request,
@@ -608,7 +616,7 @@ def carrinho_excluir(request):
 def carrinho(request):
 
     if not request.user.is_authenticated:
-        msg = 'Você tem que estar logado para adicionar items no carrinho'
+        msg = 'Você tem que estar logado para ver os items no carrinho'
         success = None
         preco_carrinho = 0
         item = None
@@ -617,7 +625,7 @@ def carrinho(request):
         final = 0
 
     if request.user.groups.filter(name="Donos").exists():
-        msg = 'Você tem que ser cliente para adicionar items no carrinho'
+        msg = 'Você tem que ser cliente para ver os items no carrinho'
         success = None
         preco_carrinho = 0
         item = None
@@ -633,6 +641,7 @@ def carrinho(request):
         taxa_entrega = 0
         msg_entrega = []
         final = 0
+        success = None
 
     if id_user is not None:
         try:
@@ -665,13 +674,6 @@ def carrinho(request):
             taxa_entrega = 0
             msg_entrega = []
             final = 0
-    else:
-        success = None
-        msg = 'User não encontrado'
-        preco_carrinho = 0
-        taxa_entrega = 0
-        msg_entrega = []
-        final = 0
 
     
     return render(
@@ -811,3 +813,53 @@ def favoritos_remove(request):
         else:
             msg = 'Erro ao remover dos favoritos'
             return JsonResponse({ 'status': 'erro' , 'msg': msg})
+
+def checkout(request):
+
+    msg = ''
+    items = ''
+    success = ''
+    total = 0
+    taxa_entrega = 0
+    final = 0
+
+    if not request.user.is_authenticated:
+        msg = 'Para de digitar na URL e cria uma conta logo'
+        success = False
+
+    if request.user.groups.filter(name="Donos").exists():
+       msg = 'Para de digitar na URL e cria uma conta logo'
+       success = False
+
+    try:
+        id_user = Cliente.objects.get(user_id=request.user.id)
+    except Cliente.DoesNotExist:
+        id_user = None
+    
+    #Pega os items que estão no carrinho
+    try:
+        items = Carrinho.objects.filter(id_cliente=id_user.id)
+        success = True
+        msg = None
+
+        for i in items:
+            total += i.id_produto.preco
+            taxa_entrega += i.id_produto.restaurante.taxa_entrega
+    
+        final = total + taxa_entrega
+
+    except Carrinho.DoesNotExist:
+        items = None
+
+    return render(
+        request,
+        'checkout.html',
+        {
+            'items': items,
+            'success': success,
+            'msg': msg,
+            'total': total,
+            'taxa_entrega': taxa_entrega,
+            'final': final
+        }
+    )

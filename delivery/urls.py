@@ -30,4 +30,5 @@ urlpatterns = [
     path('carrinho/cep',views.carrinho_cep,name="Calcular CEP"),
     path('favoritos/add',views.favoritos_add,name="Adicionar Favoritos"),
     path('favoritos/remove',views.favoritos_remove,name="Remover dos Favoritos"),
+    path('checkout/',views.checkout,name="Checkout Compra"),
 ]

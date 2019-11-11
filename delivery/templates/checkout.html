@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Checkout
+{% endblock %}
+
+{% block content %}
+    <div class="checkout-wrapper">
+        <div class="container-fluid">
+
+            <div class="header-checkout">
+                <a href="#"> < Voltar</a>
+                <h1>Finalize sua compra</h1>
+
+                <h2>Obrigado pela escolha , <span>{{user.username}}</span></h2>
+
+                <p>Confira se os produtos estão corretos e se sua informção tambem está!</p>
+                <p>Obrigado por confiar no Foodz</p>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-md-3">
+                    <div class="left-side-info-products">
+                        {% if success %}
+                            <h3>Seus items</h3>
+                            <ul>
+                                {% for i in items %}
+                                    <li>
+                                        <div class="display">
+                                            <div class="amount">
+                                                <p>x <span>{{i.quantidade}}</span></p>
+                                            </div>
+
+                                            <div class="info">
+                                                <h5>{{i.id_produto.nome}}</h5>
+                                                <p><strong>Vendido por: </strong> {{i.id_produto.restaurante.nome}} </p>
+                                            </div>
+
+                                            <div class="preco">
+                                                <p>R$ <span>{{i.id_produto.preco}}</span> </p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                {% endfor %}
+
+                                <li class="valores-finais">
+                                    <h3>Valor Total</h3>
+                                    <p>R$ <span>{{total}}</span> </p>
+                                    <p>+ R$ <span>{{taxa_entrega}}</span> </p>
+                                    <p class="finalaehoo">Final: R$ <span>{{final}}</span></p>
+                                </li>
+                            </ul>
+                        {% else %}
+                            <h2>{{msg}}</h2>
+                        {% endif %}
+                    </div>
+                </div>
+                
+                <div class="col-xs-12 col-md-9">
+                    <div class="contact-info">
+                        <h3>Confirme seus dados</h3>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
