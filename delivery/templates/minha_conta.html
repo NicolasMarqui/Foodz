@@ -37,8 +37,9 @@
                         
                         <div class="show-pedidos">
 
-                            <div class="container p-0">
-                                {% for i in range %}
+                            <div class="container p-0 m-w">
+                                {% if pedido %}
+                                    {% for i in pedidos %}
                                     <div class="pedido pedido-1">
                                         <div class="row fs-0">
                                             <div class="col-xs-12 col-md-3 h100 col-in-block">
@@ -80,6 +81,17 @@
                                         </div>
                                     </div>
                                 {% endfor %}
+                                {% else %}
+                                    <div class="no-pedidos">
+                                        <h2>{{msg}}</h2>
+
+                                        <span>Me leve até os </span>
+
+                                        <a href="/produtos">
+                                            Produtos
+                                        </a>
+                                    </div>
+                                {% endif %}
                             </div>
 
                         </div>

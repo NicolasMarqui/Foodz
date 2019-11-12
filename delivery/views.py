@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Cliente, Produto, Restaurante, Notificacao, Carrinho, Favoritos
+from .models import Cliente, Produto, Restaurante, Notificacao, Carrinho, Favoritos, Placed_order
 from django.contrib.auth import logout as django_logout
 from django.contrib.auth.models import User, auth, Group
 from django.db.models import Q
@@ -352,12 +352,34 @@ def pesquisa(request):
 
 def minha_conta(request, id):
 
-    cliente = Cliente.objects.all().filter(user_id=id)
+    msg = ''
+    success = False
+    items = ''
+
+    if not request.user.is_authenticated:
+        return redirect('/dashboard')
 
     if request.user.groups.filter(name="Donos").exists():
         return redirect('/dashboard')
-    
 
+    try:
+        cliente = Cliente.objects.filter(user_id=id)
+        success = True
+
+    except Cliente.DoesNotExist:
+        msg = 'Erro ao encontrar o cliente'
+
+    try:
+        items = Placed_order.objects.filter(id_cliente=id)
+
+        if not items:
+            msg = 'Nenhum pedido encontrado'
+
+    except Placed_order.DoesNotExist:
+        items = None
+        msg = 'Nenhum pedido encontrado'
+
+    print({'item': items, 'msg': msg})
     
     return render(
         request,
@@ -365,6 +387,8 @@ def minha_conta(request, id):
         {
             "id": id,
             "cliente": cliente,
+            'msg': msg,
+            'pedidos': items,
         }
     )
 

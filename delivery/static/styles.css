@@ -59,6 +59,10 @@ body ::-webkit-scrollbar-thumb, html ::-webkit-scrollbar-thumb {
   background-color: #E04040;
 }
 
+.m-w {
+  max-width: 100%;
+}
+
 .display-choices-products button.slick-prev, .display-choices-products button.slick-next {
   display: none !important;
 }
@@ -4624,5 +4628,42 @@ footer .footer .fot-bottom p {
 
 .checkout-wrapper .left-side-info-products ul li.valores-finais p.finalaehoo span {
   border-bottom: 2px solid #E04040;
+}
+
+.no-pedidos {
+  padding: 24px;
+}
+
+.no-pedidos h2 {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.no-pedidos span {
+  display: block;
+  text-align: center;
+  padding: 8px 0;
+}
+
+.no-pedidos a {
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+  padding: 14px 16px;
+  text-align: center;
+  color: #fff;
+  background-color: #E04040;
+  text-decoration: none;
+}
+
+.no-pedidos a:hover {
+  background-color: #e76c6c;
+}
+
+@media (min-width: 768px) {
+  .no-pedidos a {
+    width: 350px;
+  }
 }
 /*# sourceMappingURL=styles.css.map */

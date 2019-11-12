@@ -99,13 +99,14 @@ class Comentario(models.Model):
 
 class Placed_order(models.Model):
     id_restaurante              = models.ForeignKey(Restaurante, on_delete=models.CASCADE)
-    order_time                  = models.DateTimeField()
-    tempo_estimado              = models.IntegerField(blank=True)
+    order_time                  = models.DateTimeField(auto_now=True,)
+    tempo_estimado              = models.IntegerField(blank=True, default=15)
     comida_pronta               = models.DateTimeField(auto_now=True, blank=True)
     endereco_entrega            = models.CharField(max_length=255)
     endereco_saida              = models.CharField(max_length=255)
     id_cliente                  = models.ForeignKey(Cliente, on_delete=models.CASCADE)
-    preco                       = models.DecimalField(max_digits=5,decimal_places=2)
+    id_produto                  = models.ForeignKey(Produto, on_delete=models.CASCADE)
+    quantidade                  = models.IntegerField(default=1)
     comentario                  = models.TextField(blank=True, null=True)
 
 class Compras(models.Model):
