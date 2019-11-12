@@ -5,7 +5,7 @@ from django.contrib.auth import logout as django_logout
 from django.contrib.auth.models import User, auth, Group
 from django.db.models import Q
 from django.contrib import messages
-from .forms import MoreInfoRestaurant, AddProducts
+from .forms import MoreInfoRestaurant, AddProducts, MoreInfoCliente
 from django.shortcuts import get_object_or_404
 import datetime
 from django.http import JsonResponse
@@ -232,9 +232,17 @@ def login(request):
         email = request.POST['email']
         senha = request.POST['senha']
 
-        usuario = User.objects.filter(email=email)
+        try:
+            usuario = User.objects.filter(email=email)
+        except User.DoesNotExist:
+            usuario = None
+            messages.info(request, 'O usuário não existe')
 
-        has_login = User.objects.get(email=email)
+        try:
+            has_login = User.objects.get(email=email)
+        except User.DoesNotExist:
+            has_login = None
+            messages.info(request, 'O usuário não existe')
 
         if usuario.exists():
             for i in usuario:
@@ -355,6 +363,7 @@ def minha_conta(request, id):
     msg = ''
     success = False
     items = ''
+    data = ''
 
     if not request.user.is_authenticated:
         return redirect('/dashboard')
@@ -379,8 +388,29 @@ def minha_conta(request, id):
         items = None
         msg = 'Nenhum pedido encontrado'
 
-    print({'item': items, 'msg': msg})
-    
+    #Cadastro
+    #Pegar dados existentes
+    try:
+        cliente = Cliente.objects.filter(user_id=id)
+
+        for i in cliente:
+            data = {
+                'user': request.user.username,
+                'cpf': i.cpf,
+                'telefone': i.telefone,
+                'avatar': i.avatar,
+                'user_id': i.user_id
+            }
+
+        form = MoreInfoCliente(request.POST or None, request.FILES or None, initial=data, instance=cliente.first())
+    except Cliente.DoesNotExist:
+        form = MoreInfoCliente(request.POST or None, request.FILES or None)
+
+    #Salvar os dados
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+
     return render(
         request,
         'minha_conta.html',
@@ -389,6 +419,7 @@ def minha_conta(request, id):
             "cliente": cliente,
             'msg': msg,
             'pedidos': items,
+            'form': form
         }
     )
 

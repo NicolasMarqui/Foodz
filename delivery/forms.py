@@ -2,7 +2,7 @@ from django import forms
 from django.core.validators import MinValueValidator, MaxValueValidator
 from .choices import *
 from django.contrib.auth.forms import UserCreationForm
-from .models import Restaurante, Produto
+from .models import Restaurante, Produto, Cliente
 from django_summernote.widgets import SummernoteInplaceWidget,SummernoteWidget
 
 class MoreInfoRestaurant(forms.ModelForm):
@@ -13,6 +13,11 @@ class MoreInfoRestaurant(forms.ModelForm):
         widgets = {
             'descricao': SummernoteWidget(),
         }
+
+class MoreInfoCliente(forms.ModelForm):
+    class Meta:
+        model = Cliente
+        fields = ['cpf', 'telefone', 'avatar']
 
 class AddProducts(forms.ModelForm):
     class Meta:

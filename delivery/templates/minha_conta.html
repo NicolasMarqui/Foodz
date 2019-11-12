@@ -28,7 +28,7 @@
 
                 <ul class="nav nav-tabs">
                     <li class="active"><a data-toggle="tab" href="#pedidos">Pedidos</a></li>
-                    <li><a data-toggle="tab" href="#enderecos">Cadastro</a></li>
+                    <li><a data-toggle="tab" href="#cadastro">Cadastro</a></li>
                     <li><a data-toggle="tab" href="#enderecos">Endereços</a></li>
                 </ul>
 
@@ -98,10 +98,35 @@
 
                     </div>
 
-                    <div id="home" class="tab-pane fade">
+                    <div id="cadastro" class="tab-pane fade">
                       
-                        <div class="info-tab">
+                        <div class="display-info">
+                            <form action="/conta/{{id}}/" method="post" enctype='multipart/form-data'>
+                                {% csrf_token %}
 
+                                <div class="row">
+                                    <div class="form-group row">
+                                        <label for="{{form.cpf.label}}" class="col-sm-2 col-form-label">{{form.cpf.label}}</label>
+                                        <div class="col-sm-10">
+                                            {{form.cpf}}
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="{{form.telefone.label}}" class="col-sm-2 col-form-label">{{form.telefone.label}}</label>
+                                        <div class="col-sm-10">
+                                            {{form.telefone}}
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="{{form.avatar.label}}" class="col-sm-2 col-form-label">{{form.avatar.label}}</label>
+                                        <div class="col-sm-10">
+                                            {{form.avatar}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button type="submit">Salvar</button>
+                            </form>
                         </div>
 
 

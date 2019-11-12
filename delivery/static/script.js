@@ -758,5 +758,22 @@ $(document).ready(function(){
       });
   });
 
+  //Masks
+  var spOptions = {
+    onKeyPress: function(val, e, field, options) {
+      var mask = "";
+
+      if (val.length === 5) {
+        mask = '00.00'
+      } else {
+        mask = '000.00'
+      }
+      $('#id_preco').mask(mask, options);
+    },
+  };
+
+  $('#id_preco').mask('00.00', spOptions);
+  $('#id_cpf').mask('000.000.000.00');
+  $('#id_telefone').mask('(00) 00000-0000');
 
 })
