@@ -19,6 +19,26 @@
 
                     <h2>{{user.username}}</h2>
 
+                    <ul>
+                        <li>
+                            <a href="#">
+                                <i class="fas fa-user"></i> Minha Conta
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                <i class="fas fa-heart"></i> Favoritos
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                <i class="fas fa-trash-alt"></i> Deletar Conta
+                            </a>
+                        </li>
+                    </ul>
+
                 </div>
 
             </div>
@@ -99,8 +119,10 @@
                     </div>
 
                     <div id="cadastro" class="tab-pane fade">
-                      
+
+                        
                         <div class="display-info">
+                            <h3>Informações Adicionais</h3>
                             <form action="/conta/{{id}}/" method="post" enctype='multipart/form-data'>
                                 {% csrf_token %}
 
@@ -133,8 +155,13 @@
                     </div>
 
                     <div id="enderecos" class="tab-pane fade">
-                      <h3>Menu 1</h3>
-                      <p>Some content in menu 1.</p>
+                      <h2>Seus Endereços</h2>
+
+                      <div class="endereco-wrapper">
+                          <ul>
+                              <li>Endereço: {{cl.endereco_id.endereco}}</li>
+                          </ul>
+                      </div>
                     </div>
 
                 </div>

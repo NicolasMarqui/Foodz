@@ -3231,7 +3231,7 @@ footer .footer .fot-bottom p {
 }
 
 .minha-conta-wrapper {
-  height: calc(100% - 100px);
+  height: calc(100% - 70px);
   width: 100%;
   overflow: hidden;
   position: relative;
@@ -3257,11 +3257,22 @@ footer .footer .fot-bottom p {
   border-radius: 50%;
 }
 
+.minha-conta-wrapper .side-nav-conta .info-nome ul li {
+  width: 100%;
+}
+
+.minha-conta-wrapper .side-nav-conta .info-nome ul li a {
+  display: block;
+  text-align: center;
+  padding: 24px;
+}
+
 .minha-conta-wrapper .side-nav-conta .info-nome h2 {
   padding: 24px;
   font-weight: 600;
   font-size: 25px;
   text-align: center;
+  text-transform: capitalize;
 }
 
 .minha-conta-wrapper .side-nav-conta .info-nome h2 a {

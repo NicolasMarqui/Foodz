@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Cliente, Produto, Restaurante, Notificacao, Carrinho, Favoritos, Placed_order
+from .models import Cliente, Produto, Restaurante, Notificacao, Carrinho, Favoritos, Placed_order, Endereco
 from django.contrib.auth import logout as django_logout
 from django.contrib.auth.models import User, auth, Group
 from django.db.models import Q
@@ -99,7 +99,7 @@ def dashboard(request):
     
     if info_restaurante:
         restaurante = Restaurante.objects.get(user_id = id)
-        info_produtos = Produto.objects.filter(restaurante_id=restaurante.id)
+        info_produtos = Produto.objects.filter(restaurante_id=restaurante.id)[:4]
     else:
         info_produtos = None
 
@@ -364,6 +364,7 @@ def minha_conta(request, id):
     success = False
     items = ''
     data = ''
+    enderecos = ''
 
     if not request.user.is_authenticated:
         return redirect('/dashboard')
@@ -410,6 +411,19 @@ def minha_conta(request, id):
     if request.method == 'POST':
         if form.is_valid():
             form.save()
+
+    #Procura o endereço
+    try:
+        cl= Cliente.objects.filter(user_id=id)
+
+        for i in cl:
+            enderecos.append(Endereco.objects.filter(id_cliente=i.id))
+    except:
+        enderecos = None
+
+
+    print(enderecos)
+    print(cl)
 
     return render(
         request,

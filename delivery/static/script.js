@@ -512,8 +512,11 @@ $(document).ready(function(){
     $('#todos_produtos').on('click', $('.updateBtn'), function(){
         $.ajax({
           type: "method",
-          url: "url",
-          data: "data",
+          url: "get-produto-editar/",
+          data: {
+            id: id,
+            csrfmiddlewaretoken: getCookie('csrftoken'),
+          },
           dataType: "dataType",
           success: function (response) {
             
@@ -521,7 +524,7 @@ $(document).ready(function(){
         });
     })
 
-    $('.edit-prod').click(function(){
+    $('.edit-prod').on('click', function(){
 
       id = $(this).attr('id')
 
