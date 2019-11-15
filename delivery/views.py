@@ -887,18 +887,18 @@ def checkout(request):
 
     msg = ''
     items = ''
-    success = ''
+    success = None
     total = 0
     taxa_entrega = 0
     final = 0
 
     if not request.user.is_authenticated:
         msg = 'Para de digitar na URL e cria uma conta logo'
-        success = False
+        success = None
 
     if request.user.groups.filter(name="Donos").exists():
        msg = 'Para de digitar na URL e cria uma conta logo'
-       success = False
+       success = None
 
     try:
         id_user = Cliente.objects.get(user_id=request.user.id)
@@ -906,20 +906,25 @@ def checkout(request):
         id_user = None
     
     #Pega os items que estão no carrinho
-    try:
-        items = Carrinho.objects.filter(id_cliente=id_user.id)
-        success = True
-        msg = None
+    if id_user is not None:
+        try:
+            items = Carrinho.objects.filter(id_cliente=id_user.id)
+            success = True
+            msg = None
 
-        for i in items:
-            total += i.id_produto.preco
-            taxa_entrega += i.id_produto.restaurante.taxa_entrega
-    
-        final = total + taxa_entrega
+            for index,i in enumerate(items, start=1):
+                if index >= 1 and i.id_produto.restaurante.nome != i.id_produto.restaurante.nome:
+                    taxa_entrega += i.id_produto.restaurante.taxa_entrega
+                else:
+                    taxa_entrega = i.id_produto.restaurante.taxa_entrega
 
-    except Carrinho.DoesNotExist:
-        items = None
+                total += (i.id_produto.preco * i.quantidade)
+        
+            final = total + taxa_entrega
 
+        except Carrinho.DoesNotExist:
+            items = None
+        
     return render(
         request,
         'checkout.html',
@@ -929,6 +934,7 @@ def checkout(request):
             'msg': msg,
             'total': total,
             'taxa_entrega': taxa_entrega,
-            'final': final
+            'final': final,
+            'usuario': id_user
         }
     )

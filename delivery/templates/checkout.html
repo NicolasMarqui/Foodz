@@ -6,64 +6,174 @@
 {% endblock %}
 
 {% block content %}
-    <div class="checkout-wrapper">
-        <div class="container-fluid">
-
-            <div class="header-checkout">
-                <a href="#"> < Voltar</a>
-                <h1>Finalize sua compra</h1>
-
-                <h2>Obrigado pela escolha , <span>{{user.username}}</span></h2>
-
-                <p>Confira se os produtos estão corretos e se sua informção tambem está!</p>
-                <p>Obrigado por confiar no Foodz</p>
+    <div class="carrinho-wrapper">
+        <div class="main-header">
+            <div class="container-fluid">
+                <div class="row fs-0">
+                    <div class="col-xs-12 col-md-3 col-in-block v-bottom">
+                    </div>
+        
+                    <div class="col-xs-12 col-md-6 col-in-block">
+                        <div class="logo-bread">
+                            <h1>Foodz</h1>
+        
+                            <ul>
+                                <li>
+                                    <a href="/">Voltar para o site</a>
+                                </li>
+        
+                                <li>
+                                    <a href="/carrinho">Seu carrinho</a>
+                                </li>
+        
+                                <li><span>Checkout</span></li>
+        
+                                <li>
+                                    <span class="notYet">
+                                        Confirmação
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+        
+                    <div class="col-xs-12 col-md-3 col-in-block v-middle">
+                        <div class="cart">
+                            <p>
+                                <i class="fas fa-shopping-cart"></i>
+                                <span class="amount-carrinho">0.00</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
+        </div>
 
-            <div class="row">
-                <div class="col-xs-12 col-md-3">
-                    <div class="left-side-info-products">
-                        {% if success %}
-                            <h3>Seus items</h3>
+        <div class="checkout-info">
+            <div class="container">
+                <h2>Checkout</h2>
+                <div class="row">
+
+                    <div class="col-xs-12 col-md-6">
+                        
+                        <h3>Detalhes do envio</h3>
+                        <div class="info-and-payment">
+
+                            {% if success%}
+                                <ul>
+                                    <li>
+                                        <p>Nome: <span>{{user.username}}</span></p>
+                                    </li>
+                                    <li>
+                                        <p>Email: <span>{{user.email}}</span></p>
+                                    </li>
+                                    <li>
+                                        <p>Endereço: <span>{{usuario.endereco_id.endereco}}, {{usuario.endereco_id.numero}}</span></p>
+                                    </li>
+                                    <li>
+                                        <p>Cidade: <span>{{usuario.endereco_id.cidade.nomeCidade}}</span></p>
+                                    </li>
+                                </ul>
+
+                                <i class="fas fa-pencil-alt" data-toggle="tooltip" title="Editar Endereço" data-placement="left"></i>
+                            {% else %}
+                                <div class="no-login">
+                                    <h4>{{msg}}</h4>
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="prods-checkout">
+
+                            <h3>Detalhe dos produtos</h3>
+
+                            {% if success %}
                             <ul>
                                 {% for i in items %}
                                     <li>
-                                        <div class="display">
-                                            <div class="amount">
-                                                <p>x <span>{{i.quantidade}}</span></p>
+                                        <div class="prod">
+                                            <div class="image">
+                                                <img src="/media/{{i.id_produto.foto}}" alt="">
                                             </div>
 
-                                            <div class="info">
-                                                <h5>{{i.id_produto.nome}}</h5>
-                                                <p><strong>Vendido por: </strong> {{i.id_produto.restaurante.nome}} </p>
+                                            <div class="name">
+                                                <h4>{{i.id_produto.nome}}</h4>
+                                                <p>Vendido por: {{i.id_produto.restaurante.nome}}</p>
                                             </div>
 
-                                            <div class="preco">
-                                                <p>R$ <span>{{i.id_produto.preco}}</span> </p>
+                                            <div class="quantity-preco">
+                                                <p>R$ <span>{{i.id_produto.preco}}</span></p>
+
+                                                <p>(x{{i.quantidade}})</p>
                                             </div>
                                         </div>
                                     </li>
                                 {% endfor %}
-
-                                <li class="valores-finais">
-                                    <h3>Valor Total</h3>
-                                    <p>R$ <span>{{total}}</span> </p>
-                                    <p>+ R$ <span>{{taxa_entrega}}</span> </p>
-                                    <p class="finalaehoo">Final: R$ <span>{{final}}</span></p>
-                                </li>
                             </ul>
-                        {% else %}
-                            <h2>{{msg}}</h2>
-                        {% endif %}
+
+                            <div class="total">
+                                Preço final <p>R$ <span>{{final}}</span></p>
+                            </div>
+                            {% else %}
+                                <div class="no-login">
+                                    <h4>{{msg}}</h4>
+                                </div>
+                            {% endif %}
+                        </div>
+
                     </div>
-                </div>
-                
-                <div class="col-xs-12 col-md-9">
-                    <div class="contact-info">
-                        <h3>Confirme seus dados</h3>
+
+                    <div class="col-xs-12 col-md-6">
+                        <div class="payment">
+
+                            <h3>Detalhes do Pagamento</h3>
+
+                            <div class="show-card"></div>
+
+                            <form action="" class="pagamento">
+                                <div class="form-group">
+                                    <label for="nome">
+                                        Nome no cartão
+                                    </label>
+                                    <input type="text" id="nome" name="name" required/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="number">
+                                        Número do cartão
+                                    </label>
+                                    <input type="text" id="number" name="number" required/>
+                                </div>
+                                
+
+                                <div class="col-xs-12 col-md-6 p-0">
+                                    <div class="form-group">
+                                        <label for="expiry">
+                                            Data de Expiração
+                                        </label>
+                                        <input type="text" id="expiry" name="expiry" required/>
+                                    </div>      
+                                </div>
+                                <div class="col-xs-12 col-md-6 p-0">
+                                    <label for="cvc">Código CVC</label>
+                                    <div class="form-group">
+                                        <input type="text" id="cvc" name="cvc" required/>
+                                    </div>     
+                                </div>
+
+                                <button type="submit" id="submitPayment" {% if not success %}disabled{% endif %}>
+                                    Pagar (R${{final}})
+                                </button>
+                            </form>
+
+                            <a href="#dinheiro" id="pagarDinheiro">
+                                Vou pagar na entrega
+                            </a>
+
+                        </div>
                     </div>
+
                 </div>
             </div>
-
         </div>
     </div>
 {% endblock %}

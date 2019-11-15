@@ -229,7 +229,7 @@
                 </div>
                 <div class="bottom-header">
                     <div class="container">
-                        {% if '/conta' not in request.path %}
+                        {% if '/conta' not in request.path and '/carrinho' not in request.path and '/checkout' not in request.path %}
                             {% include 'includes/products-bottom.html' %}
                         {% endif %}
                     </div>
@@ -305,6 +305,7 @@
         <script src="{% static 'lib/toast/jquery.toast.min.js' %}"></script>
         <script src="{% static 'lib/jquery.mask.min.js' %}"></script>
         <script src="{% static 'lib/slick-1.8.1/slick/slick.min.js' %}"></script>
+        <script src="{% static 'lib/jquery.card.js' %}"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
         <script src="{% static 'lib/jquery-loading-master/jquery-loading-master/dist/jquery.loading.min.js' %}"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>

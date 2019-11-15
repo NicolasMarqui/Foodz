@@ -195,7 +195,7 @@ body ::-webkit-scrollbar-thumb, html ::-webkit-scrollbar-thumb {
 }
 
 .v-bottom {
-  vertical-align: middle;
+  vertical-align: bottom !important;
 }
 
 .relative {
@@ -4676,5 +4676,222 @@ footer .footer .fot-bottom p {
   .no-pedidos a {
     width: 350px;
   }
+}
+
+.logo-bread {
+  padding: 14px;
+}
+
+.logo-bread h1 {
+  width: 100%;
+  text-align: center;
+}
+
+.logo-bread ul {
+  margin: 0;
+  padding: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
+.logo-bread ul li {
+  font-size: 14px;
+  text-align: center;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  color: #B3B5BD;
+  position: relative;
+}
+
+.logo-bread ul li a {
+  font-size: 14px;
+  color: #B3B5BD;
+  text-align: center;
+}
+
+.logo-bread ul li::before {
+  content: '>';
+  position: absolute;
+  top: 50%;
+  right: 0;
+  -webkit-transform: translate(0, -50%);
+          transform: translate(0, -50%);
+}
+
+.logo-bread ul li:last-child::before {
+  content: none;
+}
+
+.checkout-info h2 {
+  font-size: calc(1.34375rem + 1.125vw);
+  margin: 25px 0;
+}
+
+@media (min-width: 1200px) {
+  .checkout-info h2 {
+    font-size: 2.1875rem;
+  }
+}
+
+.checkout-info h3 {
+  color: #7c7c7c;
+  font-size: 22px;
+  text-transform: uppercase;
+  margin: 8px 0;
+  border-bottom: 1px solid #B3B5BD;
+  padding-bottom: 8px;
+}
+
+.checkout-info .no-login h4 {
+  text-align: center;
+}
+
+.checkout-info .info-and-payment {
+  padding: 15px;
+  position: relative;
+}
+
+.checkout-info .info-and-payment ul li {
+  padding: 8px 0;
+}
+
+.checkout-info .info-and-payment ul li:first-child {
+  text-transform: capitalize;
+}
+
+.checkout-info .info-and-payment ul li p span {
+  margin: 0 5px;
+  font-weight: 600;
+}
+
+.checkout-info .info-and-payment i {
+  position: absolute;
+  top: 25px;
+  right: 15px;
+  cursor: pointer;
+}
+
+.checkout-info .payment {
+  margin: 8px 0;
+}
+
+#pagarDinheiro {
+  padding: 10px;
+  text-align: center;
+  background-color: #4cb8a8;
+  display: block;
+  outline: none;
+  border: none;
+  margin: 15px 0;
+  width: 100%;
+  color: #fff;
+  text-decoration: none;
+}
+
+#pagarDinheiro:hover {
+  background-color: #e76c6c;
+}
+
+form.pagamento {
+  margin: 18px 0;
+}
+
+form.pagamento label {
+  display: block;
+  margin: 8px 0 5px;
+  text-transform: uppercase;
+  color: #B3B5BD;
+  font-size: 14px;
+}
+
+form.pagamento input {
+  padding: 8px;
+  width: 100%;
+}
+
+form.pagamento button {
+  padding: 10px;
+  text-align: center;
+  background-color: #E04040;
+  display: block;
+  outline: none;
+  border: none;
+  width: 100%;
+  color: #fff;
+}
+
+.prods-checkout {
+  margin: 18px 0;
+}
+
+.prods-checkout ul li {
+  margin: 18px 0;
+}
+
+.prods-checkout ul li .prod {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.prods-checkout ul li .prod .image {
+  height: 70px;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.prods-checkout ul li .prod .image img {
+  height: 100%;
+  width: auto;
+  margin: 0 auto;
+}
+
+.prods-checkout ul li .prod .name {
+  -webkit-box-flex: 3;
+      -ms-flex: 3;
+          flex: 3;
+  margin-top: 8px;
+}
+
+.prods-checkout ul li .prod .name h4 {
+  font-size: 14px;
+}
+
+.prods-checkout ul li .prod .name p {
+  font-size: 12px;
+}
+
+.prods-checkout ul li .prod .quantity-preco {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  margin-top: 8px;
+}
+
+.prods-checkout ul li .prod .quantity-preco p {
+  font-size: 13px;
+  display: inline-block;
+}
+
+.prods-checkout .total {
+  text-align: center;
+}
+
+.prods-checkout .total p {
+  font-size: 18px;
+}
+
+.prods-checkout .total p span {
+  font-weight: 600;
 }
 /*# sourceMappingURL=styles.css.map */
