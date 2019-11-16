@@ -97,23 +97,21 @@ class Comentario(models.Model):
     recomenda                   = models.BooleanField(default=True)
     data_comentario             = models.DateTimeField()
 
+class Order(models.Model):
+    id_cliente                  = models.ForeignKey(Cliente, on_delete=models.CASCADE)
+
 class Placed_order(models.Model):
+    order_id                    = models.ForeignKey(Order, on_delete=models.CASCADE)
     id_restaurante              = models.ForeignKey(Restaurante, on_delete=models.CASCADE)
     order_time                  = models.DateTimeField(auto_now=True,)
     tempo_estimado              = models.IntegerField(blank=True, default=15)
-    comida_pronta               = models.DateTimeField(auto_now=True, blank=True)
+    pedido_pronta               = models.BooleanField(default=False)
     endereco_entrega            = models.CharField(max_length=255)
     endereco_saida              = models.CharField(max_length=255)
     id_cliente                  = models.ForeignKey(Cliente, on_delete=models.CASCADE)
     id_produto                  = models.ForeignKey(Produto, on_delete=models.CASCADE)
     quantidade                  = models.IntegerField(default=1)
     comentario                  = models.TextField(blank=True, null=True)
-
-class Compras(models.Model):
-    id_cliente                  = models.ForeignKey(Cliente, on_delete=models.CASCADE)
-    id_produto                  = models.ForeignKey(Produto, on_delete=models.CASCADE)
-    id_restaurante              = models.ForeignKey(Restaurante, on_delete=models.CASCADE)
-    placed_order_id             = models.ForeignKey(Placed_order, on_delete=models.CASCADE)
 
 class Notificacao(models.Model):
     id_user                     = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -137,3 +135,10 @@ class Favoritos(models.Model):
     id_produto                  = models.ForeignKey(Produto, on_delete=models.CASCADE)
     is_favorito                 = models.BooleanField(default=False)
     adicionado_favorito         = models.DateTimeField(auto_now=True,blank=True)
+
+class Status(models.Model):
+    id_compra                   = models.ForeignKey(Placed_order, on_delete=models.CASCADE)
+    recebido                    = models.BooleanField(default=False)
+    saiu                        = models.BooleanField(default=False)
+    em_rota                     = models.BooleanField(default=False)
+    entregue                    = models.BooleanField(default=False)

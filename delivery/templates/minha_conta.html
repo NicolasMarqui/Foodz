@@ -7,6 +7,51 @@
 {% block content %}
     
     {% if user.is_authenticated %}
+
+        <div class="modal-favoritos">
+
+            <i class="fas fa-times"></i>
+
+            <div class="actual-modal">
+                <h3>Seus Favoritos</h3>
+
+                {% if favoritos %}
+                    <ul>
+                        {% for i in favoritos %}
+                            <li>
+                                <div class="fav">
+                                    <div class="image">
+                                        <img src="/media/{{i.id_produto.foto}}" alt="">
+                                    </div>
+
+                                    <div class="text">
+                                        <p>{{i.id_produto.nome}}</p>
+                                        <p>Vendido por: <span>{{i.id_produto.restaurante.nome}}</span></p>
+                                    </div>
+
+                                    <div class="link">
+                                        <div class="center-me">
+                                            <a href="/produtos/info/{{i.id_produto.id}}">
+                                                <i class="fas fa-info" data-toggle="tooltip" title="Ver Produto" data-placement="bottom"></i>
+                                            </a>
+    
+                                            <a href="#deletar-{{i.id_produto.id}}">
+                                                <i class="fas fa-trash-alt" data-toggle="tooltip" title="Remover Favorito" data-placement="bottom"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <div class="no-fav">
+                        <h4>Você não possui nenhum produto favorito</h4>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
         {% for cl in cliente %}
         <div class="minha-conta-wrapper">
             <div class="side-nav-conta">
@@ -22,19 +67,19 @@
                     <ul>
                         <li>
                             <a href="#">
-                                <i class="fas fa-user"></i> Minha Conta
+                                <i class="fas fa-user"></i> <span>Minha Conta</span>
                             </a>
                         </li>
 
                         <li>
                             <a href="#">
-                                <i class="fas fa-heart"></i> Favoritos
+                                <i class="fas fa-heart"></i> <span>Favoritos</span>
                             </a>
                         </li>
 
                         <li>
                             <a href="#">
-                                <i class="fas fa-trash-alt"></i> Deletar Conta
+                                <i class="fas fa-trash-alt"></i> <span>Deletar Conta</span>
                             </a>
                         </li>
                     </ul>
@@ -58,23 +103,23 @@
                         <div class="show-pedidos">
 
                             <div class="container p-0 m-w">
-                                {% if pedido %}
+                                {% if pedidos %}
                                     {% for i in pedidos %}
                                     <div class="pedido pedido-1">
                                         <div class="row fs-0">
                                             <div class="col-xs-12 col-md-3 h100 col-in-block">
                                                 <div class="product-image">
-                                                    <div class="bg" style="background-image: url('/media/{{cl.avatar}}');"></div>
+                                                    <img src="/media/{{i.id_produto.foto}}" alt="">
                                                 </div>
                                             </div>
 
                                             <div class="col-xs-12 col-md-5 col-in-block v-middle">
-                                                <h4>{{cl.nome}}</h4>
-                                                <p>R$ <span>0.00</span></p>
+                                                <h4>{{i.id_produto.nome}}</h4>
+                                                <p>R$ <span>{{i.id_produto.preco}}</span></p>
 
-                                                <p class="vendido-por">Vendido por:  <span>{{cl.nome}}</span></p>
+                                                <p class="vendido-por">Vendido por:  <span>{{i.id_restaurante.nome}}</span></p>
                                                 
-                                                <a href="#" class="mais-detalhes">Mais Detalhes</a>
+                                                <a href="/produtos/info/{{i.id_produto.id}}" class="mais-detalhes">Mais Detalhes</a>
                                             </div>
                                         </div>
 

@@ -790,6 +790,12 @@ $(document).ready(function(){
         cvc: '***'
     }
 });
+
+
+//Checkout
+$('#submitPayment').click(function(){
+  console.log('clicked')
+})
   
 
 })

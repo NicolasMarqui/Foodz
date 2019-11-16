@@ -43,7 +43,7 @@
 
                                             <div class="text">
                                                 <h3>{{p.nome}}</h3>
-                                                <p class="desc">{{p.descricao}}</p>
+                                                {{p.descricao|safe}}
 
                                                 <a href="/produtos/info/{{p.id}}">Info</a>
                                             </div>

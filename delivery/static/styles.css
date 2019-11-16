@@ -3264,7 +3264,13 @@ footer .footer .fot-bottom p {
 .minha-conta-wrapper .side-nav-conta .info-nome ul li a {
   display: block;
   text-align: center;
-  padding: 24px;
+  padding: 24px 16px;
+  text-decoration: none;
+  color: #000;
+}
+
+.minha-conta-wrapper .side-nav-conta .info-nome ul li a i {
+  text-align: left;
 }
 
 .minha-conta-wrapper .side-nav-conta .info-nome h2 {
@@ -3320,11 +3326,9 @@ footer .footer .fot-bottom p {
   padding-bottom: 60%;
 }
 
-.minha-conta-wrapper .my-info-conta .pedido .product-image:hover .bg {
-  -webkit-transition: all .9s linear;
-  transition: all .9s linear;
-  -webkit-transform: scale(1.12) rotate(36deg);
-          transform: scale(1.12) rotate(36deg);
+.minha-conta-wrapper .my-info-conta .pedido .product-image img {
+  height: 100px;
+  width: 100%;
 }
 
 .minha-conta-wrapper .my-info-conta .pedido h4 {
@@ -4139,7 +4143,7 @@ footer .footer .fot-bottom p {
   text-align: left;
 }
 
-.display-produtos-pesquisa .display .text .desc {
+.display-produtos-pesquisa .display .text p {
   padding: 15px 0;
 }
 
@@ -4272,6 +4276,10 @@ footer .footer .fot-bottom p {
 
 .no-items a:hover {
   background-color: #e76c6c;
+}
+
+.carrinho-wrapper {
+  overflow-x: none;
 }
 
 .carrinho-wrapper h1 {
@@ -4893,5 +4901,128 @@ form.pagamento button {
 
 .prods-checkout .total p span {
   font-weight: 600;
+}
+
+.modal-favoritos {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 20;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: none;
+}
+
+.modal-favoritos .fa-times {
+  position: absolute;
+  top: 50px;
+  right: 50px;
+  cursor: pointer;
+  color: #fff;
+  font-size: 28px;
+}
+
+.modal-favoritos .actual-modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  background-color: #fff;
+  width: 50%;
+  height: 500px;
+  overflow: auto;
+}
+
+.modal-favoritos .actual-modal h3 {
+  font-size: 25px;
+  text-align: center;
+  font-weight: 600;
+  padding: 15px 0;
+}
+
+.modal-favoritos .actual-modal ul li {
+  margin: 5px 0;
+  padding: 8px 0;
+  border-bottom: 1px solid #f8f8f8;
+}
+
+.modal-favoritos .actual-modal ul li:nth-child(odd) {
+  background-color: #f8f8f8;
+}
+
+.modal-favoritos .actual-modal .fav {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.modal-favoritos .actual-modal .fav .image {
+  -webkit-box-flex: 2;
+      -ms-flex: 2;
+          flex: 2;
+}
+
+.modal-favoritos .actual-modal .fav .image img {
+  height: 100px;
+  width: auto;
+  margin: 0 auto;
+  display: block;
+}
+
+.modal-favoritos .actual-modal .fav .text {
+  -webkit-box-flex: 3;
+      -ms-flex: 3;
+          flex: 3;
+  margin-top: 8px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.modal-favoritos .actual-modal .fav .text p {
+  font-size: 14px;
+}
+
+.modal-favoritos .actual-modal .fav .text p span {
+  font-weight: 600;
+}
+
+.modal-favoritos .actual-modal .fav .link {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+}
+
+.modal-favoritos .actual-modal .fav .link a {
+  margin: 0 8px;
+}
+
+.modal-favoritos .actual-modal .fav .link a i {
+  color: #000;
+}
+
+.modal-favoritos .actual-modal .fav .link a:last-child i {
+  color: #E04040;
 }
 /*# sourceMappingURL=styles.css.map */

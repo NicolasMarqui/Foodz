@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Cliente, Produto, Restaurante, Notificacao, Carrinho, Favoritos, Placed_order, Endereco
+from .models import Cliente, Produto, Restaurante, Notificacao, Carrinho, Favoritos, Placed_order, Endereco, Order
 from django.contrib.auth import logout as django_logout
 from django.contrib.auth.models import User, auth, Group
 from django.db.models import Q
@@ -365,29 +365,41 @@ def minha_conta(request, id):
     items = ''
     data = ''
     enderecos = ''
+    favoritos = None
 
+    #Redireciona o user que não estiver logado
     if not request.user.is_authenticated:
-        return redirect('/dashboard')
+        return redirect('/login')
 
+    #Redireciona o user que é dono de restaurante
     if request.user.groups.filter(name="Donos").exists():
         return redirect('/dashboard')
 
+    #Pega instancia do cliente
     try:
-        cliente = Cliente.objects.filter(user_id=id)
+        cliente = Cliente.objects.get(user_id=id)
         success = True
 
     except Cliente.DoesNotExist:
         msg = 'Erro ao encontrar o cliente'
 
+    #Pega as orders do cliente
     try:
-        items = Placed_order.objects.filter(id_cliente=id)
+        orders = Order.objects.filter(id_cliente=cliente.id) 
 
-        if not items:
+        for i in orders:
+            orders_item = Placed_order.objects.filter(order_id=i.id)
+
+            for j in orders_item:
+                print(j.id_produto.nome)
+
+        if not orders:
             msg = 'Nenhum pedido encontrado'
 
     except Placed_order.DoesNotExist:
-        items = None
+        orders = None
         msg = 'Nenhum pedido encontrado'
+        orders_item = None
 
     #Cadastro
     #Pegar dados existentes
@@ -421,9 +433,12 @@ def minha_conta(request, id):
     except:
         enderecos = None
 
-
-    print(enderecos)
-    print(cl)
+    #Pega os favoritos
+    try:
+        cliente_fav = Cliente.objects.get(user_id=id)
+        favoritos = Favoritos.objects.filter(id_cliente=cliente_fav.id)
+    except Favoritos.DoesNotExist:
+        favoritos = None
 
     return render(
         request,
@@ -432,8 +447,9 @@ def minha_conta(request, id):
             "id": id,
             "cliente": cliente,
             'msg': msg,
-            'pedidos': items,
-            'form': form
+            'pedidos': orders_item,
+            'form': form,
+            'favoritos': favoritos,
         }
     )
 
@@ -938,3 +954,83 @@ def checkout(request):
             'usuario': id_user
         }
     )
+
+def confirma(request):
+    
+    # if request.method == 'POST' and request.is_ajax():
+
+        #Variaveis de retorno
+        cliente = None
+        items_carrinho = None
+
+        #Verifica se user está logado
+        if not request.user.is_authenticated:
+            redirect('/')
+
+        #Pega dados do cliente que está comprando
+        try:
+            cliente = Cliente.objects.get(user_id=request.user.id)
+        except Cliente.DoesNotExist:
+            cliente = None
+
+        #Pega produtos da compra
+        if cliente is not None:
+            try:
+                items_carrinho = Carrinho.objects.filter(id_cliente=cliente.id)
+
+                #Cria uma order
+                order = Order(id_cliente=cliente)
+
+                #Salva order
+                order.save()
+
+                #pega o ultimo id
+                ultimo_id = Order.objects.latest('id')
+
+                #Verifica se order ja existe
+                try:
+                    order_exist = Placed_order.objects.filter(order_id=ultimo_id.id).exists()
+                except Placed_order.DoesNotExist:
+                    order_exist = True
+
+                print(order_exist)
+
+                if not order_exist:
+                    #Salva os produtos como compra
+                    for it in items_carrinho:
+                        #Instancia do Restaurante
+                        rest = Restaurante.objects.get(id=it.id_produto.restaurante.id)
+
+                        
+                        #Cria um pedido
+                        order = Placed_order(endereco_entrega=cliente.endereco_id.endereco,
+                                            endereco_saida=it.id_produto.restaurante.endereco,
+                                            id_cliente=it.id_cliente,
+                                            id_restaurante=rest,
+                                            id_produto=it.id_produto,
+                                            quantidade=it.quantidade,
+                                            order_id=ultimo_id)
+
+                        #Salva os pedidos        
+                        order.save()
+
+                        #limpa Carrinho
+                        limpa_carrinho = Carrinho.objects.filter(id_produto=it.id_produto)
+
+                        #Remove do Carrinho
+                        limpa_carrinho.delete()
+                
+                else:
+                    return HttpResponse('Ja tem essa order')
+
+
+
+            except Carrinho.DoesNotExist:
+                items_carrinho = None
+
+        else:
+            redirect('/login')
+
+    # else:
+    #     redirect('/')
+        return HttpResponse('teste')
