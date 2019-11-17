@@ -87,6 +87,9 @@ def restaurantes(request):
 
 def dashboard(request):
 
+    #variaveis
+    lucro = 0
+
     #Verifica se user está logado
     if not request.user.is_authenticated:
         return redirect('/login')
@@ -110,8 +113,19 @@ def dashboard(request):
         #Ultimas Vendas
         try:
             vendas = Placed_order.objects.filter(id_restaurante=restaurante.id)
+            ultimas_vendas = Placed_order.objects.filter(id_restaurante=restaurante.id)[:4]
         except Placed_order.DoesNotExists:
             vendas = None
+            ultimas_vendas = None
+
+        #Salva total no restaurante
+        if vendas is not None:
+            restaurante.total_vendas = vendas.count()
+            restaurante.save()
+
+            #Pega o total de lucro
+            for i in vendas:
+                lucro += (i.id_produto.preco * i.quantidade)
 
     else:
         info_produtos = None
@@ -123,7 +137,9 @@ def dashboard(request):
             'range': range(9),
             'info': info_restaurante,
             'ult_produtos': info_produtos,
-            'vendas': vendas
+            'vendas': vendas,
+            'lucro': lucro,
+            'ultimas_vendas': ultimas_vendas
         }
     )
 
@@ -1055,9 +1071,10 @@ def confirma(request):
 
                         #Remove do Carrinho
                         limpa_carrinho.delete()
+                    
+                #Mandar notificação ao restaurante
 
-                        #Adiciona mais venda aos restaurantes
-
+                #Adicionar status da venda
                 
                 else:
                     return HttpResponse('Ja tem essa order')

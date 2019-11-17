@@ -1,4 +1,4 @@
-from .models import Notificacao, Restaurante, Carrinho, Cliente
+from .models import Notificacao, Restaurante, Carrinho, Cliente, Placed_order
 from ipware import get_client_ip
 from django.contrib.gis.geoip2 import GeoIP2
 
@@ -78,7 +78,7 @@ def quantidadeCarrinho(request):
 def precoCarrinho(request):
     if not request.user.is_authenticated:
         return{
-            'preco': 0.00,
+            'preco': '%.2f' % 0,
             'hasItem': False
         }
 
@@ -99,6 +99,6 @@ def precoCarrinho(request):
         }
     except Carrinho.DoesNotExist:
         return{
-            'preco': 0.00,
+            'preco': '%.2f' % 0,
             'hasItem': False
         }

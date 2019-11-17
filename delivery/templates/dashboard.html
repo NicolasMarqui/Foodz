@@ -51,12 +51,12 @@
                 <div class="info-sales">
                     <div class="info sales">
                         <h3>Total de Venda Feitas</h3>
-                        <p> {{info.total_vendas}} </p>
+                        <p> {{vendas.count}} </p>
                     </div>
             
                     <div class="info lucro">
                         <h3>Total Vendido</h3>
-                        <p> R$ <span>450,00</span> </p>
+                        <p> R$ <span>{{lucro}}</span> </p>
                     </div>
             
                     <div class="info graph">
@@ -82,7 +82,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {% for i in vendas %}
+                                            {% for i in ultimas_vendas %}
                                             <tr>
                                                 <td>Hambuguer</td>
                                                 <td>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Architecto, sint.</td>
