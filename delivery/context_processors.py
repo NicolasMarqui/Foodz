@@ -78,7 +78,8 @@ def quantidadeCarrinho(request):
 def precoCarrinho(request):
     if not request.user.is_authenticated:
         return{
-            'preco': 0.00
+            'preco': 0.00,
+            'hasItem': False
         }
 
     try:
@@ -98,5 +99,6 @@ def precoCarrinho(request):
         }
     except Carrinho.DoesNotExist:
         return{
-            'preco': 0.00
+            'preco': 0.00,
+            'hasItem': False
         }

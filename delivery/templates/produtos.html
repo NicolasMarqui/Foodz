@@ -41,12 +41,12 @@ Produtos
                 </div>
             </div>
             
-            <div class="row">
+            <div class="row equal">
                 {% for p in produtos %}
-                    <div class="col-xs-12 col-md-4" id="go-to-product">
+                    <div class="col-xs-12 col-md-3" id="go-to-product">
                         <div class="wrap-results">
-                            <div class="result-produtos" style="background-image: url('/media/{{p.foto}}')">
-                                <!-- <div class="over"></div> -->
+                            <div class="result-produtos">
+                                <img src="/media/{{p.foto}}" alt="">
                             </div>
 
                             <div class="info-prods">

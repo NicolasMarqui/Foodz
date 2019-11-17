@@ -366,6 +366,7 @@ def minha_conta(request, id):
     data = ''
     enderecos = ''
     favoritos = None
+    orders_finais = []
 
     #Redireciona o user que não estiver logado
     if not request.user.is_authenticated:
@@ -386,12 +387,24 @@ def minha_conta(request, id):
     #Pega as orders do cliente
     try:
         orders = Order.objects.filter(id_cliente=cliente.id) 
+        orders_item = Placed_order.objects.filter(id_cliente=cliente.id)
 
-        for i in orders:
-            orders_item = Placed_order.objects.filter(order_id=i.id)
+        for index, i in enumerate(orders_item, start=0):
+            for order,j in enumerate(orders, start=0):
 
-            for j in orders_item:
-                print(j.id_produto.nome)
+                if j.id == i.order_id.id:
+                    pedidos = {
+                        "id": j.id,
+                        "items": [i.id_produto.nome]
+                    }
+
+                    orders_finais.append(pedidos)
+
+        print(orders_finais)
+        for k in orders_finais:
+            if k['id'] == 29:
+                print(k['id'] ,k['items'][0])
+                            
 
         if not orders:
             msg = 'Nenhum pedido encontrado'
@@ -702,7 +715,7 @@ def carrinho(request):
 
     if not request.user.is_authenticated:
         msg = 'Você tem que estar logado para ver os items no carrinho'
-        success = None
+        success = False
         preco_carrinho = 0
         item = None
         taxa_entrega = 0
@@ -711,7 +724,7 @@ def carrinho(request):
 
     if request.user.groups.filter(name="Donos").exists():
         msg = 'Você tem que ser cliente para ver os items no carrinho'
-        success = None
+        success = False
         preco_carrinho = 0
         item = None
         taxa_entrega = 0
@@ -726,39 +739,53 @@ def carrinho(request):
         taxa_entrega = 0
         msg_entrega = []
         final = 0
-        success = None
+        success = False
 
     if id_user is not None:
         try:
             item = Carrinho.objects.filter(id_cliente=id_user, is_carrinho=1)
-            success = True
-            msg = None
-            preco_carrinho = 0
-            taxa_entrega = 0
-            msg_entrega = []
-            final = 0
 
-            for index, i in enumerate(item, start=1):
+            if item:
+                success = True
+                msg = None
+                preco_carrinho = 0
+                taxa_entrega = 0
+                msg_entrega = []
+                final = 0
 
-                if index >= 1 and i.id_produto.restaurante.nome != i.id_produto.restaurante.nome:
-                    msg_entrega.append("Restaurante {} possui taxa de entrega de R${}".format(i.id_produto.restaurante.nome, i.id_produto.restaurante.taxa_entrega))
-                    taxa_entrega += i.id_produto.restaurante.taxa_entrega
-                else:
-                    msg_entrega.append("Restaurante {} possui taxa de entrega de R${}".format(i.id_produto.restaurante.nome, i.id_produto.restaurante.taxa_entrega))
-                    taxa_entrega = i.id_produto.restaurante.taxa_entrega
+                for index, i in enumerate(item, start=1):
 
-                preco_carrinho += (i.id_produto.preco * i.quantidade)
+                    if index >= 1 and i.id_produto.restaurante.nome != i.id_produto.restaurante.nome:
+                        msg_entrega.append("Restaurante {} possui taxa de entrega de R${}".format(i.id_produto.restaurante.nome, i.id_produto.restaurante.taxa_entrega))
+                        taxa_entrega += i.id_produto.restaurante.taxa_entrega
+                    else:
+                        msg_entrega.append("Restaurante {} possui taxa de entrega de R${}".format(i.id_produto.restaurante.nome, i.id_produto.restaurante.taxa_entrega))
+                        taxa_entrega = i.id_produto.restaurante.taxa_entrega
 
-            final = preco_carrinho + taxa_entrega
+                    preco_carrinho += (i.id_produto.preco * i.quantidade)
+
+                final = preco_carrinho + taxa_entrega
+            
+            else:
+                msg = 'Esse usuário não possui nenhum item em seu carrinho'
+                success = False
+                preco_carrinho = 0
+                taxa_entrega = 0
+                msg_entrega = []
+                final = 0
 
         except Carrinho.DoesNotExist:
             item = None
-            success = None
+            success = False
             msg = 'Nenhum item no carrinho'
             preco_carrinho = 0
             taxa_entrega = 0
             msg_entrega = []
             final = 0
+
+            return redirect('/login')
+
+    print(item)
 
     
     return render(
@@ -903,18 +930,18 @@ def checkout(request):
 
     msg = ''
     items = ''
-    success = None
+    success = False
     total = 0
     taxa_entrega = 0
     final = 0
 
     if not request.user.is_authenticated:
         msg = 'Para de digitar na URL e cria uma conta logo'
-        success = None
+        success = False
 
     if request.user.groups.filter(name="Donos").exists():
        msg = 'Para de digitar na URL e cria uma conta logo'
-       success = None
+       success = False
 
     try:
         id_user = Cliente.objects.get(user_id=request.user.id)
@@ -925,21 +952,29 @@ def checkout(request):
     if id_user is not None:
         try:
             items = Carrinho.objects.filter(id_cliente=id_user.id)
-            success = True
-            msg = None
+            
+            if items:
+                success = True
+                msg = None
 
-            for index,i in enumerate(items, start=1):
-                if index >= 1 and i.id_produto.restaurante.nome != i.id_produto.restaurante.nome:
-                    taxa_entrega += i.id_produto.restaurante.taxa_entrega
-                else:
-                    taxa_entrega = i.id_produto.restaurante.taxa_entrega
+                for index,i in enumerate(items, start=1):
+                    if index >= 1 and i.id_produto.restaurante.nome != i.id_produto.restaurante.nome:
+                        taxa_entrega += i.id_produto.restaurante.taxa_entrega
+                    else:
+                        taxa_entrega = i.id_produto.restaurante.taxa_entrega
 
-                total += (i.id_produto.preco * i.quantidade)
-        
-            final = total + taxa_entrega
+                    total += (i.id_produto.preco * i.quantidade)
+            
+                final = total + taxa_entrega
+
+            else:
+                success = False
+                msg = 'Faça compras antes de prosseguir ao checkout'
 
         except Carrinho.DoesNotExist:
             items = None
+
+    print(success)
         
     return render(
         request,
