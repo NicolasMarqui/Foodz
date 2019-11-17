@@ -106,6 +106,7 @@
                                 {% if pedidos %}
                                     {% for ord in orders|dictsortreversed:"id" %}
                                         <div class="pedido">
+                                            <div class="side-bar-color" style="background-color: red;"></div>
                                             <div class="header-pedido">
                                                 <p>Pedido não foi entregue</p>
                                                 <p>Pedido: {{ord.id}}</p>
@@ -126,12 +127,22 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                            <div class="more-info-order">
+                                                                <p>Data do pedido: <span>{{ i.order_time|date:"d M Y" }} {{ i.order_time|time:"H:i" }}</span></p>
+                                                                <p>Vendido por: <span>{{i.id_restaurante.nome}}</span> </p>
+                                                                <p>Endereço de entrega: <span>{{i.endereco_entrega}}</span> </p>
+                                                                <p>Endereço de Saida: <span>{{i.endereco_saida}}</span> </p>
+                                                                <p>Comentario: <span>{{i.comentario}}</span> </p>
+
+                                                                {% if not i.comentario %}
+                                                                    <a href="#">Escreva um comentário</a>
+                                                                {% endif %}
+                                                            </div>
                                                     {% endif %}
                                                 {% endfor %}
                                             </div>
                                             <div class="mais-detalhes">
                                                 <i class="fas fa-chevron-down"></i>
-
                                                 <p>Mais Detalhes</p>
                                             </div>
 
@@ -139,11 +150,49 @@
                                                 {% if status %}
                                                     {% for stat in status %}
                                                         {% if ord.id == stat.id_compra.id %}
-                                                            <p>sei la</p>
-                                                        {% endif %} 
+                                                            <div class="steps">
+                                                                <ul class="steps-container">
+                                                                    <li style="width:25%;" class="activated">
+                                                                        <div class="step">
+                                                                            <div class="step-image"><span></span></div>
+                                                                            <div class="step-current">Status 1</div>
+                                                                            <div class="step-description">Recebido</div>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li style="width:25%;">
+                                                                        <div class="step">
+                                                                            <div class="step-image"><span></span></div>
+                                                                            <div class="step-current">Status 2</div>
+                                                                            <div class="step-description">Preparação</div>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li style="width:25%;">
+                                                                        <div class="step">
+                                                                            <div class="step-image"><span></span></div>
+                                                                            <div class="step-current">Status 3</div>
+                                                                            <div class="step-description">Em rota</div>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li style="width:25%;">
+                                                                        <div class="step">
+                                                                            <div class="step-image"><span></span></div>
+                                                                            <div class="step-current">Status 4</div>
+                                                                            <div class="step-description">Entregue</div>
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+                                                                <div class="step-bar" style="width: 25%;"></div>
+                                                            </div>
+                                                        {% else %}
+                                                            <div class="no-status">
+                                                                <p>Status não disponivel para essa compra</p>
+                                                            </div>
+                                                        {% endif %}
                                                     {% endfor %}
                                                 {% else %}
-
+                                                    <div class="no-status">
+                                                        <p>Status não disponivel para essa compra</p>
+                                                    </div>
                                                 {% endif %}
                                             </div>
                                         </div>

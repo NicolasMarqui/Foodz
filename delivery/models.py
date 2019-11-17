@@ -103,7 +103,7 @@ class Order(models.Model):
 class Placed_order(models.Model):
     order_id                    = models.ForeignKey(Order, on_delete=models.CASCADE)
     id_restaurante              = models.ForeignKey(Restaurante, on_delete=models.CASCADE)
-    order_time                  = models.DateTimeField(auto_now=True,)
+    order_time                  = models.DateTimeField(default=now, blank=True)
     tempo_estimado              = models.IntegerField(blank=True, default=15)
     pedido_pronta               = models.BooleanField(default=False)
     endereco_entrega            = models.CharField(max_length=255)

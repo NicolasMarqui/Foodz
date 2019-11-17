@@ -3329,11 +3329,19 @@ footer .footer .fot-bottom p {
 }
 
 .minha-conta-wrapper .my-info-conta .pedido {
-  padding: 14px 0;
+  padding: 0 5px;
   background-color: #fff;
   margin: 15px 0;
   position: relative;
   overflow: hidden;
+}
+
+.minha-conta-wrapper .my-info-conta .pedido .side-bar-color {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 4px;
 }
 
 .minha-conta-wrapper .my-info-conta .pedido .header-pedido {
@@ -3387,6 +3395,38 @@ footer .footer .fot-bottom p {
   font-weight: 600;
 }
 
+.minha-conta-wrapper .my-info-conta .pedido .more-info-order {
+  padding: 20px;
+  border: 2px solid #f8f8f8;
+  margin: 8px 0;
+  display: none;
+}
+
+.minha-conta-wrapper .my-info-conta .pedido .more-info-order p {
+  line-height: 25px;
+  font-size: 14px;
+}
+
+.minha-conta-wrapper .my-info-conta .pedido .more-info-order p span {
+  font-weight: 600;
+}
+
+.minha-conta-wrapper .my-info-conta .pedido .more-info-order a {
+  padding: 8px;
+  background-color: #E04040;
+  display: block;
+  width: 200px;
+  text-align: center;
+  color: #fff;
+  margin: 8px 0;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.minha-conta-wrapper .my-info-conta .pedido .more-info-order a:hover {
+  background-color: #e76c6c;
+}
+
 .minha-conta-wrapper .my-info-conta .pedido .mais-detalhes {
   padding: 15px 0 0;
   text-align: center;
@@ -3401,6 +3441,15 @@ footer .footer .fot-bottom p {
 .minha-conta-wrapper .my-info-conta .pedido .mais-detalhes p {
   font-size: 14px;
   color: #494949;
+}
+
+.minha-conta-wrapper .my-info-conta .pedido .status-pedido {
+  padding: 25px;
+}
+
+.minha-conta-wrapper .my-info-conta .pedido .no-status p {
+  text-align: center;
+  font-size: 13px;
 }
 
 .thicker {

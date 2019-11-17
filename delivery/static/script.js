@@ -795,5 +795,10 @@ $('#submitPayment').click(function(){
   console.log('clicked')
 })
   
+//Mais detalhes pedidos
+$('.mais-detalhes').click(function(){
+  $('.more-info-order').toggle()
+  
+})
 
 })
