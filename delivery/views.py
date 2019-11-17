@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Cliente, Produto, Restaurante, Notificacao, Carrinho, Favoritos, Placed_order, Endereco, Order
+from .models import Cliente, Produto, Restaurante, Notificacao, Carrinho, Favoritos, Placed_order, Endereco, Order, Status
 from django.contrib.auth import logout as django_logout
 from django.contrib.auth.models import User, auth, Group
 from django.db.models import Q
@@ -626,7 +626,7 @@ def carrinho_add(request):
 
         #Verifica se o item ja esta no carrinho   
         try:
-            is_item = Carrinho.objects.get(id_produto=id_produto)
+            is_item = Carrinho.objects.get(id_produto=id_produto, id_cliente=id_user)
         except Carrinho.DoesNotExist:
             is_item = None
 
@@ -1052,10 +1052,9 @@ def confirma(request):
                     for it in items_carrinho:
                         #Instancia do Restaurante
                         rest = Restaurante.objects.get(id=it.id_produto.restaurante.id)
-
                         
                         #Cria um pedido
-                        order = Placed_order(endereco_entrega=cliente.endereco_id.endereco,
+                        item_order = Placed_order(endereco_entrega=cliente.endereco_id.endereco,
                                             endereco_saida=it.id_produto.restaurante.endereco,
                                             id_cliente=it.id_cliente,
                                             id_restaurante=rest,
@@ -1064,7 +1063,7 @@ def confirma(request):
                                             order_id=ultimo_id)
 
                         #Salva os pedidos        
-                        order.save()
+                        item_order.save()
 
                         #limpa Carrinho
                         limpa_carrinho = Carrinho.objects.filter(id_produto=it.id_produto)
@@ -1072,10 +1071,43 @@ def confirma(request):
                         #Remove do Carrinho
                         limpa_carrinho.delete()
                     
-                #Mandar notificação ao restaurante
+                        #Mandar notificação ao restaurante
 
-                #Adicionar status da venda
+                        #Pega instancia do user
+                        rest_user = Restaurante.objects.get(id=it.id_produto.restaurante.id)
+
+                        n_aguento_mais = User.objects.get(id=rest_user.user_id)
+
+                        msg = 'Atenção, o usuário {} acaba de comprar {} unidade(s) do produto {}. Finalizando em um total de R${}'.format(it.id_cliente.user_id, it.quantidade, it.id_produto.nome, (it.id_produto.preco * it.quantidade) )
+                        notificacao = Notificacao(mensagem=msg,
+                                                id_user=n_aguento_mais)
+
+                        notificacao.save()
                 
+                #Adicionar status da venda
+
+                #Verifica se ja possui venda no status
+                try:
+                    has_status = Status.objects.filter(id_compra=ultimo_id.id).exists()
+                except Status.DoesNotExist:
+                    has_status = False
+
+                #Salva compra com status
+                if not has_status:
+
+                    #Pega instacia
+                    new_order = Placed_order.objects.filter(order_id=ultimo_id)
+
+                    print(new_order)
+
+                    for i in new_order:
+                        #Cria instancia do Status
+                        new_status = Status(recebido=1,id_compra=i)
+
+                        #Salva status
+                        new_status.save()
+                        pass
+
                 else:
                     return HttpResponse('Ja tem essa order')
 

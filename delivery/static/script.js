@@ -428,13 +428,11 @@ $(document).ready(function(){
           url: "/lida",
           data: {
             id: $(this).parent().attr('id'),
-            
+            csrfmiddlewaretoken: getCookie('csrftoken'),
             lida: 1
           },
           dataType: 'json',
           complete: function (response) {
-              // console.log(response.responseJSON.notificacoes[0]);
-              
               if(response.responseJSON.status === 'Success'){
                 
                 if(response.responseJSON.notificacoes.length){
