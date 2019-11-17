@@ -87,19 +87,32 @@ def restaurantes(request):
 
 def dashboard(request):
 
+    #Verifica se user está logado
     if not request.user.is_authenticated:
         return redirect('/login')
 
+    #Verifica se usuário é dono de restaurante
     if not request.user.groups.filter(name="Donos").exists():
         return redirect('/login')
 
+    #Pega o ID
     id = request.user.id
 
+    #Pega os dados do restaurante
     info_restaurante = Restaurante.objects.filter(user_id = id)
     
     if info_restaurante:
         restaurante = Restaurante.objects.get(user_id = id)
+
+        #Ultimos produtos
         info_produtos = Produto.objects.filter(restaurante_id=restaurante.id)[:4]
+
+        #Ultimas Vendas
+        try:
+            vendas = Placed_order.objects.filter(id_restaurante=restaurante.id)
+        except Placed_order.DoesNotExists:
+            vendas = None
+
     else:
         info_produtos = None
 
@@ -110,6 +123,7 @@ def dashboard(request):
             'range': range(9),
             'info': info_restaurante,
             'ult_produtos': info_produtos,
+            'vendas': vendas
         }
     )
 
@@ -367,6 +381,7 @@ def minha_conta(request, id):
     enderecos = ''
     favoritos = None
     orders_finais = []
+    orders_num = []
 
     #Redireciona o user que não estiver logado
     if not request.user.is_authenticated:
@@ -386,25 +401,12 @@ def minha_conta(request, id):
 
     #Pega as orders do cliente
     try:
-        orders = Order.objects.filter(id_cliente=cliente.id) 
+        #Número dos pedidos que o cliente fez
+        orders_1 = Order.objects.filter(id_cliente=cliente.id)
+
+        #Produtos relacionados com o cliente 
         orders_item = Placed_order.objects.filter(id_cliente=cliente.id)
-
-        for index, i in enumerate(orders_item, start=0):
-            for order,j in enumerate(orders, start=0):
-
-                if j.id == i.order_id.id:
-                    pedidos = {
-                        "id": j.id,
-                        "items": [i.id_produto.nome]
-                    }
-
-                    orders_finais.append(pedidos)
-
-        print(orders_finais)
-        for k in orders_finais:
-            if k['id'] == 29:
-                print(k['id'] ,k['items'][0])
-                            
+        orders = list(set(orders_1))
 
         if not orders:
             msg = 'Nenhum pedido encontrado'
@@ -461,6 +463,7 @@ def minha_conta(request, id):
             "cliente": cliente,
             'msg': msg,
             'pedidos': orders_item,
+            'orders': orders,
             'form': form,
             'favoritos': favoritos,
         }
@@ -1027,9 +1030,7 @@ def confirma(request):
                     order_exist = Placed_order.objects.filter(order_id=ultimo_id.id).exists()
                 except Placed_order.DoesNotExist:
                     order_exist = True
-
-                print(order_exist)
-
+        
                 if not order_exist:
                     #Salva os produtos como compra
                     for it in items_carrinho:
@@ -1054,6 +1055,9 @@ def confirma(request):
 
                         #Remove do Carrinho
                         limpa_carrinho.delete()
+
+                        #Adiciona mais venda aos restaurantes
+
                 
                 else:
                     return HttpResponse('Ja tem essa order')
