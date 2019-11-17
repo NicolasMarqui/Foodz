@@ -104,7 +104,7 @@
 
                             <div class="container p-0 m-w">
                                 {% if pedidos %}
-                                    {% for ord in orders %}
+                                    {% for ord in orders|dictsortreversed:"id" %}
                                         <div class="pedido">
                                             <div class="header-pedido">
                                                 <p>Pedido não foi entregue</p>
@@ -136,7 +136,15 @@
                                             </div>
 
                                             <div class="status-pedido">
-                                                <!-- Status aqui -->
+                                                {% if status %}
+                                                    {% for stat in status %}
+                                                        {% if ord.id == stat.id_compra.id %}
+                                                            <p>sei la</p>
+                                                        {% endif %} 
+                                                    {% endfor %}
+                                                {% else %}
+
+                                                {% endif %}
                                             </div>
                                         </div>
                                     {% endfor %}

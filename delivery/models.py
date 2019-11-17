@@ -137,7 +137,7 @@ class Favoritos(models.Model):
     adicionado_favorito         = models.DateTimeField(auto_now=True,blank=True)
 
 class Status(models.Model):
-    id_compra                   = models.ForeignKey(Placed_order, on_delete=models.CASCADE)
+    id_compra                   = models.ForeignKey(Order, on_delete=models.CASCADE)
     recebido                    = models.BooleanField(default=False)
     saiu                        = models.BooleanField(default=False)
     em_rota                     = models.BooleanField(default=False)

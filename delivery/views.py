@@ -389,7 +389,6 @@ def pesquisa(request):
     )
 
 def minha_conta(request, id):
-
     msg = ''
     success = False
     items = ''
@@ -431,6 +430,14 @@ def minha_conta(request, id):
         orders = None
         msg = 'Nenhum pedido encontrado'
         orders_item = None
+
+    #Pega os status da compra
+    try:
+        status = Status.objects.all()
+    except Status.DoesNotExist:
+        status = None
+
+    print(status)
 
     #Cadastro
     #Pegar dados existentes
@@ -482,6 +489,7 @@ def minha_conta(request, id):
             'orders': orders,
             'form': form,
             'favoritos': favoritos,
+            'status': status
         }
     )
 
@@ -1072,7 +1080,6 @@ def confirma(request):
                         limpa_carrinho.delete()
                     
                         #Mandar notificação ao restaurante
-
                         #Pega instancia do user
                         rest_user = Restaurante.objects.get(id=it.id_produto.restaurante.id)
 
@@ -1096,17 +1103,18 @@ def confirma(request):
                 if not has_status:
 
                     #Pega instacia
-                    new_order = Placed_order.objects.filter(order_id=ultimo_id)
+                    new_order = Order.objects.get(id=ultimo_id.id)
 
-                    print(new_order)
+                    new_status = Status(recebido=1,id_compra=new_order)
 
-                    for i in new_order:
-                        #Cria instancia do Status
-                        new_status = Status(recebido=1,id_compra=i)
+                    new_status.save()
 
-                        #Salva status
-                        new_status.save()
-                        pass
+                    # for i in new_order:
+                    #     #Cria instancia do Status
+                    #     new_status = Status(recebido=1,id_compra=i)
+
+                    #     #Salva status
+                    #     new_status.save()
 
                 else:
                     return HttpResponse('Ja tem essa order')
