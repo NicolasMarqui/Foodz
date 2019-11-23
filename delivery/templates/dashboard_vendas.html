@@ -1,0 +1,61 @@
+{% extends 'base_dashboard.html' %}
+{% load static %}
+
+{% block title %}
+    Dashboard > Vendas
+{% endblock %}
+
+<div class="wrapper-dashboard">
+    
+    {% block content %}
+
+        <div class="content-vendas">
+            
+            <div class="vendas-header">
+                <h2>Suas Vendas</h2>
+
+                <p>Aqui você pode visualizar suas vendas e/ou alterar seus status</p>
+            </div>
+
+            <div class="search-filtros-vendas">
+                <div class="pesquisa-order">
+                    <form>
+                        <div class="form-group">
+                            <input type="text" placeholder="Pesquisar">
+                        </div>
+
+                        <div class="form-group">
+                            <select name="" id="">
+                                <option value="">Em aberto</option>
+                                <option value="">Entregues</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+
+            <div class="display-vendas">
+                <ul>
+                    {% if vendas %}
+                        {% for i in vendas %}
+                            <li>
+                                <div class="vendas-wrapper">
+                                    <div class="header-vendas">
+                                        <h3>Pedido número:  <span>{{i.order_id.id}}</span> </h3>
+                                    </div>
+                                    <p>{{i.id}}</p>
+                                    <p>{{i.id_produto.nome}}</p>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    {% else %}
+                        <li>
+                            <p>Nenhuma venda no momento</p>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+
+        </div>
+
+    {% endblock %}
+</div>

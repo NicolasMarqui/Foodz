@@ -98,8 +98,12 @@
                                 {% endif %}
                             </li>
                 
-                            <li>
-                                <a href="#"> <i class="fas fa-chart-line"></i> <span class="click_toggle">Vendas</span> </a>
+                            <li class="get-vendas">
+                                {% if request.path == '/dashboard/vendas' %}
+                                <a href="/dashboard/vendas" class="active-dash"> <i class="fas fa-chart-line"></i> <span class="click_toggle">Vendas</span> </a>
+                                {% else %}
+                                <a href="/dashboard/vendas"> <i class="fas fa-chart-line"></i> <span class="click_toggle">Vendas</span> </a>
+                                {% endif %}
                             </li>
                 
                             <li>

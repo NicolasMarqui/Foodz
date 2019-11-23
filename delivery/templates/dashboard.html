@@ -10,41 +10,6 @@
     {% block content %}
         {% if info %}
 
-            <div class="modal-more-orders">
-                
-                <div class="more-orders-inside">
-                    <i class="fa fa-times" id="close-all-orders"></i>
-
-                    <h2>Todos seus pedidos</h2>
-        
-                    <div class="table-responsive">
-                        <table class="table table-striped table-hover">
-                            <thead>
-                                <tr>
-                                    <td>Nome</td>
-                                    <td>Descrição</td>
-                                    <td>Preço</td>
-                                    <td>Qnt</td>
-                                    <td>Comprador</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for i in range %}
-                                <tr>
-                                    <td>Hambuguer</td>
-                                    <td>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Architecto, sint.</td>
-                                    <td>19.90</td>
-                                    <td>5</td>
-                                    <td>Nicolas Marqui</td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-            </div>
-
             <div class="content-owner" id="home">
                 <h2>Seja bem vindo, <span>{{user.username}}</span></h2>
             
@@ -75,7 +40,6 @@
                                         <thead>
                                             <tr>
                                                 <td>Nome</td>
-                                                <td>Descrição</td>
                                                 <td>Preço</td>
                                                 <td>Qnt</td>
                                                 <td>Comprador</td>
@@ -84,18 +48,17 @@
                                         <tbody>
                                             {% for i in ultimas_vendas %}
                                             <tr>
-                                                <td>Hambuguer</td>
-                                                <td>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Architecto, sint.</td>
-                                                <td>19.90</td>
-                                                <td>5</td>
-                                                <td>Nicolas Marqui</td>
+                                                <td>{{i.id_produto.nome}}</td>
+                                                <td>{{i.id_produto.preco}}</td>
+                                                <td>{{i.quantidade}}</td>
+                                                <td>{{i.id_cliente.user_id}}</td>
                                             </tr>
                                             {% endfor %}
                                         </tbody>
                                     </table>
                                 </div>
                         
-                                <a href="#" class="ver-todos-order">Ver Todos</a>
+                                <a href="/dashboard/vendas" class="ver-todos">Ver Todos</a>
                             </div>
                         </div>
 
@@ -123,7 +86,7 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <a href="#">Veja todos</a>
+                                <a href="/dashboard/produtos" class="ver-todos">Ver Todos</a>
                             </div>
                         </div>
                     </div>

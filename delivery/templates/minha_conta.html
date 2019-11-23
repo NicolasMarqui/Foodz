@@ -10,7 +10,7 @@
 
         <div class="modal-favoritos">
 
-            <i class="fas fa-times"></i>
+            <i class="fas fa-times" id="close-fav"></i>
 
             <div class="actual-modal">
                 <h3>Seus Favoritos</h3>
@@ -31,7 +31,7 @@
 
                                     <div class="link">
                                         <div class="center-me">
-                                            <a href="/produtos/info/{{i.id_produto.id}}">
+                                            <a href="/produtos/info/{{i.id_produto.id}}" target="_blank">
                                                 <i class="fas fa-info" data-toggle="tooltip" title="Ver Produto" data-placement="bottom"></i>
                                             </a>
     
@@ -71,7 +71,7 @@
                             </a>
                         </li>
 
-                        <li>
+                        <li class="open-fav">
                             <a href="#">
                                 <i class="fas fa-heart"></i> <span>Favoritos</span>
                             </a>

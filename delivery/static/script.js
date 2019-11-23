@@ -86,19 +86,7 @@ $(document).ready(function(){
             $(nav).removeClass("fixed-nav")
         }
     });
-
-    //Dasboard Actions
-
-    ///Abrir Modal de Vendas
-    $('.ver-todos-order').click(function(){
-        $('.modal-more-orders').css('display', 'block');
-    })
-
-    //Fechar Modal de Vendas
-    $('#close-all-orders').click(function(){
-        $('.modal-more-orders').css('display', 'none');
-    })
-
+  
     //Signup
     $("#signup").click(function(){
         $('.main-container-login').addClass('right-panel-active');
@@ -759,6 +747,9 @@ $(document).ready(function(){
       });
   });
 
+  //Pega order do Dono do restaurante
+
+
   //Masks
   var spOptions = {
     onKeyPress: function(val, e, field, options) {
@@ -790,15 +781,24 @@ $(document).ready(function(){
 });
 
 
-//Checkout
-$('#submitPayment').click(function(){
-  console.log('clicked')
-})
-  
-//Mais detalhes pedidos
-$('.mais-detalhes').click(function(){
-  $('.more-info-order').toggle()
-  
-})
+  //Checkout
+  $('#submitPayment').click(function(){
+    console.log('clicked')
+  })
+    
+  //Mais detalhes pedidos
+  $('.mais-detalhes').click(function(){
+    $('.more-info-order').toggle()
+  })
+
+  //Abre favoritos do cliente
+  $('.open-fav').click(function(){
+    $('.modal-favoritos').css('display', 'block');
+  })
+
+  //Fecha Favoritos
+  $('#close-fav').click(function(){
+    $('.modal-favoritos').css('display', 'none');
+  })
 
 })

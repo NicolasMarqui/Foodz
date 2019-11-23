@@ -1547,55 +1547,19 @@ footer .footer .fot-bottom p {
   position: relative;
 }
 
-.wrapper-dashboard .modal-more-orders {
-  display: none;
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background-color: rgba(0, 0, 0, 0.7);
-  z-index: 5;
-  overflow: none;
+.wrapper-dashboard .ver-todos {
+  display: block;
+  padding: 8px;
+  margin: 10px auto 8px;
+  text-align: center;
+  color: #fff;
+  background-color: #E04040;
+  width: 200px;
+  text-decoration: none;
 }
 
-.wrapper-dashboard .modal-more-orders .more-orders-inside {
-  height: 80%;
-  width: 50%;
-  margin: 0 auto;
-  z-index: 6;
-  background-color: #f8f8f8;
-  overflow: hidden;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
-  -webkit-box-shadow: 1px 1px 2px 3px rgba(0, 0, 0, 0.75);
-  box-shadow: 1px 1px 2px 3px rgba(0, 0, 0, 0.75);
-  -webkit-transition: all .5s linear;
-  transition: all .5s linear;
-  padding: 24px;
-  overflow: auto;
-}
-
-.wrapper-dashboard .modal-more-orders .more-orders-inside h2 {
-  font-size: calc(1.28125rem + 0.375vw);
-  margin: 15px 10px;
-}
-
-@media (min-width: 1200px) {
-  .wrapper-dashboard .modal-more-orders .more-orders-inside h2 {
-    font-size: 1.5625rem;
-  }
-}
-
-.wrapper-dashboard .modal-more-orders .more-orders-inside i {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 20px;
-  cursor: pointer;
+.wrapper-dashboard .ver-todos:hover {
+  background-color: #e76c6c;
 }
 
 .wrapper-dashboard .sidenav {
@@ -1919,6 +1883,10 @@ footer .footer .fot-bottom p {
   padding: 20px 5px;
   font-size: 1.25rem;
   font-weight: 600;
+}
+
+.wrapper-dashboard .main-content-dashboard .content-owner .last-orders table {
+  text-align: center;
 }
 
 .wrapper-dashboard .main-content-dashboard .content-owner .last-products {
@@ -3770,6 +3738,7 @@ footer .footer .fot-bottom p {
   z-index: 0;
   background-color: #B3B5BD;
   width: 0;
+  overflow: auto;
   -webkit-transition: all .2s;
   transition: all .2s;
 }
@@ -3867,9 +3836,7 @@ footer .footer .fot-bottom p {
   bottom: 0;
   left: 0;
   right: 0;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+  display: none;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
@@ -5069,5 +5036,23 @@ form.pagamento button {
 
 .modal-favoritos .actual-modal .fav .link a:last-child i {
   color: #E04040;
+}
+
+.content-vendas {
+  padding: 0 40px;
+}
+
+.content-vendas .vendas-header h2 {
+  text-align: center;
+}
+
+.content-vendas .vendas-header p {
+  text-align: center;
+  font-size: 15px;
+}
+
+.content-vendas .search-filtros-vendas {
+  margin-top: 25px;
+  text-align: center;
 }
 /*# sourceMappingURL=styles.css.map */

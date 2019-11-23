@@ -889,7 +889,7 @@ def favoritos_add(request):
             id_produto = None
 
         try:
-            already_exists = Favoritos.objects.get(id_produto=id_produto)
+            already_exists = Favoritos.objects.get(id_produto=id_produto,id_cliente=id_user.id)
         except Favoritos.DoesNotExist:
             already_exists = None
         
@@ -908,6 +908,7 @@ def favoritos_add(request):
             return JsonResponse({ 'status': 'success' , 'msg': msg})
         else:
             msg = 'Erro ao adicionar aos favoritos'
+            print(id_produto)
             return JsonResponse({ 'status': 'erro' , 'msg': msg})
 
 def favoritos_remove(request):
@@ -932,7 +933,7 @@ def favoritos_remove(request):
             id_produto = None
 
         try:
-            already_exists = Favoritos.objects.get(id_produto=id_produto)
+            already_exists = Favoritos.objects.get(id_produto=id_produto,id_cliente=id_user.id)
         except Favoritos.DoesNotExist:
             already_exists = None
         
@@ -1130,3 +1131,33 @@ def confirma(request):
     # else:
     #     redirect('/')
         return HttpResponse('teste')
+
+def dashboard_vendas(request):
+
+    #Verifica se user está logado
+    if not request.user.is_authenticated:
+        redirect('/')
+
+    try:
+        id_user = Restaurante.objects.get(user_id=request.user.id)
+    except Restaurante.DoesNotExist:
+        id_user = None
+
+    if id_user is not None:
+
+        #Pega todas as vendas
+        try:
+            vendas = Placed_order.objects.filter(id_restaurante=id_user.id).order_by('id')
+        except Placed_order.DoesNotExist:
+            vendas = False
+
+    else:
+        redirect('/login')
+
+    return render(
+        request,
+        'dashboard_vendas.html',
+        {
+            'vendas': set(vendas),
+        }
+    )
