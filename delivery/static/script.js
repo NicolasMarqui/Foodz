@@ -801,4 +801,134 @@ $(document).ready(function(){
     $('.modal-favoritos').css('display', 'none');
   })
 
+  //Fecha Status
+  $('#close-status').click(function () { 
+    $('.alterar-status').css('display', 'none');
+  });
+
+  //Troca status da compra
+  $('.clickToChangeStatus').click(function () { 
+    console.log('eae');
+    
+    
+    //Abre janela de Status
+    $('.alterar-status').css('display', 'block');
+
+    //Inicializa div para dar append nas informções
+    let info = '';
+
+    //Informação para o ajax
+    let id = $(this).attr('id');
+
+    let data = {
+      csrfmiddlewaretoken: getCookie('csrftoken'),
+      id: id,
+    }
+    
+    $('.actual-status .removeMe').remove()
+
+    $.ajax({
+      type: "GET",
+      url: "/pedidos/get/status",
+      data: data,
+      dataType: "json",
+      beforeSend: function(){
+        $('.actual-status').loading({
+          stoppable: true
+        });
+      },
+      success: function (response) {
+
+        if(response.status == 'success'){
+          info += `
+            <div class="removeMe">
+              <div class="status-header">
+                <h3>${response.titulo}</h3>
+                <p>Status atual: <span>${response.atual}</span></p>
+              </div>
+              <div class="choose-newStatus">
+                <form action="/pedidos/editar/status" method="POST" class="edit-status">
+                  <section>
+                      <input type="hidden" class="order_id_form" value="${id}">
+                      <div>
+                          <input type="radio" id="control_01" name="select" value="recebido" checked>
+                          <label for="control_01">
+                          <h2>Recebido</h2>
+                          <p>Esse status é dado automaticamente a uma compra</p>
+                          </label>
+                      </div>
+                      <div>
+                          <input type="radio" id="control_02" name="select" value="saiu">
+                          <label for="control_02">
+                          <h2>Em preparação</h2>
+                          <p>Marque essa opção caso o(s) produto ja está em processo de preparação</p>
+                          </label>
+                      </div>
+                      <div>
+                          <input type="radio" id="control_03" name="select" value="em_rota">
+                          <label for="control_03">
+                          <h2>Em rota</h2>
+                          <p>Marque essa opção caso o(s) produtos já tenha saido do estabelecimento</p>
+                          </label>
+                      </div>
+                      <div>
+                          <input type="radio" id="control_04" name="select" value="entregue">
+                          <label for="control_04">
+                          <h2>Entregue</h2>
+                          <p>Marque essa opção caso o(s) produtos já tenha sido entregue</p>
+                          </label>
+                      </div>
+
+                      </section>
+                      <button type="submit">Salvar</button>
+                    </form>
+              </div>
+            </div>
+          `
+        }
+
+        $('.actual-status').append(info)
+        $('.actual-status').loading('stop');
+      }
+    });
+    
+  });
+
+
+  $(document).on('submit', '.edit-status' ,function(e){
+    e.preventDefault();
+
+    let data = $(this).serialize();
+
+    let id = $('.order_id_form').val();
+    
+    $.ajax({
+      type: "POST",
+      url: '/pedidos/editar/status',
+      data: {
+        id: id,
+        data,
+        csrfmiddlewaretoken: getCookie('csrftoken'),
+      },
+      dataType: "json",
+      beforeSend: function(){
+        $('.actual-status').loading({
+          stoppable: true
+        });
+      },
+      success: function (response) {
+        console.log(response);
+        
+        if(response.status == 'success'){
+          $('.alterar-status').css('display', 'none');
+
+          $('.vendas-wrapper').find(`div#venda-${id} h4 span`).html(response.tipo)
+          $('.actual-status').loading('stop');
+        }
+
+      }
+    });
+    
+  })
+
 })

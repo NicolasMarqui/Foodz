@@ -5,11 +5,19 @@
     Dashboard > Vendas
 {% endblock %}
 
+
 <div class="wrapper-dashboard">
     
     {% block content %}
 
         <div class="content-vendas">
+
+            <div class="alterar-status">
+                <i class="fas fa-times" id="close-status"></i>
+                <div class="actual-status">
+                    <!-- Ajax aqui -->
+                </div>
+            </div>
             
             <div class="vendas-header">
                 <h2>Suas Vendas</h2>
@@ -36,14 +44,46 @@
             <div class="display-vendas">
                 <ul>
                     {% if vendas %}
-                        {% for i in vendas %}
+                        {% for i in todas_vendas %}
                             <li>
                                 <div class="vendas-wrapper">
-                                    <div class="header-vendas">
-                                        <h3>Pedido número:  <span>{{i.order_id.id}}</span> </h3>
+                                    <div class="row fs-0">
+                                        <div class="col-xs-12 col-md-3 col-in-block v-middle">
+                                            <div class="header-vendas">
+                                                <h3>Pedido número:  #<span>{{i}}</span></h3>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-md-6 col-in-block">
+                                            <div class="display-products-venda">
+                                                {% for j in vendas %}
+                                                    {% if i == j.order_id.id %}
+                                                        <div class="display-images">
+                                                            <img src="/media/{{j.id_produto.foto}}" alt="{{j.id_produto.nome}}" data-toggle="tooltip" title="{{j.id_produto.nome}}" data-placement="top">
+                                                        </div>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-md-3 col-in-block v-middle">
+                                            <div class="status-venda" id="venda-{{i}}">
+                                                {% for k in status %}
+                                                    {% if k.id_compra.id == i %}
+                                                        {% if k.recebido %}
+                                                        <h4><i class="far fa-envelope-open" data-toggle="tooltip" title="Recebido" data-placement="top"></i><span>Recebido</span></h4>
+                                                        {% elif k.saiu %}
+                                                        <h4><i class="far fa-envelope-open" data-toggle="tooltip" title="Saiu" data-placement="top"></i><span>Saiu</span></h4>
+                                                        {% elif k.em_rota %}
+                                                        <h4><i class="far fa-envelope-open" data-toggle="tooltip" title="Recebido" data-placement="top"></i><span>Recebido</span></h4>
+                                                        {% elif k.entregue %}
+                                                        <h4><i class="far fa-envelope-open" data-toggle="tooltip" title="Entregue" data-placement="top"></i><span>Entregue</span></h4>
+                                                        {% endif %}
+
+                                                        <a href="#" class="clickToChangeStatus" id="{{i}}">Alterar Status</a>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </div>
+                                        </div>
                                     </div>
-                                    <p>{{i.id}}</p>
-                                    <p>{{i.id_produto.nome}}</p>
                                 </div>
                             </li>
                         {% endfor %}

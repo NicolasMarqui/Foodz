@@ -1145,19 +1145,120 @@ def dashboard_vendas(request):
 
     if id_user is not None:
 
-        #Pega todas as vendas
+        #Pega todas as vendas do restaurante
         try:
-            vendas = Placed_order.objects.filter(id_restaurante=id_user.id).order_by('id')
+            vendas = Placed_order.objects.filter(id_restaurante=id_user.id).order_by('-id')
         except Placed_order.DoesNotExist:
             vendas = False
 
     else:
         redirect('/login')
 
+
+    vendas_unique = []
+
+    for i in vendas:
+        if i.order_id.id not in vendas_unique:
+            vendas_unique.append(i.order_id.id)
+
+    status = []
+
+    for j in vendas_unique:
+        stat = Status.objects.filter(id_compra=j)
+        
+        for k in stat:
+            status.append(k)
+
     return render(
         request,
         'dashboard_vendas.html',
         {
             'vendas': set(vendas),
+            'todas_vendas': vendas_unique,
+            'status': status,
         }
     )
+
+def get_status(request):
+
+    #Verifica se é AJAX
+    if request.method == 'GET' and request.is_ajax():
+
+        #Verifica se user está logado
+        if not request.user.is_authenticated:
+            redirect('/')
+
+        #Pega o id que ta vindo
+        id_compra = request.GET['id']
+
+        status_atual = 'ops..'
+    
+        #Pega no status
+        try:
+            status = Status.objects.get(id_compra=id_compra)
+
+            if status.recebido:
+                status_atual = 'recebido'
+            elif status.saiu:
+                status_atual = 'saiu'
+            elif status.em_rota:
+               status_atual = 'em_rota'
+            elif status.entregue:
+                status_atual = 'entregue'
+
+            titulo = 'Status do pedido {}'.format(status.id_compra.id)
+            return JsonResponse({ 'status': 'success' , 'titulo': titulo , 'atual': status_atual})
+
+
+        except Status.DoesNotExist:
+            msg: 'Não foi possivel encontrar essa compra'
+            return JsonResponse({ 'status': 'error' , 'msg': msg})
+
+    return JsonResponse({ 'status': 'error' , 'msg': 'Request Inválido'})
+
+def editar_status(request):
+
+    #Verifica se é AJAX
+    if request.method == 'POST' and request.is_ajax():
+
+        #Verifica se user está logado
+        if not request.user.is_authenticated:
+            redirect('/')
+
+        #Pega o id que ta vindo
+        id_compra = request.POST['id']
+        tipo = request.POST['data'].replace('select=', '')
+
+        status_atual = 'ops..'
+    
+        #Pega no status
+        try:
+            status = Status.objects.get(id_compra=id_compra)
+            
+            #Zera todos
+            status.recebido = 0
+            status.saiu = 0
+            status.em_rota = 0
+            status.entregue = 0
+
+            if tipo == 'recebido':
+                status.recebido = 1
+            elif tipo == 'saiu':
+                status.saiu = 1
+            elif tipo == 'em_rota':
+                status.em_rota = 1
+            elif tipo == 'entregue':
+                status.entregue = 1
+
+            status.save()
+
+            msg = 'O pedido {} foi alterado para {}'.format(id_compra, tipo)
+            return JsonResponse({ 'status': 'success' , 'msg': msg, 'tipo': tipo})
+
+        except Status.DoesNotExist:
+            msg: 'Não foi possivel encontrar essa compra'
+            return JsonResponse({ 'status': 'error' , 'msg': msg})
+
+    return JsonResponse({ 'status': 'error' , 'msg': 'Request Inválido'})
+
+

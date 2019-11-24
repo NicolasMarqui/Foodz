@@ -114,30 +114,30 @@
                                             <div class="pedido-items">
                                                 {% for i in pedidos %}
                                                     {% if ord.id == i.order_id.id %}
-                                                            <div class="row spec-ped">
-                                                                <div class="col-xs-12 col-md-3">
-                                                                    <img src="/media/{{i.id_produto.foto}}" alt="" class="img-pedido">
-                                                                </div>
+                                                        <div class="row spec-ped">
+                                                            <div class="col-xs-12 col-md-3">
+                                                                <img src="/media/{{i.id_produto.foto}}" alt="" class="img-pedido">
+                                                            </div>
 
-                                                                <div class="col-xs-12 col-md-9">
-                                                                    <div class="text">
-                                                                        <p>{{i.id_produto.nome}}</p>
-                                                                        <p> <span>{{i.quantidade}}</span> unidade - R$ <span>{{i.id_produto.preco}}(cada)</span> </p>
-                                                                        <p>Vendido por: <a href="#"> {{i.id_restaurante.nome}} </a></p>
-                                                                    </div>
+                                                            <div class="col-xs-12 col-md-9">
+                                                                <div class="text">
+                                                                    <p>{{i.id_produto.nome}}</p>
+                                                                    <p> <span>{{i.quantidade}}</span> unidade - R$ <span>{{i.id_produto.preco}}(cada)</span> </p>
+                                                                    <p>Vendido por: <a href="#"> {{i.id_restaurante.nome}} </a></p>
                                                                 </div>
                                                             </div>
-                                                            <div class="more-info-order">
-                                                                <p>Data do pedido: <span>{{ i.order_time|date:"d M Y" }} {{ i.order_time|time:"H:i" }}</span></p>
-                                                                <p>Vendido por: <span>{{i.id_restaurante.nome}}</span> </p>
-                                                                <p>Endereço de entrega: <span>{{i.endereco_entrega}}</span> </p>
-                                                                <p>Endereço de Saida: <span>{{i.endereco_saida}}</span> </p>
-                                                                <p>Comentario: <span>{{i.comentario}}</span> </p>
+                                                        </div>
+                                                        <div class="more-info-order">
+                                                            <p>Data do pedido: <span>{{ i.order_time|date:"d M Y" }} {{ i.order_time|time:"H:i" }}</span></p>
+                                                            <p>Vendido por: <span>{{i.id_restaurante.nome}}</span> </p>
+                                                            <p>Endereço de entrega: <span>{{i.endereco_entrega}}</span> </p>
+                                                            <p>Endereço de Saida: <span>{{i.endereco_saida}}</span> </p>
+                                                            <p>Comentario: <span>{{i.comentario}}</span> </p>
 
-                                                                {% if not i.comentario %}
-                                                                    <a href="#">Escreva um comentário</a>
-                                                                {% endif %}
-                                                            </div>
+                                                            {% if not i.comentario %}
+                                                                <a href="#">Escreva um comentário</a>
+                                                            {% endif %}
+                                                        </div>
                                                     {% endif %}
                                                 {% endfor %}
                                             </div>
