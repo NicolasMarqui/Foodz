@@ -922,7 +922,8 @@ $(document).ready(function(){
         if(response.status == 'success'){
           $('.alterar-status').css('display', 'none');
 
-          $('.vendas-wrapper').find(`div#venda-${id} h4 span`).html(response.tipo)
+          $('.vendas-wrapper').find(`div#venda-${id} h4 span`).html(response.tipo == 'saiu' ? 'Em Preparação' : response.tipo)
+
           $('.actual-status').loading('stop');
         }
 

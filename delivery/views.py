@@ -1252,6 +1252,17 @@ def editar_status(request):
 
             status.save()
 
+            #Manda notificação para o dono
+
+            if request.user.id is not None:
+                try:
+                    msg_not = "Uau, o status do pedido {} foi alterado para '{}'".format(id_compra, tipo)
+                    notif = Notificacao(mensagem=msg_not, id_user=request.user)
+
+                    notif.save()
+                except Notificacao.DoesNotExist:
+                    notif = ''
+
             msg = 'O pedido {} foi alterado para {}'.format(id_compra, tipo)
             return JsonResponse({ 'status': 'success' , 'msg': msg, 'tipo': tipo})
 
@@ -1260,5 +1271,3 @@ def editar_status(request):
             return JsonResponse({ 'status': 'error' , 'msg': msg})
 
     return JsonResponse({ 'status': 'error' , 'msg': 'Request Inválido'})
-
-
