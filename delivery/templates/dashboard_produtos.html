@@ -14,7 +14,6 @@
 
             <h2>Produtos</h2>
 
-            {% if produtos %}
             <ul class="nav nav-tabs">
                 <li class="active"><a data-toggle="tab" href="#adicionar">Adicionar</a></li>
                 <li><a data-toggle="tab" href="#editar" id="load-products">Editar</a></li>
@@ -98,6 +97,7 @@
                 </div>
 
                 <div id="editar" class="tab-pane fade">
+                    {% if produtos %}
                         <div class="table-responsive">
                             <table class="table table-striped table-hover" id="todos_produtos">
                                 <thead>
@@ -126,9 +126,9 @@
                             </table>
                         </div>
                     {% else %}
-                        <div class="sem-produto">
-                            <h3>Você não possui nenhum produto cadastrado no momento :(</h3>
-                        </div>
+                    <div class="sem-produto">
+                        <h3>Você não possui nenhum produto cadastrado no momento :(</h3>
+                    </div>
                     {% endif %}
                 </div>
 

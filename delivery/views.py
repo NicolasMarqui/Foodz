@@ -89,6 +89,8 @@ def dashboard(request):
 
     #variaveis
     lucro = 0
+    vendas = None
+    ultimas_vendas = None
 
     #Verifica se user está logado
     if not request.user.is_authenticated:
@@ -1138,6 +1140,10 @@ def dashboard_vendas(request):
     if not request.user.is_authenticated:
         redirect('/')
 
+    vendas = False
+    vendas_unique = False
+    status = []
+
     try:
         id_user = Restaurante.objects.get(user_id=request.user.id)
     except Restaurante.DoesNotExist:
@@ -1154,26 +1160,26 @@ def dashboard_vendas(request):
     else:
         redirect('/login')
 
+    if vendas:
+        vendas_unique = []
 
-    vendas_unique = []
+        for i in vendas:
+            if i.order_id.id not in vendas_unique:
+                vendas_unique.append(i.order_id.id)
 
-    for i in vendas:
-        if i.order_id.id not in vendas_unique:
-            vendas_unique.append(i.order_id.id)
+        status = []
 
-    status = []
-
-    for j in vendas_unique:
-        stat = Status.objects.filter(id_compra=j)
-        
-        for k in stat:
-            status.append(k)
+        for j in vendas_unique:
+            stat = Status.objects.filter(id_compra=j)
+            
+            for k in stat:
+                status.append(k)
 
     return render(
         request,
         'dashboard_vendas.html',
         {
-            'vendas': set(vendas),
+            'vendas': vendas,
             'todas_vendas': vendas_unique,
             'status': status,
         }
@@ -1269,5 +1275,19 @@ def editar_status(request):
         except Status.DoesNotExist:
             msg: 'Não foi possivel encontrar essa compra'
             return JsonResponse({ 'status': 'error' , 'msg': msg})
+
+    return JsonResponse({ 'status': 'error' , 'msg': 'Request Inválido'})
+
+def pesquisa_pedido(request):
+    #Verifica se é AJAX
+    if request.method == 'POST' and request.is_ajax():
+        #Verifica se user está logado
+        if not request.user.is_authenticated:
+            redirect('/')
+
+        try:
+            orders = Placed_order.objects.filter()
+        except Order.DoesNotExist:
+            orders = None
 
     return JsonResponse({ 'status': 'error' , 'msg': 'Request Inválido'})

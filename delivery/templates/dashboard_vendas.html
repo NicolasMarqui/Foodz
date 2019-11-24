@@ -29,13 +29,16 @@
                 <div class="pesquisa-order">
                     <form>
                         <div class="form-group">
-                            <input type="text" placeholder="Pesquisar">
+                            <input type="text" placeholder="Pesquisar pedido" id="search-order">
                         </div>
 
                         <div class="form-group">
                             <select name="" id="">
-                                <option value="">Em aberto</option>
-                                <option value="">Entregues</option>
+                                <option value="" disabled selected>Selecione um status</option>
+                                <option value="recebido">Recebido</option>
+                                <option value="saiu">Em preparação</option>
+                                <option value="em_rota">Em Rota</option>
+                                <option value="entregue">Entregue</option>
                             </select>
                         </div>
                     </form>

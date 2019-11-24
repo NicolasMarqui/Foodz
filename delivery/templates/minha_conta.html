@@ -108,7 +108,21 @@
                                         <div class="pedido">
                                             <div class="side-bar-color" style="background-color: red;"></div>
                                             <div class="header-pedido">
-                                                <p>Pedido não foi entregue</p>
+                                                    {% if status %}
+                                                        {% for stat in status %}
+                                                            {% if ord.id == stat.id_compra.id %}
+                                                                {% if stat.recebido %}
+                                                                    <p>Pedido Recebido</p>
+                                                                {% elif stat.saiu %}
+                                                                    <p>Pedido Em preparação</p>
+                                                                {% elif stat.em_rota %}
+                                                                    <p>Pedido Em rota</p>
+                                                                {% elif stat.entregue %}
+                                                                    <p>Pedido Entregue</p>
+                                                                {% endif %}
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    {% endif %}
                                                 <p>Pedido: {{ord.id}}</p>
                                             </div>
                                             <div class="pedido-items">
@@ -136,6 +150,10 @@
 
                                                             {% if not i.comentario %}
                                                                 <a href="#">Escreva um comentário</a>
+
+                                                                <div class="show-comentario-to-write">
+                                                                    
+                                                                </div>
                                                             {% endif %}
                                                         </div>
                                                     {% endif %}
@@ -152,28 +170,28 @@
                                                         {% if ord.id == stat.id_compra.id %}
                                                             <div class="steps">
                                                                 <ul class="steps-container">
-                                                                    <li style="width:25%;" class="activated">
+                                                                    <li style="width:25%;" class="{% if stat.recebido %}activated{% endif %}">
                                                                         <div class="step">
                                                                             <div class="step-image"><span></span></div>
                                                                             <div class="step-current">Status 1</div>
                                                                             <div class="step-description">Recebido</div>
                                                                         </div>
                                                                     </li>
-                                                                    <li style="width:25%;">
+                                                                    <li style="width:25%;" class="{% if stat.saiu %}activated{% endif %}">
                                                                         <div class="step">
                                                                             <div class="step-image"><span></span></div>
                                                                             <div class="step-current">Status 2</div>
                                                                             <div class="step-description">Preparação</div>
                                                                         </div>
                                                                     </li>
-                                                                    <li style="width:25%;">
+                                                                    <li style="width:25%;" class="{% if stat.em_rota %}activated{% endif %}">
                                                                         <div class="step">
                                                                             <div class="step-image"><span></span></div>
                                                                             <div class="step-current">Status 3</div>
                                                                             <div class="step-description">Em rota</div>
                                                                         </div>
                                                                     </li>
-                                                                    <li style="width:25%;">
+                                                                    <li style="width:25%;" class="{% if stat.entregue %}activated{% endif %}">
                                                                         <div class="step">
                                                                             <div class="step-image"><span></span></div>
                                                                             <div class="step-current">Status 4</div>
@@ -181,11 +199,15 @@
                                                                         </div>
                                                                     </li>
                                                                 </ul>
+                                                                {% if stat.recebido %}
                                                                 <div class="step-bar" style="width: 25%;"></div>
-                                                            </div>
-                                                        {% else %}
-                                                            <div class="no-status">
-                                                                <p>Status não disponivel para essa compra</p>
+                                                                {% elif stat.saiu %}
+                                                                <div class="step-bar" style="width: 50%;"></div>
+                                                                {% elif stat.em_rota %}
+                                                                <div class="step-bar" style="width: 75%;"></div>
+                                                                {% elif stat.entregue %}
+                                                                <div class="step-bar" style="width: 90%;"></div>
+                                                                {% endif %}
                                                             </div>
                                                         {% endif %}
                                                     {% endfor %}

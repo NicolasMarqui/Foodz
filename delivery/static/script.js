@@ -932,4 +932,28 @@ $(document).ready(function(){
     
   })
 
+  // Pesquisa order input
+  // $('#search-order').keyup(function (e) { 
+    
+  //   $.ajax({
+  //     type: "GET",
+  //     url: "/pedidos/pesquisa",
+  //     data: {
+  //       query: $(this).val(),
+  //       csrfmiddlewaretoken: getCookie('csrftoken'),
+  //     },
+  //     dataType: "dataType",
+  //     beforeSend: function(){
+  //       $('.display-vendas').loading({
+  //         stoppable: true
+  //       });
+  //     },
+  //     success: function (response) {
+  //       console.log(response)
+
+  //       $('.display-vendas').loading('stop');
+  //     }
+  //   });
+  // });
+
 })

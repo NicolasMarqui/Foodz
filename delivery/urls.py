@@ -35,4 +35,5 @@ urlpatterns = [
     path('checkout/confirma',views.confirma,name="Confirma Compra"),
     path('pedidos/get/status',views.get_status,name="Ver Status"),
     path('pedidos/editar/status',views.editar_status,name="Editar Status"),
+    path('pedidos/pesquisa',views.pesquisa_pedido,name="Pesquisar Pedido"),
 ]
