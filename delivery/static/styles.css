@@ -5315,4 +5315,33 @@ form.pagamento button {
             flex-direction: column;
   }
 }
+
+.show-comentario-to-write {
+  padding: 15px;
+  border: 1px solid #000;
+  border-radius: 25px;
+  text-align: center;
+  margin-top: 25px;
+  background-color: #eeeeee;
+}
+
+.show-comentario-to-write p {
+  margin: 8px 0;
+}
+
+.show-comentario-to-write textarea, .show-comentario-to-write input {
+  padding: 8px;
+  border-radius: 15px;
+  border: 1px solid red;
+  outline: none;
+}
+
+.show-comentario-to-write textarea {
+  width: 441px;
+  height: 153px;
+}
+
+.show-comentario-to-write a {
+  margin: 8px auto !important;
+}
 /*# sourceMappingURL=styles.css.map */

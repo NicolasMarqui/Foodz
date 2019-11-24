@@ -95,7 +95,7 @@ class Comentario(models.Model):
     nota                        = models.PositiveIntegerField(null=True,default=0 ,validators=[MinValueValidator(0),MaxValueValidator(5)])
     descricao                   = models.TextField(blank=True)
     recomenda                   = models.BooleanField(default=True)
-    data_comentario             = models.DateTimeField()
+    data_comentario             = models.DateTimeField(auto_now=True,blank=True)
 
 class Order(models.Model):
     id_cliente                  = models.ForeignKey(Cliente, on_delete=models.CASCADE)

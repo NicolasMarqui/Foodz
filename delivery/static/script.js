@@ -932,28 +932,34 @@ $(document).ready(function(){
     
   })
 
-  // Pesquisa order input
-  // $('#search-order').keyup(function (e) { 
+  // Adiciona comentario
+  $('.enviaComentario').click(function () { 
     
-  //   $.ajax({
-  //     type: "GET",
-  //     url: "/pedidos/pesquisa",
-  //     data: {
-  //       query: $(this).val(),
-  //       csrfmiddlewaretoken: getCookie('csrftoken'),
-  //     },
-  //     dataType: "dataType",
-  //     beforeSend: function(){
-  //       $('.display-vendas').loading({
-  //         stoppable: true
-  //       });
-  //     },
-  //     success: function (response) {
-  //       console.log(response)
+    let descricao = $('#descricao').val() !== '' ? $('#descricao').val() : 'Gostei';
+    let nota = $('#nota').val() !== '' ? $('#nota').val() : 3;
+    let recomenda = $('#recomenda').val() !== '' ? $('#recomenda').val() : 'sim';
+    let cliente_id = $('#cliente_id').val()
+    let produto_id = $('#produto_id').val()
+    let restaurante_id = $('#restaurante_id').val()
 
-  //       $('.display-vendas').loading('stop');
-  //     }
-  //   });
-  // });
+    $.ajax({
+      type: "POST",
+      url: "/produtos/comentario/add",
+      data: {
+        descricao,
+        nota,
+        recomenda,
+        csrfmiddlewaretoken: getCookie('csrftoken'),
+        cliente_id,
+        produto_id,
+        restaurante_id
+      },
+      dataType: "dataType",
+      success: function (response) {
+        console.log(response);
+      }
+    });
+    
+  });
 
 })

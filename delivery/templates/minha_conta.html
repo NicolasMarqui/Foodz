@@ -123,7 +123,7 @@
                                                             {% endif %}
                                                         {% endfor %}
                                                     {% endif %}
-                                                <p>Pedido: {{ord.id}}</p>
+                                                <p>Pedido: #{{ord.id}}</p>
                                             </div>
                                             <div class="pedido-items">
                                                 {% for i in pedidos %}
@@ -146,13 +146,36 @@
                                                             <p>Vendido por: <span>{{i.id_restaurante.nome}}</span> </p>
                                                             <p>Endereço de entrega: <span>{{i.endereco_entrega}}</span> </p>
                                                             <p>Endereço de Saida: <span>{{i.endereco_saida}}</span> </p>
-                                                            <p>Comentario: <span>{{i.comentario}}</span> </p>
+                                                            <p>Comentario: <span class="display-comentario">{{i.comentario}}</span> </p>
 
                                                             {% if not i.comentario %}
                                                                 <a href="#">Escreva um comentário</a>
 
                                                                 <div class="show-comentario-to-write">
-                                                                    
+                                                                    <p>Nos diga o que você achou do {{i.id_produto.nome}}</p>
+                                                                    <form>
+                                                                        <div class="form-group">
+                                                                            <textarea type="text" placeholder="Descrição" required name="descricao" id="descricao"></textarea>
+                                                                        </div>
+
+                                                                        <div class="form-group">
+                                                                            <input type="number" required placeholder="Nota" name="nota" min="0" max="5" id="nota">
+                                                                        </div>
+
+                                                                        <div class="form-group radios-recomenda">
+                                                                            <select name="recomenda" id="recomenda">
+                                                                                <option value="" disabled selected>Recomenda?</option>
+                                                                                <option value="sim">Sim</option>
+                                                                                <option value="nao">Não</option>
+                                                                            </select>
+                                                                        </div>
+
+                                                                        <input type="hidden" id="cliente_id" value="{{request.user.id}}">
+                                                                        <input type="hidden" id="produto_id" value="{{i.id_produto.id}}">
+                                                                        <input type="hidden" id="restaurante_id" value="{{i.id_restaurante.id}}">
+
+                                                                        <a href="#enviarComentario" class="enviaComentario">Enviar</a>
+                                                                    </form>
                                                                 </div>
                                                             {% endif %}
                                                         </div>

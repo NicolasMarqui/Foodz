@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Cliente, Produto, Restaurante, Notificacao, Carrinho, Favoritos, Placed_order, Endereco, Order, Status
+from .models import Cliente, Produto, Restaurante, Notificacao, Carrinho, Favoritos, Placed_order, Endereco, Order, Status, Comentario
 from django.contrib.auth import logout as django_logout
 from django.contrib.auth.models import User, auth, Group
 from django.db.models import Q
@@ -1278,16 +1278,48 @@ def editar_status(request):
 
     return JsonResponse({ 'status': 'error' , 'msg': 'Request Inválido'})
 
-def pesquisa_pedido(request):
+def comentario_adicionar(request):
     #Verifica se é AJAX
     if request.method == 'POST' and request.is_ajax():
         #Verifica se user está logado
         if not request.user.is_authenticated:
             redirect('/')
+        
+        #Pega as variaveis
+        descricao       = request.POST['descricao']
+        nota            = request.POST['nota']
+        recomenda       = request.POST['recomenda']
+        cliente_id      = request.POST['cliente_id']
+        produto_id      = request.POST['produto_id']
+        restaurante_id  = request.POST['restaurante_id']
+
+        print(cliente_id, produto_id, restaurante_id)
+
+        #Cria as instancias
+        try:
+            cliente = Cliente.objects.get(user_id=cliente_id)
+        except Cliente.DoesNotExist:
+            cliente = None
 
         try:
-            orders = Placed_order.objects.filter()
-        except Order.DoesNotExist:
-            orders = None
+            produto = Produto.objects.get(id=produto_id)
+        except produto.DoesNotExist:
+            produto = None
+
+        try:
+            restaurante = Restaurante.objects.get(id=restaurante_id)
+        except Restaurante.DoesNotExist:
+            restaurante = None
+
+        if cliente is not None and produto is not None and restaurante is not None:
+            comentario = Comentario(nota=nota, descricao=descricao,cliente_id=cliente, produto_id=produto, restaurante_id=restaurante)
+
+            comentario.save()
+
+            msg = "Pronto \o/, você deixou um comentário nesse produto"
+            return JsonResponse({ 'status': 'success' , 'msg': msg})
+        
+        else:
+            return JsonResponse({ 'status': 'error' , 'msg': 'Ocorreu um erro'})
 
     return JsonResponse({ 'status': 'error' , 'msg': 'Request Inválido'})
