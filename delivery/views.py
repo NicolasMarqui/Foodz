@@ -1341,8 +1341,6 @@ def comentario_adicionar(request):
         except Restaurante.DoesNotExist:
             restaurante = None
 
-        eprint(produto.id)
-
         if cliente is not None and produto is not None and restaurante is not None:
             comentario = Comentario(nota=nota, descricao=descricao,cliente_id=cliente, produto_id=produto, restaurante_id=restaurante)
 
@@ -1355,3 +1353,21 @@ def comentario_adicionar(request):
             return JsonResponse({ 'status': 'error' , 'msg': 'Ocorreu um erro'})
 
     return JsonResponse({ 'status': 'error' , 'msg': 'Request Inválido'})
+
+def ajuda(request):
+    return render(
+        request,
+        'ajuda.html',
+    )
+
+def faq(request):
+    return render(
+        request,
+        'faq.html',
+    )
+
+def tutorial(request):
+    return render(
+        request,
+        'tutorial.html',
+    )

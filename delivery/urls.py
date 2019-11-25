@@ -37,4 +37,7 @@ urlpatterns = [
     path('checkout/confirma',views.confirma,name="Confirma Compra"),
     path('pedidos/get/status',views.get_status,name="Ver Status"),
     path('pedidos/editar/status',views.editar_status,name="Editar Status"),
+    path('ajuda/',views.ajuda,name="Ajuda"),
+    path('faq/',views.faq,name="Faq"),
+    path('tutorial/',views.tutorial,name="Tutorial"),
 ]
