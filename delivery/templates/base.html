@@ -147,23 +147,25 @@
                             <div class="hidden-xs col-sm-5 col-md-4 col-lg-3 col-in-block text-right">
                                 <div class="menu">
                                     <ul>
-                                        {% if request.path == '/' %}
-                                            <li class="active"><a href="/">Home</a></li>
-                                        {% else %}
-                                            <li><a href="/">Home</a></li>
-                                        {% endif %}
-                                
-                                        {% if '/sobre-nos' in request.path  %}
-                                            <li class="active"><a href="/sobre-nos">Sobre Nós</a></li>
-                                        {% else %}
-                                            <li><a href="/sobre-nos">Sobre Nós</a></li>
-                                        {% endif %}
-                                
-                                        {% if '/produtos' in request.path  %}
-                                            <li class="active"><a href="/produtos">Produtos</a></li>
-                                        {% else %}
-                                            <li><a href="/produtos">Produtos</a></li>
-                                        {% endif %}
+                                        <li class="{% if request.path == '/'  %}active{% endif %}"><a href="/">Home</a></li>
+                                        <li class="{% if '/sobre-nos' in request.path  %}active{% endif %} hover-display-infos">
+                                            <a href="/sobre-nos">Sobre Nós</a>
+                                            <div class="more-info-sobre-nos">
+                                                <ul>
+                                                    <li>
+                                                        <a href="/ajuda"> <span><i class="fas fa-exclamation-circle"></i></span> Ajuda</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="/faq"> <span><i class="fas fa-question-circle"></i></span> F.A.Q</a>
+                                                    </li>
+                                                    
+                                                    <li>
+                                                        <a href="/tutorial"> <span><i class="fas fa-arrow-circle-up"></i></span> Tutorial</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                        <li class="{% if '/produtos' in request.path  %}active{% endif %}"><a href="/produtos">Produtos</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -181,12 +183,6 @@
                                                         <a href="/conta/{{user.id}}">
                                                             <i class="fas fa-user"></i>
                                                             Olá , <span>{{user.username}}</span>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#favoritos-{{user.username}}">
-                                                            <i class="fas fa-heart"></i>
-                                                            <span>Favoritos</span>
                                                         </a>
                                                     </li>
                                                     <li>

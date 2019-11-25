@@ -414,12 +414,12 @@ header .header .menu ul {
   margin: 0;
 }
 
-header .header .menu ul li {
+header .header .menu ul > li {
   display: inline-block;
   position: relative;
 }
 
-header .header .menu ul li a {
+header .header .menu ul > li > a {
   display: block;
   padding: 20px 14px;
   font-size: 14px;
@@ -427,11 +427,11 @@ header .header .menu ul li a {
   color: #000;
 }
 
-header .header .menu ul li.cadastra-restaurante {
+header .header .menu ul > li.cadastra-restaurante {
   background-color: #fe0435;
 }
 
-header .header .menu ul li.cadastra-restaurante a {
+header .header .menu ul > li.cadastra-restaurante a {
   color: #fff;
   display: block;
   height: 100%;
@@ -439,15 +439,15 @@ header .header .menu ul li.cadastra-restaurante a {
   text-align: center;
 }
 
-header .header .menu ul li.cadastra-restaurante:hover {
+header .header .menu ul > li.cadastra-restaurante:hover {
   background-color: #fe375e;
 }
 
-header .header .menu ul li.active {
+header .header .menu ul > li.active {
   border-bottom: 4px solid #fe0435;
 }
 
-header .header .menu ul li:hover::before {
+header .header .menu ul > li:hover::before {
   content: '';
   position: absolute;
   top: 100%;
@@ -457,12 +457,48 @@ header .header .menu ul li:hover::before {
   background-color: #fe0435;
 }
 
-header .header .menu ul li.not-hover:hover {
+header .header .menu ul > li.not-hover:hover {
   -webkit-transform: scale(1.2);
           transform: scale(1.2);
 }
 
-header .header .menu ul li.not-hover:hover::before {
+header .header .menu ul > li.not-hover:hover::before {
+  content: none;
+}
+
+header .header .menu ul > li.hover-display-infos {
+  position: relative;
+}
+
+header .header .menu ul > li.hover-display-infos:hover .more-info-sobre-nos {
+  visibility: visible;
+}
+
+header .header .menu ul > li.hover-display-infos .more-info-sobre-nos {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: #dddd;
+  z-index: 4;
+  width: 200px;
+  visibility: hidden;
+}
+
+header .header .menu ul > li.hover-display-infos .more-info-sobre-nos ul li {
+  width: 100%;
+}
+
+header .header .menu ul > li.hover-display-infos .more-info-sobre-nos ul li a {
+  text-align: center;
+}
+
+header .header .menu ul > li.hover-display-infos .more-info-sobre-nos ul li a:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+header .header .menu ul > li.hover-display-infos .more-info-sobre-nos ul li::before {
   content: none;
 }
 
@@ -853,7 +889,6 @@ header.white-bg .header .menu ul li.cadastra-restaurante a {
 .categorias-wrapper .container-categoria .item .over, .categorias-wrapper .container-categoria .item-1 .over, .categorias-wrapper .container-categoria .item-2 .over {
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: 25px;
-  display: none;
 }
 
 .categorias-wrapper .container-categoria .item h3, .categorias-wrapper .container-categoria .item-1 h3, .categorias-wrapper .container-categoria .item-2 h3 {
@@ -864,7 +899,6 @@ header.white-bg .header .menu ul li.cadastra-restaurante a {
           transform: translate(-50%, -50%);
   color: #fff;
   font-size: 25px;
-  display: none;
 }
 
 .categorias-wrapper .container-categoria .item a, .categorias-wrapper .container-categoria .item-1 a, .categorias-wrapper .container-categoria .item-2 a {
@@ -873,13 +907,11 @@ header.white-bg .header .menu ul li.cadastra-restaurante a {
   display: block;
 }
 
-.categorias-wrapper .container-categoria .item:hover .over, .categorias-wrapper .container-categoria .item-1:hover .over, .categorias-wrapper .container-categoria .item-2:hover .over {
-  background-color: rgba(0, 0, 0, 0.5);
-  display: block;
-}
-
-.categorias-wrapper .container-categoria .item:hover h3, .categorias-wrapper .container-categoria .item-1:hover h3, .categorias-wrapper .container-categoria .item-2:hover h3 {
-  display: block;
+.categorias-wrapper .container-categoria .item:hover, .categorias-wrapper .container-categoria .item-1:hover, .categorias-wrapper .container-categoria .item-2:hover {
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+  -webkit-transition: all .2s linear;
+  transition: all .2s linear;
 }
 
 .categorias-wrapper .container-categoria .first-col .item {
@@ -1641,6 +1673,7 @@ footer .footer .fot-bottom p {
   background-color: #f8f8f8;
   position: relative;
   overflow: auto;
+  overflow-x: hidden;
 }
 
 .wrapper-dashboard .main-content-dashboard h2 {
@@ -3225,7 +3258,7 @@ footer .footer .fot-bottom p {
 }
 
 .minha-conta-wrapper .side-nav-conta {
-  width: 300px;
+  width: 70px;
   height: 100%;
   background-color: #fff;
   position: absolute;
@@ -3233,8 +3266,8 @@ footer .footer .fot-bottom p {
 }
 
 .minha-conta-wrapper .side-nav-conta .info-nome .foto {
-  height: 150px;
-  width: 150px;
+  height: 50px;
+  width: 50px;
   border-radius: 50%;
   position: relative;
   margin: 0 auto;
@@ -3260,10 +3293,14 @@ footer .footer .fot-bottom p {
   text-align: left;
 }
 
+.minha-conta-wrapper .side-nav-conta .info-nome ul li a span {
+  display: none;
+}
+
 .minha-conta-wrapper .side-nav-conta .info-nome h2 {
-  padding: 24px;
+  padding: 0px;
   font-weight: 600;
-  font-size: 25px;
+  font-size: 14px;
   text-align: center;
   text-transform: capitalize;
 }
@@ -3274,13 +3311,13 @@ footer .footer .fot-bottom p {
 }
 
 .minha-conta-wrapper .my-info-conta {
-  width: calc(100% - 300px);
-  margin-left: 300px;
+  width: calc(100% - 70px);
+  margin-left: 70px;
   height: 100%;
   background-color: #eeee;
   position: relative;
   overflow: auto;
-  padding: 25px;
+  padding: 5px;
 }
 
 .minha-conta-wrapper .my-info-conta h3 {
@@ -3294,6 +3331,12 @@ footer .footer .fot-bottom p {
 .minha-conta-wrapper .my-info-conta .nav-tabs .active a {
   background-color: #E04040;
   color: #fff;
+}
+
+.minha-conta-wrapper .my-info-conta .nav > li > a {
+  position: relative;
+  display: block;
+  padding: 10px 11px;
 }
 
 .minha-conta-wrapper .my-info-conta .pedido {
@@ -3352,6 +3395,7 @@ footer .footer .fot-bottom p {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  text-align: center;
 }
 
 .minha-conta-wrapper .my-info-conta .pedido .pedido-items .text p {
@@ -3413,11 +3457,48 @@ footer .footer .fot-bottom p {
 
 .minha-conta-wrapper .my-info-conta .pedido .status-pedido {
   padding: 25px;
+  display: none;
 }
 
 .minha-conta-wrapper .my-info-conta .pedido .no-status p {
   text-align: center;
   font-size: 13px;
+}
+
+@media (min-width: 768px) {
+  .minha-conta-wrapper .side-nav-conta {
+    width: 300px;
+  }
+  .minha-conta-wrapper .side-nav-conta .info-nome .foto {
+    height: 150px;
+    width: 150px;
+  }
+  .minha-conta-wrapper .side-nav-conta .info-nome h2 {
+    padding: 24px;
+    font-size: 25px;
+  }
+  .minha-conta-wrapper .side-nav-conta .info-nome ul li a {
+    padding: 24px 16px;
+  }
+  .minha-conta-wrapper .side-nav-conta .info-nome ul li a span {
+    display: inline-block;
+  }
+  .minha-conta-wrapper .my-info-conta {
+    width: calc(100% - 300px);
+    margin-left: 300px;
+    padding: 25px;
+  }
+  .minha-conta-wrapper .my-info-conta .nav > li > a {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+  }
+  .minha-conta-wrapper .my-info-conta .pedido-items .text {
+    text-align: left;
+  }
+  .minha-conta-wrapper .my-info-conta .status-pedido {
+    display: block;
+  }
 }
 
 .thicker {
@@ -3604,7 +3685,7 @@ footer .footer .fot-bottom p {
 }
 
 .display-info {
-  padding: 50px 50px 0;
+  padding: 50px 10px 0;
 }
 
 .display-info form label, .display-info form p {
@@ -3649,6 +3730,12 @@ footer .footer .fot-bottom p {
 
 .display-info form button:hover {
   background-color: #e76c6c;
+}
+
+@media (min-width: 768px) {
+  .display-info {
+    padding: 50px 50px 0;
+  }
 }
 
 .first-login {
@@ -4016,7 +4103,7 @@ footer .footer .fot-bottom p {
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
-  width: 50%;
+  width: 100%;
   height: 500px;
   overflow: auto;
   background-color: #fff;
@@ -4083,6 +4170,12 @@ footer .footer .fot-bottom p {
 
 .open-modal .modal-edit .header-edit i {
   cursor: pointer;
+}
+
+@media (min-width: 768px) {
+  .open-modal .modal-edit {
+    width: 60%;
+  }
 }
 
 .historia-empresa h1 {
@@ -4942,7 +5035,7 @@ form.pagamento button {
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
   background-color: #fff;
-  width: 50%;
+  width: 80%;
   height: 500px;
   overflow: auto;
 }
@@ -4977,7 +5070,7 @@ form.pagamento button {
 }
 
 .modal-favoritos .actual-modal .fav .image img {
-  height: 100px;
+  height: 50px;
   width: auto;
   margin: 0 auto;
   display: block;
@@ -5038,8 +5131,17 @@ form.pagamento button {
   color: #E04040;
 }
 
+@media (min-width: 768px) {
+  .modal-favoritos .actual-modal {
+    width: 60%;
+  }
+  .modal-favoritos .actual-modal .fav .image img {
+    height: 100px;
+  }
+}
+
 .content-vendas {
-  padding: 0 40px;
+  padding: 0 10px;
 }
 
 .content-vendas .vendas-header h2 {
@@ -5069,6 +5171,12 @@ form.pagamento button {
   background-color: #E04040;
   color: #fff;
   cursor: pointer;
+}
+
+@media (min-width: 768px) {
+  .content-vendas {
+    padding: 0 40px;
+  }
 }
 
 .display-vendas {
@@ -5338,12 +5446,18 @@ form.pagamento button {
 }
 
 .show-comentario-to-write textarea {
-  width: 441px;
+  width: 100%;
   height: 153px;
 }
 
 .show-comentario-to-write a {
   margin: 8px auto !important;
+}
+
+@media (min-width: 768px) {
+  .show-comentario-to-write textarea {
+    width: 441px;
+  }
 }
 
 .no-comments {
