@@ -5184,16 +5184,16 @@ form.pagamento button {
   background-color: #f8f8f8;
 }
 
-.removeMe {
+.removeMeStatus {
   padding: 15px;
 }
 
-.removeMe .status-header {
+.removeMeStatus .status-header {
   text-align: center;
   margin: 15px 0;
 }
 
-.removeMe .status-header span {
+.removeMeStatus .status-header span {
   text-transform: capitalize;
   font-weight: 600;
   font-size: 18px;
@@ -5201,11 +5201,11 @@ form.pagamento button {
   border-bottom: 2px solid red;
 }
 
-.removeMe .choose-newStatus {
+.removeMeStatus .choose-newStatus {
   margin-top: 25px;
 }
 
-.removeMe .choose-newStatus .edit-status button {
+.removeMeStatus .choose-newStatus .edit-status button {
   display: block;
   margin: 0 auto;
   padding: 14px;
@@ -5218,7 +5218,7 @@ form.pagamento button {
   outline: none;
 }
 
-.removeMe .choose-newStatus .edit-status button:hover {
+.removeMeStatus .choose-newStatus .edit-status button:hover {
   background-color: #e76c6c;
 }
 
@@ -5323,6 +5323,7 @@ form.pagamento button {
   text-align: center;
   margin-top: 25px;
   background-color: #eeeeee;
+  display: none;
 }
 
 .show-comentario-to-write p {
@@ -5343,5 +5344,9 @@ form.pagamento button {
 
 .show-comentario-to-write a {
   margin: 8px auto !important;
+}
+
+.no-comments {
+  margin: 10px 0;
 }
 /*# sourceMappingURL=styles.css.map */

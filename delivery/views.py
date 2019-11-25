@@ -337,13 +337,20 @@ def produto_info(request,id = None):
 
     mais_produtos = Produto.objects.filter(restaurante_id=produto.restaurante.id)[:2]
 
+    #Pega os comentarios
+    try:
+        comentarios = Comentario.objects.filter(produto_id=produto.id)
+    except Comentario.DoesNotExist:
+        comentarios = False
+
     return render(
         request,
         'produto_info.html',
         {
             'nota': str(produto.nota),
             'produto': produto,
-            'mais_produtos': mais_produtos
+            'mais_produtos': mais_produtos,
+            'comentarios': comentarios
         }
     )
 
@@ -397,6 +404,7 @@ def minha_conta(request, id):
     data = ''
     enderecos = ''
     favoritos = None
+    coment = None
     orders_finais = []
     orders_num = []
 
@@ -480,6 +488,14 @@ def minha_conta(request, id):
     except Favoritos.DoesNotExist:
         favoritos = None
 
+    #Pega os comentarios
+    try:
+        coment = Comentario.objects.filter(cliente_id=cliente[0].id)
+    except Comentario.DoesNotExist:
+        coment = None
+
+    print(coment)
+
     return render(
         request,
         'minha_conta.html',
@@ -491,7 +507,8 @@ def minha_conta(request, id):
             'orders': orders,
             'form': form,
             'favoritos': favoritos,
-            'status': status
+            'status': status,
+            'coment': coment
         }
     )
 
@@ -587,6 +604,22 @@ def save_produto_editar(request):
 
         return JsonResponse({ 'status': 'success', 'id': id})
 
+def remover_produtos(request):
+    if request.method == 'POST' and request.is_ajax():
+
+        id = request.POST['id']
+
+        try:
+            prod = Produto.objects.get(id=id)
+
+            prod.delete()
+
+            msg = 'Produto #{} removido'.format(id)
+            return JsonResponse({ 'status': 'success', 'msg': msg})
+
+        except Produto.DoesNotExist:
+            msg = 'Erro ao deletar o produto #{}'.format(id)
+            return JsonResponse({ 'status': 'error', 'msg': msg})
 
 def produtos_todos(request):
     rest = Restaurante.objects.get(user_id=request.user.id)
@@ -600,16 +633,15 @@ def produtos_todos(request):
 
 def produtos_editar(request, id):
 
-    # prod = Restaurante.objects.get(id=id)
+    prod = Restaurante.objects.get(id=id)
 
-    # produtos = list(Produto.objects.filter(restaurante_id = rest.id).values())
+    produtos = list(Produto.objects.filter(restaurante_id = rest.id).values())
 
-    # data = dict()
-    # data['produtos'] = produtos
-    # print(produtos)
+    data = dict()
+    data['produtos'] = produtos
+    print(produtos)
 
-    # return JsonResponse(data)
-    pass
+    return JsonResponse(data)
 
 def promocoes(request):
     return render(
@@ -1293,8 +1325,6 @@ def comentario_adicionar(request):
         produto_id      = request.POST['produto_id']
         restaurante_id  = request.POST['restaurante_id']
 
-        print(cliente_id, produto_id, restaurante_id)
-
         #Cria as instancias
         try:
             cliente = Cliente.objects.get(user_id=cliente_id)
@@ -1310,6 +1340,8 @@ def comentario_adicionar(request):
             restaurante = Restaurante.objects.get(id=restaurante_id)
         except Restaurante.DoesNotExist:
             restaurante = None
+
+        eprint(produto.id)
 
         if cliente is not None and produto is not None and restaurante is not None:
             comentario = Comentario(nota=nota, descricao=descricao,cliente_id=cliente, produto_id=produto, restaurante_id=restaurante)

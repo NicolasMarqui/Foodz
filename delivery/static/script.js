@@ -480,10 +480,10 @@ $(document).ready(function(){
               ${prod.descricao.slice(0,7)}...
             </td>
             <td>
-              <button class="btn updateBtn" data-id="${prod.id}">Editar</button>
+              <button class="btn updateBtn" id="${prod.id}">Editar</button>
             </td>
             <td>
-              <button class="btn deleteBtn btn-danger" data-id="${prod.id}">Deletar</button>
+              <button class="btn deleteBtn btn-danger" id="${prod.id}">Deletar</button>
             </td>
           </tr>`;
           });
@@ -495,19 +495,59 @@ $(document).ready(function(){
       });
     })
 
-    $('#todos_produtos').on('click', $('.updateBtn'), function(){
-        $.ajax({
-          type: "method",
-          url: "get-produto-editar/",
-          data: {
-            id: id,
-            csrfmiddlewaretoken: getCookie('csrftoken'),
-          },
-          dataType: "dataType",
-          success: function (response) {
-            
-          }
-        });
+    $(document).on('click', '.updateBtn', function(){
+      id = $(this).attr('id')
+
+      $.ajax({
+        type: "post",
+        url: `/get-produto-editar`,
+        data: {
+          id: id,
+          csrfmiddlewaretoken: getCookie('csrftoken'),
+        },
+        dataType: "json",
+        complete: function (response) {
+          modal = response.responseText;
+
+          $(document).find('.open-modal').remove()
+          $('.content-produtos').append('<div class="open-modal"><div class="modal-edit" ><div class="header-edit"><i class="fas fa-times" id="close-edit"></i></div><form method="POST" enctype="multipart/form-data">'+ modal +'<button type="submit" id="salvar_editar" value=' + id +'>Salvar</button></form></div></div>')
+        }
+      });
+    })
+
+    $(document).on('click', '.deleteBtn', function(){
+      id = $(this).attr('id')
+
+      $.ajax({
+        type: "post",
+        url: `/produtos/remover`,
+        data: {
+          id: id,
+          csrfmiddlewaretoken: getCookie('csrftoken'),
+        },
+        beforeSend: function(){
+          $('#editar').loading({
+            stoppable: true
+          });
+        },
+        dataType: "json",
+        complete: function (response) {
+          console.log(response);
+          
+          if(response.responseJSON.status == 'success'){
+            $.toast({
+              heading: 'Removido :(',
+              text: 'Produto removido com sucesso',
+              showHideTransition: 'slide',
+              icon: 'success'
+            });
+
+            $('#editar').loading('stop')
+            $('#load-products').trigger('click');
+
+          };
+        }
+      });
     })
 
     $('.edit-prod').on('click', function(){
@@ -567,6 +607,8 @@ $(document).ready(function(){
 
             $('.open-modal').css('display', 'none');
             $('.modal-edit').css('display', 'none');
+
+            $('#load-products').trigger('click');
           }
       });
 
@@ -788,8 +830,17 @@ $(document).ready(function(){
     
   //Mais detalhes pedidos
   $('.mais-detalhes').click(function(){
-    $('.more-info-order').toggle()
+    $.each($(this), function (indexInArray, valueOfElement) { 
+      $(this).prev().find('.more-info-order').toggle()
+    });
   })
+
+  //Mostra caixa para comentario
+  $(document).on('click', '#display-comentario-merda' ,function () { 
+    $.each($(this), function (indexInArray, valueOfElement) {
+       $(this).next().slideDown('fast');
+    }); 
+  });
 
   //Abre favoritos do cliente
   $('.open-fav').click(function(){
@@ -825,7 +876,7 @@ $(document).ready(function(){
       id: id,
     }
     
-    $('.actual-status .removeMe').remove()
+    $('.actual-status .removeMeStatus').remove()
 
     $.ajax({
       type: "GET",
@@ -841,7 +892,7 @@ $(document).ready(function(){
 
         if(response.status == 'success'){
           info += `
-            <div class="removeMe">
+            <div class="removeMeStatus">
               <div class="status-header">
                 <h3>${response.titulo}</h3>
                 <p>Status atual: <span>${response.atual}</span></p>
@@ -935,12 +986,12 @@ $(document).ready(function(){
   // Adiciona comentario
   $('.enviaComentario').click(function () { 
     
-    let descricao = $('#descricao').val() !== '' ? $('#descricao').val() : 'Gostei';
-    let nota = $('#nota').val() !== '' ? $('#nota').val() : 3;
-    let recomenda = $('#recomenda').val() !== '' ? $('#recomenda').val() : 'sim';
-    let cliente_id = $('#cliente_id').val()
-    let produto_id = $('#produto_id').val()
-    let restaurante_id = $('#restaurante_id').val()
+    let descricao       = $('#descricao').val() !== '' ? $('#descricao').val() : 'Gostei';
+    let nota            = $('#nota').val() !== '' ? $('#nota').val() : 3;
+    let recomenda       = $('#recomenda').val() !== '' ? $('#recomenda').val() : 'sim';
+    let cliente_id      = $('#cliente_id').val()
+    let produto_id      = $('#produto_id').val()
+    let restaurante_id  = $('#restaurante_id').val()
 
     $.ajax({
       type: "POST",
@@ -952,11 +1003,29 @@ $(document).ready(function(){
         csrfmiddlewaretoken: getCookie('csrftoken'),
         cliente_id,
         produto_id,
-        restaurante_id
+        restaurante_id,
       },
       dataType: "dataType",
-      success: function (response) {
-        console.log(response);
+      complete: function (response) {
+
+        console.log(response.status);
+        
+        if(response.status == 200){
+          $.toast({
+            heading: 'Obrigado :)',
+            text: 'Obrigado pelo comentario!',
+            showHideTransition: 'slide',
+            icon: 'success'
+          })
+      
+          // Limpa os campos
+          $('#descricao').val('');
+          $('#nota').val('')
+          $('#recomenda').val('')
+  
+          $('.show-comentario-to-write').slideUp('fast')
+        }
+
       }
     });
     

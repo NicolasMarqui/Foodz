@@ -134,40 +134,43 @@
 
                     <h2 class="big-title">Comentários</h2>
     
-                    <p class="small-title">
-                        Mostrando <span>8</span> de <span>120</span>
-                    </p>
-
-                    <div class="display-comments">
-
-                        {% for i in range %}
-
-                            <div class="comment comment1">
-
-                                <div class="rating-comment">
-                                    <ul>
-                                        <li><i class="far fa-star "></i> </li>
-                                        <li><i class="far fa-star "></i> </li>
-                                        <li><i class="far fa-star "></i> </li>
-                                        <li><i class="far fa-star "></i> </li>
-                                        <li><i class="far fa-star "></i> </li>
-
-                                        <li><p>4/5</p></li>
-                                    </ul>
+                    
+                    {% if comentarios %}
+                        <p class="small-title">
+                            Mostrando <span>{{comentarios.count}}</span>
+                        </p>
+                        <div class="display-comments">
+                            {% for i in comentarios %}
+    
+                                <div class="comment comment1">
+                                    <div class="rating-comment">
+                                        <ul>
+                                            {% with ''|center:i.nota as range %}
+                                                {% for nota in range %}
+                                                    <li><i class="fas fa-star"></i> </li>
+                                                {% endfor %}
+                                            {% endwith %}
+                                            <li><p>{{i.nota}}/5</p></li>
+                                        </ul>
+                                    </div>
+    
+                                    <h3> Usuário ID: {{i.cliente_id.user_id}} </h3>
+                                    <p class="small-title"> {{ i.data_comentario|date:"d M Y" }} {{ i.data_comentario|time:"H:i" }} </p>
+    
+                                    <div class="review">
+                                        <p>{{i.descricao}}</p>
+                                    </div>
+    
                                 </div>
-
-                                <h3> Nicolas Marqui </h3>
-                                <p class="small-title"> 16/08/2019 ás <span>19:30</span> </p>
-
-                                <div class="review">
-                                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolore officiis blanditiis voluptas possimus maxime aspernatur asperiores similique sint architecto nihil. Culpa magnam ab beatae debitis.</p>
-                                </div>
-
-                            </div>
-
-                        {% endfor %}
-
-                    </div>
+    
+                            {% endfor %}
+    
+                        </div>
+                    {% else %}
+                        <div class="no-comments">
+                            <h2>Nenhum comentario nesse produto :(</h2>
+                        </div>
+                    {% endif %}
 
                 </div>
             </div>
