@@ -5479,4 +5479,38 @@ form.pagamento button {
   height: 400px;
   border: 2px solid rgba(0, 0, 0, 0.5);
 }
+
+.content-relatorio {
+  padding: 0 10px;
+}
+
+.content-relatorio .wrapper-relatorios {
+  margin: 15px 8px;
+}
+
+.content-relatorio .wrapper-relatorios a {
+  display: block;
+  background-color: #E04040;
+  color: #fff;
+  padding: 14px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.content-relatorio .wrapper-relatorios a:hover {
+  background-color: #e76c6c;
+}
+
+.content-relatorio .pdf-display {
+  margin-top: 50px;
+  height: 200px;
+}
+
+.content-relatorio .pdf-display p {
+  text-align: center;
+}
+
+.content-relatorio .pdf-display iframe {
+  height: 500px;
+}
 /*# sourceMappingURL=styles.css.map */

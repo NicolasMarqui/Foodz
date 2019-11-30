@@ -1,0 +1,44 @@
+{% extends 'base_dashboard.html' %}
+{% load static %}
+
+{% block title %}
+    Dashboard > Relatórios
+{% endblock %}
+
+<div class="wrapper-dashboard">
+    
+    {% block content %}
+
+        <div class="content-relatorio">
+            <h2>Relatórios</h2>
+
+            <div class="wrapper-relatorios">
+                <div class="row m-w">
+                    <div class="col-xs-12 col-sm-4">
+                        <a href="#" id="vendas-rel" class="{{request.user.id}}">
+                            Relatório de vendas
+                        </a>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-4">
+                        <a href="#" id="produtos-rel" class="{{request.user.id}}"> 
+                            Relatório de produtos
+                        </a>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-4">
+                        <a href="#" id="financeiro-rel" class="{{request.user.id}}">
+                            Relatório de financeiro
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pdf-display">
+                <p>Selecione um dos relatórios acima</p>
+            </div>
+
+        </div>
+
+    {% endblock %}
+</div>

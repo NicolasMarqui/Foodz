@@ -12,6 +12,8 @@ from django.http import JsonResponse
 import json
 from django.core import serializers
 import requests
+from datetime import datetime
+from django.utils import formats
 
 # Create your views here.
 def home(request):
@@ -257,52 +259,6 @@ def dashboard_config(request):
             'first_time': first_time,
         }
     )
-
-# def login(request):
-
-#     if request.method == 'POST':
-#         email = request.POST['email']
-#         senha = request.POST['senha']
-
-#         try:
-#             usuario = User.objects.filter(email=email)
-#         except User.DoesNotExist:
-#             usuario = None
-
-#         try:
-#             has_login = User.objects.get(email=email)
-#         except User.DoesNotExist:
-#             has_login = None
-
-#         if usuario.exists():
-#             for i in usuario:
-#                 user = auth.authenticate(username=i, password=senha)
-#         else:
-#             user = None
-
-#         if user is not None:
-
-#             if has_login.last_login == 'NULL':
-#                 notificacao = Notificacao(id_user=has_login, mensagem="Bem vindo ao nosso sistema")
-#                 notificacao.save()
-#             else:
-#                 msg = "Bem Vindo novamente, Sentimos sua falta!"
-#                 # notificacao = Notificacao(id_user=has_login, mensagem=msg)
-#                 # notificacao.save()
-
-#             auth.login(request, user)
-#             return redirect('/')
-#         else:
-#             messages.info(request, 'Os dados não conferem')
-
-#     else:
-#         return render(request, 'login.html')
-
-#     return render(
-#         request,
-#         'login.html',
-#     )
-
 
 def login(request):
 
@@ -1410,3 +1366,66 @@ def tutorial(request):
         request,
         'tutorial.html',
     )
+
+def dashboard_relatorio(request):
+
+    return render(
+        request,
+        'dashboard_relatorio.html'
+    )
+
+def relatorio_vendas(request):
+
+    data = []
+    total = 0
+
+    #Verifica se é AJAX
+    if request.method == 'GET' and request.is_ajax():
+
+        #Verifica se user está logado
+        if not request.user.is_authenticated:
+            redirect('/')
+
+        id = request.GET['id']
+
+        #Pega a instancia do restaurante
+        try:
+            restaurante = Restaurante.objects.get(user_id=id)
+        except Restaurante.DoesNotExist:
+            restaurante = False
+
+        if restaurante:
+            
+            try:
+                orders = Placed_order.objects.filter(id_restaurante=restaurante.id)
+            except Placed_order.DoesNotExist:
+                orders = None
+
+            if orders is not None:
+
+                for i in orders:
+
+                    total += (i.id_produto.preco * i.quantidade)
+
+                    all_orders = {
+                        'id': i.id,
+                        'time': formats.date_format(i.order_time, format='d/m/y'),
+                        'cliente': i.id_cliente.id,
+                        'produto': i.id_produto.nome,
+                        'quantidade': i.quantidade,
+                        'total': total,
+                    }
+
+                    data.append(all_orders)
+
+                    total = 0
+
+                return JsonResponse({'status':'success', 'data': data}, safe=False)
+
+        return JsonResponse({'status':'error', 'msg': 'Você ainda não possui nenhuma compra para solicitar os relatórios'})
+
+
+
+    return JsonResponse({ 'status': 'error' , 'msg': 'Request Inválido'})
+
+    
