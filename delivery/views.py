@@ -1428,4 +1428,54 @@ def relatorio_vendas(request):
 
     return JsonResponse({ 'status': 'error' , 'msg': 'Request Inválido'})
 
+
+def relatorio_produtos(request):
+
+    data = []
+
+    #Verifica se é AJAX
+    if request.method == 'GET' and request.is_ajax():
+
+        #Verifica se user está logado
+        if not request.user.is_authenticated:
+            redirect('/')
+
+        id = request.GET['id']
+
+        #Pega a instancia do restaurante
+        try:
+            restaurante = Restaurante.objects.get(user_id=id)
+        except Restaurante.DoesNotExist:
+            restaurante = False
+
+        if restaurante:
+            
+            try:
+                produtos = Produto.objects.filter(restaurante_id=restaurante.id)
+            except Produto.DoesNotExist:
+                produtos = None
+
+            if produtos is not None:
+
+                for i in produtos:
+
+                    all_produtos = {
+                        'id': i.id,
+                        'nome': i.nome,
+                        'descrição': i.descricao,
+                        'preco': i.preco,
+                        'categoria': i.categoria,
+                        'nota': i.nota,
+                    }
+
+                    data.append(all_produtos)
+
+                return JsonResponse({'status':'success', 'data': data}, safe=False)
+
+        return JsonResponse({'status':'error', 'msg': 'Você ainda não possui nenhuma compra para solicitar os relatórios'})
+
+
+
+    return JsonResponse({ 'status': 'error' , 'msg': 'Request Inválido'})
+
     

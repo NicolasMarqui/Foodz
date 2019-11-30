@@ -41,5 +41,7 @@ urlpatterns = [
     path('ajuda/',views.ajuda,name="Ajuda"),
     path('faq/',views.faq,name="Faq"),
     path('tutorial/',views.tutorial,name="Tutorial"),
-    path('relatorio/vendas', views.relatorio_vendas, name="Relatório de Venda")
+    path('relatorio/vendas', views.relatorio_vendas, name="Relatório de Venda"),
+    path('relatorio/produtos', views.relatorio_produtos, name="Relatório de Produtos"),
+    path('relatorio/financeiro', views.relatorio_financeiro, name="Relatório de financeiro"),
 ]

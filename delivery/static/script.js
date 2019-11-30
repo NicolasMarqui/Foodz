@@ -1151,6 +1151,7 @@ $(document).ready(function(){
           $('.pdf-display').css('height', '750px');
 
           $('.pdf-display p').remove();
+          $('.pdf-display iframe').remove();
 
           var doc = new jsPDF({
             orientation: 'landscape',
@@ -1168,6 +1169,127 @@ $(document).ready(function(){
 
           doc.autoTable({
             theme: 'grid',
+            head: [titles[0]],
+            body,
+          })
+
+          $('.pdf-display').loading('stop')
+
+          var string = doc.output('datauristring');
+          var iframe = "<iframe width='100%' height='100%' src='" + string + "'></iframe>"
+          
+          $('.pdf-display').append(iframe)
+        }
+
+      }
+    });
+    
+    
+  });
+
+  //Relatório de Produtos
+  $('#produtos-rel').click(function () { 
+    
+    let id_restaurante = $(this).attr('class');
+
+    $.ajax({
+      type: "GET",
+      url: "/relatorio/produtos",
+      data: {
+        id: Number(id_restaurante),
+        csrfmiddlewaretoken: getCookie('csrftoken'),
+      },
+      dataType: "json",
+      beforeSend: function(){
+        $('.pdf-display').loading({
+          stoppable: true
+        });
+      },
+      success: function (response) {
+        
+        if(response.status == 'success'){
+
+          $('.pdf-display').css('height', '750px');
+
+          $('.pdf-display p').remove();
+          $('.pdf-display iframe').remove();
+
+          var doc = new jsPDF({
+            orientation: 'landscape',
+            unit: 'cm',
+            format: 'letter'
+          })
+
+          let titles = [];
+          let body = []
+
+          $.each(response.data, function (i, ord) { 
+            titles.push(Object.keys(ord))
+            body.push(Object.keys(ord).map(k => ord[k]));
+          });
+
+          doc.autoTable({
+            theme: 'striped',
+            head: [titles[0]],
+            body,
+          })
+
+          $('.pdf-display').loading('stop')
+
+          var string = doc.output('datauristring');
+          var iframe = "<iframe width='100%' height='100%' src='" + string + "'></iframe>"
+          
+          $('.pdf-display').append(iframe)
+        }
+
+      }
+    });
+    
+    
+  });
+
+  $('#financeiro-rel').click(function () { 
+    
+    let id_restaurante = $(this).attr('class');
+
+    $.ajax({
+      type: "GET",
+      url: "/relatorio/financeiro",
+      data: {
+        id: Number(id_restaurante),
+        csrfmiddlewaretoken: getCookie('csrftoken'),
+      },
+      dataType: "json",
+      beforeSend: function(){
+        $('.pdf-display').loading({
+          stoppable: true
+        });
+      },
+      success: function (response) {
+        
+        if(response.status == 'success'){
+
+          $('.pdf-display').css('height', '750px');
+
+          $('.pdf-display p').remove();
+          $('.pdf-display iframe').remove();
+
+          var doc = new jsPDF({
+            orientation: 'landscape',
+            unit: 'cm',
+            format: 'letter'
+          })
+
+          let titles = [];
+          let body = []
+
+          $.each(response.data, function (i, ord) { 
+            titles.push(Object.keys(ord))
+            body.push(Object.keys(ord).map(k => ord[k]));
+          });
+
+          doc.autoTable({
+            theme: 'striped',
             head: [titles[0]],
             body,
           })
