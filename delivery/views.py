@@ -258,23 +258,70 @@ def dashboard_config(request):
         }
     )
 
+# def login(request):
+
+#     if request.method == 'POST':
+#         email = request.POST['email']
+#         senha = request.POST['senha']
+
+#         try:
+#             usuario = User.objects.filter(email=email)
+#         except User.DoesNotExist:
+#             usuario = None
+
+#         try:
+#             has_login = User.objects.get(email=email)
+#         except User.DoesNotExist:
+#             has_login = None
+
+#         if usuario.exists():
+#             for i in usuario:
+#                 user = auth.authenticate(username=i, password=senha)
+#         else:
+#             user = None
+
+#         if user is not None:
+
+#             if has_login.last_login == 'NULL':
+#                 notificacao = Notificacao(id_user=has_login, mensagem="Bem vindo ao nosso sistema")
+#                 notificacao.save()
+#             else:
+#                 msg = "Bem Vindo novamente, Sentimos sua falta!"
+#                 # notificacao = Notificacao(id_user=has_login, mensagem=msg)
+#                 # notificacao.save()
+
+#             auth.login(request, user)
+#             return redirect('/')
+#         else:
+#             messages.info(request, 'Os dados não conferem')
+
+#     else:
+#         return render(request, 'login.html')
+
+#     return render(
+#         request,
+#         'login.html',
+#     )
+
+
 def login(request):
 
-    if request.method == 'POST':
+    if request.method == 'POST' and request.is_ajax():
+
         email = request.POST['email']
         senha = request.POST['senha']
 
+        #Pesquisa o email na tabela de usuário
         try:
             usuario = User.objects.filter(email=email)
         except User.DoesNotExist:
             usuario = None
-            messages.info(request, 'O usuário não existe')
 
-        try:
-            has_login = User.objects.get(email=email)
-        except User.DoesNotExist:
-            has_login = None
-            messages.info(request, 'O usuário não existe')
+        #Se o usuaio não existir retorna erro
+        if not usuario:
+            return JsonResponse({ 'status': 'error' , 'msg': 'Esse email não está cadastrado :('})
+
+        print(usuario)
 
         if usuario.exists():
             for i in usuario:
@@ -283,19 +330,11 @@ def login(request):
             user = None
 
         if user is not None:
-
-            if has_login.last_login == 'NULL':
-                notificacao = Notificacao(id_user=has_login, mensagem="Bem vindo ao nosso sistema")
-                notificacao.save()
-            else:
-                msg = "Bem Vindo novamente, Sentimos sua falta!"
-                # notificacao = Notificacao(id_user=has_login, mensagem=msg)
-                # notificacao.save()
-
             auth.login(request, user)
-            return redirect('/')
+            return JsonResponse({ 'status': 'success' , 'msg': 'Bem vindo ao nosso sistema'})
+            # return redirect('/')
         else:
-            messages.info(request, 'Os dados não conferem')
+            return JsonResponse({ 'status': 'error' , 'msg': 'Verifique os dados inseridos :('})
 
     else:
         return render(request, 'login.html')

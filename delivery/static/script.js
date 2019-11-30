@@ -1031,4 +1031,76 @@ $(document).ready(function(){
     
   });
 
+  // Inicialize Mansory
+  $('.grid').masonry({
+    // options
+    itemSelector: '.grid-item',
+    columnWidth: 200,
+    gutter: 10,
+    horizontalOrder: true,
+    fitWidth: true
+  });
+
+  //Login with ajax
+  $('.login-btn').click(function(e){
+
+    e.preventDefault();
+
+    let email = $('#email-login').val();
+    let senha = $('#senha-login').val();
+
+    $.ajax({
+      type: "POST",
+      url: "/login/",
+      data: {
+        email,
+        senha,
+        csrfmiddlewaretoken: getCookie('csrftoken'),
+      },
+      dataType: "json",
+      beforeSend: function(){
+        $('.center-form-login').loading({
+          stoppable: true
+        });
+      },
+      success: function (response) {
+
+        $('.center-form-login').loading('stop');
+        
+        if(response.status == 'error'){
+          $('#email-login').addClass('thicker');
+          $('#senha-login').addClass('thicker');
+
+          $.toast({
+            heading: 'Ops :(',
+            text: response.msg,
+            showHideTransition: 'slide',
+            position: 'bottom-center',
+            icon: 'error'
+          })
+        }else{
+          
+          $.toast({
+            heading: 'Bem vindo :)',
+            text: 'Bem vindo ao nosso sistema, você será redirecionado em breve !!',
+            showHideTransition: 'slide',
+            position: 'bottom-center',
+            icon: 'success',
+            beforeShow: function(){
+              $('body').loading({
+                stoppable: true
+              });
+            },
+              afterHidden: function () {
+                $('body').loading('stop');
+                window.location = "/";
+            }
+          })
+
+        }
+        
+      }
+    });
+
+  })
 })

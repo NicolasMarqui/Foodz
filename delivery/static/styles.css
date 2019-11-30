@@ -470,8 +470,16 @@ header .header .menu ul > li.hover-display-infos {
   position: relative;
 }
 
+header .header .menu ul > li.hover-display-infos:hover {
+  background-color: #E04040;
+}
+
 header .header .menu ul > li.hover-display-infos:hover .more-info-sobre-nos {
   visibility: visible;
+}
+
+header .header .menu ul > li.hover-display-infos:hover a {
+  color: #fff;
 }
 
 header .header .menu ul > li.hover-display-infos .more-info-sobre-nos {
@@ -479,7 +487,7 @@ header .header .menu ul > li.hover-display-infos .more-info-sobre-nos {
   top: 100%;
   left: 0;
   right: 0;
-  background-color: #dddd;
+  background-color: #E04040;
   z-index: 4;
   width: 200px;
   visibility: hidden;
@@ -491,11 +499,11 @@ header .header .menu ul > li.hover-display-infos .more-info-sobre-nos ul li {
 
 header .header .menu ul > li.hover-display-infos .more-info-sobre-nos ul li a {
   text-align: center;
+  color: #fff;
 }
 
 header .header .menu ul > li.hover-display-infos .more-info-sobre-nos ul li a:hover {
-  background-color: #000;
-  color: #fff;
+  background-color: #e76c6c;
 }
 
 header .header .menu ul > li.hover-display-infos .more-info-sobre-nos ul li::before {
@@ -1906,7 +1914,7 @@ footer .footer .fot-bottom p {
 .wrapper-dashboard .main-content-dashboard .content-owner .last-orders {
   min-height: 200px;
   width: 100%;
-  margin: 50px auto;
+  margin: 50px auto 0;
   background-color: #fff;
   padding: 14px;
   position: relative;
@@ -5462,5 +5470,13 @@ form.pagamento button {
 
 .no-comments {
   margin: 10px 0;
+}
+
+.grid-item {
+  width: 200px;
+  margin-bottom: 10px;
+  float: left;
+  height: 400px;
+  border: 2px solid rgba(0, 0, 0, 0.5);
 }
 /*# sourceMappingURL=styles.css.map */

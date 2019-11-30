@@ -35,15 +35,11 @@
 
             <h2>Seja bem vindo de volta!</h2>
 
-            <form action="{% url 'login' %}" method="POST">
+            <form method="POST">
             {% csrf_token %}
                 
-                {% if messages %}
-                <input type="email" placeholder="Email" name="email" required class="thicker">
-                {% else %}
-                <input type="email" placeholder="Email" name="email" required>
-                {% endif %}
-                <input type="password" placeholder="Senha" name="senha" required>
+                <input type="email" placeholder="Email" name="email" class="{% if messages %}thicker{% endif %}" id="email-login" required>
+                <input type="password" placeholder="Senha" name="senha" class="{% if messages %}thicker{% endif %}" id="senha-login" required>
 
                 {% if messages %}
                     <div class="alert alert-danger">
