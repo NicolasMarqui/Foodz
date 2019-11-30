@@ -87,6 +87,7 @@
                                     </table>
                                 </div>
                                 <a href="/dashboard/produtos" class="ver-todos">Ver Todos</a>
+                                {% for p in todos_produtos %}{{p.quantidade}},{% endfor %}
                             </div>
                         </div>
                     </div>
@@ -113,6 +114,56 @@
 
         </div>
         {% endif %}
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+        {% if todos_produtos %}
+            <script>
+                var ctx = document.getElementById('myChart').getContext('2d');
+                
+                data = {
+                    datasets: [{
+                        data: [{% for p in todos_produtos %}{{p.quantidade}},{% endfor %}],
+                        backgroundColor: ['rgb(255, 66, 28)', 'rgb(252, 169, 1)', 'rgb(50, 117, 254)', 'rgb(40, 187, 145)', 'rgb(67, 59, 83)', 'rgb(241, 194, 176)'],
+                    }],
+                
+                    // These labels appear in the legend and in the tooltips when hovering different arcs
+                    labels: [{% for p in todos_produtos %}'{{p.nome}}',{% endfor %}]
+                };
+
+                var myPieChart = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: data,
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                        },
+                        responsive: true,
+                    }
+                });
+            </script>
+        {% else %}
+            <script>
+                console.log('eae')
+                let graph = document.getElementsByClassName('graph');
+                let can = document.getElementById('myChart');
+
+                can.style.display = 'none';
+
+                let msgs = document.createElement("p");
+
+                msgs.classList.add('no-sales-error');
+
+                msgs.innerHTML = 'Nenhuma venda feita até agora';
+
+                graph[0].appendChild(msgs)
+
+            </script>
+        {% endif %}
+
     {% endblock %}
     
 </div>

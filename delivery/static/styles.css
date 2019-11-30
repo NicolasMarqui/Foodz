@@ -5513,4 +5513,14 @@ form.pagamento button {
 .content-relatorio .pdf-display iframe {
   height: 500px;
 }
+
+#myChart {
+  background-color: #fff;
+}
+
+.no-sales-error {
+  color: #fff;
+  text-align: center;
+  font-size: 15px !important;
+}
 /*# sourceMappingURL=styles.css.map */

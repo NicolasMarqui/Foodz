@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from .models import Cliente, Produto, Restaurante, Notificacao, Carrinho, Favoritos, Placed_order, Endereco, Order, Status, Comentario
 from django.contrib.auth import logout as django_logout
 from django.contrib.auth.models import User, auth, Group
-from django.db.models import Q
+from django.db.models import Q, Count
 from django.contrib import messages
 from .forms import MoreInfoRestaurant, AddProducts, MoreInfoCliente
 from django.shortcuts import get_object_or_404
@@ -131,8 +131,31 @@ def dashboard(request):
             for i in vendas:
                 lucro += (i.id_produto.preco * i.quantidade)
 
+            all_products_order = []
+            soms = 0
+
+            orders_sorted = Placed_order.objects.filter(id_restaurante=restaurante.id).values('id_produto').annotate(c=Count('id_produto')).order_by('-c')[:6]
+
+            #Pega os produtos mais vendidos
+            for j in orders_sorted:
+                
+                #Pega os nomes dos produtos
+                nome_prods = Produto.objects.get(id=j['id_produto'])
+
+                #Novo obj com os nome e as quantidades
+                name_and_quantity = {
+                    'nome': nome_prods.nome,
+                    'quantidade': j['c']
+                }
+
+                all_products_order.append(name_and_quantity)
+        else:
+            all_products_order = False
+            
     else:
         info_produtos = None
+
+    print(all_products_order)
 
     return render(
         request,
@@ -142,8 +165,9 @@ def dashboard(request):
             'info': info_restaurante,
             'ult_produtos': info_produtos,
             'vendas': vendas,
-            'lucro': lucro,
-            'ultimas_vendas': ultimas_vendas
+            'lucro': lucro,''
+            'ultimas_vendas': ultimas_vendas,
+            'todos_produtos': all_products_order,
         }
     )
 
@@ -1472,10 +1496,26 @@ def relatorio_produtos(request):
 
                 return JsonResponse({'status':'success', 'data': data}, safe=False)
 
-        return JsonResponse({'status':'error', 'msg': 'Você ainda não possui nenhuma compra para solicitar os relatórios'})
+        return JsonResponse({'status':'error', 'msg': 'Você ainda não possui nenhum produto para solicitar os relatórios'})
 
 
 
     return JsonResponse({ 'status': 'error' , 'msg': 'Request Inválido'})
 
     
+def relatorio_financeiro(request):
+
+    #Verifica se é AJAX
+    if request.method == 'GET' and request.is_ajax():
+
+        #Verifica se user está logado
+        if not request.user.is_authenticated:
+            redirect('/')
+
+        id = request.GET['id'] 
+        
+        return JsonResponse({'status':'success', 'msg': 'Em manutenção!'})
+
+
+
+    return JsonResponse({ 'status': 'error' , 'msg': 'Request Inválido'})
