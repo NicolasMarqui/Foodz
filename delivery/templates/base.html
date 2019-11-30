@@ -99,7 +99,7 @@
                 <i class="fas fa-times" id="close-full-search"></i>
 
                 <h2>Pesquisa</h2>
-                <form action="pesquisa/" method="POST">
+                <form action="/pesquisa/" method="POST">
                     {% csrf_token %}
                     <input type="text" placeholder="Pesquisa" name="query">
                     <button type="submit">Pesquisar</button>

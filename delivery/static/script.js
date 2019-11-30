@@ -1049,6 +1049,28 @@ $(document).ready(function(){
     let email = $('#email-login').val();
     let senha = $('#senha-login').val();
 
+    if(!email || !senha){
+      $.toast({
+        heading: 'Atenção :(',
+        text: 'Por Favor, Preencha os campos para continuar',
+        showHideTransition: 'slide',
+        position: 'bottom-center',
+        icon: 'warning'
+      })
+      return false;
+    }
+
+    if(email.indexOf('@') < 0){
+      $.toast({
+        heading: 'Atenção :(',
+        text: 'Ops, insira um email válido',
+        showHideTransition: 'slide',
+        position: 'bottom-center',
+        icon: 'warning'
+      })
+      return false;
+    }
+    
     $.ajax({
       type: "POST",
       url: "/login/",
