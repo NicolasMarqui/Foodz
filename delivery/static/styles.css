@@ -5692,4 +5692,32 @@ form.pagamento button {
 .ajuda-wrapper .help-4 .text-help-4 a:hover {
   background-color: #e76c6c;
 }
+
+.wrapper-faq {
+  width: 100%;
+  overflow: hidden;
+}
+
+.wrapper-faq h2 {
+  font-size: calc(1.3125rem + 0.75vw);
+}
+
+@media (min-width: 1200px) {
+  .wrapper-faq h2 {
+    font-size: 1.875rem;
+  }
+}
+
+.wrapper-faq p {
+  margin: 12px 0px;
+  line-height: 24px;
+}
+
+.wrapper-faq .panel-group .panel .panel-heading {
+  background-color: #E04040;
+}
+
+.wrapper-faq .panel-group .panel .panel-heading h4 a {
+  color: #fff;
+}
 /*# sourceMappingURL=styles.css.map */

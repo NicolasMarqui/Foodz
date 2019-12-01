@@ -6,32 +6,61 @@
 {% endblock %}
 
 {% block content %}
-    <div class="banner-interno" style="background-image: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80')">
-        <div class="over"></div>
-
+    <div class="wrapper-faq padding-sections">
         <div class="container">
-            <div class="bread-banner">
-                <ul>
-                    <li><a href="/">Home</a></li>
-                    <li> <span> > </span> </li>
-                    <li><h1>Produtos</h1></li>
-                </ul>
-            </div>
-        </div>
-    </div>
+            <h2>F.A.Q - Pergunta mais frequentes</h2>
 
-    <div class="historia-empresa padding-sections">
-        <div class="container">
-            <div class="col-xs-12 col-md-4">
-                <div class="item">
-
-                </div>
-            </div>
-            <div class="col-xs-12 col-md-4">
-                
-            </div>
-            <div class="col-xs-12 col-md-4">
+            <p>Abaixo você pode encontrar as perguntas mais frequentes feitas pelos nossos clientes, caso tenha alguma duvido que não esteja abaixo, nos contate e assim que possivel iremos responder.</p>
         
+            <div class="panel-group" id="accordion" data-aos="fade-left">
+                <div class="panel panel-default">
+                    <div class="panel-heading" data-aos="fade-up">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+                            Como começo no sistema?</a>
+                        </h4>
+                    </div>
+                    <div id="collapse1" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            Para começar é só logar em sua conta, ou, criar uma nova conta. Acesse <a href="/ajuda">ajuda</a> para mais informações!</div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" data-aos="fade-down">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+                            Porque escolher o Foodz?</a>
+                        </h4>
+                    </div>
+                    <div id="collapse2" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            O Foodz é a melhor plataforma entre seus concorrentes, pois, aqui é possivel ter preços mais baixos, maior rapidez na entrega de seu produto e uma maior satisfação, tanto como cliente, como donos de restaurante</div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" data-aos="zoom-left">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
+                            Quanto é a taxa para donos de restaurante?</a>
+                        </h4>
+                    </div>
+                    <div id="collapse3" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            Nosso sistema conta com uma taxa de 3% sobre todos os produtos vendidos!</div>
+                    </div>
+                </div>
+                <div class="panel panel-default" data-aos="zoom-right">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">
+                            O Foodz é gratuito?</a>
+                        </h4>
+                    </div>
+                    <div id="collapse4" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            Sim !!, nosso sistema é totalmente gratuito</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -1391,12 +1391,6 @@ def faq(request):
         'faq.html',
     )
 
-def tutorial(request):
-    return render(
-        request,
-        'tutorial.html',
-    )
-
 def dashboard_relatorio(request):
 
     return render(
