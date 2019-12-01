@@ -5720,4 +5720,168 @@ form.pagamento button {
 .wrapper-faq .panel-group .panel .panel-heading h4 a {
   color: #fff;
 }
+
+.wrapper-sobre-nos {
+  padding-bottom: 0;
+}
+
+.wrapper-sobre-nos .hero-foodz img {
+  max-width: 100%;
+}
+
+.wrapper-sobre-nos .hero-foodz h1 {
+  text-align: left;
+  padding: 24px 0;
+  font-size: calc(1.475rem + 2.7vw);
+  font-weight: 600;
+}
+
+@media (min-width: 1200px) {
+  .wrapper-sobre-nos .hero-foodz h1 {
+    font-size: 3.5rem;
+  }
+}
+
+.wrapper-sobre-nos .hero-foodz p {
+  margin-top: 10px;
+  line-height: 27px;
+}
+
+.wrapper-sobre-nos .hero-foodz p span {
+  font-weight: 600;
+}
+
+.wrapper-sobre-nos .hero-foodz a {
+  display: block;
+  width: 300px;
+  background-color: #E04040;
+  color: #fff;
+  border-radius: 15px;
+  padding: 12px 24px;
+  margin-top: 25px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.wrapper-sobre-nos .hero-foodz a:hover {
+  background-color: #e76c6c;
+}
+
+.wrapper-sobre-nos .about-more-about {
+  z-index: 2;
+}
+
+.wrapper-sobre-nos .about-more-about h2 {
+  font-size: calc(1.375rem + 1.5vw);
+  margin-bottom: 25px;
+  text-align: left;
+  font-weight: 600;
+}
+
+@media (min-width: 1200px) {
+  .wrapper-sobre-nos .about-more-about h2 {
+    font-size: 2.5rem;
+  }
+}
+
+.wrapper-sobre-nos .about-more-about .item {
+  padding: 24px;
+  -webkit-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.75);
+  min-height: 400px;
+  background-color: #E04040;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  color: #fff;
+  text-align: center;
+}
+
+.wrapper-sobre-nos .about-more-about .item i {
+  display: block;
+  margin: 0 auto;
+  font-size: 35px;
+  text-align: center;
+}
+
+.wrapper-sobre-nos .about-more-about .item h3 {
+  margin-top: 15px;
+  font-size: 25px;
+  text-align: center;
+}
+
+.wrapper-sobre-nos .about-more-about .item p {
+  margin-top: 15px;
+  line-height: 27px;
+}
+
+.wrapper-sobre-nos .about-more-about .item p span {
+  font-weight: 600;
+}
+
+.wrapper-sobre-nos .about-more-about .item ul li {
+  font-size: 20px;
+  padding: 8px 0;
+}
+
+.wrapper-sobre-nos .about-more-about .item.bigger-item {
+  margin-top: -50px;
+}
+
+.wrapper-sobre-nos .about-more-about .item:hover {
+  -webkit-box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.75);
+}
+
+.wrapper-sobre-nos .see-code {
+  height: 300px;
+  margin-top: 50px;
+  position: relative;
+  background-image: url("https://images.pexels.com/photos/169573/pexels-photo-169573.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+  background-position: center;
+  background-size: cover;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.wrapper-sobre-nos .see-code a {
+  display: block;
+  text-align: center;
+  color: #fff;
+  z-index: 3;
+  text-decoration: none;
+}
+
+.wrapper-sobre-nos .see-code a i {
+  font-size: 65px;
+}
+
+.wrapper-sobre-nos .see-code a p {
+  margin-top: 15px;
+  font-size: 20px;
+}
+
+.wrapper-sobre-nos .see-code a:hover i {
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
 /*# sourceMappingURL=styles.css.map */
