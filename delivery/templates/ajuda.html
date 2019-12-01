@@ -6,33 +6,72 @@
 {% endblock %}
 
 {% block content %}
-    <div class="banner-interno" style="background-image: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80')">
-        <div class="over"></div>
+    <div class="ajuda-wrapper">
 
-        <div class="container">
-            <div class="bread-banner">
-                <ul>
-                    <li><a href="/">Home</a></li>
-                    <li> <span> > </span> </li>
-                    <li><h1>Produtos</h1></li>
-                </ul>
-            </div>
-        </div>
-    </div>
+        <section>
+            <div class="help-1" style="background-image: url('https://images.pexels.com/photos/2422294/pexels-photo-2422294.jpeg?cs=srgb&dl=group-of-people-sitting-inside-room-2422294.jpg&fm=jpg');">
+                <div class="over"></div>
 
-    <div class="historia-empresa padding-sections">
-        <div class="container">
-            <div class="col-xs-12 col-md-4">
-                <div class="item">
-
+                <div class="main-title-help" data-aos="fade-up">
+                    <h1>Seja bem vindo ao <span>Foodz</span></h1>
                 </div>
             </div>
-            <div class="col-xs-12 col-md-4">
-                
+        </section>
+
+        <div class="separator-help"></div>
+
+        <section>
+            <div class="help-2" data-aos="fade-left">
+                <div class="bg" style="background-image: url('https://images.pexels.com/photos/7075/people-office-group-team.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');"></div>
+                <div class="row">
+                    <div class="col-xs-12 col-md-6 col-md-offset-6" id="text-help-2">
+                        <h2 data-aos="fade-up">Para usar nosso sistema é <span>fácil</span></h2>
+
+                        <p data-aos="fade-bottom">Utilize a barra de navegação acima para fazer o login. Ou caso não possua uma conta, crie uma e venha fazer parte dessa familia.</p>
+                    </div>
+                </div>
             </div>
-            <div class="col-xs-12 col-md-4">
-        
+        </section>
+
+        <div class="separator-help"></div>
+
+        <section>
+            <div class="help-3" data-aos="fade-down">
+                <div class="container">
+                    <h2>Após estar logado <i class="fas fa-arrow-down"></i></h2>
+
+                    <div class="row padding-sections">
+                        <div class="col-xs-12 col-md-4">
+                            <i class="fas fa-users" data-aos="zoom-left"></i>
+                            <p>Finalize seu cadastro adicionando mais informações sobre você</p>
+                        </div>
+
+                        <div class="col-xs-12 col-md-4">
+                            <i class="fas fa-heart" data-aos="zoom-up"></i>
+                            <p>Adicione seu produtos favoritos no seu carrinho</p>
+                        </div>
+
+                        <div class="col-xs-12 col-md-4">
+                            <i class="fas fa-cart-plus" data-aos="zoom-down"></i>
+                            <p>Compre e aproveite mais de {{total}} produtos no nosso site</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
+        </section>
+
+        <div class="separator-help"></div>
+
+        <section>
+            <div class="help-4" data-aos="zoom-right">
+                <div class="over"></div>
+                <div class="text-help-4">
+                    <h2 data-aos="fade-left">Que tal continuar?</h2>
+
+                    <a href="/" data-aos="fade-down">Continuar</a>
+                </div>
+            </div>
+        </section>
+
     </div>
 {% endblock %}

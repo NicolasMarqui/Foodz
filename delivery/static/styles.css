@@ -5523,4 +5523,173 @@ form.pagamento button {
   text-align: center;
   font-size: 15px !important;
 }
+
+.ajuda-wrapper {
+  min-height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.ajuda-wrapper .help-1 {
+  height: 400px;
+  width: 100%;
+  position: relative;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+}
+
+.ajuda-wrapper .help-1 .main-title-help {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+.ajuda-wrapper .help-1 .main-title-help h1 {
+  color: #fff;
+  font-size: calc(1.5rem + 3vw);
+  text-align: center;
+}
+
+@media (min-width: 1200px) {
+  .ajuda-wrapper .help-1 .main-title-help h1 {
+    font-size: 3.75rem;
+  }
+}
+
+.ajuda-wrapper .help-1 .main-title-help h1 span {
+  font-weight: 700;
+  display: block;
+}
+
+.ajuda-wrapper .separator-help {
+  height: 30px;
+  width: 100%;
+  background-color: #fff;
+}
+
+.ajuda-wrapper .help-2 .bg {
+  width: 50%;
+}
+
+.ajuda-wrapper .help-2 #text-help-2 {
+  padding: 100px;
+}
+
+.ajuda-wrapper .help-2 #text-help-2 h2 {
+  font-size: calc(1.5rem + 3vw);
+  line-height: 70px;
+}
+
+@media (min-width: 1200px) {
+  .ajuda-wrapper .help-2 #text-help-2 h2 {
+    font-size: 3.75rem;
+  }
+}
+
+.ajuda-wrapper .help-2 #text-help-2 h2 span {
+  font-weight: 700;
+  background-color: #E04040;
+  color: #fff;
+  padding: 0 8px 8px;
+}
+
+.ajuda-wrapper .help-2 #text-help-2 p {
+  line-height: 30px;
+  margin-top: 25px;
+}
+
+.ajuda-wrapper .help-3 h2 {
+  text-align: center;
+  font-size: calc(1.375rem + 1.5vw);
+  margin-top: 50px;
+  padding-bottom: 15px;
+  position: relative;
+}
+
+@media (min-width: 1200px) {
+  .ajuda-wrapper .help-3 h2 {
+    font-size: 2.5rem;
+  }
+}
+
+.ajuda-wrapper .help-3 h2 i {
+  font-size: 25px;
+}
+
+.ajuda-wrapper .help-3 h2::before {
+  content: '';
+  position: absolute;
+  top: 100%;
+  width: 30%;
+  margin: 0 auto;
+  height: 3px;
+  background-color: #E04040;
+}
+
+.ajuda-wrapper .help-3 .padding-sections i {
+  text-align: center;
+  font-size: 30px;
+  margin: 0 auto;
+  display: block;
+}
+
+.ajuda-wrapper .help-3 .padding-sections p {
+  text-align: center;
+  font-size: 18px;
+  line-height: 30px;
+  margin-top: 25px;
+}
+
+.ajuda-wrapper .help-4 {
+  background-image: url("https://images.pexels.com/photos/2755/restaurant.jpg?cs=srgb&dl=bar-coffee-shop-restaurant-2755.jpg&fm=jpg");
+  height: 300px;
+  position: relative;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.ajuda-wrapper .help-4 .over {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.ajuda-wrapper .help-4 .text-help-4 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+.ajuda-wrapper .help-4 .text-help-4 h2 {
+  color: #fff;
+  font-size: calc(1.5rem + 3vw);
+  text-align: center;
+}
+
+@media (min-width: 1200px) {
+  .ajuda-wrapper .help-4 .text-help-4 h2 {
+    font-size: 3.75rem;
+  }
+}
+
+.ajuda-wrapper .help-4 .text-help-4 a {
+  display: block;
+  width: 300px;
+  background-color: #E04040;
+  color: #fff;
+  border-radius: 15px;
+  margin: 0 auto;
+  padding: 12px 24px;
+  margin-top: 15px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.ajuda-wrapper .help-4 .text-help-4 a:hover {
+  background-color: #e76c6c;
+}
 /*# sourceMappingURL=styles.css.map */

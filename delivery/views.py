@@ -1374,9 +1374,15 @@ def comentario_adicionar(request):
     return JsonResponse({ 'status': 'error' , 'msg': 'Request Inválido'})
 
 def ajuda(request):
+
+    total = Produto.objects.all().count()
+
     return render(
         request,
         'ajuda.html',
+        {
+            'total': total
+        }
     )
 
 def faq(request):
