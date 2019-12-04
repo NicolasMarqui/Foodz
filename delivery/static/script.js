@@ -1044,8 +1044,6 @@ $(document).ready(function(){
         });
       },
       complete: function (response) {
-
-        console.log(response.status);
         
         if(response.status == 200){
           $.toast({

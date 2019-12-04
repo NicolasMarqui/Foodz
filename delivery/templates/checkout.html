@@ -132,7 +132,7 @@
                             {% if success %}
                                 <div class="show-card"></div>
 
-                                <form class="pagamento" id="submitPayment">
+                                <form class="pagamento" id="submitPayment" {% if not tem_endereco %}data-toggle="tooltip" data-placement="left" title="Cadastre um endereço antes de continuar" {% endif %}>
                                     <div class="form-group">
                                         <label for="nome">
                                             Nome no cartão
@@ -162,7 +162,9 @@
                                         </div>     
                                     </div>
 
-                                    <button type="submit" {% if not success %}disabled{% endif %}>
+                                    <button 
+                                    type="submit" 
+                                    {% if not success or not tem_endereco %}disabled{% endif %}>
                                         Pagar (R${{final}})
                                     </button>
                                 </form>

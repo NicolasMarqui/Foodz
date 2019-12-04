@@ -1062,7 +1062,15 @@ def checkout(request):
         except Carrinho.DoesNotExist:
             items = None
 
-    print(success)
+        if id_user.endereco_id is None :
+            tem_endereco = False
+        else:
+            tem_endereco = True
+
+    else:
+        tem_endereco = False
+
+    print(tem_endereco)
         
     return render(
         request,
@@ -1074,7 +1082,8 @@ def checkout(request):
             'total': total,
             'taxa_entrega': taxa_entrega,
             'final': final,
-            'usuario': id_user
+            'usuario': id_user,
+            'tem_endereco': tem_endereco,
         }
     )
 
