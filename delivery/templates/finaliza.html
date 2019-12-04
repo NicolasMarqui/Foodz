@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Obrigado
+{% endblock %}
+
+{% block content %}
+    <div class="finaliza-wrapper">
+        <div class="over"></div>
+        <div class="congrat-texto">
+            <h1>Parabéns</h1>
+
+            <p>Obrigado pela compra em nosso site !!</p>
+
+            <a href="/" class="voltar-site">Clique aqui para voltar ao site</a>
+
+            <div class="prods-ver-conta">
+                <a href="/conta/{{request.user.id}}">Minha Conta</a>
+                <a href="/produtos">Produtos</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -21,7 +21,16 @@
     </div>
 
     <div class="all-rests padding-sections">
-        
+        {% if restaurantes %}
+
+            {% for r in restaurantes %}
+
+            {% endfor %}
+
+        {% else %}
+            <h2>Nenhum restaurante encontrado :(</h2>
+
+        {% endif %}
     </div>
 
 {% endblock %}

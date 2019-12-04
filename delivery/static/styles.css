@@ -1563,6 +1563,7 @@ footer .footer .fot-bottom p {
 .banner-interno .bread-banner ul li span {
   display: block;
   font-size: 18px;
+  color: #fff;
 }
 
 .banner-interno .bread-banner h1 {
@@ -3502,7 +3503,7 @@ footer .footer .fot-bottom p {
     padding: 10px 15px;
   }
   .minha-conta-wrapper .my-info-conta .pedido-items .text {
-    text-align: left;
+    text-align: left !important;
   }
   .minha-conta-wrapper .my-info-conta .pedido .status-pedido {
     display: block;
@@ -5883,5 +5884,69 @@ form.pagamento button {
 .wrapper-sobre-nos .see-code a:hover i {
   -webkit-transform: rotate(45deg);
           transform: rotate(45deg);
+}
+
+.finaliza-wrapper {
+  width: 100%;
+  height: 100vh;
+  background-image: url("https://images.pexels.com/photos/908602/pexels-photo-908602.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+  background-position: center;
+  background-position: cover;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  overflow: hidden;
+}
+
+.finaliza-wrapper .congrat-texto {
+  z-index: 2;
+  background-color: #fff;
+  padding: 50px;
+  text-align: center;
+}
+
+.finaliza-wrapper .congrat-texto h1 {
+  font-size: calc(1.4375rem + 2.25vw);
+}
+
+@media (min-width: 1200px) {
+  .finaliza-wrapper .congrat-texto h1 {
+    font-size: 3.125rem;
+  }
+}
+
+.finaliza-wrapper .congrat-texto p {
+  margin: 8px 0;
+}
+
+.finaliza-wrapper .congrat-texto a.voltar-site {
+  margin: 8px 0;
+  display: block;
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  color: #fff;
+  letter-spacing: 2px;
+}
+
+.finaliza-wrapper .congrat-texto .prods-ver-conta a {
+  display: inline-block;
+  width: 48%;
+  background-color: #E04040;
+  margin: 8px 2px;
+  padding: 14px 8px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.finaliza-wrapper .congrat-texto .prods-ver-conta a:hover {
+  background-color: #e76c6c;
 }
 /*# sourceMappingURL=styles.css.map */

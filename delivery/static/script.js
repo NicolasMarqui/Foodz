@@ -824,8 +824,45 @@ $(document).ready(function(){
 
 
   //Checkout
-  $('#submitPayment').click(function(){
-    console.log('clicked')
+  $('#submitPayment').submit(function(e){
+    
+    e.preventDefault();
+  
+    $.ajax({
+      type: "POST",
+      url: "/checkout/confirma",
+      data: {
+        csrfmiddlewaretoken: getCookie('csrftoken'),
+      },
+      dataType: "JSON",
+      beforeSend: function(){
+        $('.payment').loading({
+          stoppable: true
+        });
+      },
+      success: function (response) {
+
+        $('.payment').loading('stop');
+
+        $.toast({
+          heading: response.status == 'success' ? 'Obrigado :)' : 'Que pena :(',
+          text: response.msg,
+          showHideTransition: 'slide',
+          position: 'bottom-center',
+          icon: response.status == 'success' ? 'success' : 'error',
+          beforeShow: function(){
+            $('.checkout-info').loading({
+              stoppable: true
+            });
+          },
+            afterHidden: function () {
+              $('.checkout-info').loading('stop');
+              window.location = response.status == 'success' ? '/finalizando' : '/';
+          }
+        })
+      }
+    });
+
   })
     
   //Mais detalhes pedidos

@@ -79,11 +79,18 @@ def produtos(request):
     )
 
 def restaurantes(request):
+
+    try:
+        all_restaurante = Restaurante.objects.all()
+    except Restaurante.DoesNotExist:
+        all_restaurante = False
+
+
     return render(
         request,
         'restaurantes.html',
         {
-            'range': range(9)
+            'restaurante': all_restaurante
         }
     )
 
@@ -1073,7 +1080,7 @@ def checkout(request):
 
 def confirma(request):
     
-    # if request.method == 'POST' and request.is_ajax():
+    if request.method == 'POST' and request.is_ajax():
 
         #Variaveis de retorno
         cliente = None
@@ -1139,15 +1146,12 @@ def confirma(request):
 
                         n_aguento_mais = User.objects.get(id=rest_user.user_id)
 
-                        msg = 'Atenção, o usuário {} acaba de comprar {} unidade(s) do produto {}. Finalizando em um total de R${}'.format(it.id_cliente.user_id, it.quantidade, it.id_produto.nome, (it.id_produto.preco * it.quantidade) )
+                        msg = 'Atenção, o usuário #{} acaba de comprar {} unidade(s) do produto {}. Finalizando em um total de R${}'.format(it.id_cliente.user_id, it.quantidade, it.id_produto.nome, (it.id_produto.preco * it.quantidade) )
                         notificacao = Notificacao(mensagem=msg,
                                                 id_user=n_aguento_mais)
 
                         notificacao.save()
                 
-                #Adicionar status da venda
-
-                #Verifica se ja possui venda no status
                 try:
                     has_status = Status.objects.filter(id_compra=ultimo_id.id).exists()
                 except Status.DoesNotExist:
@@ -1173,17 +1177,19 @@ def confirma(request):
                 else:
                     return HttpResponse('Ja tem essa order')
 
-
+                msg = 'Obrigado pela compra :)'
+                return JsonResponse({ 'status': 'success', 'msg': msg })
 
             except Carrinho.DoesNotExist:
                 items_carrinho = None
+                msg = 'Ops, Algo de errado não está certo :('
+                return JsonResponse({ 'status': 'error', 'msg': msg })
 
         else:
             redirect('/login')
 
-    # else:
-    #     redirect('/')
-        return HttpResponse('teste')
+    else:
+        redirect('/')
 
 def dashboard_vendas(request):
 
@@ -1519,3 +1525,13 @@ def relatorio_financeiro(request):
 
 
     return JsonResponse({ 'status': 'error' , 'msg': 'Request Inválido'})
+
+def finaliza(request):
+
+    if not request.user.is_authenticated:
+        return redirect('/')
+
+    return render(
+        request,
+        'finaliza.html',
+    )
