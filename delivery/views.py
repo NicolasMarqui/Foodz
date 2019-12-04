@@ -361,6 +361,8 @@ def produto_info(request,id = None):
 
     produto = Produto.objects.get(id=id)
 
+    teste = []
+
     mais_produtos = Produto.objects.filter(restaurante_id=produto.restaurante.id)[:2]
 
     #Pega os comentarios
@@ -369,6 +371,14 @@ def produto_info(request,id = None):
     except Comentario.DoesNotExist:
         comentarios = False
 
+    if comentarios is not None:
+        for i in comentarios:
+            teste.append(5 - int(i.nota))
+    else:
+        teste = 0
+
+    print(teste)
+
     return render(
         request,
         'produto_info.html',
@@ -376,7 +386,8 @@ def produto_info(request,id = None):
             'nota': str(produto.nota),
             'produto': produto,
             'mais_produtos': mais_produtos,
-            'comentarios': comentarios
+            'comentarios': comentarios,
+            'teste': teste
         }
     )
 
@@ -1544,3 +1555,57 @@ def finaliza(request):
         request,
         'finaliza.html',
     )
+
+def make_principal(request):
+
+    id = request.POST['id']
+
+    #Verifica se é ajax
+    if request.method == 'POST' and request.is_ajax():
+
+        #Pega instancia do Cliente
+        try:
+            cliente = Cliente.objects.get(user_id=request.user.id)
+        except Cliente.DoesNotExist:
+            cliente = None
+
+        #Pega instancia do endereço
+        if cliente is not None:
+            try:
+                endereco = Endereco.objects.filter(id_cliente=cliente.id)
+            except Endereco.DoesNotExist:
+                endereco = None
+        else:
+            endereco = None
+
+        #Transforma todos os endereçoes em não principais
+        if endereco is not None:
+            
+            for e in endereco:
+                e.is_principal = False
+
+                e.save()
+
+                print(e.is_principal)
+
+            #Transforma um único em principal
+
+            try:
+                main = Endereco.objects.get(id=id)
+            except Endereco.DoesNotExist:
+                main = False
+
+            if main:
+                main.is_principal = True
+
+                main.save()
+
+                return JsonResponse({ 'status': 'success' , 'msg': 'Endereço principal alterado :)'})
+            else:
+                return JsonResponse({ 'status': 'error' , 'msg': 'Houve um erro ao realizar a ação :('})
+
+        else:
+            return JsonResponse({ 'status': 'error' , 'msg': 'Houve um erro ao realizar a ação :('})
+
+    else:
+        return JsonResponse({ 'status': 'error' , 'msg': 'Request Inválido'})

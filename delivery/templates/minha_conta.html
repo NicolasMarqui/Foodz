@@ -301,7 +301,7 @@
                                     {% for e in enderecos %}
                                         <ul>
                                             <li>
-                                                <div class="box-endereco {% if e.is_principal %}main-address{% endif %}">
+                                                <div class="box-endereco selectAdress {% if e.is_principal %}main-address{% endif %}" id="{{e.id}}">
                                                     <p>Endereço {{ forloop.counter }} - <i class="fas {% if e.tipo == 'casa' %}fa-home{% elif e.tipo == 'apartamento' %}fa-building{% else %}fa-store{% endif %}"></i></p>
                                                     <p>Endereço: <span>{{e.endereco}}</span> - N° <span>{{e.numero}} </span></p>
                                                     <p>Complemento: <span>{{e.complemento}}</span></p>

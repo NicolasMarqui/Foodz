@@ -44,4 +44,5 @@ urlpatterns = [
     path('relatorio/vendas', views.relatorio_vendas, name="Relatório de Venda"),
     path('relatorio/produtos', views.relatorio_produtos, name="Relatório de Produtos"),
     path('relatorio/financeiro', views.relatorio_financeiro, name="Relatório de financeiro"),
+    path('user/endereco/principal', views.make_principal, name="Endereço Principal"),
 ]

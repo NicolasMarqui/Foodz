@@ -1321,4 +1321,51 @@ $(document).ready(function(){
     
     
   });
+
+
+  //Select user main address
+  $('.selectAdress').click(function(){
+
+    let id =  $(this).attr('id');
+
+    $.ajax({
+      type: "POST",
+      url: "/user/endereco/principal",
+      data: {
+        id: id,
+        csrfmiddlewaretoken: getCookie('csrftoken'),
+      },
+      dataType: "json",
+      beforeSend: function(){
+        $('.endereco-wrapper').loading({
+          stoppable: true
+        });
+      },
+      success: function (response) {
+
+        console.log(response);
+        
+        
+        if(response.status == 'success'){
+
+          //Remove Classe de todos os endereços
+          $('.selectAdress').removeClass('main-address')
+        
+          $('.selectAdress#'+id).addClass('main-address');
+
+          $.toast({
+            heading: 'Alterado :)',
+            text: response.msg,
+            showHideTransition: 'slide',
+            position: 'bottom-center',
+            icon: 'success',
+          })
+        }
+
+        $('.endereco-wrapper').loading('stop');
+
+      }
+    });
+    
+  })
 })
