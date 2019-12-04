@@ -151,17 +151,17 @@
 
                                                             <div class="show-comentario-to-write">
                                                                 <p>Nos diga o que você achou do {{i.id_produto.nome}}</p>
-                                                                <form>
+                                                                <form method="POST" class="enviaComentario">
                                                                     <div class="form-group">
-                                                                        <textarea type="text" placeholder="Descrição" required name="descricao" id="descricao"></textarea>
+                                                                        <textarea type="text" placeholder="Descrição" required name="descricao" id="descricao_comentario"></textarea>
                                                                     </div>
 
                                                                     <div class="form-group">
-                                                                        <input type="number" required placeholder="Nota" name="nota" min="0" max="5" id="nota">
+                                                                        <input type="number" required placeholder="Nota" name="nota" min="0" max="5" id="nota_comentario">
                                                                     </div>
 
                                                                     <div class="form-group radios-recomenda">
-                                                                        <select name="recomenda" id="recomenda">
+                                                                        <select name="recomenda" id="recomenda_comentario" required>
                                                                             <option value="" disabled selected>Recomenda?</option>
                                                                             <option value="sim">Sim</option>
                                                                             <option value="nao">Não</option>
@@ -172,7 +172,7 @@
                                                                     <input type="hidden" id="produto_id" value="{{i.id_produto.id}}">
                                                                     <input type="hidden" id="restaurante_id" value="{{i.id_restaurante.id}}">
 
-                                                                    <a href="#enviarComentario" class="enviaComentario">Enviar</a>
+                                                                    <button type="submit">Enviar</a>
                                                                 </form>
                                                             </div>
                                                         </div>

@@ -1021,28 +1021,28 @@ $(document).ready(function(){
   })
 
   // Adiciona comentario
-  $('.enviaComentario').click(function () { 
-    
-    let descricao       = $('#descricao').val() !== '' ? $('#descricao').val() : 'Gostei';
-    let nota            = $('#nota').val() !== '' ? $('#nota').val() : 3;
-    let recomenda       = $('#recomenda').val() !== '' ? $('#recomenda').val() : 'sim';
-    let cliente_id      = $('#cliente_id').val()
-    let produto_id      = $('#produto_id').val()
-    let restaurante_id  = $('#restaurante_id').val()
+  $('.enviaComentario').submit(function (e) { 
+
+    e.preventDefault();
 
     $.ajax({
       type: "POST",
       url: "/produtos/comentario/add",
       data: {
-        descricao,
-        nota,
-        recomenda,
+        'descricao': $(this).find('textarea#descricao_comentario').val(),
+        'nota': Number($(this).find('input#nota_comentario').val()),
+        'recomenda': $(this).find('select#recomenda_comentario').val(),
+        'cliente_id': Number($(this).find('input#cliente_id').val()),
+        'produto_id': Number($(this).find('input#produto_id').val()),
+        'restaurante_id': Number($(this).find('input#restaurante_id').val()),
         csrfmiddlewaretoken: getCookie('csrftoken'),
-        cliente_id,
-        produto_id,
-        restaurante_id,
       },
-      dataType: "dataType",
+      dataType: "json",
+      beforeSend: function(){
+        $('.show-comentario-to-write').loading({
+          stoppable: true
+        });
+      },
       complete: function (response) {
 
         console.log(response.status);
@@ -1056,9 +1056,11 @@ $(document).ready(function(){
           })
       
           // Limpa os campos
-          $('#descricao').val('');
-          $('#nota').val('')
-          $('#recomenda').val('')
+          $(this).find('input#descricao_comentario').val('');
+          $(this).find('input#nota_comentario').val('');
+          $(this).find('input#recomenda_comentario').val('');
+
+          $('.show-comentario-to-write').loading('stop');
   
           $('.show-comentario-to-write').slideUp('fast')
         }
