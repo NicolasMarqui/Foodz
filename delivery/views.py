@@ -1078,10 +1078,13 @@ def checkout(request):
         else:
             tem_endereco = True
 
+        try:
+            main_address = Endereco.objects.get(id_cliente=id_user.id, is_principal=1)
+        except Endereco.DoesNotExist:
+            main_address = False
+
     else:
         tem_endereco = False
-
-    print(tem_endereco)
         
     return render(
         request,
@@ -1095,6 +1098,7 @@ def checkout(request):
             'final': final,
             'usuario': id_user,
             'tem_endereco': tem_endereco,
+            'main_address': main_address
         }
     )
 
