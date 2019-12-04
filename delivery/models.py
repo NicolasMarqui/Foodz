@@ -19,6 +19,7 @@ class Endereco(models.Model):
     complemento                 = models.CharField(max_length=100, blank=True, null=True)
     tipo                        = models.CharField(max_length=255, choices=TIPO_CHOICE)
     cidade                      = models.ForeignKey(Cidade, on_delete = models.CASCADE)
+    is_principal                = models.BooleanField(default=False)
 
     def __str__(self):
         return '{} e {}' .format(self.id_cliente, self.endereco)

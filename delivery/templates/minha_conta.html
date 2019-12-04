@@ -293,12 +293,31 @@
                     </div>
 
                     <div id="enderecos" class="tab-pane fade">
-                      <h2>Seus Endereços</h2>
+                        
+                        <div class="endereco-wrapper">
+                            <h2>Seus Endereços</h2>
+                            <div class="row m-w">
+                                <div class="col-xs-12 col-md-6">
+                                    {% for e in enderecos %}
+                                        <ul>
+                                            <li>
+                                                <div class="box-endereco {% if e.is_principal %}main-address{% endif %}">
+                                                    <p>Endereço {{ forloop.counter }} - <i class="fas {% if e.tipo == 'casa' %}fa-home{% elif e.tipo == 'apartamento' %}fa-building{% else %}fa-store{% endif %}"></i></p>
+                                                    <p>Endereço: <span>{{e.endereco}}</span> - N° <span>{{e.numero}} </span></p>
+                                                    <p>Complemento: <span>{{e.complemento}}</span></p>
+                                                    <p>Cidade: <span>Indaiatuba</span></p>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    {% empty %}
+                                        <h2>Você não possui nenhum endereco</h2>
+                                    {% endfor %}
+                                </div>
 
-                      <div class="endereco-wrapper">
-                          <ul>
-                              <li>Endereço: {{cl.endereco_id.endereco}}</li>
-                          </ul>
+                                <div class="col-xs-12 col-md-6">
+                                    <a href="#">Adicionar novo endereço</a>
+                                </div>
+                            </div>
                       </div>
                     </div>
 

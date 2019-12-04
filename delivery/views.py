@@ -428,7 +428,6 @@ def minha_conta(request, id):
     success = False
     items = ''
     data = ''
-    enderecos = ''
     favoritos = None
     coment = None
     orders_finais = []
@@ -503,9 +502,9 @@ def minha_conta(request, id):
         cl= Cliente.objects.filter(user_id=id)
 
         for i in cl:
-            enderecos.append(Endereco.objects.filter(id_cliente=i.id))
+            enderecos = Endereco.objects.filter(id_cliente=i.id)
     except:
-        enderecos = None
+        enderecos = False
 
     #Pega os favoritos
     try:
@@ -520,7 +519,7 @@ def minha_conta(request, id):
     except Comentario.DoesNotExist:
         coment = None
 
-    print(coment)
+    print(enderecos)
 
     return render(
         request,
@@ -534,7 +533,8 @@ def minha_conta(request, id):
             'form': form,
             'favoritos': favoritos,
             'status': status,
-            'coment': coment
+            'coment': coment,
+            'enderecos': enderecos,
         }
     )
 
