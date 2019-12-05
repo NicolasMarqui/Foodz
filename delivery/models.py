@@ -15,7 +15,7 @@ class Endereco(models.Model):
     id_cliente                  = models.ForeignKey('Cliente', on_delete=models.CASCADE)
     cep                         = models.CharField(max_length=10)
     endereco                    = models.CharField(max_length=255)
-    numero                      = models.CharField(max_length=255, blank=True, null=True)
+    numero                      = models.IntegerField()
     complemento                 = models.CharField(max_length=100, blank=True, null=True)
     tipo                        = models.CharField(max_length=255, choices=TIPO_CHOICE)
     cidade                      = models.ForeignKey(Cidade, on_delete = models.CASCADE)

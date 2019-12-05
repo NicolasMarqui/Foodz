@@ -1343,9 +1343,6 @@ $(document).ready(function(){
       },
       success: function (response) {
 
-        console.log(response);
-        
-        
         if(response.status == 'success'){
 
           //Remove Classe de todos os endereços
@@ -1368,4 +1365,30 @@ $(document).ready(function(){
     });
     
   })
+
+  //Salva Endereço
+  // $('.submitAddress').submit(function (e) { 
+  //   e.preventDefault();
+
+  //   $.ajax({
+  //     type: "POST",
+  //     url: $(this).attr('action'),
+  //     data: {
+  //       csrfmiddlewaretoken: getCookie('csrftoken'),
+  //       data: $('.submitAddress').serialize(),
+  //     },
+  //     dataType: "JSON",
+  //     beforeSend: function(){
+  //       $('.submitAddress').loading({
+  //         stoppable: true
+  //       });
+  //     },
+  //     success: function (response) {
+
+  //       $('.submitAddress').loading('stop');
+        
+  //     }
+  //   });
+    
+  // });
 })

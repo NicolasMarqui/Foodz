@@ -5,7 +5,7 @@ from django.contrib.auth import logout as django_logout
 from django.contrib.auth.models import User, auth, Group
 from django.db.models import Q, Count
 from django.contrib import messages
-from .forms import MoreInfoRestaurant, AddProducts, MoreInfoCliente
+from .forms import MoreInfoRestaurant, AddProducts, MoreInfoCliente, AddAddress
 from django.shortcuts import get_object_or_404
 import datetime
 from django.http import JsonResponse
@@ -483,11 +483,11 @@ def minha_conta(request, id):
     except Status.DoesNotExist:
         status = None
 
-    print(status)
 
     #Cadastro
     #Pegar dados existentes
     try:
+        #Pega os dados do cliente para por no Form
         cliente = Cliente.objects.filter(user_id=id)
 
         for i in cliente:
@@ -500,8 +500,13 @@ def minha_conta(request, id):
             }
 
         form = MoreInfoCliente(request.POST or None, request.FILES or None, initial=data, instance=cliente.first())
+
+        #Cria instancia do form de endereço
+        add_endereco = AddAddress(request.POST or None)
+
     except Cliente.DoesNotExist:
         form = MoreInfoCliente(request.POST or None, request.FILES or None)
+        add_endereco = AddAddress(request.POST or None)
 
     #Salvar os dados
     if request.method == 'POST':
@@ -530,8 +535,6 @@ def minha_conta(request, id):
     except Comentario.DoesNotExist:
         coment = None
 
-    print(enderecos)
-
     return render(
         request,
         'minha_conta.html',
@@ -541,6 +544,7 @@ def minha_conta(request, id):
             'msg': msg,
             'pedidos': orders_item,
             'orders': orders,
+            'add_endereco': add_endereco,
             'form': form,
             'favoritos': favoritos,
             'status': status,
@@ -1590,10 +1594,7 @@ def make_principal(request):
 
                 e.save()
 
-                print(e.is_principal)
-
             #Transforma um único em principal
-
             try:
                 main = Endereco.objects.get(id=id)
             except Endereco.DoesNotExist:
@@ -1610,6 +1611,36 @@ def make_principal(request):
 
         else:
             return JsonResponse({ 'status': 'error' , 'msg': 'Houve um erro ao realizar a ação :('})
+
+    else:
+        return JsonResponse({ 'status': 'error' , 'msg': 'Request Inválido'})
+
+def add_endereco(request):
+    
+    user = request.user.id
+
+    #Verifica se é ajax
+    if request.method == 'POST':
+
+        form = AddAddress(request.POST)
+
+        if form.is_valid():
+
+            try:
+                cli = Cliente.objects.get(user_id=user)
+            except Cliente.DoesNotExist:
+                cli = None
+
+            if cli is not None:
+                ende = form.save(commit=False)
+
+                ende.id_cliente = cli
+                ende.save()
+
+            return redirect('/conta/{}'.format(request.user.id))
+        else:
+            print(form.errors)
+            return redirect('/conta/{}'.format(request.user.id))
 
     else:
         return JsonResponse({ 'status': 'error' , 'msg': 'Request Inválido'})
