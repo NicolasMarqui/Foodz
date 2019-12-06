@@ -2246,6 +2246,7 @@ footer .footer .fot-bottom p {
 }
 
 .product-display .main-image img {
+  margin: 0 auto;
   height: 100%;
   width: auto;
 }
@@ -2324,8 +2325,7 @@ footer .footer .fot-bottom p {
   margin-top: 25px;
   padding: 14px;
   color: #fff;
-  width: 85%;
-  max-width: 70%;
+  width: 100%;
   display: block !important;
 }
 
@@ -2339,7 +2339,7 @@ footer .footer .fot-bottom p {
   }
   .product-display .buy-and-quantity a {
     width: auto;
-    display: inline-block;
+    max-width: 70%;
   }
 }
 

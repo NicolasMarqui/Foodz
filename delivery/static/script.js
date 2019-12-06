@@ -683,6 +683,75 @@ $(document).ready(function(){
       
     });
 
+    //Add to carrinho - pagina produto
+    $('.product-display').on('click', 'a.add-carrinho', function () {
+      
+      id                  = Number($(this).attr('id'));
+      totalCarrinho       = Number($('.amount-cart span').html())
+      totalCarrinhoMobile = Number($('.mobile-cart span').html())
+      total_preco         = Number($('.price-header span').html())
+
+      data = {
+        csrfmiddlewaretoken: getCookie('csrftoken'),
+        id: id,
+      }
+      
+      $.ajax({
+        type: "POST",
+        url: "/carrinho/add",
+        data: data,
+        dataType: "json",
+        beforeSend: function(){
+          $('body').loading({
+            stoppable: true
+          });
+        },
+        complete: function (response) {
+          console.log(response.responseJSON)
+          status = response.responseJSON.status
+          msg = response.responseJSON.msg
+          ja_tem = response.responseJSON.ja_tem ? response.responseJSON.ja_tem : false
+
+          if(status == 'success'){
+            if(ja_tem){
+              $('.amount-cart span').html(totalCarrinho)
+              $('.mobile-cart span').html(totalCarrinho)
+            }else{
+              $('.amount-cart span').html(totalCarrinho + 1)
+              $('.mobile-cart span').html(totalCarrinho + 1)
+            }
+
+            $.toast({
+              heading: 'Adicionado :)',
+              text: msg,
+              showHideTransition: 'slide',
+              icon: 'success'
+            })
+
+            final_cara = total_preco + Number($(`#price-${id} p span`).html())
+
+            $('.price-header span').html(Number(final_cara).toFixed(2)) 
+            
+            
+          }else{
+            $.toast({
+              heading: 'Ops :)',
+              text: msg,
+              showHideTransition: 'slide',
+              icon: 'error'
+            })
+          }
+
+          $('.mobile-cart').addClass('infinite slower delay-3s')
+          $(this).parents().addClass('slideOutUp')
+
+          $('body').loading('stop');
+          
+        }
+      });
+      
+    });
+
     $('#calcularFrete').submit(function(e){
       e.preventDefault();
 

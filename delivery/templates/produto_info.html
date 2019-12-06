@@ -14,7 +14,7 @@
                 {% if produto %}
                     <div class="col-xs-12 col-md-6" data-aos="fade-right">
                         <div class="main-image">
-                            <img src="/media/{{produto.foto}}" alt="">
+                            <img src="/media/{{produto.foto}}" alt="{{produto.nome}}" class="img-responsive">
                         </div>
                     </div>
         
@@ -33,13 +33,13 @@
                         <p class=descricao_info>{{produto.descricao|striptags }}</p>
 
                         <div class="price-info">
-                            <h4>
+                            <h4 id="price-{{produto.id}}">
                                 <p>R$ <span>{{produto.preco}}</span> </p>
                             </h4>
                         </div>
 
                         <div class="buy-and-quantity" data-aos="zoom-bottom">
-                            <a href="#" class="btn">Comprar</a>
+                            <a href="#adicionar-carrinho" class="btn add-carrinho" id="{{produto.id}}">Comprar</a>
                         </div>
                     </div>
                 {% endif %}
