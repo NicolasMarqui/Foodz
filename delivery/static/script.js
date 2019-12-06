@@ -1446,4 +1446,38 @@ $(document).ready(function(){
   }, 2000);
     
   });
+
+  //Filtra produtos
+  $('#filtrar_produtos').change(function (e) { 
+    e.preventDefault();
+
+    let opcao = $(this).val();
+
+    $.ajax({
+      type: "POST",
+      url: "/produtos/filtrar",
+      data: {
+        opcao: opcao,
+        csrfmiddlewaretoken: getCookie('csrftoken'),
+      },
+      dataType: 'JSON',
+      success: function (response) {
+          console.log(response);
+          
+      }
+    });
+    
+  });
+
+
+
+
+
+
+
+
+
+
+
+
 })

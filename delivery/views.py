@@ -18,7 +18,7 @@ from django.utils import formats
 # Create your views here.
 def home(request):
 
-    produtos = Produto.objects.all().order_by('-id')[:10]
+    produtos = Produto.objects.all().order_by('?')[:10]
     restaurantes = Restaurante.objects.all()[:10]
     ta_nos_favoritos = []
     favoritos = None
@@ -161,8 +161,7 @@ def dashboard(request):
             
     else:
         info_produtos = None
-
-    print(all_products_order)
+        all_products_order = False
 
     return render(
         request,
@@ -1649,6 +1648,46 @@ def add_endereco(request):
         else:
             print(form.errors)
             return redirect('/conta/{}'.format(request.user.id))
+
+    else:
+        return JsonResponse({ 'status': 'error' , 'msg': 'Request Inválido'})
+
+def filtrar_produtos(request):
+
+    data = []
+
+    if request.method == 'POST' and request.is_ajax():
+
+        opcao = request.POST['opcao']
+
+        try:
+            if opcao == 'menorPreco':
+                prods = Produto.objects.all().order_by('-preco')
+            elif opcao == 'maiorPreco':
+                prods = Produto.objects.all().order_by('preco')
+            else:
+                prods = Produto.objects.all().order_by('-id')
+        except Produto.DoesNotExist:
+            prods = None
+        
+        if prods is not None:
+
+            for i in prods:
+                all_prods = {
+                    'id': i.id,
+                    'nome': i.nome,
+                    'foto': i.foto,
+                    'descrição': i.descricao,
+                    'preco': i.preco,
+                    'categoria': i.categoria,
+                    'restaurante': i.restaurante_id,
+                }
+
+                data.append(all_prods)
+
+            return JsonResponse({ 'status': 'success' , 'produtos': data})
+        else:
+            return JsonResponse({ 'status': 'error' , 'msg': 'Nenhum Produto'})
 
     else:
         return JsonResponse({ 'status': 'error' , 'msg': 'Request Inválido'})

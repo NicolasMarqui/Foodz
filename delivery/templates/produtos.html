@@ -29,12 +29,11 @@ Produtos
                     <h2>Mostrando <span>{{produtos.count}}</span> resultados</h2>
                 </div>
                 <div class="col-xs-12 col-md-8 text-right col-in-block">
-                    <form action="">
-                        <select name="" id="">
+                    <form method="POST">
+                        <select id="filtrar_produtos">
                             <option value="" disabled selected>Filtrar</option>
                             <option value="menorPreco">Menor Preço</option>
                             <option value="maiorPreco">Maior Preço</option>
-                            <option value="data">Data</option>
                             <option value="relevancia">Relevancia</option>
                         </select>
                     </form>

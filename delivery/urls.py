@@ -25,6 +25,7 @@ urlpatterns = [
     path('produtos/editar/<int:id>',views.produtos_editar,name="Editar produtos"),
     path('produtos/remover',views.remover_produtos,name="Remover produtos"),
     path('produtos/comentario/add',views.comentario_adicionar,name="Adicionar Comentário"),
+    path('produtos/filtrar',views.filtrar_produtos,name="Filtrar pedidos"),
     path('get-produto-editar',views.get_produto_editar,name="Editar Produto"),
     path('save-produto-editar',views.save_produto_editar,name="Editar Produto"),
     path('carrinho/add',views.carrinho_add,name="Adicionar Carrinho"),
