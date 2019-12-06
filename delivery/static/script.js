@@ -1367,28 +1367,14 @@ $(document).ready(function(){
   })
 
   //Salva Endereço
-  // $('.submitAddress').submit(function (e) { 
-  //   e.preventDefault();
+  $('.display-add-more-address').click(function (e) { 
+    e.preventDefault();
 
-  //   $.ajax({
-  //     type: "POST",
-  //     url: $(this).attr('action'),
-  //     data: {
-  //       csrfmiddlewaretoken: getCookie('csrftoken'),
-  //       data: $('.submitAddress').serialize(),
-  //     },
-  //     dataType: "JSON",
-  //     beforeSend: function(){
-  //       $('.submitAddress').loading({
-  //         stoppable: true
-  //       });
-  //     },
-  //     success: function (response) {
+    $('.submitAddress').toggle('fast');
 
-  //       $('.submitAddress').loading('stop');
-        
-  //     }
-  //   });
+    $([document.documentElement, document.body]).animate({
+      scrollTop: $(".submitAddress").offset().top
+  }, 2000);
     
-  // });
+  });
 })

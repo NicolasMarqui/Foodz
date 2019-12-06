@@ -6,42 +6,67 @@
 {% endblock %}
 
 {% block content %}
+    <div class="banner-interno" style="background-image: url('https://images.pexels.com/photos/1640772/pexels-photo-1640772.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940')">
+        <div class="over"></div>
+
+        <div class="container">
+            <div class="bread-banner">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li> <span> > </span> </li>
+                    <li><h1>Produtos</h1></li>
+                    <li> <span> > </span> </li>
+                    <li><h1> {{produto.nome}} </h1></li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
     <div class="product-display">
 
         <div class="container">
             <div class="row">
 
                 {% if produto %}
-                    <div class="col-xs-12 col-md-6" data-aos="fade-right">
-                        <div class="main-image">
-                            <img src="/media/{{produto.foto}}" alt="">
+                    <div class="col-xs-12 col-md-3">
+                            <div class="main-image">
+                                <img src="/media/{{produto.foto}}" alt="">
+                            </div>
                         </div>
-                    </div>
         
-                    <div class="col-xs-12 col-md-6" id="ifp">
-    
-                        <p class="small-title" style="text-transform: capitalize;">
-                            <a href="#">
+                        <div class="col-xs-12 col-md-9" id="ifp">
+        
+                            <!-- <div class="starts-area">
+                                <ul>
+                                    {% for i in nota %}
+                                        <p>{{i}}</p>
+                                        <li><i class="far fa-star fa-2x"></i></li>
+                                    {% endfor %}
+                                </ul>
+                            </div> -->
+        
+                            <p class="small-title">
                                 {{produto.categoria}}
-                            </a>
-                        </p>
-    
-                        <h1 class="big-title" data-aos="fade-up">
-                            {{produto.nome}}
-                        </h1>
-    
-                        <p class=descricao_info>{{produto.descricao|striptags }}</p>
+                            </p>
+        
+                            <h1 class="big-title">
+                                {{produto.nome}}
+                            </h1>
+        
+                            <p>{{produto.descricao|striptags }}</p>
 
-                        <div class="price-info">
-                            <h4>
-                                <p>R$ <span>{{produto.preco}}</span> </p>
-                            </h4>
-                        </div>
+                            <div class="price-info">
+                                <h4>
+                                    <p>R$ <span>{{produto.preco}}</span> </p>
+                                </h4>
 
-                        <div class="buy-and-quantity" data-aos="zoom-bottom">
-                            <a href="#" class="btn">Comprar</a>
+                                <div class="buy-and-quantity">
+                                    <a href="#" class="btn">Comprar</a>
+            
+                                    <input type="number" value="1">
+                                </div>
+                            </div>
                         </div>
-                    </div>
                 {% endif %}
             </div>
         </div>

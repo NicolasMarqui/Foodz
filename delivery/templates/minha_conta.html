@@ -277,14 +277,11 @@
                                             {{form.telefone}}
                                         </div>
                                     </div>
-                                    <div class="form-group row">
-                                        <label for="{{add_endereco.complemento.label}}" class="col-sm-2 col-form-label">{{add_endereco.complemento.label}}</label>
-                                        <div class="col-sm-10">
-                                            {{add_endereco.complemento}}
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                       
+                                    <div class="form-group row">	                                    
+                                        <label for="{{form.avatar.label}}" class="col-sm-2 col-form-label">{{form.avatar.label}}</label>	                                        <label for="{{add_endereco.complemento.label}}" class="col-sm-2 col-form-label">{{add_endereco.complemento.label}}</label>
+                                        <div class="col-sm-10">	                                        
+                                            {{form.avatar}}	                                           
+                                        </div>	                                        
                                     </div>
                                 </div>
 
@@ -300,11 +297,13 @@
                         <div class="endereco-wrapper">
                             <h2>Seus Endereços</h2>
                             <div class="row m-w">
-                                <div class="col-xs-12 col-md-6">
+                                <div class="col-xs-12">
                                     {% for e in enderecos %}
                                         <ul>
                                             <li>
-                                                <div class="box-endereco selectAdress {% if e.is_principal %}main-address{% endif %}" id="{{e.id}}">
+                                                <div class="box-endereco selectAdress {% if e.is_principal %}main-address{% endif %}" 
+                                                id="{{e.id}}"
+                                                data-toggle="tooltip" title="Clique para tornar o endereço como principal" data-placement="top">
                                                     <p>Endereço {{ forloop.counter }} - <i class="fas {% if e.tipo == 'casa' %}fa-home{% elif e.tipo == 'apartamento' %}fa-building{% else %}fa-store{% endif %}"></i></p>
                                                     <p>Endereço: <span>{{e.endereco}}</span> - N° <span>{{e.numero}} </span></p>
                                                     <p>Complemento: <span>{{e.complemento}}</span></p>
@@ -317,45 +316,45 @@
                                     {% endfor %}
                                 </div>
 
-                                <div class="col-xs-12 col-md-6">
-                                    <a href="#">Adicionar novo endereço</a>
+                                <div class="col-xs-12">
+                                    <a href="#" class="display-add-more-address">Adicionar novo endereço</a>
 
                                     <form action="/user/endereco/add" method="POST" class="submitAddress">
                                         {% csrf_token %}
                                         <div class="row m-w">
                                             <div class="form-group row">
                                                 <label for="{{add_endereco.endereco.label}}" class="col-sm-2 col-form-label">{{add_endereco.endereco.label}}</label>
-                                                <div class="col-sm-10">
+                                                <div class="col-sm-12">
                                                     {{add_endereco.endereco}}
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label for="{{add_endereco.numero.label}}" class="col-sm-2 col-form-label">{{add_endereco.numero.label}}</label>
-                                                <div class="col-sm-10">
+                                                <div class="col-sm-12">
                                                     {{add_endereco.numero}}
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label for="{{add_endereco.cep.label}}" class="col-sm-2 col-form-label">{{add_endereco.cep.label}}</label>
-                                                <div class="col-sm-10">
+                                                <div class="col-sm-12">
                                                     {{add_endereco.cep}}
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label for="{{add_endereco.complemento.label}}" class="col-sm-2 col-form-label">{{add_endereco.complemento.label}}</label>
-                                                <div class="col-sm-10">
+                                                <div class="col-sm-12">
                                                     {{add_endereco.complemento}}
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label for="{{add_endereco.tipo.label}}" class="col-sm-2 col-form-label">{{add_endereco.tipo.label}}</label>
-                                                <div class="col-sm-10">
+                                                <div class="col-sm-12">
                                                     {{add_endereco.tipo}}
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label for="{{add_endereco.cidade.label}}" class="col-sm-2 col-form-label">{{add_endereco.cidade.label}}</label>
-                                                <div class="col-sm-10">
+                                                <div class="col-sm-12">
                                                     {{add_endereco.cidade}}
                                                 </div>
                                             </div>

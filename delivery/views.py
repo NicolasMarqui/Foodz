@@ -1634,8 +1634,16 @@ def add_endereco(request):
             if cli is not None:
                 ende = form.save(commit=False)
 
+                #Salva o endereco
                 ende.id_cliente = cli
                 ende.save()
+
+                #Associa o endereco ao usuario
+                last_id = Endereco.objects.latest('id')
+
+                cli.endereco_id = last_id
+
+                cli.save()
 
             return redirect('/conta/{}'.format(request.user.id))
         else:

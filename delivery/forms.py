@@ -27,6 +27,8 @@ class AddProducts(forms.ModelForm):
         widgets = {
             'id': forms.TextInput(attrs={'readonly': 'readonly'}),
             'restaurante': forms.TextInput(attrs={'readonly': 'readonly'}),
+            'descricao': SummernoteWidget(),
+            'ingredientes': SummernoteWidget(),
         }
 
         labels = {
