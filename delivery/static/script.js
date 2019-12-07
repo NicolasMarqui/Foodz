@@ -1466,6 +1466,17 @@ $(document).ready(function(){
           
       }
     });
+
+    $('.deletarConta').on('click', function(){
+
+      if(confirm("Você realmente deseja excluir sua conta?")){
+        alert('Uma pena, gostavamos muito de você :(');
+      }else{
+        alert('Ufffa :)');
+        return false;
+      }
+
+    })
     
   });
 
