@@ -385,7 +385,10 @@ def produto_info(request,id = None):
     else:
         teste = 0
 
-    print(teste)
+    if mais_produtos is not None:
+        id_rest = mais_produtos[0].restaurante_id
+    else:
+        id_rest = False
 
     return render(
         request,
@@ -395,7 +398,7 @@ def produto_info(request,id = None):
             'produto': produto,
             'mais_produtos': mais_produtos,
             'comentarios': comentarios,
-            'teste': teste
+            'id_rest': id_rest
         }
     )
 
@@ -403,7 +406,7 @@ def restaurante_info(request,id = None):
 
     restaurante = Restaurante.objects.get(id=id)
 
-    mais_produtos = Produto.objects.filter(restaurante_id=restaurante.id)[:4]
+    mais_produtos = Produto.objects.filter(restaurante_id=restaurante.id)
 
     return render(
         request,

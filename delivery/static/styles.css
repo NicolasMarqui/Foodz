@@ -6106,4 +6106,120 @@ form.pagamento button {
   font-size: 14px;
   display: block;
 }
+
+.rest-info-wrapper .hero-info {
+  height: 400px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.rest-info-wrapper .hero-info p {
+  text-align: center;
+}
+
+.rest-info-wrapper .hero-info h1 {
+  font-size: calc(1.5rem + 3vw);
+  text-align: center;
+}
+
+@media (min-width: 1200px) {
+  .rest-info-wrapper .hero-info h1 {
+    font-size: 3.75rem;
+  }
+}
+
+.rest-info-wrapper .hero-info h2 {
+  margin-top: 8px;
+}
+
+.rest-info-wrapper .hero-info h2 span {
+  font-weight: 600;
+}
+
+.rest-info-wrapper .nossos-produtos {
+  padding: 40px 0;
+  background-color: #494949;
+}
+
+.rest-info-wrapper .nossos-produtos h2 {
+  font-size: calc(1.375rem + 1.5vw);
+  text-align: center;
+  color: #fff;
+  margin-bottom: 50px;
+}
+
+@media (min-width: 1200px) {
+  .rest-info-wrapper .nossos-produtos h2 {
+    font-size: 2.5rem;
+  }
+}
+
+.rest-info-wrapper .nossos-produtos .row {
+  padding: 50px 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.rest-info-wrapper .nossos-produtos .row img.info-prod-img {
+  margin: 0 auto;
+}
+
+.rest-info-wrapper .nossos-produtos .row h3 {
+  color: #fff;
+  font-size: calc(1.34375rem + 1.125vw);
+  text-align: center;
+}
+
+@media (min-width: 1200px) {
+  .rest-info-wrapper .nossos-produtos .row h3 {
+    font-size: 2.1875rem;
+  }
+}
+
+.rest-info-wrapper .nossos-produtos .row p {
+  line-height: 28px;
+  color: #fff;
+  text-align: center;
+  margin-top: 25px;
+}
+
+.rest-info-wrapper .nossos-produtos .row a {
+  display: block;
+  background-color: #E04040;
+  padding: 14px;
+  color: #fff;
+  text-align: center;
+  margin-top: 15px;
+}
+
+@media (min-width: 992px) {
+  .rest-info-wrapper .nossos-produtos .row {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+  }
+}
 /*# sourceMappingURL=styles.css.map */

@@ -88,11 +88,13 @@
                                 </div>
                             </div>
                         {% endfor %}
-                        <div class="saiba-mais-card">
-                            <a href="/restaurante/info/{{r.restaurante.id}}">
-                                <p>Saiba Mais <span><i class="fas fa-arrow-right"></i></span> </p>
-                            </a>
-                        </div>
+                        {% if id_rest %}
+                            <div class="saiba-mais-card">
+                                <a href="/restaurante/info/{{id_rest}}">
+                                    <p>Saiba Mais <span><i class="fas fa-arrow-right"></i></span> </p>
+                                </a>
+                            </div>
+                        {% endif %}
 
                     </div>
                 </div>
