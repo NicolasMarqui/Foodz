@@ -452,13 +452,15 @@ $(document).ready(function(){
     })
 
     //Pega os produtos
-    $('#load-products').click(function(){
+    $('#load-products').on('click',function(){
 
-      $('#todos_produtos > tbody > tr').remove()
+      $('#todos_produtos > tbody > tr').remove();
 
+      console.log('amada?/');
+      
       $.ajax({
         type: "get",
-        url: "/produtos/todos",
+        url: "/vsf/todos",
         dataType: "json",
 
         beforeSend: function(){
@@ -491,7 +493,7 @@ $(document).ready(function(){
           $('#todos_produtos > tbody').append(produtos)
 
           $('body').loading('stop');
-        }
+        },
       });
     })
 

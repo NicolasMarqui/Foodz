@@ -694,20 +694,26 @@ def remover_produtos(request):
             return JsonResponse({ 'status': 'error', 'msg': msg})
 
 def produtos_todos(request):
-    rest = Restaurante.objects.get(user_id=request.user.id)
-    produtos = list(Produto.objects.filter(restaurante_id = rest.id).values())
+    print('oi')
+    if request.method == 'GET' and request.is_ajax():
+        rest = Restaurante.objects.get(user_id=request.user.id)
+        produtos = list(Produto.objects.filter(restaurante_id = rest.id).values())
 
-    data = dict()
-    data['produtos'] = produtos
-    print(produtos)
+        data = dict()
+        data['produtos'] = produtos
 
-    return JsonResponse(data)
+        print(produtos)
+
+        return JsonResponse(data)
+
+    else:
+        return JsonResponse({ 'status': 'error', 'msg': 'Wrong thing buddy'})
 
 def produtos_editar(request, id):
 
     prod = Restaurante.objects.get(id=id)
 
-    produtos = list(Produto.objects.filter(restaurante_id = rest.id).values())
+    produtos = list(Produto.objects.filter(restaurante_id = prod.id).values())
 
     data = dict()
     data['produtos'] = produtos

@@ -5571,16 +5571,18 @@ form.pagamento button {
 }
 
 .ajuda-wrapper .help-2 .bg {
-  width: 50%;
+  width: 100%;
+  opacity: .2;
 }
 
 .ajuda-wrapper .help-2 #text-help-2 {
-  padding: 100px;
+  padding: 20px;
 }
 
 .ajuda-wrapper .help-2 #text-help-2 h2 {
   font-size: calc(1.5rem + 3vw);
   line-height: 70px;
+  text-align: center;
 }
 
 @media (min-width: 1200px) {
@@ -5693,6 +5695,19 @@ form.pagamento button {
   background-color: #e76c6c;
 }
 
+@media (min-width: 992px) {
+  .ajuda-wrapper .help-2 #text-help-2 {
+    padding: 100px;
+  }
+  .ajuda-wrapper .help-2 #text-help-2 h2 {
+    text-align: left;
+  }
+  .ajuda-wrapper .help-2 .bg {
+    width: 50%;
+    opacity: 1;
+  }
+}
+
 .wrapper-faq {
   width: 100%;
   overflow: hidden;
@@ -5723,6 +5738,7 @@ form.pagamento button {
 
 .wrapper-sobre-nos {
   padding-bottom: 0;
+  overflow: hidden;
 }
 
 .wrapper-sobre-nos .hero-foodz img {
