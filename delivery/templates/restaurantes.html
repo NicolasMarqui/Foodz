@@ -5,7 +5,8 @@
 {% endblock %}
 
 {% block content %}
-    <div class="banner-interno" style="background-image: url('/static/assets/burguer.jpg')">
+
+    <div class="banner-interno" style="background-image: url('https://images.pexels.com/photos/941861/pexels-photo-941861.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940')">
         <div class="over"></div>
 
         <div class="container">
@@ -20,17 +21,44 @@
 
     </div>
 
-    <div class="all-rests padding-sections">
-        {% if restaurantes %}
+    <div class="container"> 
+        <div class="show-produtos-wrapper">
 
-            {% for r in restaurantes %}
+            <div class="row mt-20 fs-0">
+                <div class="col-xs-12 col-md-4 col-in-block">
+                    <h2>Mostrando <span>{{restaurante.count}}</span> resultados</h2>
+                </div>
+            </div>
+            
+            <div class="row equal">
+                <!-- <div class="grid"> -->
+                {% for p in restaurante %}
+                    <div class="col-xs-12 col-md-3" id="go-to-product">
+                        <div class="wrap-results">
+                            <div class="result-produtos">
+                                <img src="/media/{{p.logo}}" alt="">
+                            </div>
 
-            {% endfor %}
+                            <div class="info-prods">
+                                <h3 class="text-center">{{p.nome}}</h3>
+                            </div>
 
-        {% else %}
-            <h2>Nenhum restaurante encontrado :(</h2>
-
-        {% endif %}
+                            <div class="infos">
+                                <a href="/restaurante/info/{{p.id}}" class="h-100">
+                                    <i class="fas fa-info"></i> Info
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <div class="no-prod-display">
+                        <div class="cen-text">
+                            <h3>Ops, não achamos nenhum restaurante :(</h3>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
     </div>
 
 {% endblock %}

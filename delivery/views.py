@@ -95,7 +95,6 @@ def restaurantes(request):
     except Restaurante.DoesNotExist:
         all_restaurante = False
 
-
     return render(
         request,
         'restaurantes.html',
