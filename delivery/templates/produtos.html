@@ -46,6 +46,13 @@ Produtos
                     <div class="col-xs-12 col-md-3" id="go-to-product">
                         <div class="wrap-results">
                             <div class="result-produtos">
+                                <div class="addFavorite">
+                                    {% if p.nome in teste %}
+                                        <i class="fas fa-heart removeMe" id="{{p.id}}"></i>
+                                    {% else %}
+                                        <i class="far fa-heart addMe" id="{{p.id}}"></i>
+                                    {% endif %}
+                                </div>
                                 <img src="/media/{{p.foto}}" alt="">
                             </div>
 

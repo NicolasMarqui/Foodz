@@ -69,6 +69,15 @@ def produtos(request,cat=None):
 
     categorias = ['salgados', 'saladas', 'italiana', 'doces', 'lanches', 'sorvetes', 'bebidas', 'chinesa', 'japonesa', 'petiscos', 'pizzas', 'masssas', 'pratos', 'outros']
     all_cat = []
+    ta_nos_favoritos = []
+
+    if request.user.is_authenticated:
+        try:
+            id_user = Cliente.objects.get(user_id=request.user.id)
+        except Cliente.DoesNotExist:
+            id_user = None
+    else:
+        id_user = None
     
     if cat is None and cat not in categorias:
         produtos = Produto.objects.all().order_by('-id')
@@ -77,7 +86,17 @@ def produtos(request,cat=None):
 
     for cat in categorias:
         all_cat.append(cat.capitalize())
-        
+
+    if id_user is not None:
+        favoritos = Favoritos.objects.filter(id_cliente=id_user, is_favorito=1)
+
+        for i in favoritos:
+            ta_nos_favoritos.append(i.id_produto.nome)
+    
+    else:
+        favoritos: None
+        ta_nos_favoritos = []
+
     return render(
         request,
         'produtos.html',
@@ -85,6 +104,7 @@ def produtos(request,cat=None):
             'range': range(9),
             'produtos': produtos,
             'all_cat': all_cat,
+            'teste': ta_nos_favoritos
         }
     )
 

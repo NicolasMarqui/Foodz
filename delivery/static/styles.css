@@ -2036,9 +2036,9 @@ footer .footer .fot-bottom p {
 }
 
 .show-produtos-wrapper .wrap-results .info-prods h4 {
-  padding: 5px;
+  padding: 5px 0;
   color: #000;
-  font-size: 16px;
+  font-size: 30px;
 }
 
 .show-produtos-wrapper .wrap-results .info-prods h4 span {
@@ -6105,6 +6105,10 @@ form.pagamento button {
   color: #fff;
   font-size: 14px;
   display: block;
+}
+
+.rest-info-wrapper {
+  overflow: hidden;
 }
 
 .rest-info-wrapper .hero-info {
