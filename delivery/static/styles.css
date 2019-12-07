@@ -6226,4 +6226,112 @@ form.pagamento button {
             flex-direction: row;
   }
 }
+
+.promocoes-wrapper {
+  height: calc(100vh - 132px);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  overflow: hidden;
+}
+
+.promocoes-wrapper .promo {
+  height: 100%;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  -webkit-transition: all .5s linear;
+  transition: all .5s linear;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  overflow: hidden;
+}
+
+.promocoes-wrapper .promo h2 {
+  color: #fff;
+  font-size: calc(1.5rem + 3vw);
+}
+
+@media (min-width: 1200px) {
+  .promocoes-wrapper .promo h2 {
+    font-size: 3.75rem;
+  }
+}
+
+.promocoes-wrapper .promo p {
+  color: #fff;
+  line-height: 28px;
+  text-align: center;
+}
+
+.promocoes-wrapper .promo a {
+  display: block;
+  background-color: #E04040;
+  padding: 14px;
+  text-align: center;
+  color: #fff;
+  text-align: center;
+  border-radius: 15px;
+  width: 80%;
+  margin: 15px auto;
+}
+
+.promocoes-wrapper .promo a:hover {
+  background-color: #e76c6c;
+  text-decoration: none;
+}
+
+.promocoes-wrapper .promo:hover {
+  -webkit-box-flex: 2;
+      -ms-flex: 2;
+          flex: 2;
+  -webkit-transform: scale(1.2);
+          transform: scale(1.2);
+}
+
+.promocoes-wrapper .promo.promo-1 {
+  background-image: url("https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80");
+  background-position: center;
+  background-size: cover;
+}
+
+.promocoes-wrapper .promo.promo-2 {
+  background-image: url("https://images.unsplash.com/photo-1553621042-f6e147245754?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=925&q=80");
+  background-position: center;
+  background-size: cover;
+}
+
+.promocoes-wrapper .promo.promo-3 {
+  background-image: url("https://images.unsplash.com/photo-1529565214304-a882ebc5a8e6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80");
+  background-position: center;
+  background-size: cover;
+}
+
+@media (min-width: 992px) {
+  .promocoes-wrapper {
+    height: calc(100vh - 100px);
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+  }
+}
 /*# sourceMappingURL=styles.css.map */
