@@ -65,16 +65,26 @@ def sobre_nos(request):
         }
     )
 
-def produtos(request):
+def produtos(request,cat=None):
 
-    produtos = Produto.objects.all().order_by('-id')
+    categorias = ['salgados', 'saladas', 'italiana', 'doces', 'lanches', 'sorvetes', 'bebidas', 'chinesa', 'japonesa', 'petiscos', 'pizzas', 'masssas', 'pratos', 'outros']
+    all_cat = []
+    
+    if cat is None and cat not in categorias:
+        produtos = Produto.objects.all().order_by('-id')
+    else:
+        produtos = Produto.objects.all().filter(categoria=cat).order_by('-id')
 
+    for cat in categorias:
+        all_cat.append(cat.capitalize())
+        
     return render(
         request,
         'produtos.html',
         {
             'range': range(9),
-            'produtos': produtos
+            'produtos': produtos,
+            'all_cat': all_cat,
         }
     )
 

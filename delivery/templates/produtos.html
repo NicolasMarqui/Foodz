@@ -68,6 +68,24 @@ Produtos
                             </div>
                         </div>
                     </div>
+                    {% empty %}
+                    <div class="no-prod-display">
+                        <div class="cen-text">
+                            <h3>Ops, não achamos nenhum produto :(</h3>
+
+                            <p>Que tal escolher um desses abaixo?</p>
+
+                            <ul>
+                                {% for al in all_cat %}
+                                    <li>
+                                        <a href="/produtos/{{al|lower}}">
+                                            {{al}}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
                 {% endfor %}
             </div>
         </div>
