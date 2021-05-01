@@ -7,3 +7,5 @@ static/responsive
 *.map
 reset.css
 *.mmdb
+
+.vscode
